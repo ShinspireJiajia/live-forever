@@ -1,0 +1,395 @@
+/* 繳款紀錄管理專用樣式 */
+
+/* 搜尋區域樣式 */
+.search-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow-x: auto; /* 允許水平滾動 */
+    padding-bottom: 10px; /* 為滾動條留出空間 */
+    scrollbar-width: thin; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 搜尋區域滾動條樣式 */
+.search-area::-webkit-scrollbar {
+    height: 6px;
+}
+
+.search-area::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.search-area::-webkit-scrollbar-thumb {
+    background: #B8A676;
+    border-radius: 3px;
+}
+
+.search-area::-webkit-scrollbar-thumb:hover {
+    background: #a08f61;
+}
+
+.search-group {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    white-space: nowrap;
+    flex-shrink: 0; /* 防止元素被壓縮 */
+}
+
+.search-label {
+    margin-right: 10px;
+    color: #B8A676; /* 主要色系 */
+    font-weight: 500;
+}
+
+.search-select, .search-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 150px;
+}
+
+.search-input {
+    min-width: 250px;
+}
+
+.btn-search {
+    background-color: #4CAF50;
+    color: white;
+    white-space: nowrap;
+    flex-shrink: 0; /* 防止按鈕被壓縮 */
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #45a049;
+}
+
+.btn-clear {
+    background-color: #e0e0e0;
+    color: #333;
+    white-space: nowrap;
+    flex-shrink: 0; /* 防止按鈕被壓縮 */
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-clear:hover {
+    background-color: #d0d0d0;
+}
+
+/* 表格容器樣式 */
+.table-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+    overflow: hidden; /* 隱藏溢出內容 */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 表格滾動容器 */
+.table-container {
+    overflow-x: auto; /* 啟用水平滾動 */
+    margin-bottom: 10px;
+    position: relative;
+    scrollbar-width: thin; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    -webkit-overflow-scrolling: touch; /* 增強iOS滾動體驗 */
+    padding-bottom: 5px; /* 為滾動條留出空間 */
+}
+
+/* 滾動條樣式 */
+.table-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #B8A676;
+    border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a08f61;
+}
+
+/* 滾動指示器 */
+.scroll-indicator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.scroll-arrows {
+    display: flex;
+    align-items: center;
+    color: #FF9800;
+    font-size: 24px;
+}
+
+.arrow-left, .arrow-right {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    user-select: none; /* 防止文字被選中 */
+}
+
+.arrow-left.disabled, .arrow-right.disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.scroll-text {
+    margin: 0 10px;
+    color: #666;
+    font-size: 14px;
+    user-select: none; /* 防止文字被選中 */
+}
+
+/* 滾動進度條 */
+.scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: #B8A676;
+    width: 0;
+    transition: width 0.3s;
+}
+
+/* 表格樣式 */
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    table-layout: fixed; /* 固定表格布局 */
+}
+
+.payment-table thead {
+    background-color: #f9f9f9;
+}
+
+.payment-table th, .payment-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap; /* 防止文字換行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 文字過長時顯示省略號 */
+}
+
+/* 設置各列的寬度 */
+.payment-table th:nth-child(1), .payment-table td:nth-child(1) { min-width: 120px; } /* 名稱 */
+.payment-table th:nth-child(2), .payment-table td:nth-child(2) { min-width: 100px; } /* 到期日 */
+.payment-table th:nth-child(3), .payment-table td:nth-child(3) { min-width: 100px; } /* 金額 */
+.payment-table th:nth-child(4), .payment-table td:nth-child(4) { min-width: 80px; } /* 繳費狀態 */
+.payment-table th:nth-child(5), .payment-table td:nth-child(5) { min-width: 100px; } /* 發票類型 */
+.payment-table th:nth-child(6), .payment-table td:nth-child(6) { min-width: 80px; } /* 發票狀態 */
+.payment-table th:nth-child(7), .payment-table td:nth-child(7) { min-width: 80px; } /* 繳款證明 */
+.payment-table th:nth-child(8), .payment-table td:nth-child(8) { min-width: 200px; } /* 備註 */
+.payment-table th:nth-child(9), .payment-table td:nth-child(9) { min-width: 120px; } /* 操作 */
+
+.payment-table th {
+    font-weight: 600;
+    color: #666;
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 5;
+}
+
+.status-paid {
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+.status-unpaid {
+    color: #c62828;
+    font-weight: 500;
+}
+
+.receipt-type-pre {
+    color: #1565c0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.btn-action {
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.btn-edit {
+    color: #26a69a;
+}
+
+.btn-delete {
+    color: #ef5350;
+}
+
+.btn-notify {
+    color: #ff9800;
+}
+
+/* 工具提示樣式 - 用於顯示完整文字 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: auto;
+    min-width: 200px;
+    max-width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px 12px;
+    position: absolute;
+    z-index: 100;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: normal;
+    word-wrap: break-word;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 滑動提示動畫 */
+@keyframes slideHint {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(10px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.scroll-arrows {
+    animation: slideHint 2s ease-in-out;
+    animation-iteration-count: 1;
+}
+
+/* 首次訪問滑動提示 */
+.swipe-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.swipe-hint i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .search-area {
+        flex-wrap: nowrap; /* 在小螢幕上不換行，改用水平滾動 */
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    .search-group {
+        width: auto;
+        margin-right: 15px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+    
+    .search-select, .search-input {
+        width: auto;
+    }
+}
+
+/* 按鈕樣式覆蓋 */
+.btn-primary-gold {
+    background-color: #B8A676; /* 主要色系 */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-primary-gold:hover {
+    background-color: #a08f61; /* 深一點的主要色系 */
+}

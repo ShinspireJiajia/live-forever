@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綠海養護時段預約 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/green-site-schedule.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
+        <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">綠海養護</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="green-site.html" class="breadcrumb-item">案場管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">維護時段預約</span>
+            </div>
+
+            <!-- 頁面內容 -->
+            <div class="content-wrapper">
+                <div class="schedule-container">
+                    <div class="schedule-header">
+                        <div>
+                            <h1 class="schedule-title">Jade123 綠海養護時段預約/可預約時段</h1>
+                        </div>
+                        <div class="header-actions">
+                            <button class="action-button" onclick="window.location.href='green-site.html'">
+                                <i class="fa-solid fa-arrow-left"></i> 返回列表
+                            </button>
+                            <button class="action-button">複製上一周設定</button>
+                        </div>
+                    </div>
+                    
+                    <div class="date-navigation">
+                        <button class="nav-buttons">
+                            <span>&lt;</span>
+                        </button>
+                        <div class="date-range">7月 20 - 7月 26, 2025</div>
+                        <button class="nav-buttons">
+                            <span>&gt;</span>
+                        </button>
+                    </div>
+                    
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    星期日<br>
+                                    7月 20
+                                </th>
+                                <th>
+                                    星期一<br>
+                                    7月 21
+                                </th>
+                                <th>
+                                    星期二<br>
+                                    7月 22
+                                </th>
+                                <th>
+                                    星期三<br>
+                                    7月 23
+                                </th>
+                                <th>
+                                    星期四<br>
+                                    7月 24
+                                </th>
+                                <th>
+                                    星期五<br>
+                                    7月 25
+                                </th>
+                                <th>
+                                    星期六<br>
+                                    7月 26
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 09:00 - 09:30 -->
+                            <tr>
+                                <td class="time-cell">09:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-booked-1">1</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 09:30 - 10:00 -->
+                            <tr>
+                                <td class="time-cell">09:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 10:00 - 10:30 -->
+                            <tr>
+                                <td class="time-cell">10:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-booked-2">2</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-booked-2">2</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 10:30 - 11:00 -->
+                            <tr>
+                                <td class="time-cell">10:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 11:00 - 11:30 -->
+                            <tr>
+                                <td class="time-cell">11:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 11:30 - 12:00 -->
+                            <tr>
+                                <td class="time-cell">11:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 12:00 - 12:30 -->
+                            <tr>
+                                <td class="time-cell">12:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 12:30 - 13:00 -->
+                            <tr>
+                                <td class="time-cell">12:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 13:00 - 13:30 -->
+                            <tr>
+                                <td class="time-cell">13:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 13:30 - 14:00 -->
+                            <tr>
+                                <td class="time-cell">13:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 14:00 - 14:30 -->
+                            <tr>
+                                <td class="time-cell">14:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 14:30 - 15:00 -->
+                            <tr>
+                                <td class="time-cell">14:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 15:00 - 15:30 -->
+                            <tr>
+                                <td class="time-cell">15:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 15:30 - 16:00 -->
+                            <tr>
+                                <td class="time-cell">15:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 16:00 - 16:30 -->
+                            <tr>
+                                <td class="time-cell">16:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 16:30 - 17:00 -->
+                            <tr>
+                                <td class="time-cell">16:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 17:00 - 17:30 -->
+                            <tr>
+                                <td class="time-cell">17:00</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                            <!-- 17:30 - 18:00 -->
+                            <tr>
+                                <td class="time-cell">17:30</td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                                <td><div class="slot slot-available">0</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- 新增底部按鈕區域 -->
+                    <div class="footer-actions">
+                        <button class="save-button" id="saveButton">
+                            <span class="save-icon">💾</span>確認儲存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 成功訊息提示 -->
+    <div class="success-message" id="successMessage">
+        預約時段已成功儲存！
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/green-site-schedule.js"></script>
+</body>
+</html>

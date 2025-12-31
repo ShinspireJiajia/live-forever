@@ -1,0 +1,141 @@
+/* 綠海養護合約專用樣式 */
+/* green-contract.css */
+
+/* ========================================
+   表格樣式覆寫（修正間距）
+   ======================================== */
+#contractTable.case-table {
+    min-width: 1400px;
+}
+
+#contractTable.case-table thead tr,
+#contractTable.case-table tbody tr {
+    display: table-row;
+}
+
+#contractTable.case-table th.col-1,
+#contractTable.case-table td.col-1 {
+    display: table-cell;
+    padding: 12px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#contractTable.case-table th.col-1:first-child,
+#contractTable.case-table td.col-1:first-child {
+    text-align: left;
+}
+
+#contractTable.case-table th.col-1:last-child,
+#contractTable.case-table td.col-1:last-child {
+    text-align: center;
+    min-width: 260px;
+}
+
+#contractTable.case-table tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+#contractTable.case-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========================================
+   表格內操作按鈕區域
+   ======================================== */
+#contractTable .table-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   表格容器（保留舊樣式相容性）
+   ======================================== */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* 自訂卷軸樣式 */
+.table-container::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #c0aa70;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #a89355;
+}
+
+.summary-cell {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 操作功能列樣式 */
+.action-links {
+    display: flex;
+    flex-wrap: nowrap; /* 防止換行 */
+    gap: 10px;
+    min-width: 240px; /* 確保有足夠的寬度顯示所有按鈕 */
+    white-space: nowrap; /* 防止文字換行 */
+}
+
+.action-link {
+    color: #2196F3;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block; /* 確保每個按鈕都是塊級元素 */
+    white-space: nowrap; /* 防止文字換行 */
+    font-size: 14px;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+/* 滾動提示 */
+.scroll-hint {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.table-container:hover .scroll-hint {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .scroll-hint {
+        opacity: 1;
+    }
+}
+

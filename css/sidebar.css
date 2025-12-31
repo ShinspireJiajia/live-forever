@@ -1,0 +1,174 @@
+﻿/* 1. 結構與佈局樣式 */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 16rem; /* 256px */
+  height: 100%;
+  background-color: #ffffff;
+  border-right: 1px solid #edf1f7;
+  transition: width 0.3s ease;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.scrollable {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 2. 選單項目樣式 */
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  display: block;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.menu-item > a {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1rem; /* 20px 16px */
+  color: #1a2138;
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.menu-item > a:hover {
+  color: #3366ff;
+}
+
+.menu-item > a.active {
+  color: #3366ff;
+  border-right: 4px solid #3366ff;
+}
+
+/* 3. 圖示樣式 */
+.menu-icon {
+  font-size: 1.5rem; /* 24px */
+  width: 1.5rem;
+  margin-right: 1rem;
+  color: #8f9bb3;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.menu-item > a:hover .menu-icon,
+.menu-item > a.active .menu-icon {
+  color: #3366ff;
+}
+
+/* 4. 展開/收合狀態指示器 */
+.expand-state {
+  margin-left: auto;
+  font-size: 1.5rem;
+  color: #8f9bb3;
+  transition: transform 0.3s ease;
+}
+
+.menu-item.expanded > a > .expand-state {
+  transform: rotate(180deg);
+}
+
+/* 5. 子選單樣式 */
+.menu-item > .menu-items {
+  display: none;
+  background-color: #ffffff;
+}
+
+.menu-item.expanded > .menu-items {
+  display: block;
+}
+
+.menu-item > .menu-items > .menu-item {
+  border-bottom: none;
+}
+
+.menu-item > .menu-items > .menu-item > a {
+  padding: 0.75rem 1rem 0.75rem 3.5rem; /* 縮排 */
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  color: #1a2138;
+}
+
+.menu-item > .menu-items > .menu-item > a:hover {
+  color: #3366ff;
+}
+
+.menu-item > .menu-items > .menu-item > a.active {
+  color: #3366ff;
+  font-weight: 600;
+  border-right: 4px solid #3366ff;
+}
+
+/* 6. 滾動條樣式 (Webkit) */
+.scrollable::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: #c5cee0;
+  border-radius: 2.5px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #8f9bb3;
+}
+
+/* 7. 收合狀態 (Collapsed) */
+.sidebar.collapsed {
+  width: 4rem; /* 64px */
+}
+
+.sidebar.collapsed .menu-title,
+.sidebar.collapsed .expand-state {
+  display: none;
+}
+
+.sidebar.collapsed .menu-item > a {
+  padding: 1.25rem 0;
+  justify-content: center;
+}
+
+.sidebar.collapsed .menu-icon {
+  margin-right: 0;
+}
+
+.sidebar.collapsed .menu-item > .menu-items {
+  display: none !important; /* 強制隱藏子選單 */
+}
+
+/* 懸停顯示子選單 (可選) */
+.sidebar.collapsed .menu-item:hover > .menu-items {
+  display: block !important;
+  position: absolute;
+  left: 4rem;
+  top: auto;
+  width: 12rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border: 1px solid #edf1f7;
+}
+
+.sidebar.collapsed .menu-item:hover > .menu-items > .menu-item > a {
+  padding-left: 1rem;
+  justify-content: flex-start;
+}

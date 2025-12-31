@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>款項維護 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/case-list.css">
+    <link rel="stylesheet" href="css/green-contract-payment.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
+        <header class="header">
+            <div class="header-left">
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">綠海養護</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="green-contract.html" class="breadcrumb-item">養護合約</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">款項維護</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form case-search-form" id="searchForm">
+                        <div class="search-grid">
+                            <!-- 繳費狀態 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">繳費狀態</label>
+                                <div class="col-input">
+                                    <select class="form-select" id="payment-status">
+                                        <option value="">請選擇</option>
+                                        <option value="paid">已繳費</option>
+                                        <option value="unpaid">未繳費</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 款項名稱 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">款項名稱</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="payment-name" placeholder="請輸入款項名稱">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 操作按鈕 -->
+                        <div class="form-actions-right">
+                            <button type="reset" class="btn btn-info" id="payment-clear-btn">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="submit" class="btn btn-info" id="payment-search-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="window.location.href='green-contract.html'">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                返回列表
+                            </button>
+                            <button type="button" class="btn btn-success" id="add-payment-btn">
+                                新增期款
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-responsive">
+                    <table class="data-table case-table" id="paymentTable">
+                        <thead>
+                            <tr>
+                                <th class="col-1">名稱</th>
+                                <th class="col-1">到期日</th>
+                                <th class="col-1">金額</th>
+                                <th class="col-1">繳費狀態</th>
+                                <th class="col-1">發票類型</th>
+                                <th class="col-1">發票狀態</th>
+                                <th class="col-1">發票號碼</th>
+                                <th class="col-1">開立日期</th>
+                                <th class="col-1">稅額</th>
+                                <th class="col-1">繳款證明</th>
+                                <th class="col-1">備註</th>
+                                <th class="col-1">功能</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payment-table-body">
+                        <!-- 資料將由 JS 動態產生 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯期款彈窗 -->
+    <div class="modal" id="editPaymentModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editPaymentModalTitle">新增期款</h3>
+                <button class="modal-close" id="editPaymentModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm" class="form-container">
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label class="form-label required">款項名稱</label>
+                            <input type="text" class="form-control" id="edit-name" required placeholder="例如：第一期管理費">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">預計收款日</label>
+                            <input type="date" class="form-control" id="edit-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">金額</label>
+                            <input type="number" class="form-control" id="edit-amount" required placeholder="請輸入金額">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">繳費狀態</label>
+                            <select class="form-select" id="edit-status">
+                                <option value="unpaid">未繳費</option>
+                                <option value="paid">已繳費</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">發票類型</label>
+                            <select class="form-select" id="edit-type">
+                                <option value="預開發票">預開發票</option>
+                                <option value="後開發票">後開發票</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">發票狀態</label>
+                            <select class="form-select" id="edit-invStatus">
+                                <option value="未開立">未開立</option>
+                                <option value="處理中">處理中</option>
+                                <option value="已開立">已開立</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">發票字號</label>
+                            <input type="text" class="form-control" id="edit-invNumber" placeholder="請輸入發票字號" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">開立日期</label>
+                            <input type="date" class="form-control" id="edit-invDate">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">稅額</label>
+                            <input type="number" class="form-control" id="edit-taxAmount" placeholder="稅額">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">繳款證明</label>
+                            <div class="file-upload-container">
+                                <input type="file" class="form-control" id="edit-proof-file" accept="image/*,.pdf">
+                                <div id="proof-preview-area" style="display: none; margin-top: 8px; align-items: center; gap: 10px;">
+                                    <a href="#" id="view-proof-btn" target="_blank" class="btn-link" style="color: var(--color-info); text-decoration: none;">
+                                        <i class="fa-solid fa-eye"></i> 檢視證明
+                                    </a>
+                                    <button type="button" id="delete-proof-btn" class="btn-icon-danger" title="刪除證明" style="background: none; border: none; color: var(--color-danger); cursor: pointer;">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <span id="proof-file-name" style="color: var(--color-gray-500); font-size: var(--font-size-sm);"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label class="form-label">備註</label>
+                            <textarea class="form-control" id="edit-note" rows="3" placeholder="請輸入備註事項"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- 異動歷程區塊 -->
+                <div id="payment-history-section" class="history-section">
+                    <h4 class="history-title">異動歷程</h4>
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 140px;">時間</th>
+                                <th style="width: 100px;">人員</th>
+                                <th>備註說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payment-history-body">
+                            <!-- JS 動態載入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="editPaymentCancel">取消</button>
+                <button class="btn btn-primary" id="editPaymentSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LINE 推播通知彈窗 -->
+    <div class="modal" id="lineNotifyModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="max-width: 500px; padding: 0; overflow: hidden;">
+            <div class="line-notification-container">
+                <div class="line-header">
+                    <div class="line-logo">L</div>
+                    <div class="line-title">LINE推播通知</div>
+                    <button class="close-button" id="lineNotifyClose">&times;</button>
+                </div>
+                
+                <div class="notification-body-scroll">
+                    <div class="notification-section">
+                        <div class="section-title">
+                            <span class="section-icon">📋</span>
+                            <span>推播類型</span>
+                        </div>
+                        
+                        <div class="notification-type">
+                            <div class="type-option" data-type="completion">
+                                <div class="type-radio"></div>
+                                <div class="type-icon">⚠️</div>
+                                <div class="type-details">
+                                    <div class="type-title">完工簽署確認提醒</div>
+                                    <div class="type-description">提醒用戶已完工，回覆簽名</div>
+                                </div>
+                            </div>
+                            
+                            <div class="type-option selected" data-type="upcoming">
+                                <div class="type-radio"></div>
+                                <div class="type-icon info">ℹ️</div>
+                                <div class="type-details">
+                                    <div class="type-title">預約即期通知</div>
+                                    <div class="type-description">通知用戶預約日期快到了</div>
+                                </div>
+                            </div>
+                            
+                            <div class="type-option" data-type="renewal">
+                                <div class="type-radio"></div>
+                                <div class="type-icon info">ℹ️</div>
+                                <div class="type-details">
+                                    <div class="type-title">履約到期是否續約通知</div>
+                                    <div class="type-description">通知用戶到期了，是否有需要再安排合約討論</div>
+                                </div>
+                            </div>
+                            
+                            <div class="type-option" data-type="service">
+                                <div class="type-radio"></div>
+                                <div class="type-icon info">ℹ️</div>
+                                <div class="type-details">
+                                    <div class="type-title">通知用戶可以申請綠海養護服務</div>
+                                    <div class="type-description">提醒用戶要線上申請綠海養護服務</div>
+                                </div>
+                            </div>
+
+                            <div class="type-option" data-type="payment">
+                                <div class="type-radio"></div>
+                                <div class="type-icon warning">💰</div>
+                                <div class="type-details">
+                                    <div class="type-title">繳款通知提醒</div>
+                                    <div class="type-description">通知用戶繳納款項，包含金額與期限</div>
+                                </div>
+                            </div>
+
+                            <div class="type-option" data-type="payment_completed">
+                                <div class="type-radio"></div>
+                                <div class="type-icon success" style="color: var(--color-success);">✅</div>
+                                <div class="type-details">
+                                    <div class="type-title">繳款完成通知</div>
+                                    <div class="type-description">通知用戶款項已確認入帳</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-section">
+                        <div class="section-title">
+                            <span class="section-icon">✏️</span>
+                            <span>推播內容</span>
+                        </div>
+                        
+                        <div class="notification-content">
+                            <textarea class="content-textarea" id="notifyContent" placeholder="請輸入推播內容">我們已經完成了您的項目。請您撥冗查看檢查結果，並在確認無誤後回復簽名，以便我們進行後續處理。</textarea>
+                        </div>
+                        
+                        <div class="notification-options">
+                            <div class="option-checkbox">
+                                <input type="checkbox" id="includeLink" class="checkbox-input" checked>
+                                <label for="includeLink" class="checkbox-label">包含連結按鈕</label>
+                            </div>
+                            
+                            <div class="option-checkbox">
+                                <input type="checkbox" id="showDetails" class="checkbox-input" checked>
+                                <label for="showDetails" class="checkbox-label">顯示全部資訊</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-section">
+                        <div class="preview-title">預覽畫面：</div>
+                        
+                        <div class="preview-card">
+                            <div class="preview-header" id="previewHeader">【完工確認簽署提醒】</div>
+                            <div class="preview-body" id="previewBody">我們已經完成了您的項目。請您撥冗查看檢查結果，並在確認無誤後回復簽名，以便我們進行後續處理。</div>
+                            
+                            <div class="preview-details" id="previewDetails">
+                                <div class="preview-detail">
+                                    <div class="detail-label">戶別：</div>
+                                    <div class="detail-value">一樓-A室</div>
+                                </div>
+                                <div class="preview-detail">
+                                    <div class="detail-label">完工日期：</div>
+                                    <div class="detail-value">2025/12/12</div>
+                                </div>
+                            </div>
+                            
+                            <div class="preview-actions" id="previewActions">
+                                <button class="preview-button">查看詳情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-cancel" id="lineNotifyCancel">取消</button>
+                    <button class="btn btn-send" id="lineNotifySend">發送推播</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/green-contract-payment.js"></script>
+</body>
+</html>

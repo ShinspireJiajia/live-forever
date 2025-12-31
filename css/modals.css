@@ -1,0 +1,477 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 彈窗元件樣式
+ * ============================================
+ * 檔案：modals.css
+ * 說明：定義彈出視窗/對話框的樣式
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* ============================================
+ * 彈窗背景遮罩 (Modal Backdrop)
+ * ============================================ */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-index-modal-backdrop);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+ * 彈窗容器 (Modal Container)
+ * ============================================ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    z-index: var(--z-index-modal);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 禁止背景捲動 */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* ============================================
+ * 彈窗內容 (Modal Content)
+ * ============================================ */
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    max-height: calc(100vh - var(--spacing-lg) * 2);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.9) translateY(-20px);
+    transition: transform var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+/* ============================================
+ * 彈窗尺寸變體 (Modal Sizes)
+ * ============================================ */
+.modal-sm .modal-content {
+    max-width: 360px;
+}
+
+.modal-lg .modal-content {
+    max-width: 800px;
+}
+
+.modal-xl .modal-content {
+    max-width: 1140px;
+}
+
+.modal-fullscreen .modal-content {
+    max-width: none;
+    width: calc(100% - var(--spacing-lg) * 2);
+    height: calc(100vh - var(--spacing-lg) * 2);
+    max-height: none;
+    border-radius: var(--border-radius-md);
+}
+
+/* ============================================
+ * 彈窗標題區 (Modal Header)
+ * ============================================ */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: var(--border-width-thin) solid var(--color-border);
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+/* 關閉按鈕 */
+.modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: calc(var(--spacing-sm) * -1);
+    padding: 0;
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    background: none;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-gray-100);
+}
+
+.modal-close:focus {
+    outline: 2px solid var(--color-content-bg);
+    outline-offset: 2px;
+}
+
+/* ============================================
+ * 彈窗內容區 (Modal Body)
+ * ============================================ */
+.modal-body {
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* 帶捲軸的內容區 */
+.modal-body-scroll {
+    max-height: 60vh;
+}
+
+/* ============================================
+ * 彈窗底部 (Modal Footer)
+ * ============================================ */
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: var(--border-width-thin) solid var(--color-border);
+    background-color: var(--color-gray-50);
+    flex-shrink: 0;
+}
+
+/* 底部按鈕左右分佈 */
+.modal-footer-between {
+    justify-content: space-between;
+}
+
+/* 底部按鈕置中 */
+.modal-footer-center {
+    justify-content: center;
+}
+
+/* ============================================
+ * 確認對話框 (Confirm Dialog)
+ * ============================================ */
+.modal-confirm .modal-content {
+    max-width: 400px;
+}
+
+.modal-confirm .modal-body {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.modal-confirm-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 32px;
+}
+
+.modal-confirm-icon.warning {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.modal-confirm-icon.danger {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+}
+
+.modal-confirm-icon.success {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.modal-confirm-icon.info {
+    background-color: var(--color-info-light);
+    color: var(--color-info);
+}
+
+.modal-confirm-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.modal-confirm-message {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-loose);
+}
+
+.modal-confirm .modal-footer {
+    justify-content: center;
+}
+
+/* ============================================
+ * 表單彈窗 (Form Modal)
+ * ============================================ */
+.modal-form .modal-body {
+    padding: var(--spacing-lg);
+}
+
+.modal-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-form .form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* 表單彈窗的欄位佈局 */
+.modal-form-row {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.modal-form-row .form-group {
+    flex: 1;
+}
+
+/* ============================================
+ * 圖片/媒體彈窗 (Image/Media Modal)
+ * ============================================ */
+.modal-image .modal-content {
+    background-color: transparent;
+    box-shadow: none;
+    max-width: none;
+    width: auto;
+}
+
+.modal-image .modal-body {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--border-radius-md);
+}
+
+.modal-image .modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: var(--border-radius-full);
+}
+
+.modal-image .modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+ * 載入中狀態 (Loading State)
+ * ============================================ */
+.modal-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-3xl);
+}
+
+.modal-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--color-gray-200);
+    border-top-color: var(--color-content-bg);
+    border-radius: 50%;
+    animation: modal-spin 1s linear infinite;
+}
+
+@keyframes modal-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.modal-loading-text {
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+ * 側邊抽屜 (Side Drawer)
+ * 從側邊滑出的彈窗變體
+ * ============================================ */
+.modal-drawer {
+    padding: 0;
+    justify-content: flex-end;
+}
+
+.modal-drawer .modal-content {
+    height: 100%;
+    max-height: 100%;
+    max-width: 480px;
+    border-radius: 0;
+    transform: translateX(100%);
+}
+
+.modal-drawer.active .modal-content {
+    transform: translateX(0);
+}
+
+/* 左側抽屜 */
+.modal-drawer-left {
+    justify-content: flex-start;
+}
+
+.modal-drawer-left .modal-content {
+    transform: translateX(-100%);
+}
+
+.modal-drawer-left.active .modal-content {
+    transform: translateX(0);
+}
+
+/* ============================================
+ * 動畫變體 (Animation Variants)
+ * ============================================ */
+
+/* 淡入淡出 */
+.modal-fade .modal-content {
+    transform: none;
+    opacity: 0;
+}
+
+.modal-fade.active .modal-content {
+    opacity: 1;
+}
+
+/* 從上方滑入 */
+.modal-slide-down .modal-content {
+    transform: translateY(-100px);
+}
+
+.modal-slide-down.active .modal-content {
+    transform: translateY(0);
+}
+
+/* 從下方滑入 */
+.modal-slide-up .modal-content {
+    transform: translateY(100px);
+}
+
+.modal-slide-up.active .modal-content {
+    transform: translateY(0);
+}
+
+/* ============================================
+ * 響應式設計
+ * ============================================ */
+
+/* 平板裝置 */
+@media screen and (max-width: 1023px) {
+    .modal {
+        padding: var(--spacing-md);
+    }
+    
+    .modal-lg .modal-content,
+    .modal-xl .modal-content {
+        max-width: calc(100% - var(--spacing-md) * 2);
+    }
+}
+
+/* 手機裝置 */
+@media screen and (max-width: 767px) {
+    .modal {
+        padding: 0;
+        align-items: flex-end;
+    }
+    
+    .modal-content {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        transform: translateY(100%);
+    }
+    
+    .modal.active .modal-content {
+        transform: translateY(0);
+    }
+    
+    .modal-sm .modal-content,
+    .modal-lg .modal-content,
+    .modal-xl .modal-content {
+        max-width: 100%;
+    }
+    
+    .modal-fullscreen .modal-content {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .modal-drawer .modal-content {
+        max-width: 100%;
+    }
+    
+    .modal-form-row {
+        flex-direction: column;
+    }
+    
+    .modal-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .modal-body {
+        padding: var(--spacing-md);
+    }
+    
+    .modal-footer {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}

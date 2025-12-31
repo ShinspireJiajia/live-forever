@@ -1,0 +1,568 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 表單元件樣式
+ * ============================================
+ * 檔案：forms.css
+ * 說明：定義表單相關元件的樣式，包含輸入框、下拉選單、checkbox、radio 等
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* ============================================
+ * 表單容器 (Form Container)
+ * ============================================ */
+.form {
+    width: 100%;
+}
+
+/* 行內表單 */
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--spacing-md);
+}
+
+/* ============================================
+ * 表單群組 (Form Group)
+ * ============================================ */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* 行內表單群組 */
+.form-inline .form-group {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+}
+
+/* ============================================
+ * 表單標籤 (Form Label)
+ * ============================================ */
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+}
+
+/* 必填標記 */
+.form-label.required::after {
+    content: ' *';
+    color: var(--color-danger);
+}
+
+/* 行內標籤 */
+.form-label-inline {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0;
+    margin-right: var(--spacing-sm);
+}
+
+/* ============================================
+ * 輸入框基礎樣式 (Form Control)
+ * ============================================ */
+.form-control {
+    display: block;
+    width: 100%;
+    height: var(--input-height-md);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-white);
+    background-clip: padding-box;
+    border: var(--border-width-thin) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+    border-color: var(--color-content-bg);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: var(--color-gray-100);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.form-control::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+}
+
+/* ============================================
+ * 輸入框尺寸 (Input Sizes)
+ * ============================================ */
+.form-control-sm {
+    height: var(--input-height-sm);
+    padding: calc(var(--input-padding-y) * 0.75) var(--input-padding-x);
+    font-size: var(--font-size-xs);
+}
+
+.form-control-lg {
+    height: var(--input-height-lg);
+    padding: calc(var(--input-padding-y) * 1.25) var(--input-padding-x);
+    font-size: var(--font-size-base);
+}
+
+/* ============================================
+ * 下拉選單 (Select)
+ * ============================================ */
+.form-select {
+    display: block;
+    width: 100%;
+    height: var(--input-height-md);
+    padding: var(--input-padding-y) calc(var(--input-padding-x) + 20px) var(--input-padding-y) var(--input-padding-x);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-white);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23616161' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right var(--input-padding-x) center;
+    background-size: 12px;
+    border: var(--border-width-thin) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    appearance: none;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-select:focus {
+    border-color: var(--color-content-bg);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
+}
+
+.form-select:disabled {
+    background-color: var(--color-gray-100);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* 下拉選單尺寸 */
+.form-select-sm {
+    height: var(--input-height-sm);
+    padding-top: calc(var(--input-padding-y) * 0.75);
+    padding-bottom: calc(var(--input-padding-y) * 0.75);
+    font-size: var(--font-size-xs);
+}
+
+.form-select-lg {
+    height: var(--input-height-lg);
+    padding-top: calc(var(--input-padding-y) * 1.25);
+    padding-bottom: calc(var(--input-padding-y) * 1.25);
+    font-size: var(--font-size-base);
+}
+
+/* ============================================
+ * 文字區域 (Textarea)
+ * ============================================ */
+textarea.form-control {
+    height: auto;
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ============================================
+ * Checkbox 與 Radio
+ * ============================================ */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    min-height: 24px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-check:last-child {
+    margin-bottom: 0;
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--color-btn-primary);
+    flex-shrink: 0;
+}
+
+.form-check-input:focus {
+    outline: 2px solid var(--color-content-bg);
+    outline-offset: 2px;
+}
+
+.form-check-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.form-check-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    user-select: none;
+}
+
+.form-check-input:disabled + .form-check-label {
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+}
+
+/* 行內 Checkbox/Radio */
+.form-check-inline {
+    display: inline-flex;
+    margin-right: var(--spacing-md);
+    margin-bottom: 0;
+}
+
+/* ============================================
+ * Switch 開關
+ * ============================================ */
+.form-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.form-switch-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.form-switch-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background-color: var(--color-gray-300);
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.form-switch-slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-white);
+    border-radius: 50%;
+    transition: transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-switch-input:checked + .form-switch-slider {
+    background-color: var(--color-btn-primary);
+}
+
+.form-switch-input:checked + .form-switch-slider::before {
+    transform: translateX(20px);
+}
+
+.form-switch-input:focus + .form-switch-slider {
+    box-shadow: 0 0 0 3px rgba(169, 158, 145, 0.3);
+}
+
+.form-switch-input:disabled + .form-switch-slider {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.form-switch-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    cursor: pointer;
+}
+
+/* ============================================
+ * 輸入框群組 (Input Group)
+ * ============================================ */
+.input-group {
+    display: flex;
+    align-items: stretch;
+}
+
+.input-group .form-control,
+.input-group .form-select {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.input-group .form-control:not(:first-child),
+.input-group .form-select:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group .form-control:not(:last-child),
+.input-group .form-select:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* 輸入框前後綴 */
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    background-color: var(--color-gray-100);
+    border: var(--border-width-thin) solid var(--color-border);
+    white-space: nowrap;
+}
+
+.input-group-text:first-child {
+    border-right: 0;
+    border-top-left-radius: var(--border-radius-sm);
+    border-bottom-left-radius: var(--border-radius-sm);
+}
+
+.input-group-text:last-child {
+    border-left: 0;
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+}
+
+/* 輸入框內按鈕 */
+.input-group .btn {
+    border-radius: 0;
+}
+
+.input-group .btn:first-child {
+    border-top-left-radius: var(--border-radius-sm);
+    border-bottom-left-radius: var(--border-radius-sm);
+}
+
+.input-group .btn:last-child {
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+}
+
+/* ============================================
+ * 表單驗證狀態 (Validation States)
+ * ============================================ */
+
+/* 有效狀態 */
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: var(--color-success);
+}
+
+.form-control.is-valid:focus,
+.form-select.is-valid:focus {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+}
+
+/* 無效狀態 */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--color-danger);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+/* 驗證訊息 */
+.valid-feedback,
+.invalid-feedback {
+    display: none;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+}
+
+.valid-feedback {
+    color: var(--color-success);
+}
+
+.invalid-feedback {
+    color: var(--color-danger);
+}
+
+.is-valid ~ .valid-feedback,
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* ============================================
+ * 表單說明文字 (Form Text / Help Text)
+ * ============================================ */
+.form-text {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+/* ============================================
+ * 檔案上傳 (File Input)
+ * ============================================ */
+.form-file {
+    position: relative;
+    display: flex;
+}
+
+.form-file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.form-file-label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--input-height-md);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    background-color: var(--color-white);
+    border: var(--border-width-thin) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.form-file-label::after {
+    content: '瀏覽...';
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+    margin-left: auto;
+    margin-right: calc(var(--input-padding-x) * -1);
+    height: 100%;
+    background-color: var(--color-gray-200);
+    border-left: var(--border-width-thin) solid var(--color-border);
+    color: var(--color-text-secondary);
+}
+
+.form-file-input:focus + .form-file-label {
+    border-color: var(--color-content-bg);
+    box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
+}
+
+/* ============================================
+ * 日期選擇器（基礎樣式）
+ * ============================================ */
+input[type="date"].form-control,
+input[type="datetime-local"].form-control,
+input[type="time"].form-control {
+    /* 確保日期選擇器與一般輸入框樣式一致 */
+}
+
+/* ============================================
+ * 響應式設計
+ * ============================================ */
+
+/* 手機裝置 */
+@media screen and (max-width: 767px) {
+    .form-inline {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-inline .form-group {
+        width: 100%;
+    }
+    
+    .form-check-inline {
+        display: flex;
+        margin-right: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* 所有表單元素在手機版 100% 寬度 */
+    .form-control,
+    .form-select,
+    .form-input,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="time"],
+    input[type="file"],
+    select,
+    textarea {
+        width: 100% !important;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* 表單群組間距優化 */
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .form-group:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* 標籤與輸入框垂直排列 */
+    .form-group.row {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .col-label {
+        width: 100%;
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .col-input {
+        width: 100%;
+    }
+    
+    /* 日期範圍群組垂直排列 */
+    .date-range-group {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .date-range-group .form-input,
+    .date-range-group .form-control {
+        width: 100%;
+    }
+    
+    /* 表單行列優化 */
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .form-row > .form-group {
+        width: 100%;
+        flex: unset;
+    }
+}

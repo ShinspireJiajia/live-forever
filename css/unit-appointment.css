@@ -1,0 +1,195 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 戶別預約日期設定樣式
+ * ============================================
+ * 檔案：unit-appointment.css
+ * 說明：定義戶別管理彈窗中預約日期設定區塊的樣式
+ * 建立日期：2025-12-30
+ * ============================================
+ */
+
+/* ============================================
+ * 預約說明提示文字
+ * ============================================ */
+.reservation-hint {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: #f0f7ff;
+    border-left: 3px solid var(--color-info);
+    border-radius: var(--border-radius-sm);
+}
+
+/* ============================================
+ * 預約區塊容器 (Appointment Section)
+ * ============================================ */
+.appointment-section {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    transition: box-shadow var(--transition-fast);
+}
+
+.appointment-section:last-child {
+    margin-bottom: 0;
+}
+
+.appointment-section:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+ * 預約區塊標題 (Appointment Header)
+ * ============================================ */
+.appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid #eee;
+}
+
+.appointment-title {
+    font-weight: var(--font-weight-bold);
+    color: #b08968;
+    margin: 0;
+    font-size: var(--font-size-base);
+    display: flex;
+    align-items: center;
+}
+
+.appointment-title i {
+    color: #a99e91;
+}
+
+/* ============================================
+ * 預約狀態標籤 (Appointment Status)
+ * ============================================ */
+.appointment-status {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.appointment-status.status-completed {
+    background-color: #e6f7e6;
+    color: var(--color-success);
+}
+
+.appointment-status.status-pending {
+    background-color: #fff3e0;
+    color: var(--color-warning);
+}
+
+.appointment-status.status-not-booked {
+    background-color: #f5f5f5;
+    color: var(--color-gray-500);
+}
+
+/* ============================================
+ * 實際預約資訊區塊 (Appointment Details)
+ * ============================================ */
+.appointment-details {
+    background-color: #f8f8f8;
+    border: 1px dashed #ccc;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.appointment-details .details-title {
+    margin: 0 0 var(--spacing-md) 0;
+    color: #555;
+    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-medium);
+}
+
+.appointment-details .details-title i {
+    color: var(--color-gray-500);
+}
+
+/* ============================================
+ * 唯讀欄位樣式 (Readonly Field)
+ * ============================================ */
+.readonly-field {
+    background-color: #f0f0f0 !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    border: 1px solid #ddd !important;
+}
+
+.readonly-field:focus {
+    box-shadow: none !important;
+    border-color: #ddd !important;
+}
+
+/* ============================================
+ * 預約區塊內的表單調整
+ * ============================================ */
+.appointment-section .form-group {
+    margin-bottom: var(--spacing-sm);
+}
+
+.appointment-section .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.appointment-section .col-form-label {
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+ * nb-card 預約區塊額外樣式
+ * ============================================ */
+nb-card.accent-info nb-card-header {
+    background-color: var(--color-info);
+    color: var(--color-white);
+}
+
+nb-card.accent-info nb-card-header span {
+    display: flex;
+    align-items: center;
+}
+
+/* ============================================
+ * 響應式調整 (Responsive)
+ * ============================================ */
+@media (max-width: 767px) {
+    .appointment-section {
+        padding: var(--spacing-sm);
+    }
+    
+    .appointment-details {
+        padding: var(--spacing-sm);
+    }
+    
+    .appointment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .appointment-section .form-group.row {
+        flex-direction: column;
+    }
+    
+    .appointment-section .form-group.row .col-md-1,
+    .appointment-section .form-group.row .col-md-2,
+    .appointment-section .form-group.row .col-md-3,
+    .appointment-section .form-group.row .col-md-4 {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .appointment-section .form-group.row .col-form-label.text-center {
+        text-align: left !important;
+    }
+}

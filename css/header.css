@@ -1,0 +1,81 @@
+﻿/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 頂部導覽列樣式
+ * ============================================
+ * 檔案：header.css
+ * 說明：定義頂部導覽列的樣式，包含漢堡選單、標題
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* ============================================
+ * 頂部導覽列容器 (Header)
+ * ============================================ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background-color: #fff;
+    /* border-bottom: 1px solid #eee; */ /* 移除底線以符合圖片 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: var(--z-index-header);
+    box-shadow: none; /* 移除陰影 */
+}
+
+/* ============================================
+ * 左側區域（漢堡選單 + 標題）
+ * ============================================ */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 漢堡選單按鈕 */
+.header-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: #ccc; /* 淺灰色圖示 */
+    transition: color 0.2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.header-toggle:hover {
+    color: #999;
+}
+
+.header-toggle i {
+    font-size: 24px;
+}
+
+/* 系統標題 */
+.header-brand {
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 36px; /* 加大字體 */
+    font-weight: 400; /* 正常粗細 */
+    color: #003366; /* 深藍色 */
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+ * 右側區域（隱藏或保留）
+ * ============================================ */
+.header-right {
+    display: none; /* 根據圖片隱藏右側 */
+}

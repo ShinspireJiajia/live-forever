@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物業預約管理系統</title>
+    <link rel="stylesheet" href="css/green-performance.css">
+</head>
+<body>
+    <div class="container">
+        <div class="back-btn" onclick="goBack()">
+            <span>&#8592;</span> 返回上一頁
+        </div>
+        
+        <header>
+            <h1>物業預約管理系統</h1>
+        </header>
+        
+        <!--<div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('reservationTab')">預約管理</button>
+            <button class="tab-btn" onclick="switchTab('contractTab')">合約管理</button>
+            <button class="tab-btn" onclick="switchTab('facilityTab')">公設管理</button>
+        </div>-->
+        
+        <!-- 預約管理頁籤 -->
+        <div id="reservationTab" class="tab-content active">
+            <div class="summary-section">
+                <div class="summary-card">
+                    <h3>本月預約總數</h3>
+                    <div class="value">18</div>
+                </div>
+                <div class="summary-card">
+                    <h3>待執行預約</h3>
+                    <div class="value">9</div>
+                </div>
+                <div class="summary-card">
+                    <h3>已執行預約</h3>
+                    <div class="value">9</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3>即將到期合約</h3>
+                    <div class="value">2</div>
+                </div>
+                <div class="summary-card">
+                    <h3>已逾期合約</h3>
+                    <div class="value">1</div>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-available"></div>
+                    <span>合約可預約月份</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-pending"></div>
+                    <span>已預約未執行</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-completed"></div>
+                    <span>已預約已執行</span>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-row">
+                    <div class="filter-item">
+                        <label for="propertyFilter">戶別</label>
+                        <select id="propertyFilter">
+                            <option value="">全部</option>
+                            <option value="A">A區</option>
+                            <option value="B">B區</option>
+                            <option value="C">C區</option>
+                            <option value="D">D區</option>
+                            <option value="E">E區</option>
+                            <option value="F">公設</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="contractFilter">合約編號</label>
+                        <select id="contractFilter">
+                            <option value="">全部</option>
+                            <option value="CT-2023-001">CT-2025-001</option>
+                            <option value="CT-2023-002">CT-2025-002</option>
+                            <option value="CT-2023-003">CT-2024-003</option>
+                            <option value="CT-2023-004">CT-2025-004</option>
+                            <option value="CT-2023-005">CT-2025-005</option>
+                            <option value="CT-2023-006">CT-2025-006</option>
+                            <option value="CT-2023-007">CT-2025-101 (公設)</option>
+                            <option value="CT-2023-008">CT-2025-102 (公設)</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="statusFilter">合約狀態</label>
+                        <select id="statusFilter">
+                            <option value="">全部</option>
+                            <option value="active">有效</option>
+                            <option value="expiring">即將到期</option>
+                            <option value="expired">已逾期</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="reservationStatusFilter">預約狀態</label>
+                        <select id="reservationStatusFilter">
+                            <option value="">全部</option>
+                            <option value="pending">已預約未執行</option>
+                            <option value="completed">已預約已執行</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="contractTypeFilter">合約類型</label>
+                        <select id="contractTypeFilter">
+                            <option value="">全部</option>
+                            <option value="single">一般合約</option>
+                            <option value="facility">公設合約</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="monthFilter">月份</label>
+                        <select id="monthFilter">
+                            <option value="">全部</option>
+                            <option value="1">1月</option>
+                            <option value="2">2月</option>
+                            <option value="3">3月</option>
+                            <option value="4">4月</option>
+                            <option value="5">5月</option>
+                            <option value="6">6月</option>
+                            <option value="7">7月</option>
+                            <option value="8">8月</option>
+                            <option value="9">9月</option>
+                            <option value="10">10月</option>
+                            <option value="11">11月</option>
+                            <option value="12">12月</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <button class="btn btn-primary" onclick="openAddReservationModal()">新增預約</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">套用篩選</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">重置</button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>戶別/公設</th>
+                            <th>合約編號</th>
+                            <th>合約狀態</th>
+                            <th>到期日</th>
+                            <th>合約預約次數</th>
+                            <th>實際已預約次數</th>
+                            <th>1月</th>
+                            <th>2月</th>
+                            <th>3月</th>
+                            <th>4月</th>
+                            <th>5月</th>
+                            <th>6月</th>
+                            <th>7月</th>
+                            <th>8月</th>
+                            <th>9月</th>
+                            <th>10月</th>
+                            <th>11月</th>
+                            <th>12月</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 一般戶別預約資料 -->
+                        <tr>
+                            <td>A1-5</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-001')">CT-2025-001</span></td>
+                            <td><span class="status-badge status-active">有效</span></td>
+                            <td>2025/12/31</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-001</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/03/15 14:00~16:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">王小明</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-002</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/10 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">王小明</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>B2-3</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-002')">CT-2025-002</span></td>
+                            <td><span class="status-badge status-expiring">即將到期</span></td>
+                            <td class="contract-expiring">2025/10/31</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-003</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/01/05 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">李大華</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-004</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/03/20 13:00~15:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">李大華</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-005</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/05/12 15:00~17:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">李大華</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-006</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/25 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">李大華</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>C3-7</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-003')">CT-2023-003</span></td>
+                            <td><span class="status-badge status-expired">已逾期</span></td>
+                            <td class="contract-expired">2024/10/31</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-007</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/02/18 14:00~16:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">張美玲</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-008</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/05/22 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">張美玲</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-009</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/08/05 16:00~18:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">張美玲</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>D4-2</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-004')">CT-2025-004</span></td>
+                            <td><span class="status-badge status-active">有效</span></td>
+                            <td>2026/08/30</td>
+                            <td>12</td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-010</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/30 13:00~15:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">陳志明</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                        </tr>
+                        <tr>
+                            <td>E5-9</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-005')">CT-2025-005</span></td>
+                            <td><span class="status-badge status-active">有效</span></td>
+                            <td>2026/09/30</td>
+                            <td>12</td>
+                            <td>2</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-011</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/04/08 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">林雅婷</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-012</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/07/15 14:00~16:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">林雅婷</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                        </tr>
+                        <tr>
+                            <td>E5-10</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-006')">CT-2025-006</span></td>
+                            <td><span class="status-badge status-expiring">即將到期</span></td>
+                            <td class="contract-expiring">2025/10/15</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-013</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/06/20 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">吳建志</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-014</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/18 15:00~17:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">吳建志</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>E5-11</td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-006')">CT-2025-006</span></td>
+                            <td><span class="status-badge status-expiring">即將到期</span></td>
+                            <td class="contract-expiring">2025/10/15</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-013</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/06/20 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">吳建志</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">R-2023-014</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/18 15:00~17:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">吳建志</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td>-</td>
+                        </tr>
+                        <!-- 公設預約資料 -->
+                        <tr class="facility-row">
+                            <td><span class="facility-id" onclick="openFacilityInfo('F-大廳')">F-大廳</span></td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-F01')">CT-2025-F01</span></td>
+                            <td><span class="status-badge status-active">有效</span></td>
+                            <td>2025/12/30</td>
+                            <td>12</td>
+                            <td>8</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-101</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/01/15 18:00~21:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">住戶聯誼會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">新年聯歡會</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-102</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/03/08 14:00~17:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">管委會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">季度會議</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-103</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/05/20 09:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">防災演習</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-104</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/06/15 18:00~21:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">住戶聯誼會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">端午節活動</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-105</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/12 14:00~17:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">管委會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">季度會議</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-106</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/10/01 18:00~21:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">住戶聯誼會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">中秋節活動</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-107</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/12/23 18:00~22:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">住戶聯誼會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">聖誕節活動</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="facility-row">
+                            <td><span class="facility-id" onclick="openFacilityInfo('F-健身房')">F-健身房</span></td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-F02')">CT-2025-F02</span></td>
+                            <td><span class="status-badge status-active">有效</span></td>
+                            <td>2025/12/30</td>
+                            <td>12</td>
+                            <td>3</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-108</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/02/25 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">設備維護</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-109</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/07/15 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">設備維護</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-110</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/10/20 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">設備維護</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                        </tr>
+                        <tr class="facility-row">
+                            <td><span class="facility-id" onclick="openFacilityInfo('F-游泳池')">F-游泳池</span></td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-F03')">CT-2025-F03</span></td>
+                            <td><span class="status-badge status-active">有效</span></td>
+                            <td>2025/12/30</td>
+                            <td>12</td>
+                            <td>4</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-011</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/04/10 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">水質檢測</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-012</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/06/05 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">水質檢測</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-013</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/08/15 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">水質檢測</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2025-014</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/10/10 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">水質檢測</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-015</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/12/12 09:00~11:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">水質檢測</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="facility-row">
+                            <td><span class="facility-id" onclick="openFacilityInfo('F-會議室')">F-會議室</span></td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-F04')">CT-2023-F04</span></td>
+                            <td><span class="status-badge status-expired">已逾期</span></td>
+                            <td>2023/12/30</td>
+                            <td>12</td>
+                            <td>12</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-016</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/03/15 14:00~16:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">A1-5 王小明</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">業主會議</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-017</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/05/10 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">B2-3 林大方</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">家庭聚會</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-018</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/07/20 15:00~17:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">C3-2 張美玲</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">讀書會</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-019</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/08/05 14:00~16:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">A2-1 陳志明</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">商務會議</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-020</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/09/18 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">管委會</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">季度會議</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-021</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/10/25 14:00~16:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">B1-8 吳建志</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">生日派對</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                        </tr>
+                        <tr class="facility-row">
+                            <td><span class="facility-id" onclick="openFacilityInfo('F-兒童遊戲區')">F-兒童遊戲區</span></td>
+                            <td><span class="contract-id" onclick="viewContract('CT-2023-F05')">CT-2023-F05</span></td>
+                            <td><span class="status-badge status-expired">已逾期</span></td>
+                            <td>2023/12/30</td>
+                            <td>12</td>
+                            <td>2</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-completed">
+                                    完成
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-022</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約已執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/05/01 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">設備安全檢查</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">
+                                <div class="reservation-info reservation-pending">
+                                    預約
+                                    <div class="reservation-tooltip">
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約單號:</div>
+                                            <div class="tooltip-value">F-2023-023</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約狀態:</div>
+                                            <div class="tooltip-value">已預約未執行</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約時間:</div>
+                                            <div class="tooltip-value">2023/10/15 10:00~12:00</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約對象:</div>
+                                            <div class="tooltip-value">物業管理處</div>
+                                        </div>
+                                        <div class="tooltip-row">
+                                            <div class="tooltip-label">預約用途:</div>
+                                            <div class="tooltip-value">設備安全檢查</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="reservation-available">-</td>
+                            <td class="reservation-available">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增預約 Modal -->
+    <div id="addReservationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">新增預約</h3>
+                <span class="close-btn" onclick="closeAddReservationModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="res-property">戶別/公設</label>
+                        <select id="res-property" class="form-control">
+                            <option value="">請選擇...</option>
+                            <option value="A1-5">A1-5</option>
+                            <option value="B2-3">B2-3</option>
+                            <option value="F-大廳">F-大廳</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-date">預約日期</label>
+                        <input type="date" id="res-date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="res-time">預約時間</label>
+                        <input type="time" id="res-time" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="res-note">備註</label>
+                        <textarea id="res-note" class="form-control"></textarea>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeAddReservationModal()">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="alert('預約已送出'); closeAddReservationModal()">確認預約</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/green-performance.js"></script>
+</body>
+</html>

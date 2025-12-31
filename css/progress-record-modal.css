@@ -1,0 +1,894 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 進度紀錄彈窗樣式
+ * ============================================
+ * 檔案：progress-record-modal.css
+ * 說明：期款完工進度紀錄管理彈窗的樣式定義
+ * 建立日期：2025-12-28
+ * ============================================
+ */
+
+/* ============================================
+ * 進度紀錄管理彈窗容器
+ * ============================================ */
+.progress-record-modal {
+    z-index: 1060;
+}
+
+.progress-record-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.progress-record-modal .modal-container {
+    min-width: 800px;
+    max-width: 1000px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1061;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+ * 進度紀錄彈窗標題區
+ * ============================================ */
+.progress-record-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: #333;
+    padding: 1rem 1.5rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.progress-record-modal .modal-title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.progress-record-modal .modal-close {
+    border: none;
+    color: #666;
+    font-size: 1.2rem;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0;
+    width: auto;
+    height: auto;
+    transition: color 0.2s;
+}
+
+.progress-record-modal .modal-close:hover {
+    color: #333;
+    background: transparent;
+}
+
+/* ============================================
+ * 進度紀錄彈窗內容區
+ * ============================================ */
+.progress-record-modal .modal-body {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* 進度紀錄列表標題區 */
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-title {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.progress-title i {
+    margin-right: 8px;
+    color: #6c757d;
+}
+
+/* 新增進度紀錄按鈕 */
+.btn-add-progress {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-add-progress:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+ * 進度紀錄列表樣式
+ * ============================================ */
+.progress-record-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 單筆進度紀錄卡片 */
+.progress-record-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.progress-record-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* 進度紀錄卡片標題 */
+.progress-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.progress-card-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.progress-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+.progress-date i {
+    color: #007bff;
+}
+
+/* 進度百分比顯示 */
+.progress-percent-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-percent-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.progress-percent-badge.progress-low {
+    background-color: #fce4ec;
+    color: #c62828;
+}
+
+.progress-percent-badge.progress-medium {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.progress-percent-badge.progress-high {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.progress-percent-badge.progress-complete {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* 進度條 */
+.progress-bar-container {
+    flex: 1;
+    max-width: 150px;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-bar-inner.progress-low {
+    background-color: #dc3545;
+}
+
+.progress-bar-inner.progress-medium {
+    background-color: #fd7e14;
+}
+
+.progress-bar-inner.progress-high {
+    background-color: #28a745;
+}
+
+.progress-bar-inner.progress-complete {
+    background-color: #28a745;
+}
+
+/* 卡片操作按鈕 */
+.progress-card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid;
+}
+
+.btn-card-action.btn-edit {
+    color: #007bff;
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+.btn-card-action.btn-edit:hover {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.btn-card-action.btn-delete {
+    color: #dc3545;
+    border-color: #dc3545;
+    background-color: #fff;
+}
+
+.btn-card-action.btn-delete:hover {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+/* 進度紀錄卡片內容 */
+.progress-card-body {
+    padding: 16px;
+}
+
+/* 進度說明 */
+.progress-description {
+    margin-bottom: 16px;
+}
+
+.progress-description-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.progress-description-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border-left: 3px solid #28a745;
+}
+
+.progress-description-empty {
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+}
+
+/* 進度圖片區 */
+.progress-images {
+    margin-top: 16px;
+}
+
+.progress-images-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.progress-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.progress-image-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #e9ecef;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.progress-image-item:hover {
+    transform: scale(1.02);
+}
+
+.progress-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.progress-image-item .image-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.progress-image-item:hover .image-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.progress-image-item .image-overlay i {
+    color: #fff;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.progress-image-item:hover .image-overlay i {
+    opacity: 1;
+}
+
+/* 無資料提示 */
+.no-progress-data {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.no-progress-data i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 16px;
+}
+
+.no-progress-data p {
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ============================================
+ * 進度紀錄彈窗底部區
+ * ============================================ */
+.progress-record-modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    flex-shrink: 0;
+}
+
+.progress-record-modal .modal-footer .btn-secondary,
+.progress-record-modal .btn-close-progress-modal {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+}
+
+.progress-record-modal .modal-footer .btn-secondary:hover,
+.progress-record-modal .btn-close-progress-modal:hover {
+    background-color: #5a6268;
+}
+
+/* ============================================
+ * 期款按鈕中的記錄數徽章
+ * ============================================ */
+.record-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    margin-left: 4px;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* 進度紀錄按鈕樣式 */
+.btn-action.btn-outline-info {
+    color: #17a2b8;
+    border: 1px solid #17a2b8;
+    background-color: #fff;
+}
+
+.btn-action.btn-outline-info:hover {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.btn-action.btn-outline-info:hover .record-count-badge {
+    background-color: #fff;
+    color: #17a2b8;
+}
+
+/* ============================================
+ * 新增/編輯進度紀錄表單彈窗
+ * ============================================ */
+.progress-form-modal {
+    z-index: 1070;
+}
+
+.progress-form-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.progress-form-modal .modal-container {
+    max-width: 600px;
+    z-index: 1071;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.progress-form-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: #333;
+    padding: 1rem 1.5rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid #eee;
+    border-radius: 8px 8px 0 0;
+}
+
+.progress-form-modal .modal-title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.progress-form-modal .modal-close {
+    border: none;
+    color: #666;
+    font-size: 1.2rem;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+    width: auto;
+    height: auto;
+}
+
+.progress-form-modal .modal-body {
+    padding: 1.5rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.progress-form .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.progress-form .form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.progress-form .form-label.required::after {
+    content: ' *';
+    color: #dc3545;
+}
+
+.progress-form .form-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.progress-form .form-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.progress-form .form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.progress-form .form-textarea:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* 進度輸入區 */
+.progress-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.progress-form .form-range {
+    flex: 1;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e9ecef;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.progress-form .form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #28a745;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.progress-form .form-range::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.progress-form .form-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #28a745;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.progress-value-display {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.progress-number {
+    width: 70px !important;
+    text-align: center;
+    font-weight: 600;
+}
+
+.percent-sign {
+    font-size: 16px;
+    font-weight: 600;
+    color: #28a745;
+}
+
+/* 進度條預覽 */
+.progress-bar-preview {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+/* 圖片上傳區 */
+.image-upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.image-upload-area:hover {
+    border-color: #28a745;
+    background-color: #f8fff8;
+}
+
+.image-upload-area.dragover {
+    border-color: #28a745;
+    background-color: #e8f5e9;
+}
+
+.upload-placeholder i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 12px;
+}
+
+.upload-placeholder p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: #999;
+}
+
+/* 圖片預覽容器 */
+.image-preview-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.image-preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.image-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-preview-item .remove-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(220, 53, 69, 0.9);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.image-preview-item .remove-image:hover {
+    background-color: #dc3545;
+}
+
+/* 表單底部按鈕 */
+.progress-form-modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.progress-form-modal .btn-cancel {
+    padding: 8px 20px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.progress-form-modal .btn-cancel:hover {
+    background-color: #5a6268;
+}
+
+.progress-form-modal .btn-save {
+    padding: 8px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.progress-form-modal .btn-save:hover {
+    background-color: #218838;
+}
+
+/* ============================================
+ * 圖片燈箱
+ * ============================================ */
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.image-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.lightbox-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+ * 響應式設計
+ * ============================================ */
+@media (max-width: 992px) {
+    .progress-record-modal .modal-container {
+        min-width: auto;
+        width: 95%;
+        max-width: 95%;
+    }
+    
+    .progress-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .progress-card-info {
+        flex-wrap: wrap;
+    }
+    
+    .progress-bar-container {
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .progress-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .progress-form-modal .modal-container {
+        width: 95%;
+        max-width: 95%;
+    }
+    
+    .progress-images-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    
+    .image-preview-container {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}

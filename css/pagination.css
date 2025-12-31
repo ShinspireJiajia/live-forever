@@ -1,0 +1,37 @@
+/* --- 5. 分頁樣式 --- */
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #ffffff;
+    background-color: #3366ff; /* primary 藍色 */
+    border-color: #3366ff;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #3366ff;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #ffffff;
+    border-color: #dee2e6;
+}
+
+.text-center {
+    text-align: center !important;
+}

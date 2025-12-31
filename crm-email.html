@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郵件設定 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">CRM 設定</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">郵件設定</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">郵件設定</h1>
+                    <p class="page-description">設定各類通知郵件的收件人</p>
+                </div>
+
+                <!-- 郵件設定表格 -->
+                <div class="email-settings-card">
+                    <form id="emailForm">
+                        <table class="data-table" id="emailTable">
+                            <thead>
+                                <tr>
+                                    <th width="60">序號</th>
+                                    <th>通知類型</th>
+                                    <th>收件人 Email</th>
+                                    <th width="100">啟用</th>
+                                    <th width="100">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="emailTableBody">
+                            </tbody>
+                        </table>
+                        
+                        <div class="form-actions" style="margin-top: var(--spacing-lg);">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                儲存設定
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            
+            loadEmailSettings();
+            
+            function loadEmailSettings() {
+                const settings = CRMMockData.emailSettings;
+                renderTable(settings);
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('emailTableBody');
+                
+                tbody.innerHTML = data.map(function(setting, index) {
+                    return `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${setting.type}</td>
+                            <td>
+                                <input type="email" class="form-input email-input" 
+                                    id="email_${setting.id}" 
+                                    value="${setting.email}" 
+                                    data-id="${setting.id}">
+                            </td>
+                            <td>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" 
+                                        id="enabled_${setting.id}" 
+                                        ${setting.isEnabled ? 'checked' : ''}
+                                        data-id="${setting.id}">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-secondary btn-test" data-id="${setting.id}">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    測試
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // 綁定測試按鈕事件
+                document.querySelectorAll('.btn-test').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        testEmail(id);
+                    });
+                });
+            }
+            
+            function testEmail(id) {
+                const emailInput = document.getElementById('email_' + id);
+                const email = emailInput.value;
+                
+                if (!email) {
+                    alert('請先輸入 Email');
+                    return;
+                }
+                
+                alert('測試郵件已發送至：' + email);
+            }
+            
+            // 儲存表單
+            document.getElementById('emailForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 收集所有設定
+                const settings = [];
+                document.querySelectorAll('.email-input').forEach(function(input) {
+                    const id = parseInt(input.dataset.id);
+                    const enabledCheckbox = document.getElementById('enabled_' + id);
+                    
+                    settings.push({
+                        id: id,
+                        email: input.value,
+                        isEnabled: enabledCheckbox.checked
+                    });
+                });
+                
+                console.log('儲存設定：', settings);
+                alert('郵件設定已儲存');
+            });
+        });
+    </script>
+
+    <style>
+        .page-description {
+            color: var(--color-gray-500);
+            font-size: var(--font-size-sm);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .email-settings-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .email-input {
+            width: 100%;
+            min-width: 250px;
+        }
+        
+        /* Toggle Switch 樣式 */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-gray-300);
+            transition: var(--transition-fast);
+            border-radius: 26px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: var(--transition-fast);
+            border-radius: 50%;
+        }
+        
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: var(--color-success);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+        
+        .btn-sm {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: var(--font-size-xs);
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+    </style>
+</body>
+</html>
+

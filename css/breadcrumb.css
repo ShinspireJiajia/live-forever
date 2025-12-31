@@ -1,0 +1,151 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 麵包屑導覽樣式
+ * ============================================
+ * 檔案：breadcrumb.css
+ * 說明：定義麵包屑導覽列的樣式
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* ============================================
+ * 麵包屑容器 (Breadcrumb)
+ * ============================================ */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+ * 麵包屑項目 (Breadcrumb Item)
+ * ============================================ */
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+/* 分隔符號 */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: '/';
+    display: inline-block;
+    padding: 0 var(--spacing-sm);
+    color: var(--color-text-muted);
+}
+
+/* 使用 Font Awesome 圖示作為分隔符 */
+.breadcrumb.breadcrumb-arrow .breadcrumb-item + .breadcrumb-item::before {
+    content: '\f054'; /* fa-chevron-right */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: var(--font-size-xs);
+}
+
+/* ============================================
+ * 麵包屑連結 (Breadcrumb Link)
+ * ============================================ */
+.breadcrumb-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb-link:hover {
+    color: var(--color-menu-active);
+    text-decoration: underline;
+}
+
+.breadcrumb-link:focus {
+    outline: 2px solid var(--color-content-bg);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-sm);
+}
+
+/* 首頁圖示 */
+.breadcrumb-home {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.breadcrumb-home i {
+    font-size: var(--font-size-base);
+}
+
+/* ============================================
+ * 當前頁面（最後一項）
+ * ============================================ */
+.breadcrumb-item.active {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.breadcrumb-item.active .breadcrumb-link {
+    color: var(--color-text-primary);
+    cursor: default;
+    pointer-events: none;
+}
+
+/* ============================================
+ * 麵包屑與頁面標題組合
+ * ============================================ */
+.page-header-with-breadcrumb {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-header-with-breadcrumb .breadcrumb {
+    margin-bottom: var(--spacing-sm);
+}
+
+.page-header-with-breadcrumb .page-title {
+    margin: 0;
+}
+
+/* ============================================
+ * 麵包屑容器變體
+ * ============================================ */
+
+/* 帶背景的麵包屑 */
+.breadcrumb.breadcrumb-bg {
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+}
+
+/* 帶邊框的麵包屑 */
+.breadcrumb.breadcrumb-bordered {
+    border: var(--border-width-thin) solid var(--color-border);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+}
+
+/* ============================================
+ * 響應式設計
+ * ============================================ */
+
+/* 手機裝置 */
+@media screen and (max-width: 767px) {
+    .breadcrumb {
+        font-size: var(--font-size-xs);
+    }
+    
+    .breadcrumb-item + .breadcrumb-item::before {
+        padding: 0 var(--spacing-xs);
+    }
+    
+    /* 隱藏中間項目，只顯示首頁和當前頁 */
+    .breadcrumb.breadcrumb-collapse .breadcrumb-item:not(:first-child):not(:last-child) {
+        display: none;
+    }
+    
+    .breadcrumb.breadcrumb-collapse .breadcrumb-item:last-child::before {
+        content: '...';
+        padding: 0 var(--spacing-xs);
+    }
+}

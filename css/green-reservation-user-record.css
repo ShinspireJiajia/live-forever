@@ -1,0 +1,333 @@
+/* 頁面背景與基本設定 */
+body {
+    background-color: #f5f4f0; /* 淺米色背景 */
+    font-family: var(--font-family-base);
+    color: #333;
+    margin: 0;
+    padding-bottom: 40px;
+}
+
+/* 頂部導覽 */
+.mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: transparent;
+}
+
+.back-btn {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #a99e91; /* 配合主色調 */
+    font-size: 1.2rem;
+}
+
+.header-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.header-spacer {
+    width: 40px;
+}
+
+.main-content {
+    padding: 0 20px;
+}
+
+/* 資訊卡片 */
+.info-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #555;
+    min-width: 40px;
+}
+
+.info-separator {
+    margin: 0 8px;
+    color: #ccc;
+}
+
+.info-value {
+    color: #333;
+}
+
+.info-section {
+    margin-top: 15px;
+}
+
+.info-label-block {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.info-text {
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 20px 0;
+}
+
+/* 簽名區域 */
+.signature-section {
+    margin-top: 20px;
+}
+
+.signature-pad {
+    background-color: #f5f5f5;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    height: 120px;
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.signature-placeholder {
+    color: #999;
+    pointer-events: none;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.signature-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-outline {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #a99e91; /* 棕色主色 */
+    color: #fff;
+}
+
+/* 區塊標題 */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #444;
+    font-size: 1.1rem;
+}
+
+/* 附件列表 */
+.attachment-list {
+    margin-bottom: 25px;
+}
+
+.attachment-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.attachment-name {
+    color: #444;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+.download-btn {
+    background-color: #e0f2f1; /* 淺綠色背景 */
+    color: #2e7d32; /* 深綠色圖示 */
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* 聊天區域 */
+.chat-container {
+    background-color: #e9e8e4; /* 略深一點的米灰色背景 */
+    border-radius: 12px;
+    padding: 15px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.message {
+    max-width: 85%;
+    position: relative;
+}
+
+.message-right {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message-left {
+    align-self: flex-start;
+}
+
+.message-content {
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.message-right .message-content {
+    background-color: #fff;
+    color: #333;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.message-left .message-content {
+    background-color: #dcdcdc; /* 灰色氣泡 */
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.message-time, .message-info {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+.message-file {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 200px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.file-name {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.file-download {
+    background-color: #e0f2f1;
+    color: #2e7d32;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* 輸入框區域 */
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    padding: 8px 12px;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    padding: 5px;
+}
+
+.attach-btn, .send-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn {
+    color: #a99e91;
+}

@@ -1,0 +1,321 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 新增合約頁面樣式
+ * ============================================
+ * 檔案：green-contract-add.css
+ * 說明：定義新增合約頁面的特定樣式
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* 表單群組 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--color-gray-900);
+}
+
+.form-label.required:after {
+    content: "*";
+    color: var(--color-danger);
+    margin-left: 4px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: var(--color-content-bg);
+    outline: none;
+}
+
+/* 單選與複選框 */
+.radio-group {
+    margin-top: 8px;
+}
+
+.radio-label {
+    margin-right: 15px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-label input {
+    margin-right: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    min-width: 60px;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    margin-right: 5px;
+}
+
+/* 按鈕群組 */
+.btn-group {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.btn-cancel {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-submit {
+    background-color: #c0aa70; /* User specific color */
+    color: white;
+}
+
+.highlight {
+    color: var(--color-danger);
+    font-weight: bold;
+}
+
+/* 搜尋框 */
+.search-box {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 8px 15px;
+    background-color: var(--color-info);
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+/* 篩選選項 */
+.filter-options {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 15px;
+    align-items: center;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-option input {
+    margin-right: 5px;
+}
+
+/* 房間網格 */
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.room-item {
+    border: 1px solid var(--color-gray-300);
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.room-item:hover {
+    background-color: var(--color-gray-100);
+}
+
+.room-item input {
+    margin-right: 8px;
+}
+
+/* 上傳按鈕 */
+.upload-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--color-success);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    border: none;
+}
+
+.file-info {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-gray-500);
+}
+
+/* 合約期間 */
+.contract-period {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contract-period input {
+    width: 150px;
+}
+
+/* 選擇按鈕 */
+.select-households,
+.select-contacts {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.select-households-btn,
+.select-contacts-btn {
+    padding: 8px 15px;
+    background-color: var(--color-info);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.selected-count {
+    color: var(--color-gray-500);
+    font-size: 14px;
+}
+
+/* 彈窗副標題 */
+.modal-subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 15px 0 10px;
+    color: var(--color-gray-700);
+}
+
+/* 已上傳檔案 */
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 4px;
+    background-color: var(--color-gray-100);
+}
+
+.file-icon {
+    margin-right: 10px;
+    color: var(--color-gray-700);
+    font-size: 18px;
+}
+
+.file-name {
+    font-size: 14px;
+    color: var(--color-gray-900);
+    margin-right: 10px;
+    flex: 1;
+}
+
+.download-file-btn {
+    background-color: var(--color-info);
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+/* 會員網格 */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.member-item {
+    border: 1px solid var(--color-gray-300);
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-name {
+    font-weight: bold;
+}
+
+.member-role {
+    font-size: 12px;
+    color: var(--color-gray-500);
+}
+
+.tag {
+    display: inline-block;
+    background-color: #e1f5fe;
+    color: #0288d1;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* 彈窗背景覆蓋 (Override modals.css default) */
+.modal {
+    background-color: rgba(0, 0, 0, 0.5);
+}

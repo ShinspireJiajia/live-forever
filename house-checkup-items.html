@@ -1,0 +1,1377 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>檢查項目 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">房屋健檢</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">檢查項目</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">檢查項目設定</h1>
+                </div>
+
+                <!-- 分類標籤 -->
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="all">
+                        全部
+                        <span class="tab-count">25</span>
+                    </button>
+                    <button class="category-tab" data-category="exterior">
+                        外觀結構
+                        <span class="tab-count">5</span>
+                    </button>
+                    <button class="category-tab" data-category="interior">
+                        室內空間
+                        <span class="tab-count">6</span>
+                    </button>
+                    <button class="category-tab" data-category="bathroom">
+                        衛浴設備
+                        <span class="tab-count">5</span>
+                    </button>
+                    <button class="category-tab" data-category="kitchen">
+                        廚房設備
+                        <span class="tab-count">4</span>
+                    </button>
+                    <button class="category-tab" data-category="electrical">
+                        水電系統
+                        <span class="tab-count">5</span>
+                    </button>
+                </div>
+
+                <!-- 操作按鈕區 -->
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="btnAdd">
+                        <i class="fa-solid fa-plus"></i>
+                        新增項目
+                    </button>
+                    <button class="btn btn-secondary" id="btnAddCategory">
+                        <i class="fa-solid fa-folder-plus"></i>
+                        新增分類
+                    </button>
+                    <button class="btn btn-secondary" id="btnSort">
+                        <i class="fa-solid fa-sort"></i>
+                        調整順序
+                    </button>
+                </div>
+
+                <!-- 檢查項目清單 -->
+                <div class="items-container">
+                    <!-- 外觀結構 -->
+                    <div class="category-section" data-category="exterior">
+                        <div class="category-header">
+                            <div class="category-info">
+                                <i class="fa-solid fa-building category-icon"></i>
+                                <h3 class="category-name">外觀結構</h3>
+                                <span class="category-count">5 項</span>
+                            </div>
+                            <div class="category-actions">
+                                <button class="btn-icon" title="編輯分類">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="btn-icon" title="展開/收合">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="category-items">
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">外牆磁磚</div>
+                                    <div class="item-desc">檢查外牆磁磚是否有龜裂、脫落、空鼓等情況</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">窗框密封</div>
+                                    <div class="item-desc">檢查窗框周圍密封膠是否完整、有無滲水痕跡</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">陽台排水</div>
+                                    <div class="item-desc">檢查陽台排水孔是否暢通、地坪是否積水</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">大門門鎖</div>
+                                    <div class="item-desc">檢查大門開關是否順暢、門鎖功能是否正常</div>
+                                </div>
+                                <div class="item-badge optional">選檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">屋頂防水</div>
+                                    <div class="item-desc">檢查屋頂防水層是否完好、有無滲漏痕跡</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 室內空間 -->
+                    <div class="category-section" data-category="interior">
+                        <div class="category-header">
+                            <div class="category-info">
+                                <i class="fa-solid fa-couch category-icon"></i>
+                                <h3 class="category-name">室內空間</h3>
+                                <span class="category-count">6 項</span>
+                            </div>
+                            <div class="category-actions">
+                                <button class="btn-icon" title="編輯分類">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="btn-icon" title="展開/收合">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="category-items">
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">牆面油漆</div>
+                                    <div class="item-desc">檢查牆面油漆是否有剝落、起泡、髒污等情況</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">地板平整</div>
+                                    <div class="item-desc">檢查地板是否平整、有無翹起或空鼓</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">天花板</div>
+                                    <div class="item-desc">檢查天花板是否有裂縫、滲水痕跡</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">室內門</div>
+                                    <div class="item-desc">檢查各房間門開關是否順暢、門鎖是否正常</div>
+                                </div>
+                                <div class="item-badge optional">選檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">衣櫃五金</div>
+                                    <div class="item-desc">檢查衣櫃門片、鉸鏈、滑軌是否正常</div>
+                                </div>
+                                <div class="item-badge optional">選檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">冷氣排水</div>
+                                    <div class="item-desc">檢查冷氣排水管是否暢通、有無漏水</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 衛浴設備 -->
+                    <div class="category-section" data-category="bathroom">
+                        <div class="category-header">
+                            <div class="category-info">
+                                <i class="fa-solid fa-bath category-icon"></i>
+                                <h3 class="category-name">衛浴設備</h3>
+                                <span class="category-count">5 項</span>
+                            </div>
+                            <div class="category-actions">
+                                <button class="btn-icon" title="編輯分類">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="btn-icon" title="展開/收合">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="category-items">
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">馬桶沖水</div>
+                                    <div class="item-desc">檢查馬桶沖水功能是否正常、有無漏水</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">洗手台排水</div>
+                                    <div class="item-desc">檢查洗手台排水是否順暢、有無漏水</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">淋浴設備</div>
+                                    <div class="item-desc">檢查蓮蓬頭出水、水壓是否正常</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">浴室門</div>
+                                    <div class="item-desc">檢查浴室門開關、門鎖功能是否正常</div>
+                                </div>
+                                <div class="item-badge optional">選檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">抽風機</div>
+                                    <div class="item-desc">檢查浴室抽風機運轉是否正常</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 廚房設備 -->
+                    <div class="category-section" data-category="kitchen">
+                        <div class="category-header">
+                            <div class="category-info">
+                                <i class="fa-solid fa-kitchen-set category-icon"></i>
+                                <h3 class="category-name">廚房設備</h3>
+                                <span class="category-count">4 項</span>
+                            </div>
+                            <div class="category-actions">
+                                <button class="btn-icon" title="編輯分類">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="btn-icon" title="展開/收合">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="category-items">
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">瓦斯爐具</div>
+                                    <div class="item-desc">檢查瓦斯爐點火、火焰是否正常</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">抽油煙機</div>
+                                    <div class="item-desc">檢查抽油煙機運轉、抽風效果是否正常</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">水槽排水</div>
+                                    <div class="item-desc">檢查水槽排水是否順暢、有無滲漏</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">櫥櫃五金</div>
+                                    <div class="item-desc">檢查廚櫃門片、鉸鏈、拉籃是否正常</div>
+                                </div>
+                                <div class="item-badge optional">選檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 水電系統 -->
+                    <div class="category-section" data-category="electrical">
+                        <div class="category-header">
+                            <div class="category-info">
+                                <i class="fa-solid fa-plug category-icon"></i>
+                                <h3 class="category-name">水電系統</h3>
+                                <span class="category-count">5 項</span>
+                            </div>
+                            <div class="category-actions">
+                                <button class="btn-icon" title="編輯分類">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button class="btn-icon" title="展開/收合">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="category-items">
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">配電箱</div>
+                                    <div class="item-desc">檢查配電箱各迴路開關是否正常</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">插座功能</div>
+                                    <div class="item-desc">檢查各房間插座是否正常供電</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">開關面板</div>
+                                    <div class="item-desc">檢查燈具開關是否正常運作</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">熱水器</div>
+                                    <div class="item-desc">檢查熱水器是否正常運作、出熱水是否正常</div>
+                                </div>
+                                <div class="item-badge">必檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-card">
+                                <div class="item-drag-handle">
+                                    <i class="fa-solid fa-grip-vertical"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-name">對講機</div>
+                                    <div class="item-desc">檢查對講機通話功能是否正常</div>
+                                </div>
+                                <div class="item-badge optional">選檢</div>
+                                <div class="item-actions">
+                                    <button class="btn-action btn-edit" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯項目彈窗 -->
+    <div class="modal" id="itemModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增檢查項目</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="itemForm">
+                    <input type="hidden" id="itemId">
+                    <div class="form-group">
+                        <label class="form-label required">所屬分類</label>
+                        <select class="form-select" id="itemCategory" required>
+                            <option value="">請選擇</option>
+                            <option value="exterior">外觀結構</option>
+                            <option value="interior">室內空間</option>
+                            <option value="bathroom">衛浴設備</option>
+                            <option value="kitchen">廚房設備</option>
+                            <option value="electrical">水電系統</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">項目名稱</label>
+                        <input type="text" class="form-input" id="itemName" required placeholder="請輸入項目名稱">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">檢查說明</label>
+                        <textarea class="form-textarea" id="itemDesc" rows="3" placeholder="請輸入檢查說明"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">檢查類型</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="itemType" value="required" checked>
+                                <span class="radio-text">必檢</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="itemType" value="optional">
+                                <span class="radio-text">選檢</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增分類彈窗 -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">新增檢查分類</h3>
+                <button class="modal-close" id="categoryModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <div class="form-group">
+                        <label class="form-label required">分類名稱</label>
+                        <input type="text" class="form-input" id="categoryName" required placeholder="請輸入分類名稱">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">分類圖示</label>
+                        <div class="icon-selector">
+                            <button type="button" class="icon-option active" data-icon="fa-building"><i class="fa-solid fa-building"></i></button>
+                            <button type="button" class="icon-option" data-icon="fa-couch"><i class="fa-solid fa-couch"></i></button>
+                            <button type="button" class="icon-option" data-icon="fa-bath"><i class="fa-solid fa-bath"></i></button>
+                            <button type="button" class="icon-option" data-icon="fa-kitchen-set"><i class="fa-solid fa-kitchen-set"></i></button>
+                            <button type="button" class="icon-option" data-icon="fa-plug"><i class="fa-solid fa-plug"></i></button>
+                            <button type="button" class="icon-option" data-icon="fa-door-open"><i class="fa-solid fa-door-open"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCategoryCancel">取消</button>
+                <button class="btn btn-primary" id="btnCategorySave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const itemModal = new Modal('itemModal');
+            const categoryModal = new Modal('categoryModal');
+            
+            // 分類標籤切換
+            document.querySelectorAll('.category-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(function(t) {
+                        t.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    document.querySelectorAll('.category-section').forEach(function(section) {
+                        if (category === 'all' || section.dataset.category === category) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 分類展開/收合
+            document.querySelectorAll('.category-header').forEach(function(header) {
+                header.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-icon')) return;
+                    
+                    const section = this.closest('.category-section');
+                    section.classList.toggle('collapsed');
+                });
+            });
+            
+            // 新增項目
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增檢查項目';
+                document.getElementById('itemForm').reset();
+                document.getElementById('itemId').value = '';
+                itemModal.open();
+            });
+            
+            // 新增分類
+            document.getElementById('btnAddCategory').addEventListener('click', function() {
+                document.getElementById('categoryForm').reset();
+                categoryModal.open();
+            });
+            
+            // 調整順序
+            document.getElementById('btnSort').addEventListener('click', function() {
+                alert('拖曳排序功能開發中...');
+            });
+            
+            // 編輯項目
+            document.querySelectorAll('.item-card .btn-edit').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.item-card');
+                    const name = card.querySelector('.item-name').textContent;
+                    const desc = card.querySelector('.item-desc').textContent;
+                    const type = card.querySelector('.item-badge').classList.contains('optional') ? 'optional' : 'required';
+                    const category = this.closest('.category-section').dataset.category;
+                    
+                    document.getElementById('modalTitle').textContent = '編輯檢查項目';
+                    document.getElementById('itemCategory').value = category;
+                    document.getElementById('itemName').value = name;
+                    document.getElementById('itemDesc').value = desc;
+                    document.querySelector(`input[name="itemType"][value="${type}"]`).checked = true;
+                    
+                    itemModal.open();
+                });
+            });
+            
+            // 刪除項目
+            document.querySelectorAll('.item-card .btn-delete').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.item-card');
+                    const name = card.querySelector('.item-name').textContent;
+                    
+                    ConfirmDialog.show({
+                        title: '確認刪除',
+                        message: `確定要刪除「${name}」檢查項目嗎？`,
+                        onConfirm: function() {
+                            card.remove();
+                            alert('已刪除項目');
+                        }
+                    });
+                });
+            });
+            
+            // 儲存項目
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('itemForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存檢查項目');
+                itemModal.close();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                itemModal.close();
+            });
+            
+            // 圖示選擇
+            document.querySelectorAll('.icon-option').forEach(function(option) {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.icon-option').forEach(function(o) {
+                        o.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            // 儲存分類
+            document.getElementById('btnCategorySave').addEventListener('click', function() {
+                const form = document.getElementById('categoryForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存分類');
+                categoryModal.close();
+            });
+            
+            document.getElementById('btnCategoryCancel').addEventListener('click', function() {
+                categoryModal.close();
+            });
+        });
+    </script>
+
+    <style>
+        .category-tabs {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-full);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: all var(--transition-fast);
+        }
+        
+        .category-tab:hover {
+            border-color: var(--color-btn-primary);
+        }
+        
+        .category-tab.active {
+            background: var(--color-btn-primary);
+            color: var(--color-white);
+            border-color: var(--color-btn-primary);
+        }
+        
+        .tab-count {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 8px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+        }
+        
+        .category-tab.active .tab-count {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .items-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+        
+        .category-section {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--color-gray-100);
+            cursor: pointer;
+        }
+        
+        .category-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .category-icon {
+            font-size: var(--font-size-xl);
+            color: var(--color-btn-primary);
+        }
+        
+        .category-name {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+            margin: 0;
+        }
+        
+        .category-count {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+        }
+        
+        .category-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: transparent;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-500);
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-icon:hover {
+            background: var(--color-white);
+            color: var(--color-gray-700);
+        }
+        
+        .category-items {
+            padding: var(--spacing-md);
+        }
+        
+        .category-section.collapsed .category-items {
+            display: none;
+        }
+        
+        .category-section.collapsed .category-header .fa-chevron-down {
+            transform: rotate(-90deg);
+        }
+        
+        .item-card {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--spacing-sm);
+            transition: all var(--transition-fast);
+        }
+        
+        .item-card:hover {
+            border-color: var(--color-btn-primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .item-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        .item-drag-handle {
+            color: var(--color-gray-300);
+            cursor: move;
+        }
+        
+        .item-drag-handle:hover {
+            color: var(--color-gray-500);
+        }
+        
+        .item-content {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .item-desc {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+        }
+        
+        .item-badge {
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            background: #e7f3ff;
+            color: #0066cc;
+        }
+        
+        .item-badge.optional {
+            background: #f3f3f3;
+            color: #666;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-action:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn-edit {
+            color: var(--color-gray-700);
+        }
+        
+        .btn-delete {
+            color: var(--color-btn-danger);
+        }
+        
+        .btn-delete:hover {
+            background: var(--color-btn-danger);
+            border-color: var(--color-btn-danger);
+            color: var(--color-white);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            cursor: pointer;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .icon-selector {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+        
+        .icon-option {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            color: var(--color-gray-500);
+            transition: all var(--transition-fast);
+        }
+        
+        .icon-option:hover {
+            border-color: var(--color-btn-primary);
+        }
+        
+        .icon-option.active {
+            border-color: var(--color-btn-primary);
+            background: var(--color-btn-primary);
+            color: var(--color-white);
+        }
+    </style>
+</body>
+</html>
+

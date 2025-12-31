@@ -1,0 +1,192 @@
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --bg-light: #f8f9fa;
+    --border-color: #dee2e6;
+}
+
+.content-wrapper {
+    background-color: var(--bg-light);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+/* �϶��e���˦� */
+.profile-section {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* ���D�C�u�� */
+.profile-section-header {
+    background-color: #fcfcfc;
+    border-bottom: 2px solid var(--accent-color);
+    padding: 1rem 1.5rem;
+}
+
+.profile-section-title {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-section-title i {
+    color: var(--accent-color);
+}
+
+/* ���Z�վ� */
+.profile-section-body {
+    padding: 1.5rem;
+}
+
+/* �������L�� */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #ccd1d6;
+    padding: 0.6rem 0.75rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+}
+
+/* ��Ū���A�j�� */
+.form-control:disabled {
+    background-color: #f1f3f5;
+    cursor: not-allowed;
+    color: #6c757d;
+}
+
+/* �������s�C�m���ΩT�w */
+.form-actions-bar {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--border-color);
+    margin: 0 -2rem -2rem -2rem; /* ����~�h padding */
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    backdrop-filter: blur(5px);
+    z-index: 100;
+}
+
+.btn {
+    padding: 0.5rem 2rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+    background-color: transparent;
+}
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.shadow-sm {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 交屋紀錄區塊樣式 */
+.satisfaction-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.star-rating-display {
+    display: flex;
+    gap: 2px;
+}
+
+.star-rating-display i {
+    color: #ffc107;
+    font-size: 18px;
+}
+
+.star-rating-display i.fa-regular {
+    color: #ddd;
+}
+
+.rating-value {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.rating-status {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.survey-status-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.btn-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-pending {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.status-reserved {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-inprogress {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+}

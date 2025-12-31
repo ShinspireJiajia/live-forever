@@ -1,0 +1,1237 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客變預約 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">客變預約</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">客變預約管理</h1>
+                </div>
+
+                <!-- 客變期限提醒 -->
+                <div class="deadline-alert">
+                    <div class="alert-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div class="alert-content">
+                        <strong>客變截止提醒</strong>
+                        <p>陸府原森 客變截止日期：2024-02-15（剩餘 20 天）</p>
+                    </div>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">案場</label>
+                                <select class="form-select" id="searchProject">
+                                    <option value="">全部</option>
+                                    <option value="陸府原森">陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">戶號</label>
+                                <input type="text" class="form-input" id="searchUnit" placeholder="請輸入戶號">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">會員姓名</label>
+                                <input type="text" class="form-input" id="searchMember" placeholder="請輸入會員姓名">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">變更類型</label>
+                                <select class="form-select" id="searchType">
+                                    <option value="">全部</option>
+                                    <option value="格局變更">格局變更</option>
+                                    <option value="水電配置">水電配置</option>
+                                    <option value="建材升級">建材升級</option>
+                                    <option value="設備變更">設備變更</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">申請狀態</label>
+                                <select class="form-select" id="searchStatus">
+                                    <option value="">全部</option>
+                                    <option value="待審核">待審核</option>
+                                    <option value="審核中">審核中</option>
+                                    <option value="已核准">已核准</option>
+                                    <option value="已駁回">已駁回</option>
+                                    <option value="已完成">已完成</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">申請日期起</label>
+                                <input type="date" class="form-input" id="searchDateFrom">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">申請日期迄</label>
+                                <input type="date" class="form-input" id="searchDateTo">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="btnExport">
+                                <i class="fa-solid fa-file-export"></i>
+                                匯出
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 操作按鈕區 -->
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="btnAdd">
+                        <i class="fa-solid fa-plus"></i>
+                        新增申請
+                    </button>
+                    <button class="btn btn-secondary" id="btnBatchNotify">
+                        <i class="fa-solid fa-bell"></i>
+                        截止提醒
+                    </button>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-container">
+                    <table class="data-table" id="customTable">
+                        <thead>
+                            <tr>
+                                <th width="60">序號</th>
+                                <th>案場</th>
+                                <th>戶號</th>
+                                <th>會員姓名</th>
+                                <th>變更類型</th>
+                                <th>變更項目</th>
+                                <th>預估費用</th>
+                                <th>申請日期</th>
+                                <th>狀態</th>
+                                <th width="150">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯申請彈窗 -->
+    <div class="modal" id="customModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增客變申請</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="customForm">
+                    <input type="hidden" id="customId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">案場</label>
+                            <select class="form-select" id="cProject" required>
+                                <option value="">請選擇</option>
+                                <option value="陸府原森">陸府原森</option>
+                                <option value="陸府觀微">陸府觀微</option>
+                                <option value="陸府植森">陸府植森</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">戶號</label>
+                            <select class="form-select" id="cUnit" required>
+                                <option value="">請選擇</option>
+                                <option value="A棟12A">A棟12A</option>
+                                <option value="A棟12B">A棟12B</option>
+                                <option value="B棟8A">B棟8A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">會員姓名</label>
+                            <input type="text" class="form-input" id="cMemberName" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">聯絡電話</label>
+                            <input type="tel" class="form-input" id="cPhone" required readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">變更類型</label>
+                            <select class="form-select" id="cType" required>
+                                <option value="">請選擇</option>
+                                <option value="格局變更">格局變更</option>
+                                <option value="水電配置">水電配置</option>
+                                <option value="建材升級">建材升級</option>
+                                <option value="設備變更">設備變更</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">狀態</label>
+                            <select class="form-select" id="cStatus" required>
+                                <option value="待審核">待審核</option>
+                                <option value="審核中">審核中</option>
+                                <option value="已核准">已核准</option>
+                                <option value="已駁回">已駁回</option>
+                                <option value="已完成">已完成</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- 變更項目清單 -->
+                    <div class="change-items-section">
+                        <div class="section-header">
+                            <h4 class="section-title">變更項目明細</h4>
+                            <button type="button" class="btn btn-secondary btn-sm" id="btnAddItem">
+                                <i class="fa-solid fa-plus"></i>
+                                新增項目
+                            </button>
+                        </div>
+                        <table class="data-table" id="changeItemsTable">
+                            <thead>
+                                <tr>
+                                    <th width="150">項目</th>
+                                    <th>原始規格</th>
+                                    <th>變更規格</th>
+                                    <th width="120">差額費用</th>
+                                    <th width="80">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="changeItemsBody">
+                                <tr class="item-row">
+                                    <td><input type="text" class="form-input" placeholder="項目名稱"></td>
+                                    <td><input type="text" class="form-input" placeholder="原始規格"></td>
+                                    <td><input type="text" class="form-input" placeholder="變更規格"></td>
+                                    <td><input type="number" class="form-input" placeholder="0"></td>
+                                    <td>
+                                        <button type="button" class="btn-action btn-delete-item">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" style="text-align: right; font-weight: bold;">合計：</td>
+                                    <td colspan="2"><strong id="totalCost">$0</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">附件上傳</label>
+                        <div class="file-upload">
+                            <input type="file" id="cAttachment" multiple accept=".pdf,.jpg,.png,.doc,.docx">
+                            <label for="cAttachment" class="file-upload-label">
+                                <i class="fa-solid fa-cloud-upload-alt"></i>
+                                <span>點擊或拖曳檔案至此上傳</span>
+                            </label>
+                        </div>
+                        <div class="file-list" id="fileList"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">備註說明</label>
+                        <textarea class="form-textarea" id="cRemark" rows="3" placeholder="請輸入變更需求說明..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 審核彈窗 -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">客變審核</h3>
+                <button class="modal-close" id="reviewModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="review-info">
+                    <div class="info-row">
+                        <span class="info-label">案場：</span>
+                        <span class="info-value" id="reviewProject"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">戶號：</span>
+                        <span class="info-value" id="reviewUnit"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">會員：</span>
+                        <span class="info-value" id="reviewMember"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">變更類型：</span>
+                        <span class="info-value" id="reviewType"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">預估費用：</span>
+                        <span class="info-value" id="reviewCost"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label required">審核結果</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="reviewResult" value="approved">
+                            <span class="radio-text">核准</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="reviewResult" value="rejected">
+                            <span class="radio-text">駁回</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">審核意見</label>
+                    <textarea class="form-textarea" id="reviewComment" rows="3" placeholder="請輸入審核意見..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnReviewCancel">取消</button>
+                <button class="btn btn-primary" id="btnReviewSubmit">送出審核</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const customModal = new Modal('customModal');
+            const reviewModal = new Modal('reviewModal');
+            
+            let currentPage = 1;
+            const pageSize = 10;
+            
+            loadCustomData();
+            
+            function loadCustomData(filters) {
+                const result = CRMMockData.getPaged('customChangeRequests', currentPage, pageSize, filters);
+                renderTable(result.items);
+                renderPagination(result);
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('customTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="10" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(custom, index) {
+                    let statusClass = '';
+                    switch(custom.status) {
+                        case '待審核': statusClass = 'status-pending'; break;
+                        case '審核中': statusClass = 'status-reviewing'; break;
+                        case '已核准': statusClass = 'status-approved'; break;
+                        case '已駁回': statusClass = 'status-rejected'; break;
+                        case '已完成': statusClass = 'status-completed'; break;
+                    }
+                    
+                    let typeClass = '';
+                    switch(custom.changeType) {
+                        case '格局變更': typeClass = 'type-layout'; break;
+                        case '水電配置': typeClass = 'type-utility'; break;
+                        case '建材升級': typeClass = 'type-material'; break;
+                        case '設備變更': typeClass = 'type-equipment'; break;
+                    }
+                    
+                    return `
+                        <tr>
+                            <td>${(currentPage - 1) * pageSize + index + 1}</td>
+                            <td>${custom.projectName}</td>
+                            <td>${custom.unitName}</td>
+                            <td>${custom.memberName}</td>
+                            <td><span class="type-badge ${typeClass}">${custom.changeType}</span></td>
+                            <td>${custom.changeItems || '-'}</td>
+                            <td>${custom.estimatedCost ? '$' + custom.estimatedCost.toLocaleString() : '-'}</td>
+                            <td>${custom.applyDate}</td>
+                            <td><span class="status-badge ${statusClass}">${custom.status}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-edit" data-id="${custom.id}" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    ${custom.status === '待審核' || custom.status === '審核中' ? `
+                                        <button class="btn-action btn-review" data-id="${custom.id}" title="審核">
+                                            <i class="fa-solid fa-clipboard-check"></i>
+                                        </button>
+                                    ` : ''}
+                                    <button class="btn-action btn-delete" data-id="${custom.id}" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                bindTableEvents();
+            }
+            
+            function bindTableEvents() {
+                document.querySelectorAll('.btn-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        editCustom(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-review').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        showReview(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        deleteCustom(id);
+                    });
+                });
+            }
+            
+            function renderPagination(result) {
+                const wrapper = document.getElementById('paginationWrapper');
+                
+                if (result.totalPages <= 1) {
+                    wrapper.innerHTML = '';
+                    return;
+                }
+                
+                wrapper.innerHTML = `
+                    <div class="pagination">
+                        <span class="pagination-info">共 ${result.total} 筆，第 ${result.page} / ${result.totalPages} 頁</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" ${result.page === 1 ? 'disabled' : ''} data-page="${result.page - 1}">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            ${generatePageButtons(result.page, result.totalPages)}
+                            <button class="pagination-btn" ${result.page === result.totalPages ? 'disabled' : ''} data-page="${result.page + 1}">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                wrapper.querySelectorAll('.pagination-btn:not([disabled])').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        currentPage = parseInt(this.dataset.page);
+                        loadCustomData();
+                    });
+                });
+            }
+            
+            function generatePageButtons(current, total) {
+                let buttons = '';
+                for (let i = 1; i <= total; i++) {
+                    if (i === current) {
+                        buttons += `<button class="pagination-btn active">${i}</button>`;
+                    } else if (i === 1 || i === total || (i >= current - 2 && i <= current + 2)) {
+                        buttons += `<button class="pagination-btn" data-page="${i}">${i}</button>`;
+                    } else if (i === current - 3 || i === current + 3) {
+                        buttons += '<span class="pagination-ellipsis">...</span>';
+                    }
+                }
+                return buttons;
+            }
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增客變申請';
+                document.getElementById('customForm').reset();
+                document.getElementById('customId').value = '';
+                resetChangeItems();
+                customModal.open();
+            });
+            
+            function resetChangeItems() {
+                document.getElementById('changeItemsBody').innerHTML = `
+                    <tr class="item-row">
+                        <td><input type="text" class="form-input" placeholder="項目名稱"></td>
+                        <td><input type="text" class="form-input" placeholder="原始規格"></td>
+                        <td><input type="text" class="form-input" placeholder="變更規格"></td>
+                        <td><input type="number" class="form-input item-cost" placeholder="0"></td>
+                        <td>
+                            <button type="button" class="btn-action btn-delete-item">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                bindItemEvents();
+                calculateTotal();
+            }
+            
+            function bindItemEvents() {
+                document.querySelectorAll('.btn-delete-item').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const rows = document.querySelectorAll('.item-row');
+                        if (rows.length > 1) {
+                            this.closest('tr').remove();
+                            calculateTotal();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.item-cost').forEach(function(input) {
+                    input.addEventListener('input', calculateTotal);
+                });
+            }
+            
+            function calculateTotal() {
+                let total = 0;
+                document.querySelectorAll('.item-cost').forEach(function(input) {
+                    total += parseInt(input.value) || 0;
+                });
+                document.getElementById('totalCost').textContent = '$' + total.toLocaleString();
+            }
+            
+            document.getElementById('btnAddItem').addEventListener('click', function() {
+                const tbody = document.getElementById('changeItemsBody');
+                const newRow = document.createElement('tr');
+                newRow.className = 'item-row';
+                newRow.innerHTML = `
+                    <td><input type="text" class="form-input" placeholder="項目名稱"></td>
+                    <td><input type="text" class="form-input" placeholder="原始規格"></td>
+                    <td><input type="text" class="form-input" placeholder="變更規格"></td>
+                    <td><input type="number" class="form-input item-cost" placeholder="0"></td>
+                    <td>
+                        <button type="button" class="btn-action btn-delete-item">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(newRow);
+                bindItemEvents();
+            });
+            
+            function editCustom(id) {
+                const custom = CRMMockData.getById('customChangeRequests', id);
+                if (!custom) return;
+                
+                document.getElementById('modalTitle').textContent = '編輯客變申請';
+                document.getElementById('customId').value = custom.id;
+                document.getElementById('cProject').value = custom.projectName;
+                document.getElementById('cUnit').value = custom.unitName;
+                document.getElementById('cMemberName').value = custom.memberName;
+                document.getElementById('cPhone').value = custom.phone;
+                document.getElementById('cType').value = custom.changeType;
+                document.getElementById('cStatus').value = custom.status;
+                document.getElementById('cRemark').value = custom.remark || '';
+                
+                customModal.open();
+            }
+            
+            let currentReviewId = null;
+            
+            function showReview(id) {
+                const custom = CRMMockData.getById('customChangeRequests', id);
+                if (!custom) return;
+                
+                currentReviewId = id;
+                document.getElementById('reviewProject').textContent = custom.projectName;
+                document.getElementById('reviewUnit').textContent = custom.unitName;
+                document.getElementById('reviewMember').textContent = custom.memberName;
+                document.getElementById('reviewType').textContent = custom.changeType;
+                document.getElementById('reviewCost').textContent = custom.estimatedCost ? '$' + custom.estimatedCost.toLocaleString() : '-';
+                document.getElementById('reviewComment').value = '';
+                
+                reviewModal.open();
+            }
+            
+            document.getElementById('btnReviewSubmit').addEventListener('click', function() {
+                const result = document.querySelector('input[name="reviewResult"]:checked');
+                if (!result) {
+                    alert('請選擇審核結果');
+                    return;
+                }
+                
+                const status = result.value === 'approved' ? '已核准' : '已駁回';
+                alert(`已${status === '已核准' ? '核准' : '駁回'}此客變申請`);
+                reviewModal.close();
+                loadCustomData();
+            });
+            
+            document.getElementById('btnReviewCancel').addEventListener('click', function() {
+                reviewModal.close();
+            });
+            
+            function deleteCustom(id) {
+                const custom = CRMMockData.getById('customChangeRequests', id);
+                if (!custom) return;
+                
+                ConfirmDialog.show({
+                    title: '確認刪除',
+                    message: `確定要刪除 ${custom.memberName} 的客變申請嗎？`,
+                    onConfirm: function() {
+                        alert('已刪除申請');
+                        loadCustomData();
+                    }
+                });
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('customForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存客變申請');
+                customModal.close();
+                loadCustomData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                customModal.close();
+            });
+            
+            document.getElementById('btnBatchNotify').addEventListener('click', function() {
+                alert('已發送客變截止提醒通知');
+            });
+            
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('匯出功能開發中...');
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadCustomData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadCustomData();
+                }, 0);
+            });
+            
+            document.getElementById('cUnit').addEventListener('change', function() {
+                const unit = this.value;
+                if (unit) {
+                    document.getElementById('cMemberName').value = '王小美';
+                    document.getElementById('cPhone').value = '0945-678-901';
+                } else {
+                    document.getElementById('cMemberName').value = '';
+                    document.getElementById('cPhone').value = '';
+                }
+            });
+            
+            // 檔案上傳處理
+            document.getElementById('cAttachment').addEventListener('change', function(e) {
+                const fileList = document.getElementById('fileList');
+                fileList.innerHTML = '';
+                
+                Array.from(e.target.files).forEach(function(file) {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+                        <i class="fa-solid fa-file"></i>
+                        <span>${file.name}</span>
+                        <button type="button" class="btn-remove-file">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    `;
+                    fileList.appendChild(fileItem);
+                });
+            });
+            
+            bindItemEvents();
+        });
+    </script>
+
+    <style>
+        .deadline-alert {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .alert-icon {
+            width: 48px;
+            height: 48px;
+            background: #ffc107;
+            border-radius: var(--border-radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            color: #856404;
+        }
+        
+        .alert-content strong {
+            display: block;
+            color: #856404;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .alert-content p {
+            margin: 0;
+            color: #856404;
+            font-size: var(--font-size-sm);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-reviewing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .type-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .type-layout {
+            background-color: #e7f3ff;
+            color: #0066cc;
+        }
+        
+        .type-utility {
+            background-color: #fff0e6;
+            color: #cc5500;
+        }
+        
+        .type-material {
+            background-color: #e6ffe6;
+            color: #006600;
+        }
+        
+        .type-equipment {
+            background-color: #f3e6ff;
+            color: #6600cc;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: center;
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-action:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn-edit {
+            color: var(--color-gray-700);
+        }
+        
+        .btn-review {
+            color: var(--color-info);
+            border-color: var(--color-info);
+        }
+        
+        .btn-review:hover {
+            background: var(--color-info);
+            color: var(--color-white);
+        }
+        
+        .btn-delete {
+            color: var(--color-btn-danger);
+            border-color: var(--color-btn-danger);
+        }
+        
+        .btn-delete:hover {
+            background: var(--color-btn-danger);
+            color: var(--color-white);
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+        
+        .modal-lg .modal-container {
+            max-width: 900px;
+        }
+        
+        .change-items-section {
+            margin: var(--spacing-lg) 0;
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-md);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .section-title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+            margin: 0;
+        }
+        
+        .btn-sm {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: var(--font-size-sm);
+        }
+        
+        .change-items-section .form-input {
+            padding: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .btn-delete-item {
+            color: var(--color-btn-danger);
+        }
+        
+        .file-upload {
+            position: relative;
+            border: 2px dashed var(--color-gray-300);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .file-upload:hover {
+            border-color: var(--color-btn-primary);
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--color-gray-500);
+        }
+        
+        .file-upload-label i {
+            font-size: var(--font-size-2xl);
+        }
+        
+        .file-list {
+            margin-top: var(--spacing-sm);
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--color-gray-100);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .file-item i {
+            color: var(--color-gray-500);
+        }
+        
+        .file-item span {
+            flex: 1;
+        }
+        
+        .btn-remove-file {
+            background: none;
+            border: none;
+            color: var(--color-btn-danger);
+            cursor: pointer;
+            padding: var(--spacing-xs);
+        }
+        
+        .review-info {
+            background: var(--color-gray-100);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .info-row {
+            display: flex;
+            padding: var(--spacing-xs) 0;
+        }
+        
+        .info-label {
+            width: 100px;
+            color: var(--color-gray-500);
+        }
+        
+        .info-value {
+            flex: 1;
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            cursor: pointer;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</body>
+</html>
+

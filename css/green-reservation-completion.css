@@ -1,0 +1,217 @@
+/* 綠海養護完工確認單樣式 */
+
+/* 全域樣式 */
+body {
+    background-color: var(--color-gray-100);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-base);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-table-header);
+}
+
+h1 {
+    color: var(--color-gray-900);
+    margin: 0;
+    padding: var(--spacing-sm) 0;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+}
+
+h2 {
+    color: var(--color-table-header);
+    margin-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+}
+
+h3 {
+    color: var(--color-gray-800);
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 表格樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-md);
+}
+
+th, td {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: var(--color-table-header);
+    color: var(--color-white);
+    font-weight: var(--font-weight-bold);
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-table-row-even);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--color-table-row-odd);
+}
+
+/* 檢查狀態樣式 */
+.status-options {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.status-option {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-sm);
+    cursor: pointer;
+}
+
+.status-option input {
+    margin-right: var(--spacing-xs);
+}
+
+/* 拍照按鈕樣式 */
+.photo-btn {
+    background-color: var(--color-btn-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 5px 10px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    transition: background-color var(--transition-fast);
+}
+
+.photo-btn:hover {
+    background-color: var(--color-btn-primary-hover);
+}
+
+/* 照片預覽區域 */
+.photo-preview {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed var(--color-border-dark);
+    margin-top: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-gray-50);
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+}
+
+.photo-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* 備註欄位 */
+textarea {
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    resize: vertical;
+    min-height: 60px;
+    font-family: var(--font-family-base);
+}
+
+textarea:focus {
+    border-color: var(--color-content-bg);
+    outline: none;
+}
+
+/* 簽名區域 */
+.signature-section {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+}
+
+.signature-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-md);
+    gap: var(--spacing-lg);
+}
+
+.signature-box {
+    width: 48%;
+    background-color: var(--color-gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.signature-pad {
+    width: 100%;
+    height: 150px;
+    border: 1px solid var(--color-border);
+    margin-top: var(--spacing-sm);
+    background-color: var(--color-white);
+    cursor: crosshair;
+}
+
+/* 提交按鈕 */
+.submit-btn {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    border: none;
+    padding: var(--btn-padding-x-lg) var(--btn-padding-x-lg);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-xl);
+    width: 100%;
+    height: var(--btn-height-lg);
+    transition: background-color var(--transition-normal);
+    font-weight: var(--font-weight-bold);
+}
+
+.submit-btn:hover {
+    background-color: var(--color-success-dark);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-md);
+    }
+    
+    th, td {
+        padding: var(--spacing-sm) var(--spacing-xs);
+        font-size: var(--font-size-sm);
+    }
+    
+    .signature-container {
+        flex-direction: column;
+    }
+    
+    .signature-box {
+        width: 100%;
+        margin-bottom: var(--spacing-md);
+    }
+}

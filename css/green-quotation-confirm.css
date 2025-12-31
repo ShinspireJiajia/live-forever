@@ -1,0 +1,669 @@
+/**
+ * 報價單確認頁面樣式
+ * @file green-quotation-confirm.css
+ * @description 客戶端報價確認與簽名頁面專用樣式
+ */
+
+/* ==================== 基本設定 ==================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: #f5f7fa;
+    color: var(--color-gray-900);
+    line-height: var(--line-height-base);
+    min-height: 100vh;
+}
+
+/* ==================== 容器 ==================== */
+
+.confirm-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==================== 頂部品牌標識 ==================== */
+
+.confirm-header {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.brand-logo img {
+    height: 48px;
+    width: auto;
+}
+
+.brand-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-btn-primary);
+    letter-spacing: 2px;
+}
+
+/* ==================== 主要內容區 ==================== */
+
+.confirm-main {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-xl);
+    flex: 1;
+}
+
+/* ==================== 報價單標題 ==================== */
+
+.quotation-header {
+    text-align: center;
+    padding-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--color-gray-300);
+}
+
+.quotation-title {
+    font-size: 28px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    letter-spacing: 12px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.quotation-no .label {
+    color: var(--color-gray-500);
+}
+
+.quotation-no .value {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+}
+
+/* ==================== 區塊標題 ==================== */
+
+.section-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+/* ==================== 客戶資訊區塊 ==================== */
+
+.info-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.info-item {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.info-label {
+    flex-shrink: 0;
+    min-width: 80px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-500);
+}
+
+.info-value {
+    color: var(--color-gray-900);
+}
+
+/* ==================== 報價明細表格 ==================== */
+
+.detail-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.detail-table th,
+.detail-table td {
+    border: 1px solid var(--color-gray-300);
+    padding: var(--spacing-sm) var(--spacing-md);
+    vertical-align: middle;
+}
+
+.detail-table thead th {
+    background-color: var(--color-table-header);
+    color: var(--color-white);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.detail-table tbody tr:nth-child(odd) {
+    background-color: var(--color-table-row-odd);
+}
+
+.detail-table tbody tr:nth-child(even) {
+    background-color: var(--color-table-row-even);
+}
+
+/* 欄位寬度設定 */
+.th-no { width: 50px; text-align: center; }
+.th-item { min-width: 180px; }
+.th-unit { width: 60px; text-align: center; }
+.th-qty { width: 70px; text-align: center; }
+.th-price { width: 100px; text-align: right; }
+.th-amount { width: 100px; text-align: right; }
+.th-remark { width: 120px; }
+
+.detail-table td:nth-child(1) { text-align: center; }  /* 項次 */
+.detail-table td:nth-child(3) { text-align: center; }  /* 單位 */
+.detail-table td:nth-child(4) { text-align: center; }  /* 數量 */
+.detail-table td:nth-child(5) { text-align: right; }   /* 單價 */
+.detail-table td:nth-child(6) { text-align: right; font-weight: var(--font-weight-medium); }  /* 金額 */
+
+/* ==================== 金額匯總 ==================== */
+
+.summary-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.summary-box {
+    background-color: var(--color-gray-100);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+}
+
+.summary-row:not(:last-child) {
+    border-bottom: 1px dashed var(--color-gray-300);
+}
+
+.summary-label {
+    color: var(--color-gray-700);
+}
+
+.summary-value {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+}
+
+.summary-row.total {
+    padding-top: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    border-top: 2px solid var(--color-btn-primary);
+}
+
+.summary-row.total .summary-label {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+}
+
+.summary-row.total .summary-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-btn-primary);
+}
+
+/* ==================== 備註說明 ==================== */
+
+.remark-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.remark-content {
+    background-color: #fffdf5;
+    border: 1px solid #f0e6c8;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+}
+
+.remark-content ul {
+    margin: 0;
+    padding-left: var(--spacing-lg);
+}
+
+.remark-content li {
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.6;
+}
+
+.remark-content li:last-child {
+    margin-bottom: 0;
+}
+
+/* ==================== 同意條款 ==================== */
+
+.agreement-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.agreement-content {
+    background-color: #f8f9fa;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+}
+
+.agreement-content > p {
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-md);
+}
+
+/* 自訂核取方塊 */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.checkbox-custom::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--color-white);
+    opacity: 0;
+    transform: scale(0);
+    transition: var(--transition-fast);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + .checkbox-custom {
+    background-color: var(--color-btn-primary);
+    border-color: var(--color-btn-primary);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + .checkbox-custom::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.checkbox-label {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+}
+
+/* ==================== 簽名區塊 ==================== */
+
+.signature-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.signature-wrapper {
+    position: relative;
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-white);
+    overflow: hidden;
+}
+
+.signature-wrapper.active {
+    border-color: var(--color-btn-primary);
+    border-style: solid;
+}
+
+#signatureCanvas {
+    display: block;
+    width: 100%;
+    height: 200px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.signature-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-300);
+    pointer-events: none;
+    transition: var(--transition-fast);
+}
+
+.signature-placeholder i {
+    font-size: 48px;
+}
+
+.signature-placeholder span {
+    font-size: var(--font-size-base);
+}
+
+.signature-wrapper.has-signature .signature-placeholder {
+    opacity: 0;
+}
+
+.signature-actions {
+    margin-top: var(--spacing-md);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.signature-hint {
+    margin-top: var(--spacing-sm);
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.signature-hint i {
+    color: var(--color-info);
+}
+
+/* ==================== 確認日期時間 ==================== */
+
+.confirm-datetime {
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.datetime-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+}
+
+.datetime-label {
+    color: var(--color-gray-500);
+}
+
+.datetime-value {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+}
+
+/* ==================== 提交按鈕 ==================== */
+
+.submit-section {
+    text-align: center;
+}
+
+.btn-lg {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    min-width: 200px;
+}
+
+.btn-lg i {
+    margin-right: var(--spacing-sm);
+}
+
+#submitBtn:disabled {
+    background-color: var(--color-gray-300);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.submit-hint {
+    margin-top: var(--spacing-sm);
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+}
+
+/* ==================== 頁尾 ==================== */
+
+.confirm-footer {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    text-align: center;
+}
+
+.footer-content {
+    color: var(--color-gray-500);
+}
+
+.company-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-sm);
+}
+
+.company-info {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.company-info i {
+    margin-right: var(--spacing-xs);
+}
+
+.copyright {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-400);
+}
+
+/* ==================== 成功彈窗 ==================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    max-width: 400px;
+    width: 90%;
+    margin: var(--spacing-md);
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    transform: scale(0.9);
+    transition: var(--transition-normal);
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.success-modal .modal-icon {
+    font-size: 64px;
+    color: var(--color-success);
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-message {
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.modal-info {
+    background-color: var(--color-gray-100);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-info .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs) 0;
+}
+
+.modal-info .label {
+    color: var(--color-gray-500);
+}
+
+.modal-info .value {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-actions .btn i {
+    margin-right: var(--spacing-sm);
+}
+
+/* ==================== 響應式設計 ==================== */
+
+@media (max-width: 767px) {
+    .confirm-container {
+        padding: var(--spacing-sm);
+    }
+
+    .confirm-main {
+        padding: var(--spacing-md);
+    }
+
+    .quotation-title {
+        font-size: 22px;
+        letter-spacing: 6px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-label {
+        min-width: 70px;
+    }
+
+    .summary-box {
+        max-width: 100%;
+    }
+
+    .company-info {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    #signatureCanvas {
+        height: 150px;
+    }
+
+    .btn-lg {
+        width: 100%;
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+}
+
+/* ==================== 列印樣式 ==================== */
+
+@media print {
+    body {
+        background-color: white;
+    }
+
+    .confirm-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .confirm-main {
+        box-shadow: none;
+        padding: var(--spacing-md);
+    }
+
+    .signature-actions,
+    .submit-section,
+    .agreement-section,
+    .confirm-footer {
+        display: none;
+    }
+
+    .signature-wrapper {
+        border: 1px solid var(--color-gray-300);
+        border-style: solid;
+    }
+
+    .signature-placeholder {
+        display: none;
+    }
+}

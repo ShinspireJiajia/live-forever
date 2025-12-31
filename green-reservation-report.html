@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綠海養護完工結果報告 - 陸府建設 CRM</title>
+    <link rel="stylesheet" href="css/green-reservation-report.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>綠海養護完工結果報告</h1>
+            <p><strong>檢查日期：</strong><span id="inspection-date"></span></p>
+            <p><strong>戶號：</strong><span id="house-number"></span> | <strong>住戶姓名：</strong><span id="resident-name"></span></p>
+        </header>
+        
+        <!-- 動態生成內容的區域 -->
+        <div id="results-content"></div>
+
+        <!-- 建議保養項目 -->
+        <h2>建議保養項目(住戶自費)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="60%">保養項目</th>
+                    <th width="40%">建議保養週期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>廚房人造石檯面保養</td>
+                    <td>每年一次</td>
+                </tr>
+                <tr>
+                    <td>浴室石材拋光保養</td>
+                    <td>每年一次</td>
+                </tr>
+                <tr>
+                    <td>洗衣機清洗保養</td>
+                    <td>每年一次</td>
+                </tr>
+                <tr>
+                    <td>熱水器瓦斯管及冷熱高壓管更換</td>
+                    <td>每二年一次</td>
+                </tr>
+                <tr>
+                    <td>空調設備檢測及保養</td>
+                    <td>每年一次一般保養，第四年起每隔四年一次大保養</td>
+                </tr>
+                <tr>
+                    <td>全熱交換機濾網更換</td>
+                    <td>每年一次，視使用習慣</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 簽名區域 -->
+        <div class="signature-section">
+            <h2>確認簽名</h2>
+            <div class="signature-container">
+                <div class="signature-box">
+                    <h3>住戶簽名</h3>
+                    <img id="resident-signature" class="signature-pad" alt="住戶簽名">
+                </div>
+                <div class="signature-box">
+                    <h3>品服部主任簽名</h3>
+                    <img id="manager-signature" class="signature-pad" alt="品服部主任簽名">
+                </div>
+            </div>
+        </div>
+        
+        <button class="print-btn" onclick="window.print()">列印此報告</button>
+    </div>
+    
+    <script src="js/mock-data.js"></script>
+    <script src="js/green-reservation-report.js"></script>
+</body>
+</html>

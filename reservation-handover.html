@@ -1,0 +1,1078 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交屋預約 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/reservation-handover.css">
+    <link rel="stylesheet" href="css/case-list.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">交屋預約</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">交屋預約管理</h1>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form case-search-form" id="searchForm">
+                        <div class="search-grid">
+                            <!-- 案場 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">案場</label>
+                                <div class="col-input">
+                                    <select class="form-select" id="searchProject">
+                                        <option value="">請選擇</option>
+                                        <option value="陸府原森">陸府原森</option>
+                                        <option value="陸府觀微">陸府觀微</option>
+                                        <option value="陸府植森">陸府植森</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 戶別 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">戶別</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="searchUnit" placeholder="請輸入戶別">
+                                </div>
+                            </div>
+                            <!-- 會員姓名 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">會員姓名</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="searchMember" placeholder="請輸入會員姓名">
+                                </div>
+                            </div>
+                            <!-- 主責人員 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">主責人員</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="searchInCharge" placeholder="請輸入主責人員">
+                                </div>
+                            </div>
+                            <!-- 交屋狀態 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">交屋狀態</label>
+                                <div class="col-input">
+                                    <select class="form-select" id="searchStatus">
+                                        <option value="">請選擇</option>
+                                        <option value="待預約">待預約</option>
+                                        <option value="已預約">已預約</option>
+                                        <option value="已完成">已完成</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 預約日期 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">預約日期</label>
+                                <div class="col-input">
+                                    <div class="date-range-group">
+                                        <input type="date" class="form-input" id="searchDateFrom">
+                                        <span class="date-separator">~</span>
+                                        <input type="date" class="form-input" id="searchDateTo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 操作按鈕 -->
+                        <div class="form-actions-right">
+                            <button type="reset" class="btn btn-info">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="submit" class="btn btn-info">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="button" class="btn btn-info" id="btnExport">
+                                <i class="fa-solid fa-download"></i>
+                                匯出
+                            </button>
+                            <a href="reservation-handover-schedule.html" class="btn btn-info">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                時段管理
+                            </a>
+                            <button type="button" class="btn btn-success" id="btnAdd">
+                                新增預約
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-responsive">
+                    <table class="data-table case-table" id="handoverTable">
+                        <thead>
+                            <tr>
+                                <th class="col-1">序號</th>
+                                <th class="col-1">案場</th>
+                                <th class="col-1">戶別</th>
+                                <th class="col-1">會員姓名</th>
+                                <th class="col-1">主責人員</th>
+                                <th class="col-bookable-range">可預約時段</th>
+                                <th class="col-1">已預約日期</th>
+                                <th class="col-1">時段</th>
+                                <th class="col-1">驗屋狀態</th>
+                                <th class="col-1">交屋狀態</th>
+                                <th class="col-1">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="handoverTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯預約彈窗 -->
+    <div class="modal modal-sm" id="handoverModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header modal-header-simple">
+                <h3 class="modal-title" id="modalTitle">新增預約</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">您可於此為客戶建立一筆預約。</p>
+                <form id="handoverForm">
+                    <input type="hidden" id="handoverId">
+                    <!-- 案場 -->
+                    <div class="form-group">
+                        <label class="form-label required">案場</label>
+                        <select class="form-select" id="hProject" required>
+                            <option value="">請選擇案場</option>
+                            <option value="陸府原森">陸府原森</option>
+                            <option value="陸府觀微">陸府觀微</option>
+                            <option value="陸府植森">陸府植森</option>
+                        </select>
+                    </div>
+                    <!-- 戶別 -->
+                    <div class="form-group">
+                        <label class="form-label required">戶別</label>
+                        <select class="form-select" id="hUnit" required disabled>
+                            <option value="">請先選擇案場</option>
+                        </select>
+                    </div>
+                    <!-- 日期 -->
+                    <div class="form-group">
+                        <label class="form-label required">日期</label>
+                        <input type="date" class="form-input" id="hDate" required>
+                    </div>
+                    <!-- 時段 -->
+                    <div class="form-group">
+                        <label class="form-label required">時段</label>
+                        <select class="form-select" id="hTimeSlot" required>
+                            <option value="">請選擇時段</option>
+                            <option value="09:00-10:00">09:00-10:00</option>
+                            <option value="10:00-11:00">10:00-11:00</option>
+                            <option value="11:00-12:00">11:00-12:00</option>
+                            <option value="14:00-15:00">14:00-15:00</option>
+                            <option value="15:00-16:00">15:00-16:00</option>
+                            <option value="16:00-17:00">16:00-17:00</option>
+                        </select>
+                    </div>
+                    <!-- 預約者姓名 -->
+                    <div class="form-group">
+                        <label class="form-label required">預約者姓名</label>
+                        <input type="text" class="form-input" id="hMemberName" required placeholder="請輸入預約者姓名">
+                    </div>
+                    <!-- 手機 -->
+                    <div class="form-group">
+                        <label class="form-label required">手機</label>
+                        <input type="tel" class="form-input" id="hPhone" required placeholder="請輸入手機號碼" pattern="09[0-9]{8}" title="請輸入有效的手機號碼，格式：09xxxxxxxx">
+                    </div>
+                    <!-- 主責人員 -->
+                    <div class="form-group">
+                        <label class="form-label required">主責人員</label>
+                        <select class="form-select" id="hInCharge" required>
+                            <option value="">請選擇主責人員</option>
+                            <option value="王大明">王大明</option>
+                            <option value="李小華">李小華</option>
+                            <option value="張志豪">張志豪</option>
+                            <option value="陳淑芬">陳淑芬</option>
+                        </select>
+                    </div>
+                    <!-- 備註 -->
+                    <div class="form-group">
+                        <label class="form-label">備註</label>
+                        <textarea class="form-textarea" id="hRemark" rows="3" placeholder="請輸入備註（選填）"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 交屋確認彈窗 -->
+    <div class="modal" id="confirmHandoverModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">確認交屋</h3>
+                <button class="modal-close" id="confirmModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-info">
+                    <p>即將確認 <strong id="confirmUnitName"></strong> 完成交屋</p>
+                    <div class="confirm-checklist">
+                        <h4>請確認以下項目：</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> 所有款項已結清</li>
+                            <li><i class="fa-solid fa-check"></i> 鑰匙已交付</li>
+                            <li><i class="fa-solid fa-check"></i> 住戶手冊已交付</li>
+                            <li><i class="fa-solid fa-check"></i> 保固說明已告知</li>
+                            <li><i class="fa-solid fa-check"></i> 社區規約已說明</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">交屋備註</label>
+                        <textarea class="form-textarea" id="confirmRemark" rows="3" placeholder="請輸入交屋相關備註..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnConfirmCancel">取消</button>
+                <button class="btn btn-primary" id="btnConfirmHandover">
+                    <i class="fa-solid fa-check"></i>
+                    確認交屋
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LINE 推播彈窗 -->
+    <div class="modal" id="linePushModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-lg">
+            <div class="modal-header line-header">
+                <div class="line-header-content">
+                    <i class="fa-brands fa-line"></i>
+                    <h3 class="modal-title">LINE 推播通知</h3>
+                </div>
+                <button class="modal-close" id="linePushModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 收件人資訊 -->
+                <div class="push-recipient">
+                    <div class="recipient-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="recipient-info">
+                        <div class="recipient-name" id="pushMemberName">張小明</div>
+                        <div class="recipient-unit" id="pushUnitInfo">陸府原森 A棟12A</div>
+                    </div>
+                </div>
+
+                <!-- 推播類型選擇 -->
+                <div class="push-type-section">
+                    <label class="section-label">選擇推播類型</label>
+                    <div class="type-options">
+                        <div class="type-option active" data-type="reminder3">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>3日前提醒</span>
+                        </div>
+                        <div class="type-option" data-type="reminderToday">
+                            <i class="fa-solid fa-bell"></i>
+                            <span>當日提醒</span>
+                        </div>
+                        <div class="type-option" data-type="noReservation">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>未預約提醒</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 訊息預覽 -->
+                <div class="preview-section">
+                    <label class="section-label">訊息預覽</label>
+                    <div class="line-preview">
+                        <div class="line-bubble">
+                            <div class="bubble-header">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23a99e91' width='100' height='100'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40'%3E陸%3C/text%3E%3C/svg%3E" alt="陸府建設" class="bubble-avatar">
+                                <span class="bubble-sender">陸府建設</span>
+                            </div>
+                            <div class="bubble-content" id="pushPreviewText">
+                                【交屋提醒】親愛的 張小明 您好，您預約的交屋服務將於 3 天後進行，請準時出席。如有任何問題，歡迎與我們聯繫。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancelPush">取消</button>
+                <button class="btn btn-line" id="btnSendPush">
+                    <i class="fa-brands fa-line"></i>
+                    發送推播
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const handoverModal = new Modal({ id: 'handoverModal' });
+            const confirmHandoverModal = new Modal({ id: 'confirmHandoverModal' });
+            const linePushModal = new Modal({ id: 'linePushModal' });
+            
+            let currentPage = 1;
+            const pageSize = 10;
+            
+            loadHandoverData();
+            
+            function loadHandoverData() {
+                // 1. 收集篩選條件
+                const searchProject = document.getElementById('searchProject').value;
+                const searchUnit = document.getElementById('searchUnit').value.toLowerCase();
+                const searchMember = document.getElementById('searchMember').value.toLowerCase();
+                const searchInCharge = document.getElementById('searchInCharge').value.toLowerCase();
+                const searchStatus = document.getElementById('searchStatus').value;
+                const searchDateFrom = document.getElementById('searchDateFrom').value;
+                const searchDateTo = document.getElementById('searchDateTo').value;
+
+                // 2. 取得所有資料
+                let data = CRMMockData.handoverReservations;
+
+                // 3. 篩選資料
+                data = data.filter(item => {
+                    if (searchProject && item.projectName !== searchProject) return false;
+                    if (searchUnit && !item.unitName.toLowerCase().includes(searchUnit)) return false;
+                    if (searchMember && !item.memberName.toLowerCase().includes(searchMember)) return false;
+                    if (searchInCharge && !(item.inCharge || '').toLowerCase().includes(searchInCharge)) return false;
+                    if (searchStatus && item.status !== searchStatus) return false;
+                    if (searchDateFrom && (!item.reservationDate || item.reservationDate < searchDateFrom)) return false;
+                    if (searchDateTo && (!item.reservationDate || item.reservationDate > searchDateTo)) return false;
+                    return true;
+                });
+                
+                // 4. 排序
+                const sortedItems = sortByUpcomingDate(data);
+                
+                // 5. 分頁
+                const total = sortedItems.length;
+                const totalPages = Math.ceil(total / pageSize);
+                const start = (currentPage - 1) * pageSize;
+                const pagedItems = sortedItems.slice(start, start + pageSize);
+
+                // 6. 渲染
+                renderTable(pagedItems);
+                renderPagination({
+                    page: currentPage,
+                    totalPages: totalPages,
+                    total: total
+                });
+            }
+            
+            // 排序函數：優先顯示可預約交屋的戶別，即將到期的預約優先，待預約次之，已完成最後
+            function sortByUpcomingDate(data) {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                return data.slice().sort(function(a, b) {
+                    // 1. 已完成的排最後
+                    if (a.status === '已完成' && b.status !== '已完成') return 1;
+                    if (a.status !== '已完成' && b.status === '已完成') return -1;
+                    
+                    // 2. 已預約的優先（即將到期的預約）
+                    if (a.status === '已預約' && b.status === '待預約') return -1;
+                    if (a.status === '待預約' && b.status === '已預約') return 1;
+                    
+                    // 3. 同為已預約：依預約日期排序（越近的排越前）
+                    if (a.status === '已預約' && b.status === '已預約') {
+                        const dateA = a.reservationDate ? new Date(a.reservationDate) : null;
+                        const dateB = b.reservationDate ? new Date(b.reservationDate) : null;
+                        if (!dateA && !dateB) return 0;
+                        if (!dateA) return 1;
+                        if (!dateB) return -1;
+                        return dateA - dateB;
+                    }
+                    
+                    // 4. 同為待預約：依可預約時段結束日期排序（即將到期的優先）
+                    if (a.status === '待預約' && b.status === '待預約') {
+                        const endA = a.bookableEndDate ? new Date(a.bookableEndDate) : null;
+                        const endB = b.bookableEndDate ? new Date(b.bookableEndDate) : null;
+                        if (!endA && !endB) return 0;
+                        if (!endA) return 1;
+                        if (!endB) return -1;
+                        return endA - endB;
+                    }
+                    
+                    return 0;
+                });
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('handoverTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="11" class="col-1 text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(handover, index) {
+                    let statusClass = '';
+                    switch(handover.status) {
+                        case '待預約': statusClass = 'status-pending'; break;
+                        case '已預約': statusClass = 'status-reserved'; break;
+                        case '已完成': statusClass = 'status-completed'; break;
+                    }
+                    
+                    let inspectionClass = handover.inspectionStatus === '已完成' ? 'status-completed' : 'status-warning';
+                    
+                    // 組合可預約時段顯示文字
+                    let bookableRange = '-';
+                    if (handover.bookableStartDate && handover.bookableEndDate) {
+                        bookableRange = `${handover.bookableStartDate} ~ ${handover.bookableEndDate}`;
+                    } else if (handover.bookableStartDate) {
+                        bookableRange = `${handover.bookableStartDate} 起`;
+                    } else if (handover.bookableEndDate) {
+                        bookableRange = `至 ${handover.bookableEndDate}`;
+                    }
+                    
+                    return `
+                        <tr>
+                            <td class="col-1">${(currentPage - 1) * pageSize + index + 1}</td>
+                            <td class="col-1">${handover.projectName}</td>
+                            <td class="col-1">${handover.unitName}</td>
+                            <td class="col-1">${handover.memberName}</td>
+                            <td class="col-1">${handover.inCharge || '-'}</td>
+                            <td class="col-bookable-range">${bookableRange}</td>
+                            <td class="col-1">${handover.reservationDate || '-'}</td>
+                            <td class="col-1">${handover.timeSlot || '-'}</td>
+                            <td class="col-1"><span class="status-badge ${inspectionClass}">${handover.inspectionStatus}</span></td>
+                            <td class="col-1"><span class="status-badge ${statusClass}">${handover.status}</span></td>
+                            <td class="col-1">
+                                <div class="table-actions">
+                                    <button class="btn-table-edit" data-id="${handover.id}" title="編輯">編輯</button>
+                                    <button class="btn-table-delete" data-id="${handover.id}" title="刪除">刪除</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                bindTableEvents();
+            }
+            
+            function bindTableEvents() {
+                // 編輯按鈕
+                document.querySelectorAll('.btn-table-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        editHandover(id);
+                    });
+                });
+                
+                // 刪除按鈕
+                document.querySelectorAll('.btn-table-delete').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        deleteHandover(id);
+                    });
+                });
+            }
+            
+            // 顯示 LINE 推播彈窗
+            let currentPushId = null;
+            function showPushModal(id) {
+                const handover = CRMMockData.getById('handoverReservations', id);
+                if (!handover) return;
+                
+                currentPushId = id;
+                document.getElementById('pushMemberName').textContent = handover.memberName;
+                document.getElementById('pushUnitInfo').textContent = `${handover.projectName} ${handover.unitName}`;
+                
+                // 重置選項
+                document.querySelectorAll('.type-option').forEach(opt => opt.classList.remove('active'));
+                document.querySelector('.type-option[data-type="reminder3"]').classList.add('active');
+                updatePushPreview('reminder3', handover);
+                
+                linePushModal.open();
+            }
+            
+            // 更新預覽內容
+            function updatePushPreview(type, handover) {
+                const previewText = document.getElementById('pushPreviewText');
+                let message = '';
+                
+                switch(type) {
+                    case 'reminder3':
+                        message = `【交屋提醒】親愛的 ${handover.memberName} 您好，您預約的交屋服務將於 3 天後（${handover.reservationDate}）進行，請準時出席。如有任何問題，歡迎與我們聯繫。`;
+                        break;
+                    case 'reminderToday':
+                        message = `【交屋提醒】親愛的 ${handover.memberName} 您好，您預約的交屋服務將於今日（${handover.reservationDate} ${handover.timeSlot || ''}）進行，請準時出席。地點：陸府建設服務中心。`;
+                        break;
+                    case 'noReservation':
+                        message = `【預約提醒】親愛的 ${handover.memberName} 您好，您尚未預約交屋服務，請盡快至系統進行預約，以便我們為您安排交屋事宜。`;
+                        break;
+                }
+                
+                previewText.textContent = message;
+            }
+            
+            // LINE 推播類型選擇事件
+            document.querySelectorAll('.type-option').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.type-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const type = this.dataset.type;
+                    const handover = CRMMockData.getById('handoverReservations', currentPushId);
+                    if (handover) {
+                        updatePushPreview(type, handover);
+                    }
+                });
+            });
+            
+            // 發送推播按鈕
+            document.getElementById('btnSendPush').addEventListener('click', function() {
+                const handover = CRMMockData.getById('handoverReservations', currentPushId);
+                if (!handover) return;
+                
+                const selectedType = document.querySelector('.type-option.active').dataset.type;
+                let typeText = '';
+                switch(selectedType) {
+                    case 'reminder3': typeText = '3日前提醒'; break;
+                    case 'reminderToday': typeText = '當日提醒'; break;
+                    case 'noReservation': typeText = '未預約提醒'; break;
+                }
+                
+                alert(`已成功發送「${typeText}」通知至 ${handover.memberName} 的 LINE`);
+                linePushModal.close();
+                loadHandoverData();
+            });
+            
+            document.getElementById('btnCancelPush').addEventListener('click', function() {
+                linePushModal.close();
+            });
+            
+            function renderPagination(result) {
+                const wrapper = document.getElementById('paginationWrapper');
+                
+                if (result.totalPages <= 1) {
+                    wrapper.innerHTML = '';
+                    return;
+                }
+                
+                wrapper.innerHTML = `
+                    <div class="pagination">
+                        <span class="pagination-info">共 ${result.total} 筆，第 ${result.page} / ${result.totalPages} 頁</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" ${result.page === 1 ? 'disabled' : ''} data-page="${result.page - 1}">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            ${generatePageButtons(result.page, result.totalPages)}
+                            <button class="pagination-btn" ${result.page === result.totalPages ? 'disabled' : ''} data-page="${result.page + 1}">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                wrapper.querySelectorAll('.pagination-btn:not([disabled])').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        currentPage = parseInt(this.dataset.page);
+                        loadHandoverData();
+                    });
+                });
+            }
+            
+            function generatePageButtons(current, total) {
+                let buttons = '';
+                for (let i = 1; i <= total; i++) {
+                    if (i === current) {
+                        buttons += `<button class="pagination-btn active">${i}</button>`;
+                    } else if (i === 1 || i === total || (i >= current - 2 && i <= current + 2)) {
+                        buttons += `<button class="pagination-btn" data-page="${i}">${i}</button>`;
+                    } else if (i === current - 3 || i === current + 3) {
+                        buttons += '<span class="pagination-ellipsis">...</span>';
+                    }
+                }
+                return buttons;
+            }
+            
+            // 案場與戶別連動資料
+            const projectUnits = {
+                '陸府原森': ['A棟10F', 'A棟11A', 'A棟12A', 'A棟12B', 'B棟5A', 'B棟8A', 'C棟3A'],
+                '陸府觀微': ['A1-2F', 'A1-3F', 'A2-5F', 'A2-6F', 'B1-3F', 'B1-4F'],
+                '陸府植森': ['1棟-2F', '1棟-3F', '2棟-5F', '2棟-6F', '3棟-2F', '3棟-3F']
+            };
+            
+            // 案場選擇變更事件
+            document.getElementById('hProject').addEventListener('change', function() {
+                const projectName = this.value;
+                const unitSelect = document.getElementById('hUnit');
+                
+                // 清空戶別選項
+                unitSelect.innerHTML = '';
+                
+                if (projectName && projectUnits[projectName]) {
+                    unitSelect.disabled = false;
+                    unitSelect.innerHTML = '<option value="">請選擇戶別</option>';
+                    projectUnits[projectName].forEach(function(unit) {
+                        const option = document.createElement('option');
+                        option.value = unit;
+                        option.textContent = unit;
+                        unitSelect.appendChild(option);
+                    });
+                } else {
+                    unitSelect.disabled = true;
+                    unitSelect.innerHTML = '<option value="">請先選擇案場</option>';
+                }
+            });
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增預約';
+                document.getElementById('handoverForm').reset();
+                document.getElementById('handoverId').value = '';
+                document.getElementById('hRemark').value = '';
+                document.getElementById('hInCharge').value = '';
+                
+                // 重置案場與戶別
+                document.getElementById('hProject').value = '';
+                const unitSelect = document.getElementById('hUnit');
+                unitSelect.innerHTML = '<option value="">請先選擇案場</option>';
+                unitSelect.disabled = true;
+                
+                // 設定預設日期為今天
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('hDate').setAttribute('min', today);
+                
+                handoverModal.open();
+            });
+            
+            function editHandover(id) {
+                window.location.href = `reservation-handover-edit.html?id=${id}`;
+            }
+            
+            let currentConfirmId = null;
+            
+            function showConfirmHandover(id) {
+                const handover = CRMMockData.getById('handoverReservations', id);
+                if (!handover) return;
+                
+                currentConfirmId = id;
+                document.getElementById('confirmUnitName').textContent = `${handover.projectName} ${handover.unitName}`;
+                document.getElementById('confirmRemark').value = '';
+                
+                confirmHandoverModal.open();
+            }
+            
+            document.getElementById('btnConfirmHandover').addEventListener('click', function() {
+                if (currentConfirmId) {
+                    alert('已確認交屋完成！');
+                    confirmHandoverModal.close();
+                    loadHandoverData();
+                }
+            });
+            
+            document.getElementById('btnConfirmCancel').addEventListener('click', function() {
+                confirmHandoverModal.close();
+            });
+            
+            function deleteHandover(id) {
+                const handover = CRMMockData.getById('handoverReservations', id);
+                if (!handover) return;
+                
+                ConfirmDialog.show({
+                    title: '確認刪除',
+                    message: `確定要刪除 ${handover.memberName} 的交屋預約嗎？`,
+                    onConfirm: function() {
+                        alert('已刪除預約');
+                        loadHandoverData();
+                    }
+                });
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('handoverForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                const isEdit = document.getElementById('handoverId').value !== '';
+                const projectName = document.getElementById('hProject').value;
+                const unitName = document.getElementById('hUnit').value;
+                const memberName = document.getElementById('hMemberName').value;
+                const phone = document.getElementById('hPhone').value;
+                const inCharge = document.getElementById('hInCharge').value;
+                const reservationDate = document.getElementById('hDate').value;
+                const timeSlot = document.getElementById('hTimeSlot').value;
+                const remark = document.getElementById('hRemark').value;
+                
+                // 驗證手機號碼格式
+                const phonePattern = /^09[0-9]{8}$/;
+                if (!phonePattern.test(phone)) {
+                    alert('請輸入有效的手機號碼，格式：09xxxxxxxx');
+                    document.getElementById('hPhone').focus();
+                    return;
+                }
+                
+                if (isEdit) {
+                    // 編輯現有資料
+                    const id = parseInt(document.getElementById('handoverId').value);
+                    const handover = CRMMockData.getById('handoverReservations', id);
+                    if (handover) {
+                        handover.projectName = projectName;
+                        handover.unitName = unitName;
+                        handover.memberName = memberName;
+                        handover.phone = phone;
+                        handover.inCharge = inCharge;
+                        handover.reservationDate = reservationDate;
+                        handover.timeSlot = timeSlot;
+                        handover.remark = remark;
+                        handover.status = reservationDate ? '已預約' : '待預約';
+                    }
+                    CRMMockData.save();
+                    alert('已更新預約資料');
+                } else {
+                    // 新增資料
+                    const newId = Math.max(...CRMMockData.handoverReservations.map(h => h.id)) + 1;
+                    
+                    // 計算預設可預約時段（從今天開始，30天後結束）
+                    const today = new Date();
+                    const endDate = new Date();
+                    endDate.setDate(today.getDate() + 30);
+                    const bookableStartDate = today.toISOString().split('T')[0];
+                    const bookableEndDate = endDate.toISOString().split('T')[0];
+                    
+                    const newHandover = {
+                        id: newId,
+                        projectName: projectName,
+                        unitName: unitName,
+                        memberName: memberName,
+                        phone: phone,
+                        inCharge: inCharge,
+                        bookableStartDate: bookableStartDate,
+                        bookableEndDate: bookableEndDate,
+                        reservationDate: reservationDate,
+                        timeSlot: timeSlot,
+                        inspectionStatus: '處理中',
+                        status: reservationDate ? '已預約' : '待預約',
+                        remark: remark
+                    };
+                    CRMMockData.handoverReservations.push(newHandover);
+                    CRMMockData.save();
+                    alert('已新增預約');
+                }
+                
+                handoverModal.close();
+                loadHandoverData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                handoverModal.close();
+            });
+            
+            // 新增預約彈窗 X 按鈕關閉事件
+            document.getElementById('modalClose').addEventListener('click', function() {
+                handoverModal.close();
+            });
+            
+            // 點擊彈窗外部關閉
+            document.querySelector('#handoverModal .modal-overlay').addEventListener('click', function() {
+                handoverModal.close();
+            });
+            
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('匯出功能開發中...');
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadHandoverData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadHandoverData();
+                }, 0);
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1192 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報名管理 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">活動管理</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">報名管理</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">報名管理</h1>
+                </div>
+
+                <!-- 活動資訊卡片 -->
+                <div class="activity-info-card" id="activityInfoCard">
+                    <div class="info-card-header">
+                        <div class="info-card-title">
+                            <h2 id="activityTitle">2024 春季園藝工作坊</h2>
+                            <span class="activity-status status-open" id="activityStatus">報名中</span>
+                        </div>
+                        <a href="activity-list.html" class="btn btn-secondary">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            返回清單
+                        </a>
+                    </div>
+                    <div class="info-card-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fa-solid fa-calendar"></i>
+                                <div class="info-content">
+                                    <span class="info-label">活動日期</span>
+                                    <span class="info-value" id="activityDate">2024-03-15</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-clock"></i>
+                                <div class="info-content">
+                                    <span class="info-label">活動時間</span>
+                                    <span class="info-value" id="activityTime">09:00 - 12:00</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div class="info-content">
+                                    <span class="info-label">活動地點</span>
+                                    <span class="info-value" id="activityLocation">陸府植深館 1F</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-users"></i>
+                                <div class="info-content">
+                                    <span class="info-label">報名人數</span>
+                                    <span class="info-value" id="activityAttendees">28 / 30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 統計卡片 -->
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">待審核</span>
+                            <span class="stat-value" id="statPending">5</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon approved">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">已審核</span>
+                            <span class="stat-value" id="statApproved">20</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon checkin">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">已報到</span>
+                            <span class="stat-value" id="statCheckin">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon cancelled">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">已取消</span>
+                            <span class="stat-value" id="statCancelled">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">會員姓名</label>
+                                <input type="text" class="form-input" id="searchName" placeholder="請輸入姓名">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">聯絡電話</label>
+                                <input type="text" class="form-input" id="searchPhone" placeholder="請輸入電話">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">報名狀態</label>
+                                <select class="form-select" id="searchStatus">
+                                    <option value="">全部</option>
+                                    <option value="待審核">待審核</option>
+                                    <option value="已審核">已審核</option>
+                                    <option value="已報到">已報到</option>
+                                    <option value="已取消">已取消</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">報名日期</label>
+                                <input type="date" class="form-input" id="searchDate">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 操作按鈕區 -->
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <button class="btn btn-primary" id="btnAdd">
+                            <i class="fa-solid fa-plus"></i>
+                            新增報名
+                        </button>
+                        <button class="btn btn-secondary" id="btnBatchApprove">
+                            <i class="fa-solid fa-check-double"></i>
+                            批次審核
+                        </button>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="btn btn-secondary" id="btnExport">
+                            <i class="fa-solid fa-file-excel"></i>
+                            匯出名單
+                        </button>
+                        <button class="btn btn-secondary" id="btnPrint">
+                            <i class="fa-solid fa-print"></i>
+                            列印名單
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-container">
+                    <table class="data-table" id="registrationTable">
+                        <thead>
+                            <tr>
+                                <th width="40">
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th width="60">序號</th>
+                                <th>會員姓名</th>
+                                <th>聯絡電話</th>
+                                <th>電子信箱</th>
+                                <th>報名人數</th>
+                                <th>報名日期</th>
+                                <th>狀態</th>
+                                <th width="180">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯報名彈窗 -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增報名</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm">
+                    <input type="hidden" id="registrationId">
+                    <div class="form-group">
+                        <label class="form-label required">會員姓名</label>
+                        <input type="text" class="form-input" id="rName" required placeholder="請輸入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">聯絡電話</label>
+                        <input type="tel" class="form-input" id="rPhone" required placeholder="請輸入聯絡電話">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">電子信箱</label>
+                        <input type="email" class="form-input" id="rEmail" placeholder="請輸入電子信箱">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">報名人數</label>
+                        <input type="number" class="form-input" id="rAttendees" required min="1" max="5" value="1">
+                        <span class="form-hint">每人最多可報名 5 位</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">備註</label>
+                        <textarea class="form-textarea" id="rRemarks" rows="3" placeholder="請輸入備註..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 報名詳情彈窗 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">報名詳情</h3>
+                <button class="modal-close" id="detailModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-content" id="detailContent">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCloseDetail">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const registrationModal = new Modal('registrationModal');
+            const detailModal = new Modal('detailModal');
+            
+            let currentPage = 1;
+            const pageSize = 10;
+            let currentActivityId = null;
+            
+            // 從 URL 取得活動 ID
+            const urlParams = new URLSearchParams(window.location.search);
+            currentActivityId = parseInt(urlParams.get('activityId')) || 1;
+            
+            loadActivityInfo();
+            loadRegistrationData();
+            
+            function loadActivityInfo() {
+                const activity = CRMMockData.getById('activities', currentActivityId);
+                if (activity) {
+                    document.getElementById('activityTitle').textContent = activity.name;
+                    document.getElementById('activityDate').textContent = activity.date;
+                    document.getElementById('activityTime').textContent = `${activity.timeStart} - ${activity.timeEnd}`;
+                    document.getElementById('activityLocation').textContent = activity.location;
+                    document.getElementById('activityAttendees').textContent = `${activity.currentAttendees} / ${activity.maxAttendees}`;
+                    
+                    const statusEl = document.getElementById('activityStatus');
+                    statusEl.textContent = activity.status;
+                    statusEl.className = 'activity-status';
+                    switch(activity.status) {
+                        case '報名中': statusEl.classList.add('status-open'); break;
+                        case '即將舉行': statusEl.classList.add('status-upcoming'); break;
+                        case '進行中': statusEl.classList.add('status-ongoing'); break;
+                        case '已結束': statusEl.classList.add('status-ended'); break;
+                        case '已取消': statusEl.classList.add('status-cancelled'); break;
+                    }
+                }
+            }
+            
+            function loadRegistrationData(filters) {
+                const result = CRMMockData.getPaged('activityRegistrations', currentPage, pageSize, filters);
+                renderTable(result.items);
+                renderPagination(result);
+                updateStats(result.items);
+            }
+            
+            function updateStats(data) {
+                // 這裡使用所有資料計算統計，實際應從後端取得
+                const allData = CRMMockData.activities.registrations || [];
+                document.getElementById('statPending').textContent = data.filter(d => d.status === '待審核').length;
+                document.getElementById('statApproved').textContent = data.filter(d => d.status === '已審核').length;
+                document.getElementById('statCheckin').textContent = data.filter(d => d.status === '已報到').length;
+                document.getElementById('statCancelled').textContent = data.filter(d => d.status === '已取消').length;
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('registrationTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="9" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(reg, index) {
+                    let statusClass = '';
+                    switch(reg.status) {
+                        case '待審核': statusClass = 'status-pending'; break;
+                        case '已審核': statusClass = 'status-approved'; break;
+                        case '已報到': statusClass = 'status-checkin'; break;
+                        case '已取消': statusClass = 'status-cancelled'; break;
+                    }
+                    
+                    return `
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" data-id="${reg.id}"></td>
+                            <td>${(currentPage - 1) * pageSize + index + 1}</td>
+                            <td>${reg.memberName}</td>
+                            <td>${reg.phone}</td>
+                            <td>${reg.email || '-'}</td>
+                            <td>${reg.attendees} 人</td>
+                            <td>${reg.registrationDate}</td>
+                            <td><span class="status-badge ${statusClass}">${reg.status}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-view" data-id="${reg.id}" title="檢視">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    ${reg.status === '待審核' ? `
+                                        <button class="btn-action btn-approve" data-id="${reg.id}" title="審核通過">
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+                                    ` : ''}
+                                    ${reg.status === '已審核' ? `
+                                        <button class="btn-action btn-checkin" data-id="${reg.id}" title="報到">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </button>
+                                    ` : ''}
+                                    ${reg.status !== '已取消' && reg.status !== '已報到' ? `
+                                        <button class="btn-action btn-cancel-reg" data-id="${reg.id}" title="取消報名">
+                                            <i class="fa-solid fa-ban"></i>
+                                        </button>
+                                    ` : ''}
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                bindTableEvents();
+            }
+            
+            function bindTableEvents() {
+                // 全選
+                document.getElementById('selectAll').addEventListener('change', function() {
+                    const checkboxes = document.querySelectorAll('.row-checkbox');
+                    checkboxes.forEach(cb => cb.checked = this.checked);
+                });
+                
+                // 檢視
+                document.querySelectorAll('.btn-view').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        viewRegistration(id);
+                    });
+                });
+                
+                // 審核
+                document.querySelectorAll('.btn-approve').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        approveRegistration(id);
+                    });
+                });
+                
+                // 報到
+                document.querySelectorAll('.btn-checkin').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        checkinRegistration(id);
+                    });
+                });
+                
+                // 取消報名
+                document.querySelectorAll('.btn-cancel-reg').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        cancelRegistration(id);
+                    });
+                });
+            }
+            
+            function viewRegistration(id) {
+                const reg = CRMMockData.getById('activityRegistrations', id);
+                if (!reg) return;
+                
+                document.getElementById('detailContent').innerHTML = `
+                    <div class="detail-row">
+                        <span class="detail-label">會員姓名</span>
+                        <span class="detail-value">${reg.memberName}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">聯絡電話</span>
+                        <span class="detail-value">${reg.phone}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">電子信箱</span>
+                        <span class="detail-value">${reg.email || '-'}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">報名人數</span>
+                        <span class="detail-value">${reg.attendees} 人</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">報名日期</span>
+                        <span class="detail-value">${reg.registrationDate}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">報名狀態</span>
+                        <span class="detail-value">${reg.status}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">備註</span>
+                        <span class="detail-value">${reg.remarks || '-'}</span>
+                    </div>
+                `;
+                
+                detailModal.open();
+            }
+            
+            function approveRegistration(id) {
+                ConfirmDialog.show({
+                    title: '確認審核',
+                    message: '確定要審核通過此報名嗎？',
+                    onConfirm: function() {
+                        alert('已審核通過');
+                        loadRegistrationData();
+                    }
+                });
+            }
+            
+            function checkinRegistration(id) {
+                ConfirmDialog.show({
+                    title: '確認報到',
+                    message: '確定要為此會員報到嗎？',
+                    onConfirm: function() {
+                        alert('報到成功');
+                        loadRegistrationData();
+                    }
+                });
+            }
+            
+            function cancelRegistration(id) {
+                ConfirmDialog.show({
+                    title: '取消報名',
+                    message: '確定要取消此報名嗎？此操作無法復原。',
+                    confirmText: '取消報名',
+                    onConfirm: function() {
+                        alert('已取消報名');
+                        loadRegistrationData();
+                    }
+                });
+            }
+            
+            function renderPagination(result) {
+                const wrapper = document.getElementById('paginationWrapper');
+                
+                if (result.totalPages <= 1) {
+                    wrapper.innerHTML = '';
+                    return;
+                }
+                
+                wrapper.innerHTML = `
+                    <div class="pagination">
+                        <span class="pagination-info">共 ${result.total} 筆，第 ${result.page} / ${result.totalPages} 頁</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" ${result.page === 1 ? 'disabled' : ''} data-page="${result.page - 1}">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            ${generatePageButtons(result.page, result.totalPages)}
+                            <button class="pagination-btn" ${result.page === result.totalPages ? 'disabled' : ''} data-page="${result.page + 1}">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                wrapper.querySelectorAll('.pagination-btn:not([disabled])').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        currentPage = parseInt(this.dataset.page);
+                        loadRegistrationData();
+                    });
+                });
+            }
+            
+            function generatePageButtons(current, total) {
+                let buttons = '';
+                for (let i = 1; i <= total; i++) {
+                    if (i === current) {
+                        buttons += `<button class="pagination-btn active">${i}</button>`;
+                    } else if (i === 1 || i === total || (i >= current - 2 && i <= current + 2)) {
+                        buttons += `<button class="pagination-btn" data-page="${i}">${i}</button>`;
+                    } else if (i === current - 3 || i === current + 3) {
+                        buttons += '<span class="pagination-ellipsis">...</span>';
+                    }
+                }
+                return buttons;
+            }
+            
+            // 新增報名
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增報名';
+                document.getElementById('registrationForm').reset();
+                document.getElementById('registrationId').value = '';
+                registrationModal.open();
+            });
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('registrationForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存報名');
+                registrationModal.close();
+                loadRegistrationData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                registrationModal.close();
+            });
+            
+            document.getElementById('btnCloseDetail').addEventListener('click', function() {
+                detailModal.close();
+            });
+            
+            // 批次審核
+            document.getElementById('btnBatchApprove').addEventListener('click', function() {
+                const selected = document.querySelectorAll('.row-checkbox:checked');
+                if (selected.length === 0) {
+                    alert('請先選擇要審核的報名');
+                    return;
+                }
+                
+                ConfirmDialog.show({
+                    title: '批次審核',
+                    message: `確定要審核通過選取的 ${selected.length} 筆報名嗎？`,
+                    onConfirm: function() {
+                        alert('已批次審核通過');
+                        loadRegistrationData();
+                    }
+                });
+            });
+            
+            // 匯出名單
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('已匯出報名名單 Excel');
+            });
+            
+            // 列印名單
+            document.getElementById('btnPrint').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // 查詢
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadRegistrationData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadRegistrationData();
+                }, 0);
+            });
+        });
+    </script>
+
+    <style>
+        .activity-info-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+        }
+        
+        .info-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: linear-gradient(135deg, var(--color-btn-primary) 0%, #8b7e72 100%);
+            color: var(--color-white);
+        }
+        
+        .info-card-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .info-card-title h2 {
+            margin: 0;
+            font-size: var(--font-size-xl);
+        }
+        
+        .activity-status {
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-open {
+            background: rgba(255, 255, 255, 0.9);
+            color: #155724;
+        }
+        
+        .status-upcoming {
+            background: rgba(255, 255, 255, 0.9);
+            color: #004085;
+        }
+        
+        .status-ongoing {
+            background: rgba(255, 255, 255, 0.9);
+            color: #856404;
+        }
+        
+        .status-ended {
+            background: rgba(255, 255, 255, 0.9);
+            color: #383d41;
+        }
+        
+        .status-cancelled {
+            background: rgba(255, 255, 255, 0.9);
+            color: #721c24;
+        }
+        
+        .info-card-body {
+            padding: var(--spacing-lg);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .info-item i {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-gray-100);
+            border-radius: var(--border-radius-sm);
+            color: var(--color-btn-primary);
+        }
+        
+        .info-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-500);
+        }
+        
+        .info-value {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-gray-900);
+        }
+        
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+        }
+        
+        .stat-icon.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .stat-icon.approved {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .stat-icon.checkin {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .stat-icon.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+        }
+        
+        .stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+        }
+        
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .toolbar-left,
+        .toolbar-right {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-checkin {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: center;
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-action:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn-view {
+            color: var(--color-info);
+            border-color: var(--color-info);
+        }
+        
+        .btn-view:hover {
+            background: var(--color-info);
+            color: var(--color-white);
+        }
+        
+        .btn-approve {
+            color: var(--color-success);
+            border-color: var(--color-success);
+        }
+        
+        .btn-approve:hover {
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+        
+        .btn-checkin {
+            color: var(--color-info);
+            border-color: var(--color-info);
+        }
+        
+        .btn-checkin:hover {
+            background: var(--color-info);
+            color: var(--color-white);
+        }
+        
+        .btn-cancel-reg {
+            color: var(--color-btn-danger);
+            border-color: var(--color-btn-danger);
+        }
+        
+        .btn-cancel-reg:hover {
+            background: var(--color-btn-danger);
+            color: var(--color-white);
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+        
+        .form-hint {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-500);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .detail-row {
+            display: flex;
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--color-gray-300);
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            width: 100px;
+            flex-shrink: 0;
+            font-weight: var(--font-weight-medium);
+            color: var(--color-gray-500);
+        }
+        
+        .detail-value {
+            color: var(--color-gray-900);
+        }
+        
+        @media (max-width: 767px) {
+            .info-card-header {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+            
+            .info-card-title {
+                flex-direction: column;
+            }
+            
+            .toolbar {
+                flex-direction: column;
+            }
+            
+            .toolbar-left,
+            .toolbar-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+</html>
+

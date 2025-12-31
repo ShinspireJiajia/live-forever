@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報價單確認 - 陸府生活</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/green-quotation-confirm.css">
+</head>
+<body>
+    <!-- 報價單確認容器 -->
+    <div class="confirm-container">
+        <!-- 頂部品牌標識 -->
+        <header class="confirm-header">
+            <div class="brand-logo">
+                <img src="images/logo.png" alt="陸府生活" onerror="this.style.display='none'">
+                <span class="brand-name">陸府生活</span>
+            </div>
+        </header>
+
+        <!-- 報價單主體 -->
+        <main class="confirm-main">
+            <!-- 報價單標題 -->
+            <div class="quotation-header">
+                <h1 class="quotation-title">報 價 單</h1>
+                <div class="quotation-no">
+                    <span class="label">報價單號：</span>
+                    <span class="value" id="quotationNo">GC-20251229-0001-Q1</span>
+                </div>
+            </div>
+
+            <!-- 客戶資訊區塊 -->
+            <section class="info-section">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">客戶名稱</span>
+                        <span class="info-value" id="customerName">王大明</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">建案名稱</span>
+                        <span class="info-value" id="projectName">陸府原森</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">戶別</span>
+                        <span class="info-value" id="unitNo">A1-12F</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">報價日期</span>
+                        <span class="info-value" id="quotationDate">2025/12/29</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">有效期限</span>
+                        <span class="info-value" id="validDate">2026/01/28</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">聯絡電話</span>
+                        <span class="info-value" id="contactPhone">0912-345-678</span>
+                    </div>
+                </div>
+                <div class="info-item full-width">
+                    <span class="info-label">維修說明</span>
+                    <span class="info-value" id="description">庭院植栽枯萎更換及草皮修補</span>
+                </div>
+            </section>
+
+            <!-- 報價明細表格 -->
+            <section class="detail-section">
+                <h2 class="section-title">報價明細</h2>
+                <div class="table-wrapper">
+                    <table class="detail-table" id="detailTable">
+                        <thead>
+                            <tr>
+                                <th class="th-no">項次</th>
+                                <th class="th-item">品名規格</th>
+                                <th class="th-unit">單位</th>
+                                <th class="th-qty">數量</th>
+                                <th class="th-price">單價</th>
+                                <th class="th-amount">金額</th>
+                                <th class="th-remark">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detailBody">
+                            <!-- 報價明細項目將由 JavaScript 動態產生 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 金額匯總 -->
+            <section class="summary-section">
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span class="summary-label">小計</span>
+                        <span class="summary-value" id="subtotal">NT$ 8,500</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">稅金 (5%)</span>
+                        <span class="summary-value" id="tax">NT$ 425</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span class="summary-label">合計</span>
+                        <span class="summary-value" id="total">NT$ 8,925</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 備註說明 -->
+            <section class="remark-section">
+                <h2 class="section-title">備註說明</h2>
+                <div class="remark-content" id="remarkContent">
+                    <ul>
+                        <li>本報價單有效期限為 30 天，逾期需重新報價。</li>
+                        <li>付款方式：線上信用卡付款或銀行轉帳。</li>
+                        <li>植栽更換保固期限為 3 個月。</li>
+                        <li>施工時間將於確認付款後另行通知。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 同意條款 -->
+            <section class="agreement-section">
+                <h2 class="section-title">確認同意</h2>
+                <div class="agreement-content">
+                    <p>本人已詳閱上述報價內容，同意依上列報價金額進行維修服務。</p>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="agreeCheckbox">
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-label">我已閱讀並同意以上報價內容及服務條款</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- 簽名區塊 -->
+            <section class="signature-section">
+                <h2 class="section-title">客戶簽名</h2>
+                <div class="signature-wrapper">
+                    <canvas id="signatureCanvas" width="600" height="200"></canvas>
+                    <div class="signature-placeholder" id="signaturePlaceholder">
+                        <i class="fa-solid fa-signature"></i>
+                        <span>請在此處簽名</span>
+                    </div>
+                </div>
+                <div class="signature-actions">
+                    <button type="button" class="btn btn-secondary" id="clearSignature">
+                        <i class="fa-solid fa-eraser"></i>
+                        清除簽名
+                    </button>
+                </div>
+                <p class="signature-hint">
+                    <i class="fa-solid fa-circle-info"></i>
+                    請使用滑鼠或手指在上方區域簽名
+                </p>
+            </section>
+
+            <!-- 確認日期時間 -->
+            <section class="confirm-datetime">
+                <div class="datetime-item">
+                    <span class="datetime-label">確認日期時間</span>
+                    <span class="datetime-value" id="confirmDatetime">--</span>
+                </div>
+            </section>
+
+            <!-- 提交按鈕 -->
+            <section class="submit-section">
+                <button type="button" class="btn btn-primary btn-lg" id="submitBtn" disabled>
+                    <i class="fa-solid fa-check"></i>
+                    確認報價
+                </button>
+                <p class="submit-hint">確認後將進入付款流程</p>
+            </section>
+        </main>
+
+        <!-- 頁尾 -->
+        <footer class="confirm-footer">
+            <div class="footer-content">
+                <p class="company-name">陸府生活事業股份有限公司</p>
+                <p class="company-info">
+                    <span><i class="fa-solid fa-phone"></i> 04-2259-5888</span>
+                    <span><i class="fa-solid fa-envelope"></i> service@lufu.com.tw</span>
+                </p>
+                <p class="copyright">© 2025 陸府生活事業 版權所有</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 確認成功彈窗 -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-dialog">
+            <div class="modal-content success-modal">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3 class="modal-title">報價確認成功</h3>
+                <p class="modal-message">
+                    感謝您確認報價單，<br>
+                    系統將引導您進入付款頁面。
+                </p>
+                <div class="modal-info">
+                    <div class="info-row">
+                        <span class="label">報價單號</span>
+                        <span class="value" id="modalQuotationNo">GC-20251229-0001-Q1</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">確認時間</span>
+                        <span class="value" id="modalConfirmTime">--</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-primary" id="goPaymentBtn">
+                        <i class="fa-solid fa-credit-card"></i>
+                        前往付款
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/green-quotation-confirm.js"></script>
+</body>
+</html>

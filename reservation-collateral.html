@@ -1,0 +1,1015 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>對保預約 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">對保預約</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">對保預約管理</h1>
+                </div>
+
+                <!-- 日曆/列表切換 -->
+                <div class="view-toggle">
+                    <button class="view-btn active" id="btnListView">
+                        <i class="fa-solid fa-list"></i>
+                        列表
+                    </button>
+                    <button class="view-btn" id="btnCalendarView">
+                        <i class="fa-solid fa-calendar"></i>
+                        日曆
+                    </button>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">案場</label>
+                                <select class="form-select" id="searchProject">
+                                    <option value="">全部</option>
+                                    <option value="陸府原森">陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">戶號</label>
+                                <input type="text" class="form-input" id="searchUnit" placeholder="請輸入戶號">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">會員姓名</label>
+                                <input type="text" class="form-input" id="searchMember" placeholder="請輸入會員姓名">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">狀態</label>
+                                <select class="form-select" id="searchStatus">
+                                    <option value="">全部</option>
+                                    <option value="待確認">待確認</option>
+                                    <option value="已確認">已確認</option>
+                                    <option value="已完成">已完成</option>
+                                    <option value="已取消">已取消</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">預約日期起</label>
+                                <input type="date" class="form-input" id="searchDateFrom">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">預約日期迄</label>
+                                <input type="date" class="form-input" id="searchDateTo">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="btnExport">
+                                <i class="fa-solid fa-file-export"></i>
+                                匯出
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 操作按鈕區 -->
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="btnAdd">
+                        <i class="fa-solid fa-plus"></i>
+                        新增預約
+                    </button>
+                    <button class="btn btn-secondary" id="btnBatchNotify">
+                        <i class="fa-solid fa-bell"></i>
+                        批次發送提醒
+                    </button>
+                </div>
+
+                <!-- 列表視圖 -->
+                <div class="list-view" id="listView">
+                    <div class="table-container">
+                        <table class="data-table" id="reservationTable">
+                            <thead>
+                                <tr>
+                                    <th width="60">序號</th>
+                                    <th>案場</th>
+                                    <th>戶號</th>
+                                    <th>會員姓名</th>
+                                    <th>聯絡電話</th>
+                                    <th>預約日期</th>
+                                    <th>預約時段</th>
+                                    <th>銀行</th>
+                                    <th>狀態</th>
+                                    <th width="150">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 分頁元件 -->
+                    <div class="pagination-wrapper" id="paginationWrapper">
+                    </div>
+                </div>
+
+                <!-- 日曆視圖 -->
+                <div class="calendar-view" id="calendarView" style="display: none;">
+                    <div class="calendar-header">
+                        <button class="btn btn-secondary" id="btnPrevMonth">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <h2 class="calendar-title" id="calendarTitle">2024年 1月</h2>
+                        <button class="btn btn-secondary" id="btnNextMonth">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-weekdays">
+                            <div class="weekday">日</div>
+                            <div class="weekday">一</div>
+                            <div class="weekday">二</div>
+                            <div class="weekday">三</div>
+                            <div class="weekday">四</div>
+                            <div class="weekday">五</div>
+                            <div class="weekday">六</div>
+                        </div>
+                        <div class="calendar-days" id="calendarDays">
+                            <!-- JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯預約彈窗 -->
+    <div class="modal" id="reservationModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增對保預約</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="reservationForm">
+                    <input type="hidden" id="reservationId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">案場</label>
+                            <select class="form-select" id="rProject" required>
+                                <option value="">請選擇</option>
+                                <option value="陸府原森">陸府原森</option>
+                                <option value="陸府觀微">陸府觀微</option>
+                                <option value="陸府植森">陸府植森</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">戶號</label>
+                            <select class="form-select" id="rUnit" required>
+                                <option value="">請選擇</option>
+                                <option value="A棟12A">A棟12A</option>
+                                <option value="A棟12B">A棟12B</option>
+                                <option value="B棟8A">B棟8A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">會員姓名</label>
+                            <input type="text" class="form-input" id="rMemberName" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">聯絡電話</label>
+                            <input type="tel" class="form-input" id="rPhone" required readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">預約日期</label>
+                            <input type="date" class="form-input" id="rDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">預約時段</label>
+                            <select class="form-select" id="rTimeSlot" required>
+                                <option value="">請選擇</option>
+                                <option value="09:00-10:00">09:00-10:00</option>
+                                <option value="10:00-11:00">10:00-11:00</option>
+                                <option value="11:00-12:00">11:00-12:00</option>
+                                <option value="14:00-15:00">14:00-15:00</option>
+                                <option value="15:00-16:00">15:00-16:00</option>
+                                <option value="16:00-17:00">16:00-17:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">貸款銀行</label>
+                            <select class="form-select" id="rBank" required>
+                                <option value="">請選擇</option>
+                                <option value="台灣銀行">台灣銀行</option>
+                                <option value="中國信託">中國信託</option>
+                                <option value="國泰世華">國泰世華</option>
+                                <option value="玉山銀行">玉山銀行</option>
+                                <option value="富邦銀行">富邦銀行</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">狀態</label>
+                            <select class="form-select" id="rStatus" required>
+                                <option value="待確認">待確認</option>
+                                <option value="已確認">已確認</option>
+                                <option value="已完成">已完成</option>
+                                <option value="已取消">已取消</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">備註</label>
+                        <textarea class="form-textarea" id="rRemark" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const reservationModal = new Modal('reservationModal');
+            
+            let currentPage = 1;
+            const pageSize = 10;
+            let currentDate = new Date();
+            
+            loadReservationData();
+            
+            // 視圖切換
+            document.getElementById('btnListView').addEventListener('click', function() {
+                this.classList.add('active');
+                document.getElementById('btnCalendarView').classList.remove('active');
+                document.getElementById('listView').style.display = 'block';
+                document.getElementById('calendarView').style.display = 'none';
+            });
+            
+            document.getElementById('btnCalendarView').addEventListener('click', function() {
+                this.classList.add('active');
+                document.getElementById('btnListView').classList.remove('active');
+                document.getElementById('listView').style.display = 'none';
+                document.getElementById('calendarView').style.display = 'block';
+                renderCalendar();
+            });
+            
+            function loadReservationData(filters) {
+                const result = CRMMockData.getPaged('collateralReservations', currentPage, pageSize, filters);
+                renderTable(result.items);
+                renderPagination(result);
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('reservationTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="10" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(reservation, index) {
+                    let statusClass = '';
+                    switch(reservation.status) {
+                        case '待確認': statusClass = 'status-pending'; break;
+                        case '已確認': statusClass = 'status-confirmed'; break;
+                        case '已完成': statusClass = 'status-completed'; break;
+                        case '已取消': statusClass = 'status-cancelled'; break;
+                    }
+                    
+                    return `
+                        <tr>
+                            <td>${(currentPage - 1) * pageSize + index + 1}</td>
+                            <td>${reservation.projectName}</td>
+                            <td>${reservation.unitName}</td>
+                            <td>${reservation.memberName}</td>
+                            <td>${reservation.phone}</td>
+                            <td>${reservation.reservationDate}</td>
+                            <td>${reservation.timeSlot}</td>
+                            <td>${reservation.bank}</td>
+                            <td><span class="status-badge ${statusClass}">${reservation.status}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-edit" data-id="${reservation.id}" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-notify" data-id="${reservation.id}" title="發送提醒">
+                                        <i class="fa-solid fa-bell"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" data-id="${reservation.id}" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                bindTableEvents();
+            }
+            
+            function bindTableEvents() {
+                document.querySelectorAll('.btn-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        editReservation(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-notify').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        sendNotify(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        deleteReservation(id);
+                    });
+                });
+            }
+            
+            function renderPagination(result) {
+                const wrapper = document.getElementById('paginationWrapper');
+                
+                if (result.totalPages <= 1) {
+                    wrapper.innerHTML = '';
+                    return;
+                }
+                
+                wrapper.innerHTML = `
+                    <div class="pagination">
+                        <span class="pagination-info">共 ${result.total} 筆，第 ${result.page} / ${result.totalPages} 頁</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" ${result.page === 1 ? 'disabled' : ''} data-page="${result.page - 1}">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            ${generatePageButtons(result.page, result.totalPages)}
+                            <button class="pagination-btn" ${result.page === result.totalPages ? 'disabled' : ''} data-page="${result.page + 1}">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                wrapper.querySelectorAll('.pagination-btn:not([disabled])').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        currentPage = parseInt(this.dataset.page);
+                        loadReservationData();
+                    });
+                });
+            }
+            
+            function generatePageButtons(current, total) {
+                let buttons = '';
+                for (let i = 1; i <= total; i++) {
+                    if (i === current) {
+                        buttons += `<button class="pagination-btn active">${i}</button>`;
+                    } else if (i === 1 || i === total || (i >= current - 2 && i <= current + 2)) {
+                        buttons += `<button class="pagination-btn" data-page="${i}">${i}</button>`;
+                    } else if (i === current - 3 || i === current + 3) {
+                        buttons += '<span class="pagination-ellipsis">...</span>';
+                    }
+                }
+                return buttons;
+            }
+            
+            function renderCalendar() {
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth();
+                
+                document.getElementById('calendarTitle').textContent = `${year}年 ${month + 1}月`;
+                
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const startDay = firstDay.getDay();
+                const daysInMonth = lastDay.getDate();
+                
+                let html = '';
+                
+                // 空白格
+                for (let i = 0; i < startDay; i++) {
+                    html += '<div class="calendar-day empty"></div>';
+                }
+                
+                // 日期格
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const reservations = CRMMockData.collateralReservations.filter(function(r) {
+                        return r.reservationDate === dateStr;
+                    });
+                    
+                    const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
+                    
+                    html += `
+                        <div class="calendar-day ${isToday ? 'today' : ''}" data-date="${dateStr}">
+                            <div class="day-number">${day}</div>
+                            ${reservations.length > 0 ? `
+                                <div class="day-events">
+                                    ${reservations.slice(0, 2).map(function(r) {
+                                        return `<div class="day-event">${r.timeSlot} ${r.memberName}</div>`;
+                                    }).join('')}
+                                    ${reservations.length > 2 ? `<div class="day-more">+${reservations.length - 2} 更多</div>` : ''}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+                
+                document.getElementById('calendarDays').innerHTML = html;
+            }
+            
+            document.getElementById('btnPrevMonth').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+            });
+            
+            document.getElementById('btnNextMonth').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增對保預約';
+                document.getElementById('reservationForm').reset();
+                document.getElementById('reservationId').value = '';
+                reservationModal.open();
+            });
+            
+            function editReservation(id) {
+                const reservation = CRMMockData.getById('collateralReservations', id);
+                if (!reservation) return;
+                
+                document.getElementById('modalTitle').textContent = '編輯對保預約';
+                document.getElementById('reservationId').value = reservation.id;
+                document.getElementById('rProject').value = reservation.projectName;
+                document.getElementById('rUnit').value = reservation.unitName;
+                document.getElementById('rMemberName').value = reservation.memberName;
+                document.getElementById('rPhone').value = reservation.phone;
+                document.getElementById('rDate').value = reservation.reservationDate;
+                document.getElementById('rTimeSlot').value = reservation.timeSlot;
+                document.getElementById('rBank').value = reservation.bank;
+                document.getElementById('rStatus').value = reservation.status;
+                document.getElementById('rRemark').value = reservation.remark || '';
+                
+                reservationModal.open();
+            }
+            
+            function sendNotify(id) {
+                const reservation = CRMMockData.getById('collateralReservations', id);
+                if (!reservation) return;
+                
+                alert(`已發送提醒通知給 ${reservation.memberName}`);
+            }
+            
+            function deleteReservation(id) {
+                const reservation = CRMMockData.getById('collateralReservations', id);
+                if (!reservation) return;
+                
+                ConfirmDialog.show({
+                    title: '確認刪除',
+                    message: `確定要刪除 ${reservation.memberName} 的對保預約嗎？`,
+                    onConfirm: function() {
+                        alert('已刪除預約');
+                        loadReservationData();
+                    }
+                });
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('reservationForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存預約資料');
+                reservationModal.close();
+                loadReservationData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                reservationModal.close();
+            });
+            
+            document.getElementById('btnBatchNotify').addEventListener('click', function() {
+                alert('已發送批次提醒通知');
+            });
+            
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('匯出功能開發中...');
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadReservationData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadReservationData();
+                }, 0);
+            });
+            
+            // 戶號選擇時自動帶入會員資料
+            document.getElementById('rUnit').addEventListener('change', function() {
+                const unit = this.value;
+                if (unit) {
+                    document.getElementById('rMemberName').value = '陳美華';
+                    document.getElementById('rPhone').value = '0912-345-678';
+                } else {
+                    document.getElementById('rMemberName').value = '';
+                    document.getElementById('rPhone').value = '';
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .view-toggle {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .view-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: all var(--transition-fast);
+        }
+        
+        .view-btn:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .view-btn.active {
+            background: var(--color-btn-primary);
+            color: var(--color-white);
+            border-color: var(--color-btn-primary);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-confirmed {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: center;
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-action:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn-edit {
+            color: var(--color-gray-700);
+        }
+        
+        .btn-notify {
+            color: var(--color-warning);
+            border-color: var(--color-warning);
+        }
+        
+        .btn-notify:hover {
+            background: var(--color-warning);
+            color: var(--color-white);
+        }
+        
+        .btn-delete {
+            color: var(--color-btn-danger);
+            border-color: var(--color-btn-danger);
+        }
+        
+        .btn-delete:hover {
+            background: var(--color-btn-danger);
+            color: var(--color-white);
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+        
+        /* 日曆樣式 */
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .calendar-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+        }
+        
+        .calendar-grid {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--color-table-header);
+        }
+        
+        .weekday {
+            padding: var(--spacing-md);
+            text-align: center;
+            color: var(--color-white);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--color-gray-300);
+        }
+        
+        .calendar-day {
+            min-height: 100px;
+            padding: var(--spacing-sm);
+            background: var(--color-white);
+        }
+        
+        .calendar-day.empty {
+            background: var(--color-gray-100);
+        }
+        
+        .calendar-day.today {
+            background: #fffde7;
+        }
+        
+        .day-number {
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .day-events {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .day-event {
+            font-size: var(--font-size-xs);
+            padding: 2px 4px;
+            background: var(--color-info);
+            color: var(--color-white);
+            border-radius: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .day-more {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-500);
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>
+

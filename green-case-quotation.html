@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報價單 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/green-case-quotation.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+        <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 報價單容器 -->
+            <div class="quotation-container">
+                <!-- 頂部操作按鈕區 -->
+                <div class="quotation-top">
+                    <div class="top-buttons">
+                        <div class="btn-group-left">
+                            <button class="btn btn-secondary" id="btnBack">
+                                <i class="fa-solid fa-arrow-left"></i> 返回個案單
+                            </button>
+                        </div>
+                        <div class="btn-group-right">
+                            <button class="btn btn-primary" id="btnPrint">
+                                <i class="fa-solid fa-print"></i> 列印
+                            </button>
+                            <button class="btn btn-primary" id="btnSave">
+                                <i class="fa-solid fa-floppy-disk"></i> 儲存
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 報價單主體 -->
+                <div class="quotation-paper">
+                    <!-- 報價單標題 -->
+                    <div class="quotation-header">
+                        <h1 class="quotation-title">報 價 單</h1>
+                        <div class="quotation-no">
+                            <span class="label">報價單號：</span>
+                            <span class="value" id="quotationNo">GC-20251204-0001-Q1</span>
+                        </div>
+                    </div>
+
+                    <!-- 基本資訊區塊 -->
+                    <div class="quotation-info">
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">客戶名稱</span>
+                                <span class="info-value" id="customerName">吳Ｏ嬋</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">報價日期</span>
+                                <input type="date" class="form-control info-input" id="quotationDate" value="2025-12-04">
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">建案名稱</span>
+                                <span class="info-value" id="projectName">陸府觀森</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">有效期限</span>
+                                <input type="date" class="form-control info-input" id="expiryDate" value="2026-01-03">
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">戶別</span>
+                                <span class="info-value" id="houseId">A1-2</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">個案單號</span>
+                                <span class="info-value" id="caseNo">GC-20251204-0001</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item full-width">
+                                <span class="info-label">維修說明</span>
+                                <span class="info-value" id="repairDescription">庭院角落的植栽出現枯萎現象，需要進行更換處理。</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 報價明細表格 -->
+                    <div class="quotation-table-wrapper">
+                        <table class="quotation-detail-table" id="quotationDetailTable">
+                            <thead>
+                                <tr>
+                                    <th class="th-no">項次</th>
+                                    <th class="th-item">品名規格</th>
+                                    <th class="th-unit">單位</th>
+                                    <th class="th-qty">數量</th>
+                                    <th class="th-price">單價</th>
+                                    <th class="th-amount">金額</th>
+                                    <th class="th-remark">備註</th>
+                                    <th class="th-action">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="quotationDetailBody">
+                                <tr data-row-id="1">
+                                    <td class="td-no">1</td>
+                                    <td class="td-item">
+                                        <input type="text" class="form-control" name="itemName" value="桂花樹（高度120cm）">
+                                    </td>
+                                    <td class="td-unit">
+                                        <input type="text" class="form-control input-center" name="unit" value="株">
+                                    </td>
+                                    <td class="td-qty">
+                                        <input type="number" class="form-control input-right" name="qty" value="3" min="1">
+                                    </td>
+                                    <td class="td-price">
+                                        <input type="number" class="form-control input-right" name="price" value="1500" min="0">
+                                    </td>
+                                    <td class="td-amount">
+                                        <span class="amount-value">4,500</span>
+                                    </td>
+                                    <td class="td-remark">
+                                        <input type="text" class="form-control" name="remark" value="">
+                                    </td>
+                                    <td class="td-action">
+                                        <button type="button" class="btn-remove-row" title="刪除此項">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-row-id="2">
+                                    <td class="td-no">2</td>
+                                    <td class="td-item">
+                                        <input type="text" class="form-control" name="itemName" value="培養土">
+                                    </td>
+                                    <td class="td-unit">
+                                        <input type="text" class="form-control input-center" name="unit" value="包">
+                                    </td>
+                                    <td class="td-qty">
+                                        <input type="number" class="form-control input-right" name="qty" value="5" min="1">
+                                    </td>
+                                    <td class="td-price">
+                                        <input type="number" class="form-control input-right" name="price" value="150" min="0">
+                                    </td>
+                                    <td class="td-amount">
+                                        <span class="amount-value">750</span>
+                                    </td>
+                                    <td class="td-remark">
+                                        <input type="text" class="form-control" name="remark" value="">
+                                    </td>
+                                    <td class="td-action">
+                                        <button type="button" class="btn-remove-row" title="刪除此項">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-row-id="3">
+                                    <td class="td-no">3</td>
+                                    <td class="td-item">
+                                        <input type="text" class="form-control" name="itemName" value="施工工資">
+                                    </td>
+                                    <td class="td-unit">
+                                        <input type="text" class="form-control input-center" name="unit" value="式">
+                                    </td>
+                                    <td class="td-qty">
+                                        <input type="number" class="form-control input-right" name="qty" value="1" min="1">
+                                    </td>
+                                    <td class="td-price">
+                                        <input type="number" class="form-control input-right" name="price" value="8000" min="0">
+                                    </td>
+                                    <td class="td-amount">
+                                        <span class="amount-value">8,000</span>
+                                    </td>
+                                    <td class="td-remark">
+                                        <input type="text" class="form-control" name="remark" value="含運費">
+                                    </td>
+                                    <td class="td-action">
+                                        <button type="button" class="btn-remove-row" title="刪除此項">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-row-id="4">
+                                    <td class="td-no">4</td>
+                                    <td class="td-item">
+                                        <input type="text" class="form-control" name="itemName" value="廢棄物清運">
+                                    </td>
+                                    <td class="td-unit">
+                                        <input type="text" class="form-control input-center" name="unit" value="式">
+                                    </td>
+                                    <td class="td-qty">
+                                        <input type="number" class="form-control input-right" name="qty" value="1" min="1">
+                                    </td>
+                                    <td class="td-price">
+                                        <input type="number" class="form-control input-right" name="price" value="2500" min="0">
+                                    </td>
+                                    <td class="td-amount">
+                                        <span class="amount-value">2,500</span>
+                                    </td>
+                                    <td class="td-remark">
+                                        <input type="text" class="form-control" name="remark" value="">
+                                    </td>
+                                    <td class="td-action">
+                                        <button type="button" class="btn-remove-row" title="刪除此項">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="add-row-tr">
+                                    <td colspan="8">
+                                        <button type="button" class="btn btn-add-row" id="btnAddRow">
+                                            <i class="fa-solid fa-plus"></i> 新增項目
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- 金額匯總區塊 -->
+                    <div class="quotation-summary">
+                        <div class="summary-row">
+                            <span class="summary-label">小計</span>
+                            <span class="summary-value" id="subtotal">NT$ 15,750</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-label">稅金 (5%)</span>
+                            <div class="summary-input-group">
+                                <input type="checkbox" id="includeTax" class="form-checkbox">
+                                <label for="includeTax">含稅</label>
+                                <span class="summary-value" id="taxAmount">NT$ 0</span>
+                            </div>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span class="summary-label">合計</span>
+                            <span class="summary-value" id="totalAmount">NT$ 15,750</span>
+                        </div>
+                    </div>
+
+                    <!-- 備註區塊 -->
+                    <div class="quotation-notes">
+                        <h3 class="notes-title">備註說明</h3>
+                        <textarea class="form-control" id="quotationNotes" rows="4" placeholder="請輸入備註說明...">1. 報價有效期限為30天。
+2. 付款方式：完工後一次付清。
+3. 植栽保固期限：三個月（人為因素除外）。
+4. 如有任何問題，歡迎來電洽詢。</textarea>
+                    </div>
+
+                    <!-- 內部備註區塊（僅供內部人員檢視） -->
+                    <div class="internal-notes-section">
+                        <div class="internal-notes-header">
+                            <h3 class="notes-title">
+                                <i class="fa-solid fa-lock"></i> 內部備註
+                                <span class="internal-badge">僅供內部檢視</span>
+                            </h3>
+                        </div>
+                        <textarea class="form-control" id="internalNotes" rows="3" placeholder="請輸入內部備註，此內容不會顯示給客戶...">客戶已同意報價，預計下週施工。需確認材料庫存。</textarea>
+                        <p class="internal-notes-hint">
+                            <i class="fa-solid fa-eye-slash"></i>
+                            此備註僅供內部管理人員檢視，不會顯示於客戶端或列印文件中。
+                        </p>
+                    </div>
+
+                    <!-- 狀態與操作區塊 -->
+                    <div class="quotation-status-section">
+                        <div class="status-row">
+                            <span class="status-label">報價單狀態：</span>
+                            <select class="form-select status-select" id="quotationStatus">
+                                <option value="草稿">草稿</option>
+                                <option value="待確認">待確認</option>
+                                <option value="已確認">已確認</option>
+                                <option value="已取消">已取消</option>
+                            </select>
+                        </div>
+                        <p class="status-hint">
+                            <i class="fa-solid fa-circle-info"></i>
+                            將狀態改為「待確認」後，系統會通知客戶確認報價。客戶確認後狀態會變更為「已確認」。
+                        </p>
+                    </div>
+
+                    <!-- 公司資訊 -->
+                    <div class="company-info">
+                        <div class="company-name">陸府生活事業股份有限公司</div>
+                        <div class="company-detail">地址：台中市西屯區市政北二路238號23樓</div>
+                        <div class="company-detail">電話：04-2259-5888 | 傳真：04-2259-5889</div>
+                    </div>
+                </div>
+
+                <!-- 底部按鈕區 -->
+                <div class="quotation-bottom">
+                    <div class="bottom-buttons">
+                        <button class="btn btn-secondary" id="btnBackBottom">
+                            <i class="fa-solid fa-arrow-left"></i> 返回個案單
+                        </button>
+                        <button class="btn btn-primary" id="btnSaveBottom">
+                            <i class="fa-solid fa-floppy-disk"></i> 儲存報價單
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/green-case-quotation.js"></script>
+</body>
+</html>

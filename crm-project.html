@@ -1,0 +1,1036 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案場管理 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/installment-modal.css">
+    <link rel="stylesheet" href="css/progress-record-modal.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="page-breadcrumb">
+                CRM設定 / 案場管理
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 查詢條件區 -->
+                <div class="search-panel-custom">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label class="field-label">建案</label>
+                            <select class="field-select" id="searchProject">
+                                <option value="">建案</option>
+                                <option value="陸府觀森">陸府觀森 測試</option>
+                                <option value="PARK259">PARK259</option>
+                                <option value="Test陽光街建案">Test陽光街建案</option>
+                                <option value="三普21">三普21</option>
+                                <option value="名人賞">名人賞</option>
+                                <option value="東方富域">東方富域</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="search-actions">
+                        <button type="button" class="btn-info" id="btnReset">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            重置
+                        </button>
+                        <button type="button" class="btn-info" id="btnSearch">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            查詢
+                        </button>
+                        <button type="button" class="btn-success" id="btnAdd">
+                            <i class="fa-solid fa-plus"></i>
+                            新增
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-container">
+                    <table class="data-table" id="projectTable">
+                        <thead>
+                            <tr>
+                                <th width="80">編號</th>
+                                <th width="150">建案</th>
+                                <th width="180">售前個案單逾期工作天數</th>
+                                <th width="150">公司名稱</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁區域 -->
+                <div class="pagination-container">
+                    <div class="pagination" id="pagination">
+                        <!-- 由 JavaScript 動態產生 -->
+                    </div>
+                    <div class="pagination-info">
+                        TotalRecords：<span id="totalRecords">0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯案場彈窗 -->
+    <div class="modal" id="projectModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增案場</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="projectForm">
+                    <input type="hidden" id="projectId">
+                    <div class="form-group">
+                        <label class="form-label required">建案名稱</label>
+                        <input type="text" class="form-input" id="projectName" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">售前個案單逾期工作天數</label>
+                            <input type="number" class="form-input" id="projectOverdueDays" min="1" value="14" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">公司名稱</label>
+                            <input type="text" class="form-input" id="projectCompany">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 案場期款管理彈窗 -->
+    <div class="modal installment-modal" id="installmentModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fa-solid fa-money-bill-wave" style="margin-right: 8px; color: #17a2b8;"></i>
+                    期款管理 - <span id="installmentProjectName"></span>
+                </h3>
+                <button class="modal-close" title="關閉">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 標題區與新增按鈕 -->
+                <div class="installment-header">
+                    <h6 class="installment-title">
+                        <i class="fa-solid fa-list"></i>
+                        期款項目列表
+                    </h6>
+                    <button type="button" class="btn-add-installment" id="btnAddInstallment" title="新增期款">
+                        <i class="fa-solid fa-plus"></i>
+                        新增期款
+                    </button>
+                </div>
+                
+                <!-- 期款表格 -->
+                <div class="installment-table-container">
+                    <table class="installment-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;">
+                                    <i class="fa-solid fa-hashtag"></i>期數
+                                </th>
+                                <th style="width: 15%;">
+                                    <i class="fa-solid fa-tag"></i>款項名稱
+                                </th>
+                                <th style="width: 15%;">
+                                    <i class="fa-solid fa-calendar-check"></i>預計應收日期
+                                </th>
+                                <th style="width: 15%;">
+                                    <i class="fa-solid fa-bell"></i>推播日期
+                                </th>
+                                <th style="width: 45%;">
+                                    <i class="fa-solid fa-cogs"></i>功能操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="installmentTableBody">
+                            <!-- 由 JavaScript 動態產生 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 說明區塊 -->
+                <div class="info-section">
+                    <div class="alert-info-custom">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <div>
+                            <strong>推播說明：</strong>
+                            <span>系統將於推播日期當日上午10:00自動發送LINE訊息提醒客戶</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">
+                    <i class="fa-solid fa-times"></i>
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增/編輯期款表單彈窗 -->
+    <div class="modal installment-form-modal" id="installmentFormModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="installmentFormTitle">新增期款</h3>
+                <button class="modal-close" title="關閉">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="installmentForm" class="installment-form">
+                    <div class="form-group">
+                        <label class="form-label required">期數</label>
+                        <input type="text" class="form-input" id="installmentPeriod" placeholder="例如：001、01、02" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">款項名稱</label>
+                        <input type="text" class="form-input" id="installmentName" placeholder="例如：訂金、簽約款" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">預計應收日期</label>
+                            <input type="date" class="form-input" id="installmentExpectedDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">推播日期</label>
+                            <input type="date" class="form-input" id="installmentPushDate" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="btnInstallmentCancel">取消</button>
+                <button type="button" class="btn-save" id="btnInstallmentSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 進度紀錄管理彈窗 -->
+    <div class="modal progress-record-modal" id="progressRecordModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fa-solid fa-chart-line" style="margin-right: 8px; color: #28a745;"></i>
+                    進度紀錄 - <span id="progressInstallmentName"></span>
+                </h3>
+                <button class="modal-close" title="關閉">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 標題區與新增按鈕 -->
+                <div class="progress-header">
+                    <h6 class="progress-title">
+                        <i class="fa-solid fa-history"></i>
+                        完工進度紀錄列表
+                    </h6>
+                    <button type="button" class="btn-add-progress" id="btnAddProgress" title="新增進度紀錄">
+                        <i class="fa-solid fa-plus"></i>
+                        新增進度紀錄
+                    </button>
+                </div>
+                
+                <!-- 進度紀錄列表 -->
+                <div class="progress-record-list" id="progressRecordList">
+                    <!-- 由 JavaScript 動態產生 -->
+                </div>
+                
+                <!-- 說明區塊 -->
+                <div class="info-section">
+                    <div class="alert-info-custom">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <div>
+                            <strong>說明：</strong>
+                            <span>您可以為每個期款新增多筆完工進度紀錄，記錄工程進度、上傳施工照片並填寫說明。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-progress-modal">
+                    <i class="fa-solid fa-times"></i>
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增/編輯進度紀錄表單彈窗 -->
+    <div class="modal progress-form-modal" id="progressFormModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="progressFormTitle">新增進度紀錄</h3>
+                <button class="modal-close" title="關閉">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="progressForm" class="progress-form">
+                    <div class="form-group">
+                        <label class="form-label required">紀錄日期</label>
+                        <input type="date" class="form-input" id="progressDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">進度說明</label>
+                        <textarea class="form-textarea" id="progressDescription" rows="4" placeholder="請輸入完工進度說明..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">上傳圖片</label>
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <div class="upload-placeholder" id="uploadPlaceholder">
+                                <i class="fa-solid fa-cloud-upload-alt"></i>
+                                <p>點擊或拖放圖片至此處上傳</p>
+                                <span class="upload-hint">支援 JPG、PNG 格式，單張最大 5MB</span>
+                            </div>
+                            <input type="file" id="progressImages" accept="image/jpeg,image/png" multiple style="display:none;">
+                        </div>
+                        <div class="image-preview-container" id="imagePreviewContainer">
+                            <!-- 圖片預覽由 JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="btnProgressCancel">取消</button>
+                <button type="button" class="btn-save" id="btnProgressSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/installment-modal.js"></script>
+    <script src="js/progress-record-modal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const projectModal = new Modal('projectModal');
+            
+            // 初始化期款管理彈窗
+            window.installmentModal = new InstallmentModal('installmentModal');
+            window.installmentFormModal = new InstallmentFormModal('installmentFormModal');
+            
+            // 初始化進度紀錄彈窗
+            window.progressRecordModal = new ProgressRecordModal('progressRecordModal');
+            window.progressFormModal = new ProgressFormModal('progressFormModal');
+            
+            // 案場 Mock 資料
+            const projectData = [
+                { id: 254, name: 'Jade123', overdueDays: 13, company: '新合達科技' },
+                { id: 255, name: 'PARK259', overdueDays: 14, company: '' },
+                { id: 256, name: 'Test陽光街建案', overdueDays: 30, company: '' },
+                { id: 257, name: '三普21', overdueDays: 14, company: '' },
+                { id: 258, name: '名人賞', overdueDays: 14, company: '' },
+                { id: 259, name: '東方富域', overdueDays: 14, company: '' },
+                { id: 260, name: '長虹凌雲', overdueDays: 14, company: '' },
+                { id: 261, name: '砳建築', overdueDays: 14, company: '' },
+                { id: 262, name: '國美青田', overdueDays: 14, company: '' },
+                { id: 263, name: '御中央二期', overdueDays: 14, company: '' },
+                { id: 264, name: '涵峰', overdueDays: 14, company: '' },
+                { id: 265, name: '凱銳汽車', overdueDays: 14, company: '' },
+                { id: 266, name: '森美館', overdueDays: 14, company: '' },
+                { id: 267, name: '匯豐店面', overdueDays: 14, company: '' },
+                { id: 268, name: '新美齊AIT', overdueDays: 14, company: '' },
+                { id: 269, name: '新美齊TheTop', overdueDays: 14, company: '' },
+                { id: 270, name: '新美齊心居', overdueDays: 14, company: '' },
+                { id: 271, name: '新美齊心岳', overdueDays: 14, company: '' },
+                { id: 272, name: '新美齊硯', overdueDays: 14, company: '' },
+                { id: 273, name: '新美齊匯', overdueDays: 14, company: '' },
+                { id: 274, name: '新美齊画世代', overdueDays: 14, company: '' },
+                { id: 275, name: '鉑金苑', overdueDays: 14, company: '' },
+                { id: 276, name: '鼎美清歡', overdueDays: 14, company: '' },
+                { id: 277, name: '養護合約預約', overdueDays: 14, company: '' },
+                { id: 283, name: '漢皇里寓1', overdueDays: 14, company: '' },
+                { id: 284, name: 'Michael', overdueDays: 14, company: 'Michael' },
+                { id: 286, name: '漢皇里寓', overdueDays: 14, company: '' },
+                { id: 287, name: '陸府觀森 測試', overdueDays: 14, company: '陸府建設' },
+                { id: 289, name: 'Test陽光街建案', overdueDays: 11, company: '' },
+                { id: 290, name: '漢皇里寓', overdueDays: 14, company: '' },
+                { id: 292, name: '福一潭美', overdueDays: 14, company: '' },
+                { id: 293, name: 'Test陽光街建案', overdueDays: 14, company: '' },
+                { id: 294, name: '達合新境', overdueDays: 14, company: '新合達' },
+                { id: 298, name: 'Janet', overdueDays: 14, company: 'Janet' },
+                { id: 299, name: '新美齊-JANET', overdueDays: 141, company: '新美齊-JANET' },
+                { id: 301, name: '漢皇莊園', overdueDays: 14, company: '' },
+                { id: 302, name: '特規案03', overdueDays: 10, company: '雄大建設' },
+                { id: 310, name: '特規案', overdueDays: 20, company: '雄大建設' },
+                { id: 312, name: 'Jade123', overdueDays: 1, company: 'Jade123' },
+                { id: 313, name: 'Jade123', overdueDays: 1, company: 'Jade123' },
+                { id: 314, name: 'Jade123', overdueDays: 1, company: 'Jade123' }
+            ];
+            
+            loadProjectData();
+            
+            function loadProjectData() {
+                renderTable(projectData);
+                document.getElementById('totalRecords').textContent = projectData.length;
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('projectTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(project) {
+                    return `
+                        <tr>
+                            <td>${project.id}</td>
+                            <td>${project.name}</td>
+                            <td>${project.overdueDays}</td>
+                            <td>${project.company}</td>
+                            <td>
+                                <div class="action-buttons-wrap">
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="edit">
+                                        <i class="fa-solid fa-pen-to-square"></i> 編輯
+                                    </button>
+                                    <button class="btn-outline-danger btn-sm" data-id="${project.id}" data-action="delete">
+                                        <i class="fa-regular fa-trash-can"></i> 刪除
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="milestone">
+                                        <i class="fa-solid fa-pen-to-square"></i> 里程碑設定
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="listDisplay">
+                                        <i class="fa-solid fa-pen-to-square"></i> 列表顯示設定
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="linePermission">
+                                        <i class="fa-solid fa-pen-to-square"></i> LINE功能權限設定
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="survey">
+                                        <i class="fa-solid fa-pen-to-square"></i> 問卷題目設定
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="staff">
+                                        <i class="fa-solid fa-file-invoice"></i> 案場維護人員
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="payment">
+                                        <i class="fa-solid fa-money-bill-wave"></i> 案場期款管理
+                                    </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="invoice">
+                                        <i class="fa-solid fa-file-invoice"></i> 案場發票設定
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // 綁定所有操作按鈕事件
+                document.querySelectorAll('.action-buttons-wrap button').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        const action = this.dataset.action;
+                        handleAction(action, id);
+                    });
+                });
+            }
+            
+            // 處理各種操作
+            function handleAction(action, id) {
+                const project = projectData.find(p => p.id === id);
+                if (!project) return;
+                
+                switch(action) {
+                    case 'edit':
+                        editProject(project);
+                        break;
+                    case 'delete':
+                        deleteProject(project);
+                        break;
+                    case 'milestone':
+                        alert(`開啟「${project.name}」的里程碑設定`);
+                        break;
+                    case 'listDisplay':
+                        alert(`開啟「${project.name}」的列表顯示設定`);
+                        break;
+                    case 'linePermission':
+                        alert(`開啟「${project.name}」的 LINE 功能權限設定`);
+                        break;
+                    case 'survey':
+                        alert(`開啟「${project.name}」的問卷題目設定`);
+                        break;
+                    case 'staff':
+                        alert(`開啟「${project.name}」的案場維護人員`);
+                        break;
+                    case 'payment':
+                        // 開啟案場期款管理彈窗
+                        window.installmentModal.open(project.id, project.name);
+                        break;
+                    case 'invoice':
+                        alert(`開啟「${project.name}」的案場發票設定`);
+                        break;
+                }
+            }
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增案場';
+                document.getElementById('projectForm').reset();
+                document.getElementById('projectId').value = '';
+                projectModal.open();
+            });
+            
+            function editProject(project) {
+                document.getElementById('modalTitle').textContent = '編輯案場';
+                document.getElementById('projectId').value = project.id;
+                document.getElementById('projectName').value = project.name;
+                document.getElementById('projectOverdueDays').value = project.overdueDays;
+                document.getElementById('projectCompany').value = project.company;
+                
+                projectModal.open();
+            }
+            
+            function deleteProject(project) {
+                if (typeof ConfirmDialog !== 'undefined') {
+                    ConfirmDialog.show({
+                        title: '確認刪除',
+                        message: `確定要刪除案場「${project.name}」嗎？`,
+                        onConfirm: function() {
+                            alert('已刪除案場：' + project.name);
+                            loadProjectData();
+                        }
+                    });
+                } else {
+                    if (confirm(`確定要刪除案場「${project.name}」嗎？`)) {
+                        alert('已刪除案場：' + project.name);
+                        loadProjectData();
+                    }
+                }
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('projectForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存案場資料');
+                projectModal.close();
+                loadProjectData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                projectModal.close();
+            });
+            
+            // 查詢功能
+            document.getElementById('btnSearch').addEventListener('click', function() {
+                const searchValue = document.getElementById('searchProject').value;
+                if (searchValue) {
+                    const filtered = projectData.filter(p => p.name.includes(searchValue));
+                    renderTable(filtered);
+                    document.getElementById('totalRecords').textContent = filtered.length;
+                } else {
+                    loadProjectData();
+                }
+            });
+            
+            // 重置功能
+            document.getElementById('btnReset').addEventListener('click', function() {
+                document.getElementById('searchProject').value = '';
+                loadProjectData();
+            });
+        });
+    </script>
+
+    <style>
+        /* 麵包屑導覽 */
+        .page-breadcrumb {
+            background-color: #fff;
+            color: #333;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* 搜尋區域 */
+        .search-panel-custom {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 0;
+        }
+        
+        .search-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .search-field {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        .field-label {
+            min-width: 80px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .field-select {
+            flex: 1;
+            height: 40px;
+            padding: 0 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #999;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        
+        .search-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+        
+        /* 藍色按鈕 */
+        .btn-info {
+            background-color: #17a2b8;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-info:hover {
+            background-color: #138496;
+        }
+        
+        /* 綠色按鈕 */
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        
+        /* 表格樣式 */
+        #projectTable {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f3f3f3;
+            min-width: 800px;
+        }
+        
+        #projectTable thead tr {
+            background-color: #ad9e8f;
+            color: #fff;
+        }
+        
+        #projectTable th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        #projectTable td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        #projectTable tbody tr:nth-child(odd) {
+            background-color: #e7e7e7;
+        }
+        
+        #projectTable tbody tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+        
+        /* 操作按鈕容器 */
+        .action-buttons-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            max-width: 500px;
+        }
+        
+        /* 操作按鈕基本樣式 */
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid;
+            background: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        
+        /* 綠色邊框按鈕 */
+        .btn-outline-success {
+            color: #6c9a6c;
+            border-color: #6c9a6c;
+            background-color: #fff;
+        }
+        
+        .btn-outline-success:hover {
+            background-color: #6c9a6c;
+            color: #fff;
+        }
+        
+        /* 紅色邊框按鈕（刪除） */
+        .btn-outline-danger {
+            color: #c0392b;
+            border-color: #c0392b;
+            background-color: #fdf2f2;
+        }
+        
+        .btn-outline-danger:hover {
+            background-color: #c0392b;
+            color: #fff;
+        }
+        
+        /* 分頁容器 */
+        .pagination-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            gap: 8px;
+            background-color: #fff;
+        }
+        
+        .pagination-info {
+            text-align: center;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .text-center {
+            text-align: center;
+            color: #999;
+            padding: 20px !important;
+        }
+        
+        /* 表格操作欄位寬度調整 */
+        #projectTable th:last-child,
+        #projectTable td:last-child {
+            min-width: 500px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background-color: #fff;
+            overflow-x: auto;
+        }
+        
+        /* 內容包裝器 */
+        .content-wrapper {
+            background-color: #fff;
+            padding: 0;
+        }
+        
+        /* 響應式調整 */
+        @media (max-width: 1200px) {
+            .action-buttons-wrap {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>
+

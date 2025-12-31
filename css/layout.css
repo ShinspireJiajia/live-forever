@@ -1,0 +1,380 @@
+﻿/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 版面框架樣式
+ * ============================================
+ * 檔案：layout.css
+ * 說明：定義主要版面結構，包含 Header、Sidebar、Content 三欄式佈局
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* ============================================
+ * 主容器 (App Container)
+ * ============================================ */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ============================================
+ * 主要內容區塊（Sidebar + Content）
+ * ============================================ */
+.app-main {
+    display: flex;
+    flex: 1;
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+}
+
+/* ============================================
+ * 側邊欄容器 (Sidebar)
+ * ============================================ */
+.sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    background-color: var(--color-menu-bg);
+    border-right: var(--border-width-thin) solid var(--color-border);
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width var(--transition-normal), transform var(--transition-normal);
+    z-index: var(--z-index-sidebar);
+}
+
+/* 側邊欄收合狀態 */
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar.collapsed .sidebar-menu-text,
+.sidebar.collapsed .sidebar-submenu,
+.sidebar.collapsed .sidebar-toggle-icon {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-menu-item {
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+.sidebar.collapsed .sidebar-menu-icon {
+    margin-right: 0;
+}
+
+/* ============================================
+ * 主內容區域 (Content)
+ * ============================================ */
+.content,
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: var(--content-padding);
+    background-color: var(--color-content-bg);
+    min-height: calc(100vh - var(--header-height));
+    transition: margin-left var(--transition-normal);
+    overflow-y: auto;
+}
+
+/* 側邊欄收合時的內容區域 */
+.sidebar.collapsed ~ .content,
+.app-main.sidebar-collapsed .content,
+.sidebar.collapsed ~ .main-content,
+.app-container.sidebar-collapsed .main-content {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+/* 內容區域內部容器 */
+.content-wrapper {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg);
+    min-height: calc(100vh - var(--header-height) - var(--content-padding) * 2);
+}
+
+/* ============================================
+ * 頁面標題區域
+ * ============================================ */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: var(--border-width-thin) solid var(--color-border);
+}
+
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.page-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* --- 1. 基礎佈局和框架模擬 (User Provided) --- */
+
+/* 模擬 Nebular Card (nb-card) 基礎樣式 */
+nb-card {
+    display: block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    background-color: #ffffff; /* 假設卡片背景為白色 */
+}
+
+/* 模擬 accent-success 強調色邊框 */
+nb-card.accent-success {
+    border-left: 5px solid #00d68f; /* success 顏色，Nebular 預設綠色 */
+}
+
+/* 模擬 Card Header 和 Body */
+nb-card-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #e4e9f2;
+}
+
+nb-card-body {
+    padding: 1.25rem;
+    /* 該元素有 bg-white，所以背景保持白色 */
+}
+
+/* 確保 nb-card-body 內部的 bg-white 類別有效 */
+.bg-white {
+    background-color: #ffffff !important;
+}
+
+/* 模擬 form-group 的間距 */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* 模擬 col-form-label 對齊 */
+.col-form-label {
+    padding-top: calc(0.375rem + 1px);
+    padding-bottom: calc(0.375rem + 1px);
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* 模擬 input 基礎樣式 (Nebular Style) */
+input[type="text"], input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #2e3a59;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #c5cee0;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* 模擬 full-width */
+.full-width {
+    width: 100% !important;
+}
+
+/* 模擬 text-right */
+.text-right {
+    text-align: right !important;
+}
+
+/* --- 2. Bootstrap 間距模擬 (m/p-X) (User Provided) --- */
+
+/* Margin Right (mr-2) */
+.mr-1 { margin-right: 0.25rem !important; }
+.mr-2 { margin-right: 0.5rem !important; }
+
+/* Margin All (m-1) */
+.m-1 { margin: 0.25rem !important; }
+
+/* Padding All (p-2) */
+.p-2 { padding: 0.5rem !important; }
+
+/* ============================================
+ * 網格系統 (Grid System) - Retained from original
+ * ============================================ */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(var(--spacing-md) * -0.5);
+}
+
+.col {
+    flex: 1;
+    padding: calc(var(--spacing-md) * 0.5);
+}
+
+/* 固定欄寬 */
+.col-1 { flex: 0 0 8.333%; max-width: 8.333%; }
+.col-2 { flex: 0 0 16.666%; max-width: 16.666%; }
+.col-3 { flex: 0 0 25%; max-width: 25%; }
+.col-4 { flex: 0 0 33.333%; max-width: 33.333%; }
+.col-5 { flex: 0 0 41.666%; max-width: 41.666%; }
+.col-6 { flex: 0 0 50%; max-width: 50%; }
+.col-7 { flex: 0 0 58.333%; max-width: 58.333%; }
+.col-8 { flex: 0 0 66.666%; max-width: 66.666%; }
+.col-9 { flex: 0 0 75%; max-width: 75%; }
+.col-10 { flex: 0 0 83.333%; max-width: 83.333%; }
+.col-11 { flex: 0 0 91.666%; max-width: 91.666%; }
+.col-12 { flex: 0 0 100%; max-width: 100%; }
+
+/* ============================================
+ * 工具類 (Utilities) - Retained from original
+ * ============================================ */
+
+/* 文字對齊 */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+/* .text-right is already defined in user snippet */
+
+/* Flex 對齊 */
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* 間距 */
+.mt-0 { margin-top: 0; }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+/* 顯示/隱藏 */
+.hidden { display: none !important; }
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+
+/* ============================================
+ * 響應式設計 (Responsive) - Retained from original
+ * ============================================ */
+
+/* 平板裝置 (768px ~ 1023px) */
+@media screen and (max-width: 1023px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .content,
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .app-main.sidebar-collapsed .content,
+    .app-container.sidebar-collapsed .main-content {
+        margin-left: 0;
+    }
+    
+    /* 網格響應式 */
+    .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* 手機裝置 (< 768px) */
+@media screen and (max-width: 767px) {
+    :root {
+        --content-padding: 12px;
+    }
+    
+    .content-wrapper {
+        padding: var(--spacing-md);
+        border-radius: 0;
+        box-shadow: none;
+        min-height: auto;
+    }
+    
+    /* 頁面標題區優化 */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .page-title {
+        font-size: var(--font-size-lg);
+    }
+    
+    .page-actions {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+    
+    .search-form {
+        flex-direction: column;
+    }
+    
+    .search-form-group {
+        width: 100%;
+        min-width: 0;
+    }
+    
+    .search-actions {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+    
+    .table-footer {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    /* 網格響應式 */
+    .col-sm-12 { flex: 0 0 100%; max-width: 100%; }
+    
+    /* 卡片調整 - 視覺降噪 */
+    .card,
+    nb-card {
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius-sm);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: none;
+    }
+    
+    nb-card-header {
+        padding: var(--spacing-md);
+    }
+    
+    nb-card-body {
+        padding: var(--spacing-md);
+    }
+    
+    /* 表單群組間距 */
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+}

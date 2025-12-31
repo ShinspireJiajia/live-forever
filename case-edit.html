@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個案單編輯 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/case-edit.css">
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+        <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 主要表單內容區 -->
+            <div class="case-edit-container">
+                <!-- 頂部操作按鈕區 -->
+                <div class="case-edit-top">
+                    <div class="top-buttons">
+                        <!-- 左側按鈕組 -->
+                        <div class="btn-group-left">
+                            <button class="btn btn-convert" id="btnConvert">
+                                <span>轉換</span>
+                            </button>
+                            <button class="btn btn-delete" id="btnDelete">
+                                <span>刪除</span>
+                            </button>
+                        </div>
+                        <!-- 右側按鈕組 -->
+                        <div class="btn-group-right">
+                            <button class="btn btn-back" id="btnBack" onclick="location.href='case-list.html'">
+                                <span>返回列表</span>
+                            </button>
+                            <button class="btn btn-save" id="btnSaveTop">
+                                <span>儲存</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片：表單編號與進度 -->
+                <div class="card case-card">
+                    <div class="card-header">
+                        <span class="card-title" id="caseFormNo">表單編號</span>
+                    </div>
+                    <div class="card-body">
+                        <!-- 里程碑資訊區 -->
+                        <div class="milestone-wrap">
+                            <div class="milestone-header">
+                                <div class="milestone-info">
+                                    <div class="milestone-step">Step</div>
+                                    <div class="milestone-times">
+                                        <div class="time-item">
+                                            <span class="time-label">開始時間</span>
+                                            <span class="time-value" id="startTime"></span>
+                                        </div>
+                                        <div class="time-item">
+                                            <span class="time-label">逾期時間</span>
+                                            <span class="time-value text-danger" id="overdueTime"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-progress" id="btnProgressUpdate">
+                                    <span>進度更新</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 頁籤導覽 -->
+                        <div class="tab-nav">
+                            <button class="tab-btn active" data-tab="detail">詳細資料</button>
+                            <button class="tab-btn" data-tab="completion">完工確認</button>
+                        </div>
+
+                        <!-- 頁籤內容：詳細資料 -->
+                        <div class="tab-content active" id="tab-detail">
+                            <div class="form-grid">
+                                <!-- 編號 -->
+                                <div class="form-group">
+                                    <label class="form-label" for="cCaseNo">編號</label>
+                                    <input type="text" class="form-control" id="cCaseNo" name="cCaseNo" 
+                                           placeholder="編號" disabled value="20251204-0001">
+                                </div>
+                                <!-- 狀態 -->
+                                <div class="form-group">
+                                    <label class="form-label" for="cStatus">狀態</label>
+                                    <select class="form-select" id="cStatus" name="cStatus" disabled>
+                                        <option value="">請選擇</option>
+                                        <option value="立案" selected>立案</option>
+                                        <option value="處理中">處理中</option>
+                                        <option value="結案">結案</option>
+                                    </select>
+                                </div>
+                                <!-- 建案 -->
+                                <div class="form-group">
+                                    <label class="form-label" for="cProject">建案</label>
+                                    <select class="form-select" id="cProject" name="cProject" disabled>
+                                        <option value="">建案</option>
+                                        <option value="陸府觀森" selected>陸府觀森 測試</option>
+                                        <option value="PARK259">PARK259</option>
+                                        <option value="Jade123">Jade123</option>
+                                    </select>
+                                </div>
+                                <!-- 戶別 -->
+                                <div class="form-group">
+                                    <label class="form-label" for="cHouseId">戶別</label>
+                                    <select class="form-select" id="cHouseId" name="cHouseId" disabled>
+                                        <option value="">請先選擇建案</option>
+                                        <option value="A1-2" selected>A1-2</option>
+                                        <option value="A1-01F">A1-01F</option>
+                                        <option value="A-03F">A-03F</option>
+                                    </select>
+                                </div>
+                                <!-- 個案類型 -->
+                                <div class="form-group">
+                                    <label class="form-label" for="cCaseType">個案類型</label>
+                                    <select class="form-select" id="cCaseType" name="cCaseType" disabled>
+                                        <option value="">請選擇</option>
+                                        <option value="維修" selected>維修</option>
+                                        <option value="客服">客服</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </div>
+                                <!-- 申請人 -->
+                                <div class="form-group">
+                                    <label class="form-label" for="cApplicant">申請人</label>
+                                    <input type="text" class="form-control" id="cApplicant" name="cApplicant" 
+                                           placeholder="申請人" disabled value="吳Ｏ嬋">
+                                </div>
+                                <!-- 主題（全寬） -->
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="cSubject">主題</label>
+                                    <input type="text" class="form-control" id="cSubject" name="cSubject" 
+                                           placeholder="主題">
+                                </div>
+                                <!-- 描述（全寬） -->
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="cDescription">描述</label>
+                                    <textarea class="form-control" id="cDescription" name="cDescription" 
+                                              placeholder="描述" rows="4"></textarea>
+                                </div>
+                                <!-- 急件 checkbox -->
+                                <div class="form-group full-width">
+                                    <div class="checkbox-group">
+                                        <label class="form-label mb-0">急件</label>
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="cUrgent" name="cUrgent" class="form-checkbox">
+                                            <label for="cUrgent" class="checkbox-label">是</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 分隔線 -->
+                            <hr class="section-divider">
+
+                            <!-- 附件區塊 -->
+                            <div class="section-block">
+                                <h3 class="section-title">
+                                    <i class="fa-solid fa-paperclip"></i> 附件
+                                </h3>
+                                <div class="attachment-list" id="attachmentList">
+                                    <!-- 附件媒體網格 -->
+                                    <div class="attachment-grid">
+                                        <!-- 圖片附件 -->
+                                        <div class="attachment-item" data-type="image">
+                                            <div class="attachment-preview">
+                                                <img src="https://via.placeholder.com/200x150/e0e0e0/666?text=漏水照片1" alt="漏水照片1" class="attachment-image" data-full-src="https://via.placeholder.com/800x600/e0e0e0/666?text=漏水照片1">
+                                                <div class="attachment-overlay">
+                                                    <button class="overlay-btn view-btn" title="檢視">
+                                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                                    </button>
+                                                    <button class="overlay-btn download-btn" title="下載">
+                                                        <i class="fa-solid fa-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="attachment-info">
+                                                <span class="attachment-name">漏水照片1.jpg</span>
+                                                <span class="attachment-meta">2025/08/05 10:31</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- 圖片附件 -->
+                                        <div class="attachment-item" data-type="image">
+                                            <div class="attachment-preview">
+                                                <img src="https://via.placeholder.com/200x150/d0d0d0/555?text=漏水照片2" alt="漏水照片2" class="attachment-image" data-full-src="https://via.placeholder.com/800x600/d0d0d0/555?text=漏水照片2">
+                                                <div class="attachment-overlay">
+                                                    <button class="overlay-btn view-btn" title="檢視">
+                                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                                    </button>
+                                                    <button class="overlay-btn download-btn" title="下載">
+                                                        <i class="fa-solid fa-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="attachment-info">
+                                                <span class="attachment-name">漏水照片2.jpg</span>
+                                                <span class="attachment-meta">2025/08/05 10:31</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- 影片附件 -->
+                                        <div class="attachment-item" data-type="video">
+                                            <div class="attachment-preview attachment-video">
+                                                <video class="attachment-video-player" preload="metadata">
+                                                    <source src="" type="video/mp4">
+                                                </video>
+                                                <div class="video-cover">
+                                                    <i class="fa-solid fa-play-circle"></i>
+                                                </div>
+                                                <div class="attachment-overlay">
+                                                    <button class="overlay-btn play-btn" title="播放">
+                                                        <i class="fa-solid fa-play"></i>
+                                                    </button>
+                                                    <button class="overlay-btn download-btn" title="下載">
+                                                        <i class="fa-solid fa-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="attachment-info">
+                                                <span class="attachment-name">漏水情況.mp4</span>
+                                                <span class="attachment-meta">2025/08/05 10:32</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- 圖片附件 -->
+                                        <div class="attachment-item" data-type="image">
+                                            <div class="attachment-preview">
+                                                <img src="https://via.placeholder.com/200x150/c8c8c8/444?text=損壞區域" alt="損壞區域" class="attachment-image" data-full-src="https://via.placeholder.com/800x600/c8c8c8/444?text=損壞區域">
+                                                <div class="attachment-overlay">
+                                                    <button class="overlay-btn view-btn" title="檢視">
+                                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                                    </button>
+                                                    <button class="overlay-btn download-btn" title="下載">
+                                                        <i class="fa-solid fa-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="attachment-info">
+                                                <span class="attachment-name">損壞區域.jpg</span>
+                                                <span class="attachment-meta">2025/08/05 10:33</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 分隔線 -->
+                            <hr class="section-divider">
+
+                            <!-- 線上對話區塊 -->
+                            <div class="section-block">
+                                <h3 class="section-title">
+                                    <i class="fa-regular fa-comments"></i> 留言板
+                                </h3>
+
+                                <div class="chat-container" id="chatContainer">
+                                    <!-- 對話訊息區域 -->
+                                    <div class="chat-messages" id="chatMessages">
+                                        <!-- 用戶訊息（右側）- 含圖片 -->
+                                        <div class="message message-right">
+                                            <div class="message-content">請問大約什麼時候可以維修？</div>
+                                            <div class="message-info">陳小明 2025/08/05 10:30 AM</div>
+                                        </div>
+
+                                        <!-- 用戶訊息（右側）- 含圖片附件 -->
+                                        <div class="message message-right">
+                                            <div class="message-media">
+                                                <img src="https://via.placeholder.com/300x200/e0e0e0/666?text=漏水照片" alt="客戶上傳圖片" class="media-image" data-full-src="https://via.placeholder.com/800x600/e0e0e0/666?text=漏水照片">
+                                            </div>
+                                            <div class="message-info">陳小明 2025/08/05 10:31 AM</div>
+                                        </div>
+
+                                        <!-- 客服回覆（左側） -->
+                                        <div class="message message-left">
+                                            <div class="message-content">您好，約下午會派維修人員過去</div>
+                                            <div class="message-file">
+                                                <i class="fa-solid fa-file-pdf file-icon"></i>
+                                                <span class="file-name">聯絡資訊.pdf</span>
+                                                <button class="file-download" title="下載檔案">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </button>
+                                            </div>
+                                            <div class="message-info">王曉明 2025/08/05 10:30 AM</div>
+                                        </div>
+
+                                        <!-- 用戶訊息（右側）- 含影片 -->
+                                        <div class="message message-right">
+                                            <div class="message-content">這是漏水的影片</div>
+                                            <div class="message-media">
+                                                <video controls class="media-video" preload="metadata">
+                                                    <source src="" type="video/mp4">
+                                                    您的瀏覽器不支援影片播放
+                                                </video>
+                                                <div class="video-placeholder">
+                                                    <i class="fa-solid fa-play-circle"></i>
+                                                    <span>漏水情況.mp4</span>
+                                                </div>
+                                            </div>
+                                            <div class="message-info">陳小明 2025/08/05 10:32 AM</div>
+                                        </div>
+
+                                        <!-- 客服回覆（左側） -->
+                                        <div class="message message-left">
+                                            <div class="message-content">維修已完成</div>
+                                            <div class="message-info">王曉明 2025/08/05 15:30 AM</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 輸入框區域 -->
+                                    <div class="chat-input-area">
+                                        <!-- 附件按鈕區域 (15%) -->
+                                        <div class="chat-input-left">
+                                            <button type="button" class="attach-btn" id="btnAttachFile" title="附加檔案">
+                                                <i class="fa-solid fa-paperclip"></i>
+                                            </button>
+                                            <input type="file" id="chatFileInput" class="hidden-file-input" accept="image/*,video/*,.pdf,.doc,.docx">
+                                            <span class="file-limit-hint">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                                檔案限制：10MB，支援格式：圖片、影片、PDF、Word
+                                            </span>
+                                        </div>
+                                        <!-- 文字輸入區域 (85%) -->
+                                        <div class="chat-input-right">
+                                            <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息...">
+                                            <button type="button" class="send-btn" id="btnSendMessage" title="發送訊息">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 頁籤內容：完工確認 -->
+                        <div class="tab-content" id="tab-completion">
+                            <!-- 派工單區塊 -->
+                            <div class="section-block">
+                                <h3 class="section-title">派工單</h3>
+                                <div class="dispatch-list" id="dispatchList">
+                                    <!-- 派工單項目會動態加入 -->
+                                    <p class="text-muted no-dispatch">尚無派工單</p>
+                                </div>
+                            </div>
+
+                            <!-- 分隔線 -->
+                            <hr class="section-divider">
+
+                            <!-- 完工日期 -->
+                            <div class="form-group">
+                                <label class="form-label required" for="cCompletedDate">完工日期</label>
+                                <input type="date" class="form-control" id="cCompletedDate" name="cCompletedDate" required>
+                            </div>
+
+                            <!-- 完工說明 -->
+                            <div class="form-group">
+                                <label class="form-label required" for="cCompletedNotes">完工說明</label>
+                                <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" 
+                                          placeholder="完工說明" rows="3" required></textarea>
+                                <div class="quick-fill-buttons">
+                                    <span class="quick-fill-label">快速填入：</span>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" 
+                                            data-text="已完成所有修繕工作">已完成所有修繕工作</button>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" 
+                                            data-text="待客戶驗收">待客戶驗收</button>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" 
+                                            data-text="已完成所有修繕工作，保固三個月">已完成所有修繕工作，保固三個月</button>
+                                </div>
+                            </div>
+
+                            <!-- 分隔線 -->
+                            <hr class="section-divider">
+
+                            <!-- 上傳檔案區塊 -->
+                            <div class="section-block">
+                                <h3 class="section-title">上傳檔案</h3>
+                                <label for="fileUpload" class="upload-wrap">
+                                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                    <p class="text-info text-center" id="uploadPlaceholder">拖曳檔案至此處或點擊上傳</p>
+                                    <input type="file" id="fileUpload" name="fileUpload" 
+                                           accept=".jpg,.mp4,.heic,.heif" multiple class="file-input">
+                                    <span class="upload-btn"><i class="fa-solid fa-plus"></i> 選擇檔案</span>
+                                </label>
+                                <p class="upload-hint">*支援圖片 .jpg、影片 .mp4，最大 5MB</p>
+                                <div class="upload-list" id="uploadList">
+                                    <!-- 上傳的檔案列表 -->
+                                </div>
+                            </div>
+
+                            <!-- 分隔線 -->
+                            <hr class="section-divider">
+
+                            <!-- 住戶簽名確認區塊 -->
+                            <div class="section-block">
+                                <h3 class="section-title">住戶簽名確認</h3>
+                                <div class="signature-block">
+                                    <div class="signature-area" id="signatureArea">
+                                        <canvas id="signatureCanvas" width="600" height="180"></canvas>
+                                        <div class="signature-placeholder" id="signaturePlaceholder">
+                                            <i class="fa-solid fa-signature"></i>
+                                            <span>點擊此處進行簽名</span>
+                                        </div>
+                                    </div>
+                                    <div class="signature-buttons">
+                                        <button type="button" class="btn btn-secondary" id="btnClearSign">
+                                            <i class="fa-solid fa-eraser"></i> 清除簽名
+                                        </button>
+                                        <button type="button" class="btn btn-primary" id="btnConfirmSign">
+                                            <i class="fa-solid fa-check"></i> 確認簽名
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 分隔線 -->
+                            <hr class="section-divider">
+
+                            <!-- 發送次數 -->
+                            <div class="form-group">
+                                <label class="form-label" for="cMessageSendTimes">發送次數</label>
+                                <input type="number" class="form-control" id="cMessageSendTimes" name="cMessageSendTimes" 
+                                       placeholder="發送次數" disabled value="0">
+                            </div>
+
+                            <!-- 是否本次不寄發滿意度問卷 -->
+                            <div class="form-group">
+                                <label class="form-label" for="cIsNotSendQuestionnaire">是否本次不寄發滿意度問卷</label>
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="cIsNotSendQuestionnaire" name="cIsNotSendQuestionnaire" class="form-checkbox">
+                                    <label for="cIsNotSendQuestionnaire" class="checkbox-label">不寄發</label>
+                                </div>
+                            </div>
+
+                            <!-- 滿意度問卷區塊 -->
+                            <div class="section-block questionnaire-block">
+                                <h3 class="section-title">滿意度問卷</h3>
+                                <div class="questionnaire-card">
+                                    <div class="questionnaire-body">
+                                        <!-- 整體滿意度 -->
+                                        <div class="rating-item">
+                                            <span class="rating-label">整體滿意度</span>
+                                            <div class="star-rating" data-rating="0">
+                                                <i class="fa-regular fa-star" data-value="1"></i>
+                                                <i class="fa-regular fa-star" data-value="2"></i>
+                                                <i class="fa-regular fa-star" data-value="3"></i>
+                                                <i class="fa-regular fa-star" data-value="4"></i>
+                                                <i class="fa-regular fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                        <!-- 整體報修便利性 -->
+                                        <div class="rating-item">
+                                            <span class="rating-label">整體報修便利性</span>
+                                            <div class="star-rating" data-rating="0">
+                                                <i class="fa-regular fa-star" data-value="1"></i>
+                                                <i class="fa-regular fa-star" data-value="2"></i>
+                                                <i class="fa-regular fa-star" data-value="3"></i>
+                                                <i class="fa-regular fa-star" data-value="4"></i>
+                                                <i class="fa-regular fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                        <!-- 整體處理時效性 -->
+                                        <div class="rating-item">
+                                            <span class="rating-label">整體處理時效性</span>
+                                            <div class="star-rating" data-rating="0">
+                                                <i class="fa-regular fa-star" data-value="1"></i>
+                                                <i class="fa-regular fa-star" data-value="2"></i>
+                                                <i class="fa-regular fa-star" data-value="3"></i>
+                                                <i class="fa-regular fa-star" data-value="4"></i>
+                                                <i class="fa-regular fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                        <!-- 服務內容滿意度 -->
+                                        <div class="rating-item">
+                                            <span class="rating-label">服務內容滿意度</span>
+                                            <div class="star-rating" data-rating="0">
+                                                <i class="fa-regular fa-star" data-value="1"></i>
+                                                <i class="fa-regular fa-star" data-value="2"></i>
+                                                <i class="fa-regular fa-star" data-value="3"></i>
+                                                <i class="fa-regular fa-star" data-value="4"></i>
+                                                <i class="fa-regular fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                        <!-- 服務人員滿意度 -->
+                                        <div class="rating-item">
+                                            <span class="rating-label">服務人員滿意度</span>
+                                            <div class="star-rating" data-rating="0">
+                                                <i class="fa-regular fa-star" data-value="1"></i>
+                                                <i class="fa-regular fa-star" data-value="2"></i>
+                                                <i class="fa-regular fa-star" data-value="3"></i>
+                                                <i class="fa-regular fa-star" data-value="4"></i>
+                                                <i class="fa-regular fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                        <!-- 寶貴意見 -->
+                                        <div class="form-group mt-3">
+                                            <textarea class="form-control" placeholder="寶貴意見或其他建議項目" 
+                                                      rows="3" disabled></textarea>
+                                        </div>
+                                        <!-- 建議改善 -->
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="建議改善的資訊" 
+                                                      rows="3" disabled></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 重發問卷 -->
+                            <div class="form-group">
+                                <label class="form-label">重發問卷</label>
+                                <div>
+                                    <p class="text-danger mb-0" id="resendQuestionnaireMsg">排程尚未發送問卷，無法使用此功能!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 底部按鈕區（固定在底部） -->
+                        <div class="bottom-buttons">
+                            <button class="btn btn-outline-primary" id="btnBackBottom" onclick="location.href='case-list.html'">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>返回列表</span>
+                            </button>
+                            <button class="btn btn-primary" id="btnSaveBottom">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                <span>儲存</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 進度更新彈窗 -->
+    <div class="modal-backdrop" id="progressModalBackdrop"></div>
+    <div class="modal" id="progressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">進度更新</h3>
+                <button type="button" class="modal-close" id="progressModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">目前進度</label>
+                    <select class="form-select" id="progressSelect">
+                        <option value="1">Step 1 - 立案</option>
+                        <option value="2">Step 2 - 處理中</option>
+                        <option value="3">Step 3 - 待驗收</option>
+                        <option value="4">Step 4 - 結案</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">備註</label>
+                    <textarea class="form-control" id="progressNote" rows="3" placeholder="請輸入備註"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="progressModalCancel">取消</button>
+                <button type="button" class="btn btn-primary" id="progressModalConfirm">確認更新</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 刪除確認彈窗 -->
+    <div class="modal-backdrop" id="deleteModalBackdrop"></div>
+    <div class="modal" id="deleteModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3 class="modal-title">確認刪除</h3>
+                <button type="button" class="modal-close" id="deleteModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>確定要刪除此個案單嗎？此操作無法復原。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="deleteModalCancel">取消</button>
+                <button type="button" class="btn btn-danger" id="deleteModalConfirm">確認刪除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/case-edit.js"></script>
+</body>
+</html>

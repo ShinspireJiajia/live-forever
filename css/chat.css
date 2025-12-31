@@ -1,0 +1,497 @@
+/* 聊天區域 */
+.chat-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--color-border);
+}
+
+/* 提單者與回應時間資訊區塊 */
+.chat-meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 12px 16px;
+    background-color: #f9f8f6;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 3px solid #a99e91;
+}
+
+.chat-meta-info .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-meta-info .meta-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #a99e91;
+}
+
+.chat-meta-info .meta-value {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.chat-container {
+    background-color: #e9e8e4; /* 略深一點的米灰色背景 */
+    border-radius: 12px;
+    padding: 15px;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.message {
+    max-width: 85%;
+    position: relative;
+}
+
+.message-right {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message-left {
+    align-self: flex-start;
+}
+
+.message-content {
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.message-right .message-content {
+    background-color: #fff;
+    color: #333;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.message-left .message-content {
+    background-color: #dcdcdc; /* 灰色氣泡 */
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.message-time, .message-info {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* 檔案附件樣式 */
+.message-file {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+    max-width: 280px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    margin-top: 8px;
+}
+
+.message-file .file-icon {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    flex-shrink: 0;
+}
+
+.file-name {
+    font-size: 0.9rem;
+    color: #333;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-download {
+    background-color: #e0f2f1;
+    color: #2e7d32;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.file-download:hover {
+    background-color: #c8e6c9;
+}
+
+/* ============================================
+ * 媒體訊息樣式（圖片/影片）
+ * ============================================ */
+.message-media {
+    margin-top: 8px;
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 300px;
+    background-color: #f5f5f5;
+}
+
+/* 圖片樣式 */
+.media-image {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    border-radius: 12px;
+}
+
+.media-image:hover {
+    opacity: 0.9;
+}
+
+/* 影片樣式 */
+.media-video {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    max-height: 250px;
+    border-radius: 12px;
+    background-color: #000;
+}
+
+/* 影片預覽佔位符 */
+.video-placeholder {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    background-color: #2c2c2c;
+    color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.video-placeholder:hover {
+    background-color: #3c3c3c;
+}
+
+.video-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: rgba(255,255,255,0.8);
+}
+
+.video-placeholder span {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+}
+
+/* 當影片來源為空時顯示佔位符 */
+.message-media:has(video[src=""]) .media-video,
+.message-media:has(video source[src=""]) .media-video {
+    display: none;
+}
+
+.message-media:has(video[src=""]) .video-placeholder,
+.message-media:has(video source[src=""]) .video-placeholder {
+    display: flex;
+}
+
+/* ============================================
+ * 圖片燈箱樣式
+ * ============================================ */
+.image-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.image-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.lightbox-close:hover {
+    opacity: 1;
+}
+
+.lightbox-download {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.lightbox-download:hover {
+    background-color: rgba(255,255,255,0.3);
+}
+
+/* 輸入框區域 */
+.chat-input-area {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 12px 16px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: auto;
+    border: 1px solid #e0e0e0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    gap: 10px;
+}
+
+.chat-input-area:focus-within {
+    border-color: #a99e91;
+    box-shadow: 0 2px 12px rgba(169, 158, 145, 0.15);
+}
+
+/* 附件按鈕區域 - 上方列 (15%) */
+.chat-input-left {
+    flex: 0 0 15%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 10px;
+}
+
+/* 檔案限制提示文字 */
+.file-limit-hint {
+    font-size: 0.8rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.file-limit-hint i {
+    color: #a99e91;
+    font-size: 0.85rem;
+}
+
+/* 文字輸入區域 - 下方列 (85%) */
+.chat-input-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 8px 4px;
+    background: transparent;
+    min-width: 0;
+    line-height: 1.4;
+}
+
+.chat-input::placeholder {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* 聊天按鈕共用樣式 */
+.attach-btn, .send-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+/* 附加檔案按鈕 */
+.attach-btn {
+    color: #888;
+    background-color: transparent;
+}
+
+.attach-btn:hover {
+    color: #555;
+    background-color: #f0f0f0;
+}
+
+.attach-btn:active {
+    background-color: #e0e0e0;
+    transform: scale(0.95);
+}
+
+/* 發送按鈕 */
+.send-btn {
+    color: #fff;
+    background-color: #a99e91;
+}
+
+.send-btn:hover {
+    background-color: #8a8275;
+    transform: scale(1.05);
+}
+
+.send-btn:active {
+    background-color: #7a7265;
+    transform: scale(0.95);
+}
+
+.send-btn:disabled {
+    background-color: #d0d0d0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 檔案預覽提示 */
+.chat-file-preview {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    color: #666;
+    max-width: 140px;
+    flex-shrink: 0;
+}
+
+.chat-file-preview .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    max-width: 80px;
+}
+
+.chat-file-preview .remove-file {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 2px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: all 0.2s ease;
+}
+
+.chat-file-preview .remove-file:hover {
+    color: #e74c3c;
+    background-color: #fee;
+}
+
+/* 隱藏檔案輸入框 */
+.hidden-file-input {
+    display: none;
+}
+
+/* 聊天區塊標題圖示 */
+.section-title i {
+    margin-right: 8px;
+    color: #a99e91;
+}
+
+/* 聊天訊息捲軸樣式 */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}

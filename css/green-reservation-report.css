@@ -1,0 +1,139 @@
+/* 全域樣式 */
+* {
+    box-sizing: border-box;
+    font-family: "Microsoft JhengHei", "微軟正黑體", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3a7ca5;
+}
+
+h1 {
+    color: #2c3e50;
+    margin: 0;
+    padding: 10px 0;
+}
+
+h2 {
+    color: #3a7ca5;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+/* 表格樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    word-break: break-word;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* 照片預覽區域 */
+.photo-preview {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+.photo-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* 簽名區域 */
+.signature-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.signature-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.signature-box {
+    width: 45%;
+}
+
+.signature-pad {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    object-fit: contain;
+}
+
+.print-btn {
+    background-color: #3a7ca5;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.print-btn:hover {
+    background-color: #2c5d7c;
+}
+
+@media print {
+    body {
+        background-color: #fff;
+    }
+    .container {
+        box-shadow: none;
+        padding: 0;
+    }
+    .print-btn {
+        display: none;
+    }
+}

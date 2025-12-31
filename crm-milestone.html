@@ -1,0 +1,855 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>里程碑設定 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">CRM 設定</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">里程碑設定</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">里程碑設定</h1>
+                </div>
+
+                <!-- 案場選擇區 -->
+                <div class="search-panel">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">案場</label>
+                                <select class="form-select" id="searchProject">
+                                    <option value="">請選擇案場</option>
+                                    <option value="陸府原森" selected>陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">狀態</label>
+                                <select class="form-select" id="searchStatus">
+                                    <option value="">全部</option>
+                                    <option value="啟用">啟用</option>
+                                    <option value="停用">停用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 操作按鈕區 -->
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="btnAdd">
+                        <i class="fa-solid fa-plus"></i>
+                        新增里程碑
+                    </button>
+                    <button class="btn btn-secondary" id="btnCopy">
+                        <i class="fa-solid fa-copy"></i>
+                        複製至其他案場
+                    </button>
+                </div>
+
+                <!-- 里程碑時間軸 -->
+                <div class="timeline-container" id="timelineContainer">
+                    <!-- JavaScript 動態產生 -->
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-container">
+                    <table class="data-table" id="milestoneTable">
+                        <thead>
+                            <tr>
+                                <th width="60">排序</th>
+                                <th width="60">序號</th>
+                                <th>里程碑名稱</th>
+                                <th>階段</th>
+                                <th>預計天數</th>
+                                <th>通知對象</th>
+                                <th>提前通知(天)</th>
+                                <th>狀態</th>
+                                <th width="120">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="milestoneTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯里程碑彈窗 -->
+    <div class="modal" id="milestoneModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增里程碑</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="milestoneForm">
+                    <input type="hidden" id="milestoneId">
+                    <div class="form-group">
+                        <label class="form-label required">里程碑名稱</label>
+                        <input type="text" class="form-input" id="msName" required placeholder="例如：簽約">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">階段</label>
+                            <select class="form-select" id="msPhase" required>
+                                <option value="">請選擇</option>
+                                <option value="銷售">銷售</option>
+                                <option value="施工">施工</option>
+                                <option value="交屋">交屋</option>
+                                <option value="售後">售後</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">預計天數</label>
+                            <input type="number" class="form-input" id="msDays" required min="0" placeholder="從前一里程碑起算">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">提前通知(天)</label>
+                            <input type="number" class="form-input" id="msNotifyDays" min="0" value="7" placeholder="幾天前通知">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">狀態</label>
+                            <select class="form-select" id="msStatus" required>
+                                <option value="啟用">啟用</option>
+                                <option value="停用">停用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">通知對象</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="notifyTarget" value="會員" checked>
+                                <span>會員</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="notifyTarget" value="業務">
+                                <span>業務</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="notifyTarget" value="工地主任">
+                                <span>工地主任</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="notifyTarget" value="客服">
+                                <span>客服</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">說明</label>
+                        <textarea class="form-textarea" id="msDescription" rows="3" placeholder="里程碑說明"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancel">取消</button>
+                <button class="btn btn-primary" id="btnSave">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 複製至其他案場彈窗 -->
+    <div class="modal" id="copyModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">複製里程碑至其他案場</h3>
+                <button class="modal-close" id="copyModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="copyForm">
+                    <div class="form-group">
+                        <label class="form-label required">目標案場</label>
+                        <div class="checkbox-group vertical">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="targetProject" value="陸府觀微">
+                                <span>陸府觀微</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="targetProject" value="陸府植森">
+                                <span>陸府植森</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>複製將覆蓋目標案場原有的里程碑設定</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCopyCancel">取消</button>
+                <button class="btn btn-primary" id="btnCopyConfirm">確認複製</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const milestoneModal = new Modal('milestoneModal');
+            const copyModal = new Modal('copyModal');
+            
+            loadMilestoneData();
+            
+            function loadMilestoneData() {
+                const data = CRMMockData.milestones;
+                renderTimeline(data);
+                renderTable(data);
+            }
+            
+            function renderTimeline(data) {
+                const container = document.getElementById('timelineContainer');
+                
+                // 按階段分組
+                const phases = ['銷售', '施工', '交屋', '售後'];
+                const phaseColors = {
+                    '銷售': '#3498DB',
+                    '施工': '#E67E22',
+                    '交屋': '#27AE60',
+                    '售後': '#9B59B6'
+                };
+                
+                let html = '<div class="timeline">';
+                
+                phases.forEach(function(phase) {
+                    const phaseItems = data.filter(function(m) { return m.phase === phase && m.status === '啟用'; });
+                    if (phaseItems.length === 0) return;
+                    
+                    html += `
+                        <div class="timeline-phase">
+                            <div class="phase-header" style="background-color: ${phaseColors[phase]}">
+                                ${phase}階段
+                            </div>
+                            <div class="phase-items">
+                    `;
+                    
+                    phaseItems.forEach(function(item) {
+                        html += `
+                            <div class="timeline-item" style="border-color: ${phaseColors[phase]}">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-days">${item.days} 天</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div></div>';
+                });
+                
+                html += '</div>';
+                container.innerHTML = html;
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('milestoneTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="9" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(milestone, index) {
+                    const statusClass = milestone.status === '啟用' ? 'status-active' : 'status-inactive';
+                    
+                    return `
+                        <tr data-id="${milestone.id}">
+                            <td class="drag-handle">
+                                <i class="fa-solid fa-grip-vertical"></i>
+                            </td>
+                            <td>${index + 1}</td>
+                            <td>${milestone.name}</td>
+                            <td><span class="phase-badge phase-${milestone.phase}">${milestone.phase}</span></td>
+                            <td>${milestone.days} 天</td>
+                            <td>${milestone.notifyTargets.join('、')}</td>
+                            <td>${milestone.notifyDays} 天</td>
+                            <td><span class="status-badge ${statusClass}">${milestone.status}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-edit" data-id="${milestone.id}" title="編輯">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn-action btn-delete" data-id="${milestone.id}" title="刪除">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // 綁定事件
+                document.querySelectorAll('.btn-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        editMilestone(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        deleteMilestone(id);
+                    });
+                });
+            }
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增里程碑';
+                document.getElementById('milestoneForm').reset();
+                document.getElementById('milestoneId').value = '';
+                milestoneModal.open();
+            });
+            
+            function editMilestone(id) {
+                const milestone = CRMMockData.getById('milestones', id);
+                if (!milestone) return;
+                
+                document.getElementById('modalTitle').textContent = '編輯里程碑';
+                document.getElementById('milestoneId').value = milestone.id;
+                document.getElementById('msName').value = milestone.name;
+                document.getElementById('msPhase').value = milestone.phase;
+                document.getElementById('msDays').value = milestone.days;
+                document.getElementById('msNotifyDays').value = milestone.notifyDays;
+                document.getElementById('msStatus').value = milestone.status;
+                document.getElementById('msDescription').value = milestone.description || '';
+                
+                // 設定通知對象 checkbox
+                document.querySelectorAll('input[name="notifyTarget"]').forEach(function(cb) {
+                    cb.checked = milestone.notifyTargets.includes(cb.value);
+                });
+                
+                milestoneModal.open();
+            }
+            
+            function deleteMilestone(id) {
+                const milestone = CRMMockData.getById('milestones', id);
+                if (!milestone) return;
+                
+                ConfirmDialog.show({
+                    title: '確認刪除',
+                    message: `確定要刪除里程碑「${milestone.name}」嗎？`,
+                    onConfirm: function() {
+                        alert('已刪除里程碑');
+                        loadMilestoneData();
+                    }
+                });
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('milestoneForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存里程碑設定');
+                milestoneModal.close();
+                loadMilestoneData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                milestoneModal.close();
+            });
+            
+            // 複製功能
+            document.getElementById('btnCopy').addEventListener('click', function() {
+                copyModal.open();
+            });
+            
+            document.getElementById('btnCopyCancel').addEventListener('click', function() {
+                copyModal.close();
+            });
+            
+            document.getElementById('btnCopyConfirm').addEventListener('click', function() {
+                const targets = Array.from(document.querySelectorAll('input[name="targetProject"]:checked'))
+                    .map(function(cb) { return cb.value; });
+                
+                if (targets.length === 0) {
+                    alert('請選擇至少一個目標案場');
+                    return;
+                }
+                
+                alert('已複製里程碑設定至：' + targets.join('、'));
+                copyModal.close();
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                loadMilestoneData();
+            });
+        });
+    </script>
+
+    <style>
+        .timeline-container {
+            margin-bottom: var(--spacing-lg);
+            overflow-x: auto;
+        }
+        
+        .timeline {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            min-width: max-content;
+        }
+        
+        .timeline-phase {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .phase-header {
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--color-white);
+            font-weight: var(--font-weight-bold);
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .phase-items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .timeline-item {
+            background: var(--color-gray-100);
+            border-left: 4px solid;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+        }
+        
+        .item-name {
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 4px;
+        }
+        
+        .item-days {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-500);
+        }
+        
+        .drag-handle {
+            cursor: move;
+            color: var(--color-gray-500);
+        }
+        
+        .drag-handle:hover {
+            color: var(--color-gray-700);
+        }
+        
+        .status-badge, .phase-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .phase-銷售 {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .phase-施工 {
+            background-color: #ffeeba;
+            color: #856404;
+        }
+        
+        .phase-交屋 {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .phase-售後 {
+            background-color: #e2d5f1;
+            color: #5b3a8c;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: center;
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-action:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn-edit {
+            color: var(--color-gray-700);
+        }
+        
+        .btn-delete {
+            color: var(--color-btn-danger);
+            border-color: var(--color-btn-danger);
+        }
+        
+        .btn-delete:hover {
+            background: var(--color-btn-danger);
+            color: var(--color-white);
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .checkbox-group.vertical {
+            flex-direction: column;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            background: #fff3cd;
+            border-radius: var(--border-radius-sm);
+            color: #856404;
+            font-size: var(--font-size-sm);
+        }
+        
+        .info-box i {
+            font-size: var(--font-size-lg);
+        }
+    </style>
+</body>
+</html>
+

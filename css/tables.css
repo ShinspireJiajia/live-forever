@@ -1,0 +1,133 @@
+/* --- 3. ����˦� --- */
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05); /* �j���ܦ� */
+}
+
+.table.border, .table.border td, .table.border th {
+    border: 1px solid #dee2e6;
+}
+
+/* ������D��˦� (����p�˦��M d-flex) */
+.table thead tr.d-flex {
+    background-color: #ad9e8f; /* HTML ���w�q���C�� */
+    color: #ffffff; /* text-white ���O */
+    font-weight: bold;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* ���� d-flex �M col-X �G���b����� tr/td */
+.d-flex {
+    display: flex !important;
+}
+
+.table tbody tr.d-flex > td {
+    display: flex; /* �� td �����i�H�ƪ� */
+    align-items: center;
+}
+
+.col-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
+.col-2 { flex: 0 0 16.66667%; max-width: 16.66667%; }
+.col-3 { flex: 0 0 25%; max-width: 25%; }
+
+/* ========================================
+   手機版響應式表格 (< 768px)
+   ======================================== */
+@media (max-width: 767px) {
+    /* 表格容器視覺降噪 */
+    .table-responsive {
+        overflow-x: visible;
+        border: none;
+        background-color: transparent;
+    }
+    
+    /* 通用表格卡片化 */
+    .table,
+    .data-table {
+        display: block;
+        border: none;
+    }
+    
+    .table thead,
+    .data-table thead {
+        display: none;
+    }
+    
+    .table tbody,
+    .data-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md, 16px);
+    }
+    
+    .table tbody tr,
+    .data-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+        border-radius: var(--border-radius-md, 8px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        padding: var(--spacing-md, 16px);
+        gap: var(--spacing-sm, 8px);
+        border: none;
+    }
+    
+    .table tbody tr:nth-of-type(odd),
+    .table tbody tr:nth-of-type(even),
+    .data-table tbody tr:nth-child(odd),
+    .data-table tbody tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+    
+    .table tbody tr:hover,
+    .data-table tbody tr:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    
+    .table th,
+    .table td,
+    .data-table th,
+    .data-table td {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: var(--spacing-xs, 4px);
+        padding: var(--spacing-xs, 4px) 0;
+        border: none;
+        width: 100%;
+        max-width: 100%;
+        flex: unset;
+    }
+    
+    /* 移除 d-flex 在手機版的固定寬度 */
+    .table tbody tr.d-flex,
+    .table tbody tr.d-flex > td {
+        flex-direction: column;
+        max-width: 100%;
+        flex: unset;
+    }
+    
+    .col-1,
+    .col-2,
+    .col-3 {
+        flex: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+}

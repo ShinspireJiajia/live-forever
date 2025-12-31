@@ -1,0 +1,902 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line 綁定 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">會員管理</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">Line 綁定</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">Line 綁定管理</h1>
+                </div>
+
+                <!-- 統計卡片區 -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-green">
+                            <i class="fa-brands fa-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">156</div>
+                            <div class="stat-label">已綁定會員</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-gray">
+                            <i class="fa-solid fa-link-slash"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">44</div>
+                            <div class="stat-label">未綁定會員</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-blue">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">78%</div>
+                            <div class="stat-label">綁定率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">會員姓名</label>
+                                <input type="text" class="form-input" id="searchName" placeholder="請輸入會員姓名">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">手機號碼</label>
+                                <input type="text" class="form-input" id="searchPhone" placeholder="請輸入手機號碼">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">案場</label>
+                                <select class="form-select" id="searchProject">
+                                    <option value="">全部</option>
+                                    <option value="陸府原森">陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">綁定狀態</label>
+                                <select class="form-select" id="searchStatus">
+                                    <option value="">全部</option>
+                                    <option value="已綁定">已綁定</option>
+                                    <option value="未綁定">未綁定</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="btnExport">
+                                <i class="fa-solid fa-file-export"></i>
+                                匯出
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 操作按鈕區 -->
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="btnSendInvite">
+                        <i class="fa-brands fa-line"></i>
+                        批次發送綁定邀請
+                    </button>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-container">
+                    <table class="data-table" id="lineBindTable">
+                        <thead>
+                            <tr>
+                                <th width="40">
+                                    <input type="checkbox" id="checkAll">
+                                </th>
+                                <th width="60">序號</th>
+                                <th>會員姓名</th>
+                                <th>手機號碼</th>
+                                <th>案場</th>
+                                <th>戶號</th>
+                                <th>Line 名稱</th>
+                                <th>綁定狀態</th>
+                                <th>綁定時間</th>
+                                <th width="150">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lineBindTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 發送綁定邀請彈窗 -->
+    <div class="modal" id="inviteModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">發送 Line 綁定邀請</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="invite-info">
+                    <div class="invite-icon">
+                        <i class="fa-brands fa-line"></i>
+                    </div>
+                    <p>將發送 Line 綁定邀請簡訊給 <strong id="inviteCount">0</strong> 位尚未綁定的會員</p>
+                </div>
+                <div class="info-box info-box-warning">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>簡訊內容將包含綁定連結，會員點擊後可完成 Line 帳號綁定</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnInviteCancel">取消</button>
+                <button class="btn btn-primary btn-line" id="btnInviteConfirm">
+                    <i class="fa-brands fa-line"></i>
+                    發送邀請
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 解除綁定確認彈窗 -->
+    <div class="modal" id="unbindModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">確認解除綁定</h3>
+                <button class="modal-close" id="unbindModalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-content">
+                    <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+                    <p>確定要解除 <strong id="unbindName">-</strong> 的 Line 綁定嗎？</p>
+                    <p class="warning-text">解除後該會員將無法透過 Line 接收通知訊息</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnUnbindCancel">取消</button>
+                <button class="btn btn-danger" id="btnUnbindConfirm">確認解除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const inviteModal = new Modal('inviteModal');
+            const unbindModal = new Modal('unbindModal');
+            
+            let currentPage = 1;
+            const pageSize = 10;
+            let currentMemberId = null;
+            
+            loadLineBindData();
+            
+            function loadLineBindData(filters) {
+                const result = CRMMockData.getPaged('lineBindings', currentPage, pageSize, filters);
+                renderTable(result.items);
+                renderPagination(result);
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('lineBindTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="10" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(binding, index) {
+                    const statusClass = binding.status === '已綁定' ? 'status-bound' : 'status-unbound';
+                    const isUnbound = binding.status === '未綁定';
+                    
+                    return `
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox" data-id="${binding.id}" ${isUnbound ? '' : 'disabled'}>
+                            </td>
+                            <td>${(currentPage - 1) * pageSize + index + 1}</td>
+                            <td>${binding.memberName}</td>
+                            <td>${binding.phone}</td>
+                            <td>${binding.projectName}</td>
+                            <td>${binding.unitName}</td>
+                            <td>
+                                ${binding.lineName ? `
+                                    <div class="line-info">
+                                        <i class="fa-brands fa-line line-icon"></i>
+                                        <span>${binding.lineName}</span>
+                                    </div>
+                                ` : '-'}
+                            </td>
+                            <td><span class="status-badge ${statusClass}">${binding.status}</span></td>
+                            <td>${binding.bindTime || '-'}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    ${isUnbound ? `
+                                        <button class="btn-action btn-invite" data-id="${binding.id}" title="發送綁定邀請">
+                                            <i class="fa-brands fa-line"></i>
+                                        </button>
+                                    ` : `
+                                        <button class="btn-action btn-message" data-id="${binding.id}" title="發送訊息">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
+                                        <button class="btn-action btn-unbind" data-id="${binding.id}" title="解除綁定">
+                                            <i class="fa-solid fa-link-slash"></i>
+                                        </button>
+                                    `}
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // 綁定事件
+                document.querySelectorAll('.btn-invite').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        sendSingleInvite(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-message').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        sendMessage(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-unbind').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        openUnbindModal(id);
+                    });
+                });
+                
+                // 全選功能
+                document.getElementById('checkAll').addEventListener('change', function() {
+                    const checked = this.checked;
+                    document.querySelectorAll('.row-checkbox:not(:disabled)').forEach(function(cb) {
+                        cb.checked = checked;
+                    });
+                });
+            }
+            
+            function renderPagination(result) {
+                const wrapper = document.getElementById('paginationWrapper');
+                
+                if (result.totalPages <= 1) {
+                    wrapper.innerHTML = '';
+                    return;
+                }
+                
+                wrapper.innerHTML = `
+                    <div class="pagination">
+                        <span class="pagination-info">共 ${result.total} 筆，第 ${result.page} / ${result.totalPages} 頁</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" ${result.page === 1 ? 'disabled' : ''} data-page="${result.page - 1}">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            ${generatePageButtons(result.page, result.totalPages)}
+                            <button class="pagination-btn" ${result.page === result.totalPages ? 'disabled' : ''} data-page="${result.page + 1}">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                wrapper.querySelectorAll('.pagination-btn:not([disabled])').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        currentPage = parseInt(this.dataset.page);
+                        loadLineBindData();
+                    });
+                });
+            }
+            
+            function generatePageButtons(current, total) {
+                let buttons = '';
+                for (let i = 1; i <= total; i++) {
+                    if (i === current) {
+                        buttons += `<button class="pagination-btn active">${i}</button>`;
+                    } else if (i === 1 || i === total || (i >= current - 2 && i <= current + 2)) {
+                        buttons += `<button class="pagination-btn" data-page="${i}">${i}</button>`;
+                    } else if (i === current - 3 || i === current + 3) {
+                        buttons += '<span class="pagination-ellipsis">...</span>';
+                    }
+                }
+                return buttons;
+            }
+            
+            function sendSingleInvite(id) {
+                const binding = CRMMockData.getById('lineBindings', id);
+                if (!binding) return;
+                
+                alert(`已發送綁定邀請簡訊給 ${binding.memberName}`);
+            }
+            
+            function sendMessage(id) {
+                const binding = CRMMockData.getById('lineBindings', id);
+                if (!binding) return;
+                
+                alert(`發送訊息給 ${binding.lineName} 功能開發中...`);
+            }
+            
+            function openUnbindModal(id) {
+                const binding = CRMMockData.getById('lineBindings', id);
+                if (!binding) return;
+                
+                currentMemberId = id;
+                document.getElementById('unbindName').textContent = binding.memberName;
+                unbindModal.open();
+            }
+            
+            // 批次發送邀請
+            document.getElementById('btnSendInvite').addEventListener('click', function() {
+                const selected = document.querySelectorAll('.row-checkbox:checked');
+                const count = selected.length > 0 ? selected.length : document.querySelectorAll('.row-checkbox:not(:disabled)').length;
+                
+                document.getElementById('inviteCount').textContent = count;
+                inviteModal.open();
+            });
+            
+            document.getElementById('btnInviteCancel').addEventListener('click', function() {
+                inviteModal.close();
+            });
+            
+            document.getElementById('btnInviteConfirm').addEventListener('click', function() {
+                alert('已發送綁定邀請簡訊');
+                inviteModal.close();
+            });
+            
+            document.getElementById('btnUnbindCancel').addEventListener('click', function() {
+                unbindModal.close();
+            });
+            
+            document.getElementById('btnUnbindConfirm').addEventListener('click', function() {
+                alert('已解除 Line 綁定');
+                unbindModal.close();
+                loadLineBindData();
+            });
+            
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('匯出功能開發中...');
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadLineBindData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadLineBindData();
+                }, 0);
+            });
+        });
+    </script>
+
+    <style>
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .stat-icon-green {
+            background-color: #d4edda;
+            color: #00B900;
+        }
+        
+        .stat-icon-gray {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .stat-icon-blue {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-bound {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-unbound {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .line-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .line-icon {
+            color: #00B900;
+            font-size: var(--font-size-lg);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: center;
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-action:hover {
+            background: var(--color-gray-100);
+        }
+        
+        .btn-invite {
+            color: #00B900;
+            border-color: #00B900;
+        }
+        
+        .btn-invite:hover {
+            background: #00B900;
+            color: var(--color-white);
+        }
+        
+        .btn-message {
+            color: var(--color-info);
+            border-color: var(--color-info);
+        }
+        
+        .btn-message:hover {
+            background: var(--color-info);
+            color: var(--color-white);
+        }
+        
+        .btn-unbind {
+            color: var(--color-btn-danger);
+            border-color: var(--color-btn-danger);
+        }
+        
+        .btn-unbind:hover {
+            background: var(--color-btn-danger);
+            color: var(--color-white);
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+        
+        .invite-info {
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .invite-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--spacing-md);
+            background: #d4edda;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #00B900;
+        }
+        
+        .invite-info p {
+            font-size: var(--font-size-lg);
+            color: var(--color-gray-700);
+        }
+        
+        .invite-info strong {
+            color: #00B900;
+            font-size: var(--font-size-xl);
+        }
+        
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-sm);
+        }
+        
+        .info-box-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .info-box i {
+            font-size: var(--font-size-lg);
+        }
+        
+        .btn-line {
+            background: #00B900;
+            border-color: #00B900;
+        }
+        
+        .btn-line:hover {
+            background: #009900;
+            border-color: #009900;
+        }
+        
+        .warning-content {
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .warning-icon {
+            font-size: 48px;
+            color: var(--color-warning);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .warning-content p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .warning-text {
+            color: var(--color-gray-500);
+            font-size: var(--font-size-sm);
+        }
+        
+        .btn-danger {
+            background: var(--color-danger);
+            border-color: var(--color-danger);
+            color: var(--color-white);
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+    </style>
+</body>
+</html>
+

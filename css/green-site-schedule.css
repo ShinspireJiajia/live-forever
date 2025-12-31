@@ -1,0 +1,218 @@
+/* 綠海養護時段預約頁面樣式 */
+
+.schedule-container {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-top: var(--spacing-md);
+}
+
+.schedule-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-gray-50);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.schedule-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid #c0aa70; /* Keep the gold color from user request */
+}
+
+.location-selector {
+    display: flex;
+    align-items: center;
+    margin-top: var(--spacing-sm);
+}
+
+.location-selector label {
+    margin-right: var(--spacing-sm);
+    color: var(--color-text-secondary);
+}
+
+.location-selector select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-white);
+    min-width: 200px;
+}
+
+.date-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--color-gray-50);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.date-range {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.nav-buttons button {
+    background-color: var(--color-gray-100);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.nav-buttons button:hover {
+    background-color: var(--color-gray-300);
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.schedule-table th {
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-sm);
+    text-align: center;
+    border: 1px solid var(--color-border);
+    font-weight: var(--font-weight-bold);
+}
+
+.schedule-table td {
+    border: 1px solid var(--color-border);
+    padding: 5px;
+    text-align: center;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.time-cell {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-secondary);
+    background-color: var(--color-gray-50);
+    width: 100px;
+}
+
+.slot {
+    width: 60px;
+    height: 30px;
+    margin: 0 auto;
+    border: 1px solid var(--color-border-dark);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    cursor: pointer;
+    user-select: none;
+}
+
+.slot-available {
+    background-color: var(--color-white);
+}
+
+.slot-booked-1 {
+    background-color: #fff9c4; /* Keep user color */
+}
+
+.slot-booked-2 {
+    background-color: #bbdefb; /* Keep user color */
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.action-button {
+    background-color: var(--color-info); /* Use info color for copy button */
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.action-button:hover {
+    background-color: var(--color-info-dark);
+}
+
+/* 新增底部按鈕區域樣式 */
+.footer-actions {
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-gray-50);
+    margin-top: var(--spacing-sm);
+}
+
+/* 確認儲存按鈕樣式 */
+.save-button {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    transition: background-color var(--transition-normal);
+}
+
+.save-button:hover {
+    background-color: var(--color-success-dark);
+}
+
+.save-button:active {
+    transform: translateY(1px);
+}
+
+/* 儲存圖示 */
+.save-icon {
+    margin-right: var(--spacing-sm);
+    font-size: var(--font-size-base);
+}
+
+/* 成功訊息樣式 */
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-success);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-lg);
+    display: none;
+    z-index: var(--z-index-toast);
+    animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

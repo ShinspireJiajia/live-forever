@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綠海養護完工確認單 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/green-reservation-completion.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>綠海養護完工確認單</h1>
+            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <p>檢查日期：<input type="date" id="inspection-date" style="padding: 4px; border: 1px solid #ccc; border-radius: 4px;"></p>
+                <p>戶號：<input type="text" id="house-number" value="A3-3" style="padding: 4px; border: 1px solid #ccc; border-radius: 4px; width: 80px;"></p>
+                <p>住戶姓名：<input type="text" id="resident-name" value="王曉明" style="padding: 4px; border: 1px solid #ccc; border-radius: 4px; width: 100px;"></p>
+            </div>
+        </header>
+        
+        <!-- 客廳區域 -->
+        <h2>客廳區域</h2>
+        
+        <h3>內裝</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>玄關門</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="entrance-door-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="entrance-door-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('entrance-door-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="entrance-door-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'entrance-door-photo')">
+                        <div id="entrance-door-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="entrance-door-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>天花板/牆壁漆面</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="ceiling-wall-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="ceiling-wall-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('ceiling-wall-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="ceiling-wall-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'ceiling-wall-photo')">
+                        <div id="ceiling-wall-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="ceiling-wall-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>落地窗/鋁窗推拉功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="window-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="window-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('window-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="window-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'window-photo')">
+                        <div id="window-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="window-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>木地板/矽利康</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="floor-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="floor-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('floor-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="floor-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'floor-photo')">
+                        <div id="floor-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="floor-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>機電</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>電源箱檢測</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="power-box-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="power-box-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('power-box-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="power-box-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'power-box-photo')">
+                        <div id="power-box-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="power-box-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>One Touch燈源開關</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="light-switch-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="light-switch-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('light-switch-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="light-switch-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'light-switch-photo')">
+                        <div id="light-switch-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="light-switch-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>插座功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="outlet-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="outlet-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('outlet-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="outlet-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'outlet-photo')">
+                        <div id="outlet-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="outlet-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>保安燈</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="security-light-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="security-light-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('security-light-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="security-light-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'security-light-photo')">
+                        <div id="security-light-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="security-light-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>室內對講主機</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="intercom-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="intercom-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('intercom-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="intercom-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'intercom-photo')">
+                        <div id="intercom-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="intercom-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>冷氣出風口</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="ac-vent-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="ac-vent-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('ac-vent-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="ac-vent-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'ac-vent-photo')">
+                        <div id="ac-vent-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="ac-vent-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 景觀陽台 -->
+        <h2>景觀陽台</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>地排水檢測</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="drainage-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="drainage-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('drainage-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="drainage-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'drainage-photo')">
+                        <div id="drainage-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="drainage-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>燈具/插座功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="balcony-light-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="balcony-light-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('balcony-light-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="balcony-light-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'balcony-light-photo')">
+                        <div id="balcony-light-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="balcony-light-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 廚房 -->
+        <h2>廚房</h2>
+        
+        <h3>內裝</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>天花板/牆壁漆面</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="kitchen-ceiling-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="kitchen-ceiling-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('kitchen-ceiling-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="kitchen-ceiling-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'kitchen-ceiling-photo')">
+                        <div id="kitchen-ceiling-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="kitchen-ceiling-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>壁磚</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="kitchen-tile-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="kitchen-tile-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('kitchen-tile-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="kitchen-tile-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'kitchen-tile-photo')">
+                        <div id="kitchen-tile-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="kitchen-tile-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>三合一鋁門</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="kitchen-door-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="kitchen-door-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('kitchen-door-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="kitchen-door-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'kitchen-door-photo')">
+                        <div id="kitchen-door-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="kitchen-door-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>櫥櫃</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="cabinet-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="cabinet-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('cabinet-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="cabinet-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'cabinet-photo')">
+                        <div id="cabinet-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="cabinet-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>人造石檯面</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="countertop-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="countertop-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('countertop-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="countertop-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'countertop-photo')">
+                        <div id="countertop-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="countertop-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>機電</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>給排水檢測</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="kitchen-plumbing-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="kitchen-plumbing-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('kitchen-plumbing-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="kitchen-plumbing-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'kitchen-plumbing-photo')">
+                        <div id="kitchen-plumbing-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="kitchen-plumbing-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>蒸烤爐功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="oven-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="oven-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('oven-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="oven-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'oven-photo')">
+                        <div id="oven-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="oven-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>排油煙機功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="hood-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="hood-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('hood-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="hood-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'hood-photo')">
+                        <div id="hood-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="hood-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>洗碗機功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="dishwasher-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="dishwasher-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('dishwasher-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="dishwasher-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'dishwasher-photo')">
+                        <div id="dishwasher-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                                              <textarea id="dishwasher-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 浴室 -->
+        <h2>浴室</h2>
+        
+        <h3>主浴室</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>天花板</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-bath-ceiling-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-bath-ceiling-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-bath-ceiling-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-bath-ceiling-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-bath-ceiling-photo')">
+                        <div id="master-bath-ceiling-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-bath-ceiling-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>壁/地磚</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-bath-tile-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-bath-tile-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-bath-tile-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-bath-tile-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-bath-tile-photo')">
+                        <div id="master-bath-tile-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-bath-tile-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>門扇</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-bath-door-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-bath-door-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-bath-door-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-bath-door-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-bath-door-photo')">
+                        <div id="master-bath-door-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-bath-door-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>鏡箱/鏡櫃</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-bath-mirror-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-bath-mirror-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-bath-mirror-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-bath-mirror-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-bath-mirror-photo')">
+                        <div id="master-bath-mirror-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-bath-mirror-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>淋浴玻璃</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-bath-shower-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-bath-shower-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-bath-shower-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-bath-shower-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-bath-shower-photo')">
+                        <div id="master-bath-shower-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-bath-shower-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>機電</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>燈具/插座功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="bath-light-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="bath-light-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('bath-light-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="bath-light-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'bath-light-photo')">
+                        <div id="bath-light-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="bath-light-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>緊急壓扣</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="emergency-button-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="emergency-button-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('emergency-button-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="emergency-button-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'emergency-button-photo')">
+                        <div id="emergency-button-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="emergency-button-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>暖風機</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="heater-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="heater-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('heater-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="heater-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'heater-photo')">
+                        <div id="heater-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="heater-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>給排水檢測</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="bath-plumbing-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="bath-plumbing-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('bath-plumbing-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="bath-plumbing-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'bath-plumbing-photo')">
+                        <div id="bath-plumbing-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="bath-plumbing-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 主臥室 -->
+        <h2>主臥室</h2>
+        
+        <h3>內裝</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>天花板/牆壁漆面</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-ceiling-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-ceiling-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-ceiling-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-ceiling-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-ceiling-photo')">
+                        <div id="master-ceiling-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-ceiling-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>門扇/窗戶功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-door-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-door-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-door-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-door-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-door-photo')">
+                        <div id="master-door-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-door-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>木地板</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-floor-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-floor-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-floor-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-floor-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-floor-photo')">
+                        <div id="master-floor-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-floor-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>機電</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>燈具/插座功能</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-light-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-light-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-light-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-light-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-light-photo')">
+                        <div id="master-light-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-light-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>冷氣出風口</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="master-ac-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="master-ac-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('master-ac-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="master-ac-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'master-ac-photo')">
+                        <div id="master-ac-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="master-ac-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 用電安全須知 -->
+        <h2>用電安全須知檢查項目</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">檢查項目</th>
+                    <th width="20%">檢查狀態</th>
+                    <th width="25%">拍照記錄</th>
+                    <th width="30%">備註改善項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>電器插頭正常插牢</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="plug-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="plug-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('plug-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="plug-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'plug-photo')">
+                        <div id="plug-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="plug-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>插座無損壞</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="socket-damage-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="socket-damage-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('socket-damage-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="socket-damage-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'socket-damage-photo')">
+                        <div id="socket-damage-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="socket-damage-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>插頭無焦黑</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="plug-burn-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="plug-burn-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('plug-burn-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="plug-burn-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'plug-burn-photo')">
+                        <div id="plug-burn-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="plug-burn-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>插座無累積塵埃造成通電不良</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="socket-dust-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="socket-dust-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('socket-dust-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="socket-dust-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'socket-dust-photo')">
+                        <div id="socket-dust-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="socket-dust-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>延長電線無綑綁造成發熱</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="extension-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="extension-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('extension-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="extension-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'extension-photo')">
+                        <div id="extension-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="extension-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>電線無壓在重物下</td>
+                    <td>
+                        <div class="status-options">
+                            <label class="status-option"><input type="radio" name="wire-pressure-status" value="正常"> 正常</label>
+                            <label class="status-option"><input type="radio" name="wire-pressure-status" value="異常"> 異常</label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="photo-btn" onclick="takePhoto('wire-pressure-photo')"><i class="fa-solid fa-camera"></i> 拍照</button>
+                        <input type="file" id="wire-pressure-photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event, 'wire-pressure-photo')">
+                        <div id="wire-pressure-photo" class="photo-preview">尚未拍照</div>
+                    </td>
+                    <td>
+                        <textarea id="wire-pressure-notes" placeholder="請輸入備註..."></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 建議保養項目 -->
+        <h2>建議保養項目(住戶自費)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="60%">保養項目</th>
+                    <th width="40%">建議保養週期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>廚房人造石檯面保養</td>
+                    <td>每年一次</td>
+                </tr>
+                <tr>
+                    <td>浴室石材拋光保養</td>
+                    <td>每年一次</td>
+                </tr>
+                <tr>
+                    <td>洗衣機清洗保養</td>
+                    <td>每年一次</td>
+                </tr>
+                <tr>
+                    <td>熱水器瓦斯管及冷熱高壓管更換</td>
+                    <td>每二年一次</td>
+                </tr>
+                <tr>
+                    <td>空調設備檢測及保養</td>
+                    <td>每年一次一般保養，第四年起每隔四年一次大保養</td>
+                </tr>
+                <tr>
+                    <td>全熱交換機濾網更換</td>
+                    <td>每年一次，視使用習慣</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 簽名區域 -->
+        <div class="signature-section">
+            <h2>確認簽名</h2>
+            <div class="signature-container">
+                <div class="signature-box">
+                    <h3>住戶簽名</h3>
+                    <canvas id="resident-signature" class="signature-pad" width="400" height="150"></canvas>
+                    <button class="photo-btn" onclick="clearSignature('resident-signature')" style="margin-top: 10px;"><i class="fa-solid fa-eraser"></i> 清除簽名</button>
+                </div>
+                <div class="signature-box">
+                    <h3>品服部主任簽名</h3>
+                    <canvas id="manager-signature" class="signature-pad" width="400" height="150"></canvas>
+                    <button class="photo-btn" onclick="clearSignature('manager-signature')" style="margin-top: 10px;"><i class="fa-solid fa-eraser"></i> 清除簽名</button>
+                </div>
+            </div>
+        </div>
+        
+        <button class="submit-btn" onclick="submitForm()">提交檢查表</button>
+    </div>
+    
+    <script src="js/green-reservation-completion.js"></script>
+</body>
+</html>

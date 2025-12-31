@@ -1,0 +1,379 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 交屋時段管理頁面樣式
+ * ============================================
+ * 檔案：reservation-handover-schedule.css
+ * 說明：定義交屋時段管理頁面的樣式
+ * 建立日期：2025-12-29
+ * ============================================
+ */
+
+/* ============================================
+ * 時段表格容器
+ * ============================================ */
+.schedule-container {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-top: var(--spacing-md);
+}
+
+.schedule-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-gray-300);
+    background-color: var(--color-gray-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.schedule-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin: 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid #c0aa70;
+}
+
+/* ============================================
+ * 案場選擇器
+ * ============================================ */
+.project-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.project-selector label {
+    color: var(--color-gray-700);
+    font-weight: var(--font-weight-medium);
+}
+
+.project-selector select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-white);
+    min-width: 200px;
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+ * 日期導覽
+ * ============================================ */
+.date-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--color-gray-100);
+    border-bottom: 1px solid var(--color-gray-300);
+    gap: var(--spacing-md);
+}
+
+.date-range {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    min-width: 200px;
+    text-align: center;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-buttons button {
+    background-color: var(--color-gray-100);
+    border: 1px solid var(--color-gray-300);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.nav-buttons button:hover {
+    background-color: var(--color-gray-300);
+}
+
+.nav-buttons button i {
+    color: var(--color-gray-700);
+}
+
+/* ============================================
+ * 時段表格
+ * ============================================ */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.schedule-table th {
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-sm);
+    text-align: center;
+    border: 1px solid var(--color-gray-300);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+}
+
+.schedule-table td {
+    border: 1px solid var(--color-gray-300);
+    padding: 5px;
+    text-align: center;
+    height: 45px;
+    vertical-align: middle;
+}
+
+.time-cell {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-500);
+    background-color: var(--color-gray-100);
+    width: 100px;
+}
+
+/* ============================================
+ * 時段格子
+ * ============================================ */
+.slot {
+    width: 60px;
+    height: 32px;
+    margin: 0 auto;
+    border: 1px solid var(--color-gray-400);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    cursor: pointer;
+    user-select: none;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+}
+
+.slot:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+}
+
+.slot-available {
+    background-color: var(--color-white);
+    color: var(--color-gray-500);
+}
+
+.slot-booked-1 {
+    background-color: #fff9c4;
+    color: #856404;
+    border-color: #ffc107;
+}
+
+.slot-booked-2 {
+    background-color: #bbdefb;
+    color: #004085;
+    border-color: #2196f3;
+}
+
+.slot-booked-3 {
+    background-color: #c8e6c9;
+    color: #155724;
+    border-color: #4caf50;
+}
+
+/* ============================================
+ * 標頭操作按鈕
+ * ============================================ */
+.header-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.action-button {
+    background-color: var(--color-info);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all var(--transition-fast);
+}
+
+.action-button:hover {
+    opacity: 0.9;
+}
+
+.action-button.btn-back {
+    background-color: var(--color-gray-500);
+}
+
+/* ============================================
+ * 底部操作區
+ * ============================================ */
+.footer-actions {
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--color-gray-300);
+    background-color: var(--color-gray-100);
+    margin-top: var(--spacing-sm);
+    gap: var(--spacing-sm);
+}
+
+.save-button {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    transition: background-color var(--transition-normal);
+}
+
+.save-button:hover {
+    opacity: 0.9;
+}
+
+.save-button:active {
+    transform: translateY(1px);
+}
+
+.save-icon {
+    margin-right: var(--spacing-sm);
+    font-size: var(--font-size-base);
+}
+
+/* ============================================
+ * 圖例說明
+ * ============================================ */
+.legend-container {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-gray-100);
+    border-bottom: 1px solid var(--color-gray-300);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.legend-color {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-gray-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.legend-color.slot-available {
+    background-color: var(--color-white);
+}
+
+.legend-color.slot-booked-1 {
+    background-color: #fff9c4;
+}
+
+.legend-color.slot-booked-2 {
+    background-color: #bbdefb;
+}
+
+.legend-color.slot-booked-3 {
+    background-color: #c8e6c9;
+}
+
+/* ============================================
+ * 成功訊息提示
+ * ============================================ */
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-success);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.success-message.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+ * 響應式設計
+ * ============================================ */
+@media (max-width: 1023px) {
+    .schedule-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .schedule-table {
+        font-size: var(--font-size-xs);
+    }
+    
+    .slot {
+        width: 45px;
+        height: 28px;
+        font-size: var(--font-size-xs);
+    }
+    
+    .time-cell {
+        width: 70px;
+    }
+}
+
+@media (max-width: 767px) {
+    .schedule-container {
+        overflow-x: auto;
+    }
+    
+    .schedule-table {
+        min-width: 600px;
+    }
+    
+    .legend-container {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}

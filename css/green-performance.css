@@ -1,0 +1,721 @@
+:root {
+    --primary: #2196F3;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --danger: #ffcdd2;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --gray: #6c757d;
+    --border: #dee2e6;
+    --available-bg: #e3f2fd;
+    --pending: #9575cd;
+    --facility: #26a69a;
+    --multi-property: #7e57c2;
+    --expiring: #ffecb3;
+    --expired: #ffcdd2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--success);
+    color: white;
+}
+
+.btn-warning {
+    background-color: var(--warning);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--gray);
+    color: white;
+}
+
+.btn-facility {
+    background-color: var(--facility);
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+.tab-nav {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--gray);
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.summary-section {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.summary-card {
+    flex: 0 0 200px;
+    min-width: 200px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.summary-card h3 {
+    font-size: 16px;
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.summary-card .value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.filter-section {
+    background-color: white;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin-bottom: 10px;
+    min-width: max-content;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    flex-shrink: 0;
+}
+
+.filter-item label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.filter-item select, .filter-item input {
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+.table-container {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-x: auto;
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 100%;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+th:first-child, td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1);
+}
+
+th:nth-child(2), td:nth-child(2) {
+    position: sticky;
+    left: 100px;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1);
+}
+
+th:nth-child(3), td:nth-child(3) {
+    position: sticky;
+    left: 200px;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1);
+}
+
+th:nth-child(4), td:nth-child(4) {
+    position: sticky;
+    left: 300px;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: var(--light);
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+th:first-child, th:nth-child(2), th:nth-child(3), th:nth-child(4) {
+    z-index: 30;
+}
+
+tr:hover td {
+    background-color: rgba(0,0,0,0.02);
+}
+
+tr:hover td:first-child, tr:hover td:nth-child(2), tr:hover td:nth-child(3), tr:hover td:nth-child(4) {
+    background-color: rgba(0,0,0,0.04);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.status-active {
+    background-color: var(--success);
+}
+
+.status-pending {
+    background-color: var(--warning);
+}
+
+.status-completed {
+    background-color: var(--success);
+}
+
+.status-facility {
+    background-color: var(--facility);
+}
+
+.status-multi {
+    background-color: var(--multi-property);
+}
+
+.status-expiring {
+    background-color: var(--warning);
+}
+
+.status-expired {
+    background-color: var(--danger);
+}
+
+.property-id {
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.contract-id {
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.facility-id {
+    color: var(--facility);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.reservation-btn {
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.reservation-available {
+    background-color: var(--available-bg);
+    color: var(--primary);
+}
+
+.reservation-scheduled {
+    background-color: var(--primary);
+    color: white;
+}
+
+.reservation-pending {
+    background-color: var(--pending);
+    color: white;
+}
+
+.reservation-completed {
+    background-color: var(--success);
+    color: white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 4px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.close-btn {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--gray);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
+
+.reservation-info {
+    cursor: pointer;
+    position: relative;
+}
+
+.reservation-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 100;
+    width: 300px;
+    text-align: left;
+    display: none;
+    white-space: normal;
+}
+
+.reservation-info:hover .reservation-tooltip {
+    display: block;
+}
+
+.tooltip-row {
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.tooltip-label {
+    font-weight: bold;
+    width: 80px;
+    color: var(--gray);
+}
+
+.tooltip-value {
+    flex: 1;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.legend-available {
+    background-color: var(--available-bg);
+}
+
+.legend-pending {
+    background-color: var(--pending);
+}
+
+.legend-completed {
+    background-color: var(--success);
+}
+
+.legend-facility {
+    background-color: var(--facility);
+}
+
+.legend-expiring {
+    background-color: var(--expiring);
+}
+
+.legend-expired {
+    background-color: var(--expired);
+}
+
+/* 預約詳情視窗樣式 */
+.reservation-detail {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-weight: bold;
+    width: 120px;
+    color: var(--gray);
+}
+
+.detail-value {
+    flex: 1;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.badge-facility {
+    background-color: var(--facility);
+    color: white;
+}
+
+.property-list {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.property-list-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.property-list-item:last-child {
+    border-bottom: none;
+}
+
+.tabs-inner {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tab-inner {
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--gray);
+    white-space: nowrap;
+}
+
+.tab-inner.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    font-weight: bold;
+}
+
+.tab-inner-content {
+    display: none;
+}
+
+.tab-inner-content.active {
+    display: block;
+}
+
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* 預約詳細資訊 */
+.reservation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1100;
+    max-width: 500px;
+    width: 90%;
+    display: none;
+}
+
+.reservation-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.reservation-popup-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.reservation-popup-close {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--gray);
+}
+
+.reservation-popup-content {
+    margin-bottom: 20px;
+}
+
+.reservation-popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.reservation-info-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.reservation-info-label {
+    font-weight: bold;
+    width: 120px;
+    color: var(--gray);
+}
+
+.reservation-info-value {
+    flex: 1;
+}
+
+.contract-expiring {
+    background-color: var(--expiring);
+}
+
+.contract-expired {
+    background-color: var(--expired);
+}
+
+.expiry-date {
+    font-size: 12px;
+    color: var(--danger);
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.facility-row {
+    /* background-color: rgba(38, 166, 154, 0.05); */
+}

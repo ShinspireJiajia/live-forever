@@ -1,0 +1,391 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - CSS 樣式重置
+ * ============================================
+ * 檔案：reset.css
+ * 說明：重置瀏覽器預設樣式，確保跨瀏覽器一致性
+ * 建立日期：2025-12-03
+ * ============================================
+ */
+
+/* ============================================
+ * 盒模型重置
+ * 使用 border-box 讓 padding 和 border 包含在元素寬高內
+ * ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+ * HTML 與 Body 基礎設定
+ * ============================================ */
+html {
+    /* 設定基準字型大小，方便使用 rem 單位 */
+    font-size: 16px;
+    /* 平滑捲動效果 */
+    scroll-behavior: smooth;
+    /* 防止文字大小在橫向模式下自動調整 */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    /* 使用設計系統定義的字型 */
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-gray-100);
+    /* 優化文字渲染 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 防止水平捲軸 */
+    overflow-x: hidden;
+    /* 最小高度填滿視窗 */
+    min-height: 100vh;
+}
+
+/* ============================================
+ * 標題元素重置
+ * ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+h5 { font-size: var(--font-size-base); }
+h6 { font-size: var(--font-size-sm); }
+
+/* ============================================
+ * 段落與文字元素
+ * ============================================ */
+p {
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* 強調文字 */
+strong, b {
+    font-weight: var(--font-weight-bold);
+}
+
+/* 斜體文字 */
+em, i {
+    font-style: italic;
+}
+
+/* 小字 */
+small {
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+ * 連結樣式
+ * ============================================ */
+a {
+    color: var(--color-info);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-info-dark);
+    text-decoration: underline;
+}
+
+a:focus {
+    outline: 2px solid var(--color-info);
+    outline-offset: 2px;
+}
+
+/* ============================================
+ * 列表重置
+ * ============================================ */
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+ * 表格重置
+ * ============================================ */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th, td {
+    padding: 0;
+    text-align: left;
+}
+
+/* ============================================
+ * 表單元素重置
+ * ============================================ */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+}
+
+/* 按鈕重置 */
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+button:focus {
+    outline: 2px solid var(--color-info);
+    outline-offset: 2px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 輸入框重置 */
+input,
+textarea {
+    border: var(--border-width-thin) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    background-color: var(--color-white);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-content-bg);
+    box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
+}
+
+input:disabled,
+textarea:disabled {
+    background-color: var(--color-gray-100);
+    cursor: not-allowed;
+}
+
+/* 下拉選單重置 */
+select {
+    border: var(--border-width-thin) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    background-color: var(--color-white);
+    cursor: pointer;
+    /* 移除預設箭頭（部分瀏覽器） */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--color-content-bg);
+    box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
+}
+
+/* Checkbox 與 Radio 重置 */
+input[type="checkbox"],
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-btn-primary);
+}
+
+/* 文字區域重置 */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* 移除 number input 的上下箭頭 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* 移除搜尋框的清除按鈕 */
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+/* Placeholder 樣式 */
+::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+}
+
+/* ============================================
+ * 圖片與媒體元素
+ * ============================================ */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* SVG 填色繼承 */
+svg {
+    fill: currentColor;
+}
+
+/* ============================================
+ * 其他元素重置
+ * ============================================ */
+
+/* 水平分隔線 */
+hr {
+    border: none;
+    border-top: var(--border-width-thin) solid var(--color-border);
+    margin: var(--spacing-md) 0;
+}
+
+/* 程式碼區塊 */
+code, pre {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+}
+
+pre {
+    overflow-x: auto;
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+}
+
+code {
+    background-color: var(--color-gray-100);
+    padding: 2px 6px;
+    border-radius: var(--border-radius-sm);
+}
+
+/* 引用區塊 */
+blockquote {
+    margin: 0;
+    padding-left: var(--spacing-md);
+    border-left: 4px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* 地址 */
+address {
+    font-style: normal;
+}
+
+/* 縮寫 */
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* ============================================
+ * 可訪問性 (Accessibility)
+ * ============================================ */
+
+/* 跳過導覽連結（螢幕閱讀器用） */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* 聚焦時顯示的跳過連結 */
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* 減少動畫（尊重使用者偏好） */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+ * 選取文字樣式
+ * ============================================ */
+::selection {
+    background-color: var(--color-content-bg);
+    color: var(--color-white);
+}
+
+::-moz-selection {
+    background-color: var(--color-content-bg);
+    color: var(--color-white);
+}
+
+/* ============================================
+ * 捲軸樣式（Webkit 瀏覽器）
+ * ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+    border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-gray-500);
+}

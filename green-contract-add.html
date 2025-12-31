@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增合約 - 綠海養護 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/green-contract-add.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
+        <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">綠海養護</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="green-contract.html" class="breadcrumb-item">養護合約</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">新增合約</span>
+            </div>
+
+            <!-- 頁面內容 -->
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">新增合約</h1>
+                </div>
+
+                <!-- 合約類型 -->
+                <div class="form-group">
+                    <label class="form-label required">合約類型</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="contract-type" value="專戶" checked> 專戶
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="contract-type" value="公設"> 公設
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="contract-type" value="專戶與公設"> 專戶與公設
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 合約編號 -->
+                <div class="form-group">
+                    <label class="form-label">合約編號</label>
+                    <input type="text" class="form-control" placeholder="自動生成或手動輸入">
+                </div>
+
+                <!-- 年度 -->
+                <div class="form-group">
+                    <label class="form-label">年度</label>
+                    <select class="form-control">
+                        <option value="">請選擇年度</option>
+                        <option value="2024">2024年</option>
+                        <option value="2025">2025年</option>
+                        <option value="2026">2026年</option>
+                    </select>
+                </div>
+
+                <!-- 合約期間 -->
+                <div class="form-group">
+                    <label class="form-label">合約期間</label>
+                    <div class="contract-period">
+                        <input type="date" class="form-control"> 至 <input type="date" class="form-control">
+                    </div>
+                </div>
+
+                <!-- 合約通知對象 (改為挑選方式) -->
+                <div class="form-group">
+                    <label class="form-label">合約通知對象(簽署與繳款)</label>
+                    <div class="select-contacts">
+                        <button class="select-contacts-btn"
+                            onclick="document.getElementById('contactsModal').classList.add('active')">選擇通知對象</button>
+                        <span class="selected-count">已選擇 0 個通知對象</span>
+                    </div>
+                </div>
+
+                <!-- 維護人員 -->
+                <div class="form-group">
+                    <label class="form-label">維護人員</label>
+                    <select class="form-control">
+                        <option value="">請選擇維護人員</option>
+                        <option value="王小明">王小明</option>
+                        <option value="陳大華">陳大華</option>
+                        <option value="林志強">林志強</option>
+                        <option value="張美玲">張美玲</option>
+                        <option value="李建國">李建國</option>
+                    </select>
+                </div>
+
+                <!-- 合約摘要 -->
+                <div class="form-group">
+                    <label class="form-label required">合約摘要</label>
+                    <textarea class="form-control" rows="4" placeholder="請輸入合約摘要內容"></textarea>
+                </div>
+
+                <!-- 費用 -->
+                <div class="form-group">
+                    <label class="form-label required">費用</label>
+                    <input type="text" class="form-control" placeholder="請輸入費用金額" value="100000">
+                </div>
+
+                <!-- 最大預約次數 (移至費用之後) -->
+                <div class="form-group">
+                    <label class="form-label">最大預約次數 (總次數或每月次數)</label>
+                    <input type="number" class="form-control" placeholder="請輸入數字" value="10">
+                </div>
+
+                <!-- 可預約月份 -->
+                <div class="form-group">
+                    <label class="form-label">可預約月份</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="1"> 1月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="2"> 2月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="3"> 3月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="4"> 4月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="5"> 5月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="6"> 6月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="7"> 7月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="8"> 8月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="9"> 9月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="10"> 10月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="11"> 11月
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="month" value="12"> 12月
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 公設範圍 -->
+                <div class="form-group">
+                    <label class="form-label">公設範圍</label>
+                    <input type="text" class="form-control" placeholder="請輸入公設範圍">
+                </div>
+
+                <!-- 適用戶別 -->
+                <div class="form-group">
+                    <label class="form-label">適用戶別</label>
+                    <div class="select-households">
+                        <button class="select-households-btn"
+                            onclick="document.getElementById('householdModal').classList.add('active')">選擇適用戶別</button>
+                        <span class="selected-count">已選擇 0 個戶別</span>
+                    </div>
+                </div>
+
+                <!-- 合約檔案 -->
+                <div class="form-group">
+                    <label class="form-label required">合約檔案</label>
+                    <div>
+                        <input type="file" id="contractFile" class="hidden-file-input" accept=".pdf">
+                        <button class="upload-btn" onclick="document.getElementById('contractFile').click()">選擇PDF檔案</button>
+                        <div class="file-info">單一檔案PDF檔案，檔案大小小於10MB</div>
+                        <div id="contractFileDisplay" class="uploaded-file" style="display: none;">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">contract.pdf</span>
+                            <button class="download-file-btn">下載</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 檢查項目 -->
+                <div class="form-group">
+                    <label class="form-label">檢查項目</label>
+                    <div>
+                        <input type="file" id="inspectionFile" class="hidden-file-input">
+                        <button class="upload-btn" onclick="document.getElementById('inspectionFile').click()">上傳檢查項目檔案</button>
+                        <div class="file-info">支援多種檔案格式，檔案大小小於10MB</div>
+                        <div id="inspectionFileDisplay" class="uploaded-file" style="display: none;">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">inspection_items.xlsx</span>
+                            <button class="download-file-btn">下載</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-cancel" onclick="window.location.href='green-contract.html'">取消</button>
+                    <button class="btn btn-submit">新增合約</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 適用戶別選擇彈窗 -->
+    <div class="modal" id="householdModal" onclick="if(event.target === this) this.classList.remove('active')">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">適用戶別</h3>
+                <button class="modal-close"
+                    onclick="document.getElementById('householdModal').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="受惠戶別 (如: A101, B2...)">
+                    <button class="search-btn">搜尋</button>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="radio" name="filter" value="all" checked> 全選
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="filter" value="selected"> 選擇
+                    </label>
+                    <div class="pagination-info">已勾人數：24 個戶別 | 已選：0 個</div>
+                </div>
+
+                <div class="modal-subtitle">尚未選擇戶別</div>
+
+                <div class="room-grid">
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-101">
+                        <label for="room-t1-101">T1-101</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-102">
+                        <label for="room-t1-102">T1-102</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-103">
+                        <label for="room-t1-103">T1-103</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-104">
+                        <label for="room-t1-104">T1-104</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-105">
+                        <label for="room-t1-105">T1-105</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-106">
+                        <label for="room-t1-106">T1-106</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-201">
+                        <label for="room-t1-201">T1-201</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-202">
+                        <label for="room-t1-202">T1-202</label>
+                    </div>
+                    <div class="room-item">
+                        <input type="checkbox" id="room-t1-203">
+                        <label for="room-t1-203">T1-203</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel"
+                    onclick="document.getElementById('householdModal').classList.remove('active')">取消</button>
+                <button class="btn btn-submit"
+                    onclick="document.getElementById('householdModal').classList.remove('active')">確認</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要通知對象選擇彈窗 -->
+    <div class="modal" id="contactsModal" onclick="if(event.target === this) this.classList.remove('active')">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">選擇主要通知對象</h3>
+                <button class="modal-close"
+                    onclick="document.getElementById('contactsModal').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="搜尋會員 (姓名)">
+                    <button class="search-btn">搜尋</button>
+                </div>
+
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="radio" name="contact-filter" value="all" checked> 全部
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="contact-filter" value="resident"> 住戶
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="contact-filter" value="property"> 物業
+                    </label>
+
+                    <div class="pagination-info">已選：0 個通知對象</div>
+                </div>
+
+                <div class="modal-subtitle">會員列表</div>
+
+                <div class="member-grid">
+                    <div class="member-item">
+                        <input type="checkbox" id="member-1">
+                        <div class="member-info">
+                            <span class="member-name">王小明</span>
+                            <span class="member-role"><span class="tag">住戶</span> T1-101</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <input type="checkbox" id="member-2">
+                        <div class="member-info">
+                            <span class="member-name">陳大華</span>
+                            <span class="member-role"><span class="tag">住戶</span> T1-102</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <input type="checkbox" id="member-3">
+                        <div class="member-info">
+                            <span class="member-name">林志強</span>
+                            <span class="member-role"><span class="tag">住戶</span> T1-103</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel"
+                    onclick="document.getElementById('contactsModal').classList.remove('active')">取消</button>
+                <button class="btn btn-submit"
+                    onclick="document.getElementById('contactsModal').classList.remove('active')">確認</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/green-contract-add.js"></script>
+</body>
+</html>
