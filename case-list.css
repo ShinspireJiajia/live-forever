@@ -1,0 +1,631 @@
+/**
+ * 個案單列表頁面樣式
+ * case-list.css
+ */
+
+/* ========================================
+   搜尋表單網格佈局
+   ======================================== */
+.case-search-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm) var(--spacing-lg);
+}
+
+.case-search-form .form-group.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.case-search-form .col-label {
+    width: 100px;
+    min-width: 100px;
+    flex-shrink: 0;
+    text-align: left;
+    padding-right: var(--spacing-sm);
+}
+
+.case-search-form .col-input {
+    flex: 1;
+}
+
+.case-search-form .col-input .form-select,
+.case-search-form .col-input .form-input {
+    width: 100%;
+}
+
+/* ========================================
+   日期範圍輸入群組
+   ======================================== */
+.date-range-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-range-group .form-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.date-separator {
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+    flex-shrink: 0;
+}
+
+/* ========================================
+   操作按鈕區（右對齊）
+   ======================================== */
+.form-actions-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+}
+
+/* 藍色資訊按鈕 */
+.btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+/* 綠色成功按鈕 */
+.btn-success {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* ========================================
+   匯入區塊樣式
+   ======================================== */
+.import-row {
+    display: flex;
+    align-items: center;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-300);
+    margin-top: var(--spacing-md);
+}
+
+.import-row .col-label {
+    width: 150px;
+    min-width: 150px;
+    flex-shrink: 0;
+}
+
+.import-row .col-input {
+    flex: 1;
+}
+
+.download-template {
+    color: var(--color-info);
+    text-decoration: none;
+    margin-left: var(--spacing-sm);
+}
+
+.download-template:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   表格容器（水平捲動）
+   ======================================== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+    background-color: #f3f3f3;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+}
+
+/* ========================================
+   個案單表格樣式
+   ======================================== */
+.case-table {
+    min-width: 1200px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.case-table thead tr {
+    background-color: #ad9e8f;
+    color: #ffffff;
+}
+
+.case-table thead th {
+    padding: 12px 8px;
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+    white-space: nowrap;
+    border: none;
+}
+
+.case-table thead th.col-1 {
+    width: 8.33%;
+}
+
+.case-table tbody tr {
+    display: flex;
+    background-color: #f3f3f3;
+}
+
+.case-table tbody tr:nth-child(odd) {
+    background-color: #e7e7e7;
+}
+
+.case-table thead tr {
+    display: flex;
+}
+
+.case-table th.col-1,
+.case-table td.col-1 {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+    word-break: break-word;
+}
+
+.case-table tbody td {
+    border: none;
+    vertical-align: middle;
+}
+
+/* ========================================
+   逾期狀態樣式（紅色）
+   ======================================== */
+.red,
+.overdue-text {
+    color: #dc3545;
+}
+
+.case-table td.col-1.red {
+    color: #dc3545;
+}
+
+.overdue-label {
+    display: block;
+    color: #dc3545;
+    font-size: var(--font-size-xs);
+    margin-top: 2px;
+}
+
+/* ========================================
+   表格內操作按鈕
+   ======================================== */
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-start;
+}
+
+.btn-table-edit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    font-size: var(--font-size-sm);
+    color: #28a745;
+    background-color: transparent;
+    border: 1px solid #28a745;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn-table-edit:hover {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.btn-table-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    font-size: var(--font-size-sm);
+    color: #dc3545;
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn-table-delete:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+/* ========================================
+   分頁樣式
+   ======================================== */
+.pagination-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+}
+
+.pagination-info-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+}
+
+/* ========================================
+   響應式調整
+   ======================================== */
+@media (max-width: 1024px) {
+    .search-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .date-range-group {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-actions-right {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form-actions-right .btn {
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .case-search-form .form-group.row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .case-search-form .col-label {
+        width: 100%;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .import-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .import-row .col-label {
+        width: 100%;
+        margin-bottom: var(--spacing-xs);
+    }
+}
+
+/* ========================================
+   未讀訊息樣式
+   ======================================== */
+
+/* 未讀訊息徽章 */
+.unread-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    background-color: #E74C3C;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.unread-badge i {
+    font-size: 10px;
+}
+
+/* ========================================
+   搜尋面板收合功能（手機版）
+   ======================================== */
+
+/* 桌面版隱藏收合標題 */
+.search-panel-header {
+    display: none;
+}
+
+/* 手機版響應式設計 (< 768px)
+   ======================================== */
+@media (max-width: 767px) {
+    
+    /* === 搜尋面板收合功能 === */
+    .search-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-md);
+        background-color: rgb(108, 117, 125);
+        border-radius: var(--border-radius-md);
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .search-panel-header:active {
+        background-color: rgb(90, 98, 104);
+    }
+    
+    .search-panel-title {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-medium);
+        color: white;
+    }
+    
+    .search-panel-title i {
+        color: white;
+    }
+    
+    .search-panel-toggle-icon {
+        font-size: var(--font-size-sm);
+        color: white;
+        transition: transform var(--transition-normal);
+    }
+    
+    /* 收合狀態 */
+    .search-panel.collapsed .search-panel-toggle-icon {
+        transform: rotate(-90deg);
+    }
+    
+    .search-panel.collapsed .case-search-form {
+        display: none;
+    }
+    
+    /* 展開狀態的表單樣式 */
+    .search-panel .case-search-form {
+        background-color: var(--color-white);
+        border-radius: var(--border-radius-md);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        margin-top: 0;
+    }
+    /* === 搜尋表單優化 === */
+    .case-search-form {
+        padding: var(--spacing-md);
+    }
+    
+    .search-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    /* 表單群組垂直排列 */
+    .case-search-form .form-group.row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-xs);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .case-search-form .col-label {
+        width: 100%;
+        min-width: unset;
+        margin-bottom: var(--spacing-xs);
+        font-weight: var(--font-weight-medium);
+    }
+    
+    .case-search-form .col-input {
+        width: 100%;
+    }
+    
+    /* 所有輸入框與下拉框 100% 寬度 */
+    .case-search-form .form-select,
+    .case-search-form .form-input,
+    .case-search-form .form-control,
+    .case-search-form input[type="text"],
+    .case-search-form input[type="date"],
+    .case-search-form input[type="file"],
+    .case-search-form select {
+        width: 100% !important;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+    
+    /* 日期範圍群組優化 */
+    .date-range-group {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        align-items: stretch;
+    }
+    
+    .date-range-group .form-input {
+        width: 100%;
+    }
+    
+    .date-separator {
+        text-align: center;
+        padding: var(--spacing-xs) 0;
+    }
+    
+    /* 操作按鈕區優化 */
+    .form-actions-right {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md) 0;
+    }
+    
+    .form-actions-right .btn {
+        width: 100%;
+        justify-content: center;
+        padding: var(--spacing-md);
+    }
+    
+    /* 匯入區塊優化 */
+    .import-row {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md) 0;
+        margin-top: var(--spacing-md);
+    }
+    
+    .import-row .col-label {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .import-row .col-input {
+        width: 100%;
+    }
+    
+    /* === 表格容器優化（視覺降噪）=== */
+    .table-responsive {
+        border: none;
+        background-color: transparent;
+        overflow-x: visible;
+        margin-top: var(--spacing-lg);
+    }
+    
+    /* === 表格轉卡片式佈局 === */
+    .case-table {
+        min-width: unset;
+        width: 100%;
+        display: block;
+    }
+    
+    .case-table thead {
+        display: none;
+    }
+    
+    .case-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .case-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-white);
+        border-radius: var(--border-radius-md);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+        border: none;
+    }
+    
+    .case-table tbody tr:nth-child(odd) {
+        background-color: rgb(231, 231, 231);
+    }
+
+    .case-table tbody tr:nth-child(even) {
+        background-color: rgb(243, 243, 243);
+    }
+    
+    .case-table tbody tr:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    
+    .case-table th.col-1,
+    .case-table td.col-1 {
+        flex: unset;
+        min-width: unset;
+        max-width: unset;
+        width: 100%;
+        padding: var(--spacing-xs) 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+    
+    /* 添加欄位標籤（透過偽元素）*/
+    .case-table tbody td.col-1::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: rgb(173, 158, 143);
+        min-width: 100px;
+        flex-shrink: 0;
+        font-size: var(--font-size-xs);
+    }
+    
+    /* 操作按鈕區在卡片底部 */
+    .case-table tbody td:last-child {
+        border-top: 1px solid var(--color-gray-200);
+        padding-top: var(--spacing-md);
+        margin-top: var(--spacing-sm);
+    }
+    
+    .table-actions {
+        width: 100%;
+        justify-content: flex-end;
+        gap: var(--spacing-sm);
+    }
+    
+    .btn-table-edit,
+    .btn-table-delete {
+        flex: 1;
+        justify-content: center;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .btn-table-edit {
+        color: rgb(190, 175, 174);
+        border-color: rgb(190, 175, 174);
+    }
+
+    .btn-table-delete {
+        color: rgb(196, 71, 43);
+        border-color: rgb(196, 71, 43);
+    }
+    
+    /* === 分頁優化 === */
+    .pagination-wrapper {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    /* 手機版隱藏新增個案單及個案匯入 */
+    #btnAdd,
+    .import-row {
+        display: none !important;
+    }
+}
