@@ -382,7 +382,7 @@
         justify-content: space-between;
         align-items: center;
         padding: var(--spacing-md);
-        background-color: var(--color-white);
+        background-color: rgb(108, 117, 125);
         border-radius: var(--border-radius-md);
         cursor: pointer;
         user-select: none;
@@ -391,7 +391,7 @@
     }
     
     .search-panel-header:active {
-        background-color: var(--color-gray-100);
+        background-color: rgb(90, 98, 104);
     }
     
     .search-panel-title {
@@ -400,16 +400,16 @@
         gap: var(--spacing-sm);
         font-size: var(--font-size-base);
         font-weight: var(--font-weight-medium);
-        color: var(--color-gray-700);
+        color: white;
     }
     
     .search-panel-title i {
-        color: var(--color-btn-primary);
+        color: white;
     }
     
     .search-panel-toggle-icon {
         font-size: var(--font-size-sm);
-        color: var(--color-gray-500);
+        color: white;
         transition: transform var(--transition-normal);
     }
     
@@ -553,9 +553,12 @@
         border: none;
     }
     
-    .case-table tbody tr:nth-child(odd),
+    .case-table tbody tr:nth-child(odd) {
+        background-color: rgb(231, 231, 231);
+    }
+
     .case-table tbody tr:nth-child(even) {
-        background-color: var(--color-white);
+        background-color: rgb(243, 243, 243);
     }
     
     .case-table tbody tr:hover {
@@ -578,8 +581,8 @@
     /* 添加欄位標籤（透過偽元素）*/
     .case-table tbody td.col-1::before {
         content: attr(data-label);
-        font-weight: var(--font-weight-medium);
-        color: var(--color-gray-500);
+        font-weight: bold;
+        color: rgb(173, 158, 143);
         min-width: 100px;
         flex-shrink: 0;
         font-size: var(--font-size-xs);
@@ -604,9 +607,25 @@
         justify-content: center;
         padding: var(--spacing-sm) var(--spacing-md);
     }
+
+    .btn-table-edit {
+        color: rgb(190, 175, 174);
+        border-color: rgb(190, 175, 174);
+    }
+
+    .btn-table-delete {
+        color: rgb(196, 71, 43);
+        border-color: rgb(196, 71, 43);
+    }
     
     /* === 分頁優化 === */
     .pagination-wrapper {
         padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    /* 手機版隱藏新增個案單及個案匯入 */
+    #btnAdd,
+    .import-row {
+        display: none !important;
     }
 }
