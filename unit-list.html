@@ -1,0 +1,2009 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戶別清單 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/unit-appointment.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+                <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">戶別管理</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">戶別管理</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form" id="searchForm">
+                        <div class="row">
+                            <div class="col-6 form-group row">
+                                <label class="col-4 col-form-label">建案</label>
+                                <div class="col-8">
+                                    <select class="form-control" id="searchProject">
+                                        <option value="">建案</option>
+                                        <option value="Jade123">Jade123</option>
+                                        <option value="PARK259">PARK259</option>
+                                        <option value="陸府原森">陸府原森</option>
+                                        <option value="陸府觀微">陸府觀微</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6 form-group row">
+                                <label class="col-4 col-form-label">戶別</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="searchUnit" placeholder="戶別">
+                                </div>
+                            </div>
+                            <div class="col-6 form-group row">
+                                <label class="col-4 col-form-label">戶別匯入</label>
+                                <div class="col-8">
+                                    <div class="file-input-wrapper">
+                                        <span class="mr-2">範本:<a href="https://devjeancrm.webtech888.com/files/excel/house.xlsx" target="_blank">house.xlsx</a></span>
+                                        <input type="file" accept=".xlsx">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 form-group row">
+                                <label class="col-4 col-form-label">備註</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="searchRemark" placeholder="請輸入備註搜尋關鍵字">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions text-right mt-3">
+                            <button type="reset" class="btn btn-info mr-2">
+                                <i class="fas fa-rotate-left mr-1"></i>重置
+                            </button>
+                            <button type="submit" class="btn btn-info mr-2">
+                                <i class="fas fa-search mr-1"></i>查詢
+                            </button>
+                            <button type="button" class="btn btn-success mr-2" id="btnAdd">
+                                <i class="fas fa-plus mr-1"></i>新增
+                            </button>
+                            <button type="button" class="btn btn-success mr-2" id="btnExport">
+                                <i class="fas fa-download mr-1"></i>匯出
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-container mt-4">
+                    <table class="table table-striped border" id="unitTable" style="min-width: 800px;">
+                        <thead style="background-color: #5D4037; color: white;">
+                            <tr>
+                                <th scope="col" width="10%">ID</th>
+                                <th scope="col" width="10%">建案</th>
+                                <th scope="col" width="20%">戶別</th>
+                                <th scope="col" width="10%">所有權人</th>
+                                <th scope="col" width="15%">簽約日期</th>
+                                <th scope="col" width="15%">交屋日期</th>
+                                <th scope="col" width="20%"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="unitTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯戶別彈窗 -->
+    <div class="modal" id="unitModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 900px; width: 900px;">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增戶別</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                <form id="unitForm">
+                    <input type="hidden" id="unitId">
+                    
+                    <div class="row p-2">
+                        <div class="col-12 col-md-12">
+                            <div class="row">
+                                <div class="form-group row col-12">
+                                    <label for="cId" class="col-md-4 col-form-label">流水號</label>
+                                    <div class="col-md-8">
+                                        <input type="number" class="form-control" id="cId" name="cId" placeholder="流水號" disabled>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row col-12">
+                                    <label for="cProductId" class="col-md-2 col-form-label">建案</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="cProductId">
+                                            <option value="Jade123">Jade123</option>
+                                            <option value="PARK259">PARK259</option>
+                                            <option value="陸府原森">陸府原森</option>
+                                            <option value="陸府觀微">陸府觀微</option>
+                                        </select>
+                                    </div>
+                                    <label for="cHouseName" class="col-md-2 col-form-label">戶別</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cHouseName" name="cHouseName" placeholder="戶別">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cContractNumber" class="col-md-2 col-form-label">合約代碼</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cContractNumber" name="cContractNumber" placeholder="合約代碼">
+                                    </div>
+                                    <label for="cAddress" class="col-md-2 col-form-label">門牌</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cAddress" name="cAddress" placeholder="門牌">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label class="col-md-2 col-form-label">買賣狀態</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="cSalesStatus">
+                                            <option value="已簽約">已簽約</option>
+                                            <option value="未簽約">未簽約</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">購買類型</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="cPurchaseType">
+                                            <option value="房屋">房屋</option>
+                                            <option value="車位">車位</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label class="col-md-2 col-form-label">購買子類型</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="cPurchaseSubType">
+                                            <option value="">請選擇</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">是否可填寫售前單 <span style="color: red;">*</span></label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="cPreSalesForm" required>
+                                            <option value="不開放">不開放</option>
+                                            <option value="開放">開放</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12" style="justify-content: left; align-items: center;">
+                                    <h5>購買資訊</h5>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label class="col-md-2 col-form-label">所有權人</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cOwner" name="cOwner" placeholder="註冊屋主後自動顯示" disabled>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">屋主密碼 <span style="color: red;">*</span></label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cOwnerPassword" name="cOwnerPassword" placeholder="所有權人密碼">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label class="col-md-2 col-form-label">非屋主密碼</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cGeneralPassword" name="cGeneralPassword" placeholder="非所有權人密碼">
+                                    </div>
+                                    <label for="cLandOwner" class="col-md-2 col-form-label">土地所有人</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cLandOwner" name="cLandOwner" placeholder="土地所有人">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cCollectionOwner" class="col-md-2 col-form-label">代收所有人</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cCollectionOwner" name="cCollectionOwner" placeholder="代收所有人">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12" style="justify-content: left; align-items: center;">
+                                    <h5>簽約/交屋資訊</h5>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cContractDate" class="col-md-2 col-form-label">簽約日期</label>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="cContractDate">
+                                    </div>
+                                    <label for="cDeliverDate" class="col-md-2 col-form-label">交屋日期</label>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="cDeliverDate">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label class="col-md-2 col-form-label">主要結構保固到期日</label>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="cStructureWarrantyDate" disabled>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">地壁磚保固到期日</label>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="cTileWarrantyDate" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label class="col-md-2 col-form-label">防水工程保固到期日</label>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="cWaterproofWarrantyDate" disabled>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">機電工程保固到期日</label>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="cElectromechanicalWarrantyDate" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cWarrantyRemark" class="col-md-2 col-form-label">備註</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="cWarrantyRemark" name="cWarrantyRemark" placeholder="備註" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12" style="justify-content: left; align-items: center;">
+                                    <h5>建坪資訊</h5>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cLandHold" class="col-md-2 col-form-label">土地持分</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cLandHold" name="cLandHold" placeholder="土地持分">
+                                    </div>
+                                    <label for="cSquareFootage" class="col-md-2 col-form-label">房屋坪數</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cSquareFootage" name="cSquareFootage" placeholder="房屋坪數">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cWarrantArea" class="col-md-2 col-form-label">權狀面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cWarrantArea" name="cWarrantArea" placeholder="權狀面積">
+                                    </div>
+                                    <label for="cIndoorArea" class="col-md-2 col-form-label">室內面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cIndoorArea" name="cIndoorArea" placeholder="室內面積">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cFlowerBedArea" class="col-md-2 col-form-label">花台面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cFlowerBedArea" name="cFlowerBedArea" placeholder="花台面積">
+                                    </div>
+                                    <label for="cBalconyArea" class="col-md-2 col-form-label">陽台面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cBalconyArea" name="cBalconyArea" placeholder="陽台面積">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cArcadeArea" class="col-md-2 col-form-label">騎樓面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cArcadeArea" name="cArcadeArea" placeholder="騎樓面積">
+                                    </div>
+                                    <label for="cUmbrellaArea" class="col-md-2 col-form-label">雨遮面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cUmbrellaArea" name="cUmbrellaArea" placeholder="雨遮面積">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cTerraceArea" class="col-md-2 col-form-label">露台面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cTerraceArea" name="cTerraceArea" placeholder="露台面積">
+                                    </div>
+                                    <label for="cOtherArea" class="col-md-2 col-form-label">其他面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cOtherArea" name="cOtherArea" placeholder="其他面積">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cLargePublicEstablishment" class="col-md-2 col-form-label">大公設面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cLargePublicEstablishment" name="cLargePublicEstablishment" placeholder="大公設面積">
+                                    </div>
+                                    <label for="cSmallPublicEstablishment" class="col-md-2 col-form-label">小公設面積</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cSmallPublicEstablishment" name="cSmallPublicEstablishment" placeholder="小公設面積">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12" style="justify-content: left; align-items: center;">
+                                    <h5>車位資訊</h5>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cCarNo" class="col-md-2 col-form-label">車位號碼</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cCarNo" name="cCarNo" placeholder="車位號碼">
+                                    </div>
+                                    <label for="cCarSquareFootage" class="col-md-2 col-form-label">車位坪數</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="cCarSquareFootage" name="cCarSquareFootage" placeholder="車位坪數">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12" style="justify-content: left; align-items: center;">
+                                    <h5>金額資訊</h5>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cPrice" class="col-md-2 col-form-label">表價</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cPrice" name="cPrice" placeholder="表價">
+                                        <span class="input-group-text">萬元</span>
+                                    </div>
+                                    <label for="cReservePrice" class="col-md-2 col-form-label">底價</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cReservePrice" name="cReservePrice" placeholder="底價">
+                                        <span class="input-group-text">萬元</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cSalePrice" class="col-md-2 col-form-label">售價</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cSalePrice" name="cSalePrice" placeholder="售價">
+                                        <span class="input-group-text">萬元</span>
+                                    </div>
+                                    <label for="cContractPrice" class="col-md-2 col-form-label">合約總價</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cContractPrice" name="cContractPrice" placeholder="合約總價">
+                                        <span class="input-group-text">元</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cHousePrice" class="col-md-2 col-form-label">房屋金額</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cHousePrice" name="cHousePrice" placeholder="房屋金額">
+                                        <span class="input-group-text">元</span>
+                                    </div>
+                                    <label for="cPerSquareFootagePrice" class="col-md-2 col-form-label">每坪單價</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cPerSquareFootagePrice" name="cPerSquareFootagePrice" placeholder="每坪單價">
+                                        <span class="input-group-text">元</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-12">
+                                    <label for="cParkingPrice" class="col-md-2 col-form-label">車位金額</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cParkingPrice" name="cParkingPrice" placeholder="車位金額">
+                                        <span class="input-group-text">元</span>
+                                    </div>
+                                    <label for="cOtherPrice" class="col-md-2 col-form-label">其他金額</label>
+                                    <div class="col-md-4 input-group">
+                                        <input type="number" class="form-control" id="cOtherPrice" name="cOtherPrice" placeholder="其他金額">
+                                        <span class="input-group-text">元</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <nb-card class="accent accent-success">
+                                        <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span>住戶</span>
+                                            <button type="button" class="btn btn-success btn-sm" id="btnAddResidentInUnitModal">
+                                                <i class="fas fa-plus mr-1"></i>新增住戶
+                                            </button>
+                                        </nb-card-header>
+                                        <nb-card-body class="bg-white" style="max-height: 600px;">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped border" style="min-width: 800px; background-color: #f3f3f3;">
+                                                    <thead>
+                                                        <tr class="text-white" style="background-color: #ad9e8f;">
+                                                            <th scope="col" width="10%">ID</th>
+                                                            <th scope="col" width="20%">建案</th>
+                                                            <th scope="col" width="20%">會員</th>
+                                                            <th scope="col" width="15%">身分</th>
+                                                            <th scope="col" width="15%">戶別</th>
+                                                            <th scope="col" width="20%">操作</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Resident Data -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-flex justify-content-center p-2">
+                                                <nav aria-label="Page navigation">
+                                                    <ul class="pagination">
+                                                        <li class="page-item disabled"><a class="page-link" href="#">&laquo;&laquo;</a></li>
+                                                        <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+                                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                        <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+                                                        <li class="page-item disabled"><a class="page-link" href="#">&raquo;&raquo;</a></li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <div class="text-center mt-2"> TotalRecords：0 </div>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <!-- 戶別預約日期設定區塊 -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <nb-card class="accent accent-info">
+                                        <nb-card-header>
+                                            <span><i class="fa-solid fa-calendar-check mr-2"></i>戶別預約日期設定</span>
+                                        </nb-card-header>
+                                        <nb-card-body class="bg-white">
+                                            <p class="reservation-hint">設定各項預約的可用日期區間，客戶只能在設定的日期區間內進行預約。</p>
+                                            
+                                            <!-- 客變預約 -->
+                                            <div class="appointment-section">
+                                                <div class="appointment-header">
+                                                    <h4 class="appointment-title"><i class="fa-solid fa-pen-ruler mr-2"></i>客變預約</h4>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">預約區間</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="customChangeStart" value="2023-06-01">
+                                                    </div>
+                                                    <label class="col-md-1 col-form-label text-center">至</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="customChangeEnd" value="2023-07-15">
+                                                    </div>
+                                                </div>
+                                                <div class="appointment-details">
+                                                    <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">已預約日期</label>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control readonly-field" id="customChangeBookedDate" value="2023-06-15" readonly>
+                                                        </div>
+                                                        <label class="col-md-2 col-form-label">預約單號</label>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control readonly-field" id="customChangeBookingNumber" value="20230615-001" readonly>
+                                                        </div>
+                                                        <label class="col-md-1 col-form-label">完成日</label>
+                                                        <div class="col-md-2">
+                                                            <input type="date" class="form-control readonly-field" id="customChangeCompletionDate" value="2023-06-20" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 驗屋預約 -->
+                                            <div class="appointment-section">
+                                                <div class="appointment-header">
+                                                    <h4 class="appointment-title"><i class="fa-solid fa-house-circle-check mr-2"></i>驗屋預約</h4>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">預約區間</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="inspectionStart" value="2023-07-20">
+                                                    </div>
+                                                    <label class="col-md-1 col-form-label text-center">至</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="inspectionEnd" value="2023-08-10">
+                                                    </div>
+                                                </div>
+                                                <div class="appointment-details">
+                                                    <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">已預約日期</label>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control readonly-field" id="inspectionBookedDate" value="2023-07-25" readonly>
+                                                        </div>
+                                                        <label class="col-md-2 col-form-label">預約單號</label>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control readonly-field" id="inspectionBookingNumber" value="20230725-002" readonly>
+                                                        </div>
+                                                        <label class="col-md-1 col-form-label">完成日</label>
+                                                        <div class="col-md-2">
+                                                            <input type="date" class="form-control readonly-field" id="inspectionCompletionDate" value="2023-07-25" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 對保預約 -->
+                                            <div class="appointment-section">
+                                                <div class="appointment-header">
+                                                    <h4 class="appointment-title"><i class="fa-solid fa-file-signature mr-2"></i>對保預約</h4>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">預約區間</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="loanStart" value="2023-08-15">
+                                                    </div>
+                                                    <label class="col-md-1 col-form-label text-center">至</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="loanEnd" value="2023-09-05">
+                                                    </div>
+                                                </div>
+                                                <div class="appointment-details">
+                                                    <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">已預約日期</label>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control readonly-field" id="loanBookedDate" value="2023-08-20" readonly>
+                                                        </div>
+                                                        <label class="col-md-2 col-form-label">預約單號</label>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control readonly-field" id="loanBookingNumber" value="20230820-003" readonly>
+                                                        </div>
+                                                        <label class="col-md-1 col-form-label">完成日</label>
+                                                        <div class="col-md-2">
+                                                            <input type="date" class="form-control readonly-field" id="loanCompletionDate" value="2023-08-20" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 交屋預約 -->
+                                            <div class="appointment-section">
+                                                <div class="appointment-header">
+                                                    <h4 class="appointment-title"><i class="fa-solid fa-key mr-2"></i>交屋預約</h4>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">預約區間</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="handoverStart" value="2023-09-10">
+                                                    </div>
+                                                    <label class="col-md-1 col-form-label text-center">至</label>
+                                                    <div class="col-md-4">
+                                                        <input type="date" class="form-control" id="handoverEnd" value="2023-09-30">
+                                                    </div>
+                                                </div>
+                                                <div class="appointment-details">
+                                                    <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-2 col-form-label">已預約日期</label>
+                                                        <div class="col-md-3">
+                                                            <input type="date" class="form-control readonly-field" id="handoverBookedDate" value="2023-09-15" readonly>
+                                                        </div>
+                                                        <label class="col-md-2 col-form-label">預約單號</label>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control readonly-field" id="handoverBookingNumber" value="20230915-004" readonly>
+                                                        </div>
+                                                        <label class="col-md-1 col-form-label">完成日</label>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control readonly-field" id="handoverCompletionDate" value="-" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                            <!-- 戶別預約日期設定區塊結束 -->
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-success mr-2" id="btnSave">確定</button>
+                <button class="btn btn-danger mr-2" id="btnCancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 住戶管理彈窗 -->
+    <div class="modal" id="residentModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 900px; width: 900px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 0;">
+            <div class="card" style="border: none;">
+                <div class="card-header" style="background-color: #fff; border-bottom: 1px solid #e0e0e0; padding: 1rem; font-size: 1.25rem; font-weight: 500; color: #222;">
+                    住戶
+                </div>
+                <div class="card-body" style="padding: 1rem;">
+                    <div class="row mb-3">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-success" id="btnAddResident">
+                                <i class="fas fa-plus mr-1"></i>新增
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                        <table class="table table-striped border" style="min-width: 800px; background-color: #f3f3f3;">
+                            <thead>
+                                <tr class="text-white" style="background-color: #ad9e8f;">
+                                    <th scope="col" style="width: 10%">ID</th>
+                                    <th scope="col" style="width: 20%">建案</th>
+                                    <th scope="col" style="width: 20%">會員</th>
+                                    <th scope="col" style="width: 15%">身分</th>
+                                    <th scope="col" style="width: 15%">戶別</th>
+                                    <th scope="col" style="width: 20%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="residentTableBody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div id="residentPaginationWrapper"></div>
+                </div>
+                <div class="card-footer text-center" style="padding: 1rem; border-top: 1px solid #e0e0e0;">
+                    <button class="btn btn-danger" id="residentModalCloseBtn">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增住戶彈窗 -->
+    <div class="modal" id="addResidentModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 500px; width: 500px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 0;">
+            <div class="card" style="border: none;">
+                <div class="card-header" style="background-color: #fff; border-bottom: 1px solid #e0e0e0; padding: 1rem; font-size: 1.25rem; font-weight: 500; color: #222;">
+                    新增
+                </div>
+                <div class="card-body" style="padding: 1rem;">
+                    <div class="row p-2">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="cMemberSearch" class="col-md-4 col-form-label">會員</label>
+                                <div class="col-md-8">
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="cMemberSearch" placeholder="搜尋">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="btnSearchMember">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <select class="form-control" id="cMemberSelect">
+                                        <option value="">會員姓名</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cIdentity" class="col-md-4 col-form-label">身分別</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="cIdentity">
+                                        <option value="">請選擇</option>
+                                        <option value="屋主">屋主</option>
+                                        <option value="住戶">住戶</option>
+                                        <option value="管理員">管理員</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center" style="padding: 1rem; border-top: 1px solid #e0e0e0;">
+                    <button class="btn btn-success mr-2" id="btnAddResidentConfirm">確定</button>
+                    <button class="btn btn-danger" id="btnAddResidentCancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合約管理彈窗 -->
+    <div class="modal" id="contractModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 800px; width: 800px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 0;">
+            <div class="card" style="border: none;">
+                <div class="card-header" style="background-color: #fff; border-bottom: 1px solid #e0e0e0; padding: 1rem; font-size: 1.25rem; font-weight: 500; color: #222;">
+                    <i class="fas fa-file-contract mr-2"></i>合約及附件管理
+                </div>
+                <div class="card-body" style="padding: 1rem;">
+                    <!-- 新增合約區塊 -->
+                    <div class="contract-upload-section" style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h6 style="margin-bottom: 1rem; color: #5D4037;"><i class="fas fa-plus-circle mr-1"></i>新增合約</h6>
+                        <div class="row">
+                            <div class="col-md-12 form-group row">
+                                <label class="col-md-2 col-form-label">合約／附件名稱</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="contractName" placeholder="請輸入合約名稱">
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group row">
+                                <label class="col-md-2 col-form-label">上傳檔案</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control" id="contractFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                    <small class="text-muted">支援格式：PDF、JPG、PNG</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group row">
+                                <label class="col-md-2 col-form-label">備註</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" id="contractRemark" rows="3" placeholder="請輸入合約備註說明"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <button type="button" class="btn btn-success" id="btnAddContract">
+                                    <i class="fas fa-plus mr-1"></i>新增合約／附件
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 合約列表 -->
+                    <div class="contract-list-section">
+                        <h6 style="margin-bottom: 1rem; color: #5D4037;"><i class="fas fa-list mr-1"></i>合約／附件清單</h6>
+                        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table table-striped border" style="min-width: 100%; background-color: #f3f3f3;">
+                                <thead>
+                                    <tr style="background-color: #5D4037; color: #ffffff;">
+                                        <th scope="col" style="width: 5%; color: #ffffff;">#</th>
+                                        <th scope="col" style="width: 20%">合約／附件名稱</th>
+                                        <th scope="col" style="width: 20%">檔案名稱</th>
+                                        <th scope="col" style="width: 25%">備註</th>
+                                        <th scope="col" style="width: 15%">上傳日期</th>
+                                        <th scope="col" style="width: 15%">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contractTableBody">
+                                    <!-- 合約資料將動態載入 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center" style="padding: 1rem; border-top: 1px solid #e0e0e0;">
+                    <button class="btn btn-danger" id="contractModalCloseBtn">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 編輯合約備註彈窗 -->
+    <div class="modal" id="editContractRemarkModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 500px; width: 500px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 0;">
+            <div class="card" style="border: none;">
+                <div class="card-header" style="background-color: #fff; border-bottom: 1px solid #e0e0e0; padding: 1rem; font-size: 1.25rem; font-weight: 500; color: #222;">
+                    編輯備註
+                </div>
+                <div class="card-body" style="padding: 1rem;">
+                    <input type="hidden" id="editContractId">
+                    <div class="form-group">
+                        <label for="editContractRemarkText">備註內容</label>
+                        <textarea class="form-control" id="editContractRemarkText" rows="4" placeholder="請輸入備註內容"></textarea>
+                    </div>
+                </div>
+                <div class="card-footer text-center" style="padding: 1rem; border-top: 1px solid #e0e0e0;">
+                    <button class="btn btn-success mr-2" id="btnSaveContractRemark">儲存</button>
+                    <button class="btn btn-danger" id="btnCancelEditRemark">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            const unitModal = new Modal('unitModal');
+            const residentModal = new Modal({ id: 'residentModal' });
+            
+            let currentPage = 1;
+            const pageSize = 10;
+            
+            loadUnitData();
+            
+            function loadUnitData(filters) {
+                const result = CRMMockData.getPaged('units', currentPage, pageSize, filters);
+                renderTable(result.items);
+                renderPagination(result);
+            }
+            
+            function renderTable(data) {
+                const tbody = document.getElementById('unitTableBody');
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center">無資料</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = data.map(function(unit, index) {
+                    // Mock handover date if missing
+                    const handoverDate = unit.handoverDate || (unit.status === '已交屋' ? '2024-02-06' : '未交屋');
+                    const unitName = `${unit.building}-${unit.doorNumber}`; // e.g. A-03F
+                    
+                    return `
+                        <tr>
+                            <td>${12300 + index + 1}</td>
+                            <td>${unit.projectName}</td>
+                            <td>${unitName}</td>
+                            <td>${unit.owner || ''}</td>
+                            <td>${unit.contractDate || ''}</td>
+                            <td>${handoverDate}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success btn-sm m-1 btn-edit" data-id="${unit.id}">
+                                    <i class="fas fa-edit mr-1"></i>編輯
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm m-1 btn-delete" data-id="${unit.id}">
+                                    <i class="far fa-trash-alt mr-1"></i>刪除
+                                </button>
+                                <button type="button" class="btn btn-outline-info btn-sm m-1 btn-resident" data-id="${unit.id}">
+                                    <i class="fas fa-edit mr-1"></i>住戶
+                                </button>
+                                <button type="button" class="btn btn-outline-info btn-sm m-1 btn-attribute" data-id="${unit.id}">
+                                    <i class="fas fa-pen-to-square mr-1"></i>戶別屬性
+                                </button>
+                                <button type="button" class="btn btn-outline-warning btn-sm m-1 btn-payment" data-id="${unit.id}">
+                                    <i class="fas fa-money-bill mr-1"></i>戶別款項
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 btn-contract" data-id="${unit.id}">
+                                    <i class="fas fa-file-contract mr-1"></i>合約及附件管理
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-sm m-1 btn-appointment" data-id="${unit.id}">
+                                    <i class="fas fa-calendar-check mr-1"></i>預約設定
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // 綁定事件
+                document.querySelectorAll('.btn-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        editUnit(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        deleteUnit(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-resident').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        openResidentModal(id);
+                    });
+                });
+
+                document.querySelectorAll('.btn-attribute').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        // Navigate to resident-profile.html (Unit Attribute)
+                        window.location.href = 'resident-profile.html?unitId=' + id + '&action=edit';
+                    });
+                });
+                
+                document.querySelectorAll('.btn-payment').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        // Navigate to payment page
+                        window.location.href = 'unit-payment.html?unitId=' + id;
+                    });
+                });
+
+                document.querySelectorAll('.btn-contract').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        openContractModal(id);
+                    });
+                });
+
+                // 預約設定按鈕事件
+                document.querySelectorAll('.btn-appointment').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        // 導向戶別預約日期設定頁面
+                        window.location.href = 'unit-appointment.html?id=' + id;
+                    });
+                });
+            }
+            
+            function renderPagination(result) {
+                const wrapper = document.getElementById('paginationWrapper');
+                
+                if (result.totalPages <= 1) {
+                    wrapper.innerHTML = `<div class="text-center mt-3"> TotalRecords：${result.total} </div>`;
+                    return;
+                }
+                
+                wrapper.innerHTML = `
+                    <div class="d-flex justify-content-center p-2">
+                        <ul class="pagination">
+                            <li class="page-item ${result.page === 1 ? 'disabled' : ''}">
+                                <a class="page-link" href="#" data-page="${result.page - 1}">«</a>
+                            </li>
+                            ${generatePageButtons(result.page, result.totalPages)}
+                            <li class="page-item ${result.page === result.totalPages ? 'disabled' : ''}">
+                                <a class="page-link" href="#" data-page="${result.page + 1}">»</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center mt-3"> TotalRecords：${result.total} </div>
+                `;
+                
+                wrapper.querySelectorAll('.page-link').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (this.parentElement.classList.contains('disabled')) return;
+                        const page = parseInt(this.dataset.page);
+                        if (page) {
+                            currentPage = page;
+                            loadUnitData();
+                        }
+                    });
+                });
+            }
+            
+            function generatePageButtons(current, total) {
+                let buttons = '';
+                for (let i = 1; i <= total; i++) {
+                    if (i === current) {
+                        buttons += `<li class="page-item active"><a class="page-link" href="#">${i}</a></li>`;
+                    } else if (i === 1 || i === total || (i >= current - 2 && i <= current + 2)) {
+                        buttons += `<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+                    } else if (i === current - 3 || i === current + 3) {
+                        buttons += '<li class="page-item disabled"><a class="page-link">...</a></li>';
+                    }
+                }
+                return buttons;
+            }
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                window.location.href = 'unit-profile.html?action=add';
+            });
+            
+            function editUnit(id) {
+                window.location.href = `unit-profile.html?id=${id}`;
+            }
+
+            function renderResidentTable(unit) {
+                const tbody = document.querySelector('#unitModal table tbody');
+                const countDiv = document.querySelector('#unitModal .text-center.mt-2');
+                
+                // Construct unitName to match mock data format (e.g. "A棟12A")
+                const targetUnitName = unit.building + unit.doorNumber;
+                
+                // Filter members
+                const members = CRMMockData.members.filter(m => m.unitName === targetUnitName && m.projectName === unit.projectName);
+                
+                if (members.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center">無住戶資料</td></tr>';
+                    countDiv.textContent = 'TotalRecords：0';
+                    return;
+                }
+                
+                tbody.innerHTML = members.map(m => `
+                    <tr>
+                        <td>${m.id}</td>
+                        <td>${m.projectName}</td>
+                        <td>${m.name}</td>
+                        <td>${m.identity}</td>
+                        <td>${m.unitName}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-success btn-sm m-1 btn-edit-resident-modal" data-id="${m.id}"><i class="fas fa-edit mr-1"></i>編輯</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm m-1 btn-delete-resident-modal" data-id="${m.id}"><i class="far fa-trash-alt mr-1"></i>刪除</button>
+                        </td>
+                    </tr>
+                `).join('');
+                
+                countDiv.textContent = `TotalRecords：${members.length}`;
+
+                // Bind events
+                tbody.querySelectorAll('.btn-edit-resident-modal').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        window.location.href = `unit-profile.html?id=${id}&action=edit`;
+                    });
+                });
+
+                tbody.querySelectorAll('.btn-delete-resident-modal').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        deleteResident(id, unit);
+                    });
+                });
+            }
+
+            function deleteResident(id, unit) {
+                if (!confirm('確定要刪除此住戶嗎？')) return;
+
+                const index = CRMMockData.members.findIndex(m => m.id == id);
+                if (index > -1) {
+                    CRMMockData.members.splice(index, 1);
+                    if (CRMMockData.save) CRMMockData.save();
+                    
+                    // Refresh tables
+                    if (unit) renderResidentTable(unit);
+                    
+                    // Also refresh standalone modal if open
+                    if (document.getElementById('residentModal').classList.contains('show')) {
+                        // We need the unit object for loadResidentData, but we might not have it if called from standalone
+                        // For now, just reload the page or re-fetch unit if possible
+                        // But simpler is to just alert
+                    }
+                    alert('已刪除住戶');
+                }
+            }
+            
+            function viewUnit(id) {
+                const unit = CRMMockData.getById('units', id);
+                if (!unit) return;
+                
+                alert(`戶別資訊：\n案場：${unit.projectName}\n戶號：${unit.building} ${unit.floor} ${unit.doorNumber}\n屋主：${unit.owner || '無'}\n電話：${unit.ownerPhone || '無'}\n狀態：${unit.status}`);
+            }
+            
+            function deleteUnit(id) {
+                const unit = CRMMockData.getById('units', id);
+                if (!unit) return;
+                
+                ConfirmDialog.show({
+                    title: '確認刪除',
+                    message: `確定要刪除戶別「${unit.building} ${unit.doorNumber}」嗎？`,
+                    onConfirm: function() {
+                        alert('已刪除戶別');
+                        loadUnitData();
+                    }
+                });
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('unitForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                alert('已儲存戶別資料');
+                unitModal.close();
+                loadUnitData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                unitModal.close();
+            });
+            
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('匯出功能開發中...');
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadUnitData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadUnitData();
+                }, 0);
+            });
+
+            // ==========================================
+            // 住戶彈窗相關功能
+            // ==========================================
+
+            function openResidentModal(unitId) {
+                const unit = CRMMockData.getById('units', unitId);
+                if (!unit) return;
+                
+                residentModal.currentUnitId = unitId;
+                loadResidentData(unit);
+                residentModal.open();
+            }
+
+            function loadResidentData(unit) {
+                const tbody = document.getElementById('residentTableBody');
+                const wrapper = document.getElementById('residentPaginationWrapper');
+                
+                // 組合戶別名稱以符合 Mock 資料格式 (例如: "A棟12A")
+                const targetUnitName = unit.building + unit.doorNumber;
+                
+                // 篩選該戶別的會員
+                const members = CRMMockData.members.filter(m => m.unitName === targetUnitName && m.projectName === unit.projectName);
+                
+                if (members.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center">無資料</td></tr>';
+                    wrapper.innerHTML = '<div class="text-center mt-3"> TotalRecords：0 </div>';
+                    return;
+                }
+                
+                tbody.innerHTML = members.map(m => `
+                    <tr>
+                        <td>${m.id}</td>
+                        <td>${m.projectName}</td>
+                        <td>${m.name}</td>
+                        <td>${m.identity}</td>
+                        <td>${m.unitName}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-success btn-sm m-1 btn-edit-resident" data-id="${m.id}">
+                                <i class="fas fa-edit mr-1"></i>編輯
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm m-1 btn-delete-resident" data-id="${m.id}">
+                                <i class="far fa-trash-alt mr-1"></i>刪除
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                
+                // 簡易分頁顯示
+                wrapper.innerHTML = `
+                    <div class="d-flex justify-content-center p-2">
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-center mt-3"> TotalRecords：${members.length} </div>
+                `;
+
+                // 綁定住戶列表內的操作按鈕
+                tbody.querySelectorAll('.btn-edit-resident').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        window.location.href = `unit-profile.html?id=${id}&action=edit`;
+                    });
+                });
+                
+                tbody.querySelectorAll('.btn-delete-resident').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        deleteResident(id, unit);
+                        loadResidentData(unit); // Refresh this table
+                    });
+                });
+            }
+
+            // 住戶彈窗事件監聽
+            // Note: residentModalClose button was removed in new design, only residentModalCloseBtn remains
+            const residentModalCloseBtn = document.getElementById('residentModalCloseBtn');
+            if (residentModalCloseBtn) {
+                residentModalCloseBtn.addEventListener('click', function() {
+                    residentModal.close();
+                });
+            }
+            
+            // 新增住戶彈窗實例
+            const addResidentModal = new Modal({ id: 'addResidentModal' });
+
+            document.getElementById('btnAddResident').addEventListener('click', function() {
+                addResidentModal.open();
+                // Reset form
+                document.getElementById('cMemberSearch').value = '';
+                document.getElementById('cMemberSelect').innerHTML = '<option value="">會員姓名</option>';
+                document.getElementById('cIdentity').value = '';
+            });
+
+            document.getElementById('btnAddResidentCancel').addEventListener('click', function() {
+                addResidentModal.close();
+            });
+
+            document.getElementById('btnSearchMember').addEventListener('click', function() {
+                const keyword = document.getElementById('cMemberSearch').value.trim();
+                const select = document.getElementById('cMemberSelect');
+                select.innerHTML = '<option value="">會員姓名</option>';
+                
+                if (!keyword) {
+                    alert('請輸入搜尋關鍵字');
+                    return;
+                }
+
+                // Mock search from all members
+                // 這裡搜尋現有的會員資料作為模擬
+                const results = CRMMockData.members.filter(m => m.name.includes(keyword));
+                
+                if (results.length === 0) {
+                    alert('查無會員資料');
+                    return;
+                }
+
+                // 去除重複的會員 (同名同電話視為同一人)
+                const uniqueMembers = [];
+                const map = new Map();
+                for (const item of results) {
+                    if(!map.has(item.name + item.phone)){
+                        map.set(item.name + item.phone, true);
+                        uniqueMembers.push(item);
+                    }
+                }
+
+                uniqueMembers.forEach(m => {
+                    const option = document.createElement('option');
+                    option.value = m.id; 
+                    option.dataset.name = m.name;
+                    option.dataset.phone = m.phone;
+                    option.textContent = `${m.name} (${m.phone || '無電話'})`;
+                    select.appendChild(option);
+                });
+            });
+
+            document.getElementById('btnAddResidentConfirm').addEventListener('click', function() {
+                const select = document.getElementById('cMemberSelect');
+                const memberId = select.value;
+                const identity = document.getElementById('cIdentity').value;
+                const unitId = residentModal.currentUnitId;
+
+                if (!memberId) {
+                    alert('請選擇會員');
+                    return;
+                }
+                if (!identity) {
+                    alert('請選擇身分別');
+                    return;
+                }
+
+                const unit = CRMMockData.getById('units', unitId);
+                const selectedOption = select.options[select.selectedIndex];
+                const name = selectedOption.dataset.name;
+                const phone = selectedOption.dataset.phone;
+                
+                const newResident = {
+                    id: Date.now(), // Generate new ID
+                    name: name,
+                    phone: phone,
+                    identity: identity,
+                    unitName: unit.building + unit.doorNumber,
+                    projectName: unit.projectName,
+                    email: '', // Mock empty
+                    lineBindStatus: '未綁定',
+                    bindDate: null,
+                    registerDate: new Date().toISOString().split('T')[0]
+                };
+
+                CRMMockData.members.push(newResident);
+                if (CRMMockData.save) CRMMockData.save();
+
+                alert('新增成功');
+                addResidentModal.close();
+                loadResidentData(unit); // Refresh the resident list
+            });
+
+            // Listener for Add Resident button inside Unit Modal
+            const btnAddResidentInUnitModal = document.getElementById('btnAddResidentInUnitModal');
+            if (btnAddResidentInUnitModal) {
+                btnAddResidentInUnitModal.addEventListener('click', function() {
+                    const unitId = document.getElementById('unitId').value;
+                    openResidentModal(unitId);
+                });
+            }
+
+            // ==========================================
+            // 合約管理功能
+            // ==========================================
+
+            // 初始化合約儲存（若不存在）
+            if (!CRMMockData.contracts) {
+                CRMMockData.contracts = [];
+            }
+
+            // 合約彈窗實例
+            const contractModal = new Modal({ id: 'contractModal' });
+            const editContractRemarkModal = new Modal({ id: 'editContractRemarkModal' });
+            let currentContractUnitId = null;
+
+            // 開啟合約管理彈窗
+            function openContractModal(unitId) {
+                currentContractUnitId = unitId;
+                loadContractData(unitId);
+                contractModal.open();
+                
+                // 重置表單
+                document.getElementById('contractName').value = '';
+                document.getElementById('contractFile').value = '';
+                document.getElementById('contractRemark').value = '';
+            }
+
+            // 載入合約資料
+            function loadContractData(unitId) {
+                const tbody = document.getElementById('contractTableBody');
+                const contracts = CRMMockData.contracts.filter(c => c.unitId === unitId);
+
+                if (contracts.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center">尚無合約資料</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = contracts.map((contract, index) => `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${contract.name}</td>
+                        <td>
+                            <a href="#" class="contract-download" data-id="${contract.id}" title="點擊下載">
+                                <i class="fas fa-file-download mr-1"></i>${contract.fileName}
+                            </a>
+                        </td>
+                        <td>${contract.remark || '-'}</td>
+                        <td>${contract.uploadDate}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-success btn-sm m-1 btn-edit-contract-remark" data-id="${contract.id}" title="編輯備註">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm m-1 btn-delete-contract" data-id="${contract.id}" title="刪除合約">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                // 綁定編輯備註事件
+                tbody.querySelectorAll('.btn-edit-contract-remark').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const contractId = parseInt(this.dataset.id);
+                        openEditContractRemarkModal(contractId);
+                    });
+                });
+
+                // 綁定刪除事件
+                tbody.querySelectorAll('.btn-delete-contract').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const contractId = parseInt(this.dataset.id);
+                        deleteContract(contractId);
+                    });
+                });
+
+                // 綁定下載事件（模擬）
+                tbody.querySelectorAll('.contract-download').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('檔案下載功能 - 正式環境將會下載檔案');
+                    });
+                });
+            }
+
+            // 新增合約
+            document.getElementById('btnAddContract').addEventListener('click', function() {
+                const name = document.getElementById('contractName').value.trim();
+                const fileInput = document.getElementById('contractFile');
+                const remark = document.getElementById('contractRemark').value.trim();
+
+                if (!name) {
+                    alert('請輸入合約名稱');
+                    return;
+                }
+
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    alert('請選擇要上傳的檔案');
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const newContract = {
+                    id: Date.now(),
+                    unitId: currentContractUnitId,
+                    name: name,
+                    fileName: file.name,
+                    fileSize: file.size,
+                    fileType: file.type,
+                    remark: remark,
+                    uploadDate: new Date().toISOString().split('T')[0]
+                };
+
+                CRMMockData.contracts.push(newContract);
+                if (CRMMockData.save) CRMMockData.save();
+
+                alert('合約新增成功！');
+                
+                // 重置表單
+                document.getElementById('contractName').value = '';
+                document.getElementById('contractFile').value = '';
+                document.getElementById('contractRemark').value = '';
+
+                // 重新載入合約列表
+                loadContractData(currentContractUnitId);
+            });
+
+            // 開啟編輯備註彈窗
+            function openEditContractRemarkModal(contractId) {
+                const contract = CRMMockData.contracts.find(c => c.id === contractId);
+                if (!contract) return;
+
+                document.getElementById('editContractId').value = contractId;
+                document.getElementById('editContractRemarkText').value = contract.remark || '';
+                editContractRemarkModal.open();
+            }
+
+            // 儲存備註
+            document.getElementById('btnSaveContractRemark').addEventListener('click', function() {
+                const contractId = parseInt(document.getElementById('editContractId').value);
+                const newRemark = document.getElementById('editContractRemarkText').value.trim();
+
+                const contractIndex = CRMMockData.contracts.findIndex(c => c.id === contractId);
+                if (contractIndex > -1) {
+                    CRMMockData.contracts[contractIndex].remark = newRemark;
+                    if (CRMMockData.save) CRMMockData.save();
+                    
+                    alert('備註已更新');
+                    editContractRemarkModal.close();
+                    loadContractData(currentContractUnitId);
+                }
+            });
+
+            // 取消編輯備註
+            document.getElementById('btnCancelEditRemark').addEventListener('click', function() {
+                editContractRemarkModal.close();
+            });
+
+            // 刪除合約
+            function deleteContract(contractId) {
+                if (!confirm('確定要刪除此合約嗎？此操作無法復原。')) return;
+
+                const contractIndex = CRMMockData.contracts.findIndex(c => c.id === contractId);
+                if (contractIndex > -1) {
+                    CRMMockData.contracts.splice(contractIndex, 1);
+                    if (CRMMockData.save) CRMMockData.save();
+                    
+                    alert('合約已刪除');
+                    loadContractData(currentContractUnitId);
+                }
+            }
+
+            // 關閉合約彈窗
+            document.getElementById('contractModalCloseBtn').addEventListener('click', function() {
+                contractModal.close();
+            });
+        });
+    </script>
+
+    <style>
+        /* Grid System */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .col-4, .col-6, .col-8, .col-12,
+        .col-md-2, .col-md-4, .col-md-8, .col-md-10, .col-md-12 {
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .col-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+        .col-6 { flex: 0 0 50%; max-width: 50%; }
+        .col-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+        .col-12 { flex: 0 0 100%; max-width: 100%; }
+        
+        @media (min-width: 768px) {
+            .col-md-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
+            .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+            .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+            .col-md-10 { flex: 0 0 83.333333%; max-width: 83.333333%; }
+            .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group.row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .col-form-label {
+            margin-bottom: 0;
+            font-weight: bold;
+            text-align: right;
+            padding-top: calc(0.375rem + 1px);
+            padding-bottom: calc(0.375rem + 1px);
+        }
+        
+        /* Input Group */
+        .input-group {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            width: 100%;
+        }
+        .input-group .form-control {
+            position: relative;
+            flex: 1 1 auto;
+            width: 1%;
+            min-width: 0;
+            margin-bottom: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .input-group-text {
+            display: flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            text-align: center;
+            white-space: nowrap;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: 0;
+        }
+
+        /* Section Title */
+        .section-title h5 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #5D4037;
+            border-left: 4px solid #5D4037;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Utilities */
+        .text-right { text-align: right; }
+        .mr-1 { margin-right: 0.25rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-3 { margin-top: 1rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .justify-content-center { justify-content: center; }
+        
+        /* Buttons */
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: white;
+        }
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+            background-color: transparent;
+        }
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+        }
+        .btn-outline-danger {
+            color: #dc3545;
+            border-color: #dc3545;
+            background-color: transparent;
+        }
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+        }
+        .btn-outline-info {
+            color: #17a2b8;
+            border-color: #17a2b8;
+            background-color: transparent;
+        }
+        .btn-outline-info:hover {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+        .btn-outline-warning {
+            color: #ffc107;
+            border-color: #ffc107;
+            background-color: transparent;
+        }
+        .btn-outline-warning:hover {
+            color: #212529;
+            background-color: #ffc107;
+        }
+        .btn-outline-secondary {
+            color: #6c757d;
+            border-color: #6c757d;
+            background-color: transparent;
+        }
+        .btn-outline-secondary:hover {
+            color: #fff;
+            background-color: #6c757d;
+        }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+        
+        /* Table */
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #e7e7e7;
+        }
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .border {
+            border: 1px solid #dee2e6 !important;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-waiting {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: center;
+        }
+        
+        .text-center {
+            text-align: center;
+            color: var(--color-gray-500);
+            padding: var(--spacing-xl) !important;
+        }
+        
+        /* Pagination */
+        .d-flex { display: flex; }
+        .justify-content-center { justify-content: center; }
+        .p-2 { padding: 0.5rem; }
+        
+        .pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 0.25rem;
+        }
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            text-decoration: none;
+        }
+        .page-link:hover {
+            z-index: 2;
+            color: #0056b3;
+            text-decoration: none;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+    </style>
+</body>
+</html>
+

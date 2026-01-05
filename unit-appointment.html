@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戶別預約日期設定 - 陸府建設</title>
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/unit-appointment.css">
+    <style>
+        /* ============================================
+         * 頁面專屬樣式
+         * ============================================ */
+        .unit-info-header {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .unit-info-header .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+        
+        .unit-info-header .info-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .unit-info-header .info-label {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-gray-500);
+        }
+        
+        .unit-info-header .info-value {
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+        }
+        
+        .page-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: #f0f7ff;
+            border-left: 3px solid var(--color-info);
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .appointment-card {
+            background-color: var(--color-white);
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+        }
+        
+        .appointment-card-header {
+            background-color: #a99e91;
+            color: var(--color-white);
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-weight: var(--font-weight-bold);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .appointment-card-body {
+            padding: var(--spacing-md);
+        }
+        
+        .form-actions {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+        <header class="header">
+            <div class="header-left">
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">戶別管理</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="unit-list.html" class="breadcrumb-item">戶別管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">戶別預約日期設定</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 戶別資訊摘要 -->
+                <div class="unit-info-header">
+                    <div class="info-row">
+                        <div class="info-item">
+                            <span class="info-label">建案：</span>
+                            <span class="info-value" id="displayProject">陸府原森</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">戶別：</span>
+                            <span class="info-value" id="displayUnit">A1-12F</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">所有權人：</span>
+                            <span class="info-value" id="displayOwner">王小明</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">門牌：</span>
+                            <span class="info-value" id="displayAddress">台中市西屯區市政北二路282號12樓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 頁面說明 -->
+                <p class="page-description">
+                    <i class="fa-solid fa-circle-info mr-2"></i>
+                    設定各項預約的可用日期區間，客戶只能在設定的日期區間內進行預約。「實際預約資訊」為系統自動記錄，不可編輯。
+                </p>
+
+                <form id="appointmentForm">
+                    <!-- 客變預約 -->
+                    <div class="appointment-card">
+                        <div class="appointment-card-header">
+                            <i class="fa-solid fa-pen-ruler"></i>
+                            <span>客變預約</span>
+                        </div>
+                        <div class="appointment-card-body">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">預約區間</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="customChangeStart" value="2023-06-01">
+                                </div>
+                                <label class="col-md-1 col-form-label text-center">至</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="customChangeEnd" value="2023-07-15">
+                                </div>
+                            </div>
+                            <div class="appointment-details">
+                                <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">已預約日期</label>
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control readonly-field" id="customChangeBookedDate" value="2023-06-15" readonly>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">預約單號</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control readonly-field" id="customChangeBookingNumber" value="20230615-001" readonly>
+                                    </div>
+                                    <label class="col-md-1 col-form-label">完成日</label>
+                                    <div class="col-md-2">
+                                        <input type="date" class="form-control readonly-field" id="customChangeCompletionDate" value="2023-06-20" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 驗屋預約 -->
+                    <div class="appointment-card">
+                        <div class="appointment-card-header">
+                            <i class="fa-solid fa-house-circle-check"></i>
+                            <span>驗屋預約</span>
+                        </div>
+                        <div class="appointment-card-body">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">預約區間</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="inspectionStart" value="2023-07-20">
+                                </div>
+                                <label class="col-md-1 col-form-label text-center">至</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="inspectionEnd" value="2023-08-10">
+                                </div>
+                            </div>
+                            <div class="appointment-details">
+                                <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">已預約日期</label>
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control readonly-field" id="inspectionBookedDate" value="2023-07-25" readonly>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">預約單號</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control readonly-field" id="inspectionBookingNumber" value="20230725-002" readonly>
+                                    </div>
+                                    <label class="col-md-1 col-form-label">完成日</label>
+                                    <div class="col-md-2">
+                                        <input type="date" class="form-control readonly-field" id="inspectionCompletionDate" value="2023-07-25" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 對保預約 -->
+                    <div class="appointment-card">
+                        <div class="appointment-card-header">
+                            <i class="fa-solid fa-file-signature"></i>
+                            <span>對保預約</span>
+                        </div>
+                        <div class="appointment-card-body">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">預約區間</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="loanStart" value="2023-08-15">
+                                </div>
+                                <label class="col-md-1 col-form-label text-center">至</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="loanEnd" value="2023-09-05">
+                                </div>
+                            </div>
+                            <div class="appointment-details">
+                                <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">已預約日期</label>
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control readonly-field" id="loanBookedDate" value="2023-08-20" readonly>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">預約單號</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control readonly-field" id="loanBookingNumber" value="20230820-003" readonly>
+                                    </div>
+                                    <label class="col-md-1 col-form-label">完成日</label>
+                                    <div class="col-md-2">
+                                        <input type="date" class="form-control readonly-field" id="loanCompletionDate" value="2023-08-20" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 交屋預約 -->
+                    <div class="appointment-card">
+                        <div class="appointment-card-header">
+                            <i class="fa-solid fa-key"></i>
+                            <span>交屋預約</span>
+                        </div>
+                        <div class="appointment-card-body">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">預約區間</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="handoverStart" value="2023-09-10">
+                                </div>
+                                <label class="col-md-1 col-form-label text-center">至</label>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="handoverEnd" value="2023-09-30">
+                                </div>
+                            </div>
+                            <div class="appointment-details">
+                                <h5 class="details-title"><i class="fa-solid fa-clipboard-list mr-2"></i>實際預約資訊</h5>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">已預約日期</label>
+                                    <div class="col-md-3">
+                                        <input type="date" class="form-control readonly-field" id="handoverBookedDate" value="2023-09-15" readonly>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">預約單號</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control readonly-field" id="handoverBookingNumber" value="20230915-004" readonly>
+                                    </div>
+                                    <label class="col-md-1 col-form-label">完成日</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control readonly-field" id="handoverCompletionDate" value="-" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 操作按鈕 -->
+                    <div class="form-actions text-center">
+                        <button type="submit" class="btn btn-primary mr-2" id="saveBtn">
+                            <i class="fa-solid fa-floppy-disk mr-1"></i>儲存設定
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">
+                            <i class="fa-solid fa-arrow-left mr-1"></i>返回
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script>
+        /**
+         * ============================================
+         * 戶別預約日期設定頁面 JavaScript
+         * ============================================
+         */
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 取得 URL 參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const unitId = urlParams.get('id');
+            
+            // 若有傳入 unitId，可在此載入該戶別的預約資料
+            if (unitId) {
+                loadUnitAppointmentData(unitId);
+            }
+            
+            // 表單提交事件
+            const form = document.getElementById('appointmentForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveAppointmentData();
+            });
+        });
+        
+        /**
+         * 載入戶別預約資料
+         * @param {string} unitId - 戶別 ID
+         */
+        function loadUnitAppointmentData(unitId) {
+            // TODO: 從 API 載入資料
+            console.log('載入戶別預約資料，ID:', unitId);
+            
+            // 模擬資料載入（實際應從 API 取得）
+            // document.getElementById('displayProject').textContent = '陸府原森';
+            // document.getElementById('displayUnit').textContent = 'A1-12F';
+            // ... 其他欄位
+        }
+        
+        /**
+         * 儲存預約設定
+         */
+        function saveAppointmentData() {
+            // 收集表單資料
+            const formData = {
+                customChange: {
+                    startDate: document.getElementById('customChangeStart').value,
+                    endDate: document.getElementById('customChangeEnd').value
+                },
+                inspection: {
+                    startDate: document.getElementById('inspectionStart').value,
+                    endDate: document.getElementById('inspectionEnd').value
+                },
+                loan: {
+                    startDate: document.getElementById('loanStart').value,
+                    endDate: document.getElementById('loanEnd').value
+                },
+                handover: {
+                    startDate: document.getElementById('handoverStart').value,
+                    endDate: document.getElementById('handoverEnd').value
+                }
+            };
+            
+            // 驗證日期區間
+            const validations = [
+                { name: '客變預約', start: formData.customChange.startDate, end: formData.customChange.endDate },
+                { name: '驗屋預約', start: formData.inspection.startDate, end: formData.inspection.endDate },
+                { name: '對保預約', start: formData.loan.startDate, end: formData.loan.endDate },
+                { name: '交屋預約', start: formData.handover.startDate, end: formData.handover.endDate }
+            ];
+            
+            for (const item of validations) {
+                if (item.start && item.end && new Date(item.start) > new Date(item.end)) {
+                    alert(`${item.name}的開始日期不可晚於結束日期`);
+                    return;
+                }
+            }
+            
+            // TODO: 送出資料到 API
+            console.log('儲存預約設定:', formData);
+            alert('儲存成功！');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戶別資訊維護 - 陸府建設</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <style>
+        .form-section-title {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--color-gray-700);
+        }
+        .input-group-text {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            color: #495057;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+        }
+        .input-group {
+            display: flex;
+            align-items: stretch;
+        }
+        .input-group .form-control {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .input-group .input-group-text {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+        <header class="header">
+            <div class="header-left">
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- 側邊欄 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">戶別管理</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="unit-list.html" class="breadcrumb-item">戶別管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active page-title">編輯戶別資訊</span>
+            </div>
+
+            <div class="content-wrapper">
+                <form id="unit-profile-form">
+                    <input type="hidden" id="unitId">
+                    
+                    <!-- 基本資訊 -->
+                    <div class="row">
+                        <div class="col-12 form-group row">
+                            <label for="cProductId" class="col-md-2 col-form-label">建案</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="cProductId">
+                                    <option value="Jade123">Jade123</option>
+                                    <option value="PARK259">PARK259</option>
+                                    <option value="陸府原森">陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                </select>
+                            </div>
+                            <label for="cHouseName" class="col-md-2 col-form-label">戶別</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cHouseName" name="cHouseName" placeholder="戶別">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cContractNumber" class="col-md-2 col-form-label">合約代碼</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cContractNumber" name="cContractNumber" placeholder="合約代碼">
+                            </div>
+                            <label for="cAddress" class="col-md-2 col-form-label">門牌</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cAddress" name="cAddress" placeholder="門牌">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label class="col-md-2 col-form-label">買賣狀態</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="cSalesStatus">
+                                    <option value="已簽約">已簽約</option>
+                                    <option value="未簽約">未簽約</option>
+                                </select>
+                            </div>
+                            <label class="col-md-2 col-form-label">購買類型</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="cPurchaseType">
+                                    <option value="房屋">房屋</option>
+                                    <option value="車位">車位</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label class="col-md-2 col-form-label">購買子類型</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="cPurchaseSubType">
+                                    <option value="">請選擇</option>
+                                    <option value="一般">一般</option>
+                                    <option value="特殊">特殊</option>
+                                </select>
+                            </div>
+                            <label class="col-md-2 col-form-label">是否可填寫售前單 <span style="color: red;">*</span></label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="cPreSalesForm" required="">
+                                    <option value="不開放">不開放</option>
+                                    <option value="開放">開放</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 購買資訊 -->
+                    <div class="form-section-title">購買資訊</div>
+                    <div class="row">
+                        <div class="col-12 form-group row">
+                            <label class="col-md-2 col-form-label">所有權人</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cOwner" name="cOwner" placeholder="註冊屋主後自動顯示" disabled="">
+                            </div>
+                            <label class="col-md-2 col-form-label">屋主密碼 <span style="color: red;">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cOwnerPassword" name="cOwnerPassword" placeholder="所有權人密碼">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label class="col-md-2 col-form-label">非屋主密碼</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cGeneralPassword" name="cGeneralPassword" placeholder="非所有權人密碼">
+                            </div>
+                            <label for="cLandOwner" class="col-md-2 col-form-label">土地所有人</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cLandOwner" name="cLandOwner" placeholder="土地所有人">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cCollectionOwner" class="col-md-2 col-form-label">代收所有人</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cCollectionOwner" name="cCollectionOwner" placeholder="代收所有人">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 簽約/交屋資訊 -->
+                    <div class="form-section-title">簽約/交屋資訊</div>
+                    <div class="row">
+                        <div class="col-12 form-group row">
+                            <label for="cContractDate" class="col-md-2 col-form-label">簽約日期</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="cContractDate">
+                            </div>
+                            <label for="cDeliverDate" class="col-md-2 col-form-label">交屋日期</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="cDeliverDate">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label class="col-md-2 col-form-label">主要結構保固到期日</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="cStructureWarrantyDate" disabled="">
+                            </div>
+                            <label class="col-md-2 col-form-label">地壁磚保固到期日</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="cTileWarrantyDate" disabled="">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label class="col-md-2 col-form-label">防水工程保固到期日</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="cWaterproofWarrantyDate" disabled="">
+                            </div>
+                            <label class="col-md-2 col-form-label">機電工程保固到期日</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="cElectromechanicalWarrantyDate" disabled="">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cWarrantyRemark" class="col-md-2 col-form-label">備註</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" id="cWarrantyRemark" name="cWarrantyRemark" placeholder="備註" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 建坪資訊 -->
+                    <div class="form-section-title">建坪資訊</div>
+                    <div class="row">
+                        <div class="col-12 form-group row">
+                            <label for="cLandHold" class="col-md-2 col-form-label">土地持分</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cLandHold" name="cLandHold" placeholder="土地持分">
+                            </div>
+                            <label for="cSquareFootage" class="col-md-2 col-form-label">房屋坪數</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cSquareFootage" name="cSquareFootage" placeholder="房屋坪數">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cWarrantArea" class="col-md-2 col-form-label">權狀面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cWarrantArea" name="cWarrantArea" placeholder="權狀面積">
+                            </div>
+                            <label for="cIndoorArea" class="col-md-2 col-form-label">室內面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cIndoorArea" name="cIndoorArea" placeholder="室內面積">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cFlowerBedArea" class="col-md-2 col-form-label">花台面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cFlowerBedArea" name="cFlowerBedArea" placeholder="花台面積">
+                            </div>
+                            <label for="cBalconyArea" class="col-md-2 col-form-label">陽台面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cBalconyArea" name="cBalconyArea" placeholder="陽台面積">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cArcadeArea" class="col-md-2 col-form-label">騎樓面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cArcadeArea" name="cArcadeArea" placeholder="騎樓面積">
+                            </div>
+                            <label for="cUmbrellaArea" class="col-md-2 col-form-label">雨遮面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cUmbrellaArea" name="cUmbrellaArea" placeholder="雨遮面積">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cTerraceArea" class="col-md-2 col-form-label">露台面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cTerraceArea" name="cTerraceArea" placeholder="露台面積">
+                            </div>
+                            <label for="cOtherArea" class="col-md-2 col-form-label">其他面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cOtherArea" name="cOtherArea" placeholder="其他面積">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cLargePublicEstablishment" class="col-md-2 col-form-label">大公設面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cLargePublicEstablishment" name="cLargePublicEstablishment" placeholder="大公設面積">
+                            </div>
+                            <label for="cSmallPublicEstablishment" class="col-md-2 col-form-label">小公設面積</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cSmallPublicEstablishment" name="cSmallPublicEstablishment" placeholder="小公設面積">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 車位資訊 -->
+                    <div class="form-section-title">車位資訊</div>
+                    <div class="row">
+                        <div class="col-12 form-group row">
+                            <label for="cCarNo" class="col-md-2 col-form-label">車位號碼</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cCarNo" name="cCarNo" placeholder="車位號碼">
+                            </div>
+                            <label for="cCarSquareFootage" class="col-md-2 col-form-label">車位坪數</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="cCarSquareFootage" name="cCarSquareFootage" placeholder="車位坪數">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 金額資訊 -->
+                    <div class="form-section-title">金額資訊</div>
+                    <div class="row">
+                        <div class="col-12 form-group row">
+                            <label for="cPrice" class="col-md-2 col-form-label">表價</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cPrice" name="cPrice" placeholder="表價">
+                                <span class="input-group-text">萬元</span>
+                            </div>
+                            <label for="cReservePrice" class="col-md-2 col-form-label">底價</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cReservePrice" name="cReservePrice" placeholder="底價">
+                                <span class="input-group-text">萬元</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cSalePrice" class="col-md-2 col-form-label">售價</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cSalePrice" name="cSalePrice" placeholder="售價">
+                                <span class="input-group-text">萬元</span>
+                            </div>
+                            <label for="cContractPrice" class="col-md-2 col-form-label">合約總價</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cContractPrice" name="cContractPrice" placeholder="合約總價">
+                                <span class="input-group-text">元</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cHousePrice" class="col-md-2 col-form-label">房屋金額</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cHousePrice" name="cHousePrice" placeholder="房屋金額">
+                                <span class="input-group-text">元</span>
+                            </div>
+                            <label for="cPerSquareFootagePrice" class="col-md-2 col-form-label">每坪單價</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cPerSquareFootagePrice" name="cPerSquareFootagePrice" placeholder="每坪單價">
+                                <span class="input-group-text">元</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group row">
+                            <label for="cParkingPrice" class="col-md-2 col-form-label">車位金額</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cParkingPrice" name="cParkingPrice" placeholder="車位金額">
+                                <span class="input-group-text">元</span>
+                            </div>
+                            <label for="cOtherPrice" class="col-md-2 col-form-label">其他金額</label>
+                            <div class="col-md-4 input-group">
+                                <input type="number" class="form-control" id="cOtherPrice" name="cOtherPrice" placeholder="其他金額">
+                                <span class="input-group-text">元</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 住戶列表 -->
+                    
+                    
+
+                    <div class="form-actions text-center mt-4 mb-4">
+                        <button type="submit" class="btn btn-primary mr-2" id="save-btn">確定</button>
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">取消</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/mock-data.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/unit-profile.js"></script>
+</body>
+</html>

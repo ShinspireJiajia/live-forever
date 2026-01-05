@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交屋滿意度調查 - 陸府建設</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reservation-handover-survey.css">
+    
+    <style>
+        /* 前台問卷填寫頁面樣式 */
+        body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .survey-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, #a99e91 0%, #8b7f73 100%);
+            border-radius: var(--border-radius-lg);
+            color: #fff;
+        }
+
+        .survey-logo {
+            font-size: 48px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .survey-header h1 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .survey-header p {
+            font-size: var(--font-size-base);
+            opacity: 0.9;
+        }
+
+        .survey-info {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .survey-info-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-btn-primary);
+        }
+
+        .survey-info-row {
+            display: flex;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .survey-info-label {
+            width: 100px;
+            color: var(--color-gray-500);
+            flex-shrink: 0;
+        }
+
+        .survey-info-value {
+            color: var(--color-gray-900);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .survey-form {
+            background: var(--color-white);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .survey-form-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .survey-question {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-gray-300);
+        }
+
+        .survey-question:last-of-type {
+            border-bottom: none;
+        }
+
+        .question-title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .question-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            background: var(--color-btn-primary);
+            color: #fff;
+            border-radius: 50%;
+            margin-right: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+        }
+
+        /* 星星評分 */
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            margin-top: var(--spacing-sm);
+        }
+
+        .star-rating .star {
+            font-size: 32px;
+            color: #ddd;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .star-rating .star:hover,
+        .star-rating .star.active {
+            color: #ffc107;
+        }
+
+        .star-rating .star:hover ~ .star {
+            color: #ddd;
+        }
+
+        /* 文字輸入區 */
+        .question-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--border-radius-md);
+            font-family: inherit;
+            font-size: var(--font-size-base);
+            resize: vertical;
+            transition: var(--transition-fast);
+        }
+
+        .question-textarea:focus {
+            outline: none;
+            border-color: var(--color-btn-primary);
+            box-shadow: 0 0 0 3px rgba(169, 158, 145, 0.1);
+        }
+
+        .question-textarea::placeholder {
+            color: var(--color-gray-500);
+        }
+
+        /* 提交按鈕 */
+        .survey-submit {
+            text-align: center;
+            margin-top: var(--spacing-xl);
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-2xl);
+            background: var(--color-btn-primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .btn-submit:hover {
+            background: #8b7f73;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-submit:disabled {
+            background: var(--color-gray-500);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 感謝頁面 */
+        .thank-you-container {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-2xl);
+            background: var(--color-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .thank-you-container.show {
+            display: block;
+        }
+
+        .thank-you-icon {
+            font-size: 80px;
+            color: var(--color-success);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .thank-you-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .thank-you-message {
+            font-size: var(--font-size-base);
+            color: var(--color-gray-700);
+            line-height: var(--line-height-loose);
+        }
+
+        /* 隱藏表單容器 */
+        .survey-content.hidden {
+            display: none;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .survey-page {
+                padding: var(--spacing-md);
+            }
+
+            .survey-header {
+                padding: var(--spacing-lg);
+            }
+
+            .survey-logo {
+                font-size: 40px;
+            }
+
+            .survey-header h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .star-rating .star {
+                font-size: 28px;
+            }
+
+            .btn-submit {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-page">
+        <!-- 問卷標題區 -->
+        <div class="survey-header">
+            <div class="survey-logo">
+                <i class="fa-solid fa-home"></i>
+            </div>
+            <h1>交屋滿意度調查</h1>
+            <p>感謝您選擇陸府建設，請撥冗填寫此份問卷</p>
+        </div>
+
+        <!-- 問卷內容容器 -->
+        <div class="survey-content" id="surveyContent">
+            <!-- 交屋資訊 -->
+            <div class="survey-info">
+                <div class="survey-info-title">交屋資訊</div>
+                <div class="survey-info-row">
+                    <span class="survey-info-label">案場名稱：</span>
+                    <span class="survey-info-value" id="infoProject">陸府原森</span>
+                </div>
+                <div class="survey-info-row">
+                    <span class="survey-info-label">戶　　號：</span>
+                    <span class="survey-info-value" id="infoUnit">A1-12F</span>
+                </div>
+                <div class="survey-info-row">
+                    <span class="survey-info-label">交屋日期：</span>
+                    <span class="survey-info-value" id="infoDate">2024/01/15</span>
+                </div>
+            </div>
+
+            <!-- 問卷表單 -->
+            <form class="survey-form" id="surveyForm">
+                <div class="survey-form-title">請針對以下項目進行評分</div>
+
+                <!-- 問題 1：整體交屋體驗 -->
+                <div class="survey-question">
+                    <div class="question-title">
+                        <span class="question-number">1</span>
+                        整體交屋體驗
+                    </div>
+                    <div class="star-rating" data-question="overall">
+                        <i class="fa-solid fa-star star" data-value="1"></i>
+                        <i class="fa-solid fa-star star" data-value="2"></i>
+                        <i class="fa-solid fa-star star" data-value="3"></i>
+                        <i class="fa-solid fa-star star" data-value="4"></i>
+                        <i class="fa-solid fa-star star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating_overall" id="ratingOverall" value="">
+                </div>
+
+                <!-- 問題 2：服務人員態度 -->
+                <div class="survey-question">
+                    <div class="question-title">
+                        <span class="question-number">2</span>
+                        服務人員態度
+                    </div>
+                    <div class="star-rating" data-question="staff">
+                        <i class="fa-solid fa-star star" data-value="1"></i>
+                        <i class="fa-solid fa-star star" data-value="2"></i>
+                        <i class="fa-solid fa-star star" data-value="3"></i>
+                        <i class="fa-solid fa-star star" data-value="4"></i>
+                        <i class="fa-solid fa-star star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating_staff" id="ratingStaff" value="">
+                </div>
+
+                <!-- 問題 3：交屋流程順暢度 -->
+                <div class="survey-question">
+                    <div class="question-title">
+                        <span class="question-number">3</span>
+                        交屋流程順暢度
+                    </div>
+                    <div class="star-rating" data-question="process">
+                        <i class="fa-solid fa-star star" data-value="1"></i>
+                        <i class="fa-solid fa-star star" data-value="2"></i>
+                        <i class="fa-solid fa-star star" data-value="3"></i>
+                        <i class="fa-solid fa-star star" data-value="4"></i>
+                        <i class="fa-solid fa-star star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating_process" id="ratingProcess" value="">
+                </div>
+
+                <!-- 問題 4：房屋品質滿意度 -->
+                <div class="survey-question">
+                    <div class="question-title">
+                        <span class="question-number">4</span>
+                        房屋品質滿意度
+                    </div>
+                    <div class="star-rating" data-question="quality">
+                        <i class="fa-solid fa-star star" data-value="1"></i>
+                        <i class="fa-solid fa-star star" data-value="2"></i>
+                        <i class="fa-solid fa-star star" data-value="3"></i>
+                        <i class="fa-solid fa-star star" data-value="4"></i>
+                        <i class="fa-solid fa-star star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating_quality" id="ratingQuality" value="">
+                </div>
+
+                <!-- 問題 5：文件準備完整度 -->
+                <div class="survey-question">
+                    <div class="question-title">
+                        <span class="question-number">5</span>
+                        文件準備完整度
+                    </div>
+                    <div class="star-rating" data-question="documents">
+                        <i class="fa-solid fa-star star" data-value="1"></i>
+                        <i class="fa-solid fa-star star" data-value="2"></i>
+                        <i class="fa-solid fa-star star" data-value="3"></i>
+                        <i class="fa-solid fa-star star" data-value="4"></i>
+                        <i class="fa-solid fa-star star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating_documents" id="ratingDocuments" value="">
+                </div>
+
+                <!-- 問題 6：其他建議 -->
+                <div class="survey-question">
+                    <div class="question-title">
+                        <span class="question-number">6</span>
+                        其他建議或意見（選填）
+                    </div>
+                    <textarea class="question-textarea" name="feedback" id="feedback" 
+                              placeholder="請分享您的寶貴意見，幫助我們持續改進服務品質..."></textarea>
+                </div>
+
+                <!-- 提交按鈕 -->
+                <div class="survey-submit">
+                    <button type="submit" class="btn-submit" id="btnSubmit">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        提交問卷
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 感謝頁面 -->
+        <div class="thank-you-container" id="thankYouContainer">
+            <div class="thank-you-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="thank-you-title">感謝您的填寫！</div>
+            <div class="thank-you-message">
+                您的寶貴意見已成功送出，<br>
+                我們將持續精進服務品質，<br>
+                感謝您對陸府建設的支持與肯定。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * 交屋滿意度問卷填寫頁面 JavaScript
+         * 處理星星評分與表單提交
+         */
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化星星評分
+            initStarRatings();
+            
+            // 綁定表單提交事件
+            const form = document.getElementById('surveyForm');
+            form.addEventListener('submit', handleSubmit);
+
+            // 模擬載入交屋資訊（實際應從 URL 參數或 API 取得）
+            loadSurveyInfo();
+        });
+
+        /**
+         * 初始化所有星星評分元件
+         */
+        function initStarRatings() {
+            const starRatings = document.querySelectorAll('.star-rating');
+            
+            starRatings.forEach(rating => {
+                const stars = rating.querySelectorAll('.star');
+                const questionName = rating.dataset.question;
+                
+                stars.forEach((star, index) => {
+                    // 點擊事件
+                    star.addEventListener('click', () => {
+                        const value = star.dataset.value;
+                        setRating(rating, value, questionName);
+                    });
+                    
+                    // 懸停效果
+                    star.addEventListener('mouseenter', () => {
+                        highlightStars(stars, index);
+                    });
+                });
+                
+                // 滑鼠離開時恢復選中狀態
+                rating.addEventListener('mouseleave', () => {
+                    const currentValue = getHiddenInputValue(questionName);
+                    if (currentValue) {
+                        setStarDisplay(stars, parseInt(currentValue));
+                    } else {
+                        clearStars(stars);
+                    }
+                });
+            });
+        }
+
+        /**
+         * 設定評分值
+         */
+        function setRating(ratingContainer, value, questionName) {
+            const stars = ratingContainer.querySelectorAll('.star');
+            setStarDisplay(stars, parseInt(value));
+            
+            // 更新隱藏欄位
+            const hiddenInput = document.querySelector(`input[name="rating_${questionName}"]`);
+            if (hiddenInput) {
+                hiddenInput.value = value;
+            }
+        }
+
+        /**
+         * 取得隱藏欄位值
+         */
+        function getHiddenInputValue(questionName) {
+            const input = document.querySelector(`input[name="rating_${questionName}"]`);
+            return input ? input.value : '';
+        }
+
+        /**
+         * 高亮星星（懸停效果）
+         */
+        function highlightStars(stars, upToIndex) {
+            stars.forEach((star, idx) => {
+                if (idx <= upToIndex) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        /**
+         * 設定星星顯示狀態
+         */
+        function setStarDisplay(stars, value) {
+            stars.forEach((star, idx) => {
+                if (idx < value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        /**
+         * 清除所有星星
+         */
+        function clearStars(stars) {
+            stars.forEach(star => star.classList.remove('active'));
+        }
+
+        /**
+         * 載入交屋資訊（模擬）
+         */
+        function loadSurveyInfo() {
+            // 實際應用中，應從 URL 參數取得 surveyId，再透過 API 取得資料
+            const urlParams = new URLSearchParams(window.location.search);
+            const surveyId = urlParams.get('id');
+            
+            // 模擬資料
+            const mockData = {
+                project: '陸府原森',
+                unit: 'A1-12F',
+                date: '2024/01/15'
+            };
+            
+            document.getElementById('infoProject').textContent = mockData.project;
+            document.getElementById('infoUnit').textContent = mockData.unit;
+            document.getElementById('infoDate').textContent = mockData.date;
+        }
+
+        /**
+         * 處理表單提交
+         */
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            // 驗證必填項目（所有評分問題）
+            const requiredRatings = ['overall', 'staff', 'process', 'quality', 'documents'];
+            let allFilled = true;
+            
+            requiredRatings.forEach(name => {
+                const input = document.querySelector(`input[name="rating_${name}"]`);
+                if (!input || !input.value) {
+                    allFilled = false;
+                }
+            });
+            
+            if (!allFilled) {
+                alert('請完成所有評分項目');
+                return;
+            }
+            
+            // 收集表單資料
+            const formData = {
+                rating_overall: document.getElementById('ratingOverall').value,
+                rating_staff: document.getElementById('ratingStaff').value,
+                rating_process: document.getElementById('ratingProcess').value,
+                rating_quality: document.getElementById('ratingQuality').value,
+                rating_documents: document.getElementById('ratingDocuments').value,
+                feedback: document.getElementById('feedback').value
+            };
+            
+            console.log('問卷資料：', formData);
+            
+            // 模擬提交（實際應發送至後端 API）
+            submitSurvey(formData);
+        }
+
+        /**
+         * 提交問卷（模擬）
+         */
+        function submitSurvey(data) {
+            const btnSubmit = document.getElementById('btnSubmit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 提交中...';
+            
+            // 模擬 API 請求延遲
+            setTimeout(() => {
+                // 隱藏問卷內容，顯示感謝頁面
+                document.getElementById('surveyContent').classList.add('hidden');
+                document.getElementById('thankYouContainer').classList.add('show');
+                
+                // 捲動到頁面頂部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
