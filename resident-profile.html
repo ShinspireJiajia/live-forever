@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>住戶資料維護 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/resident-profile.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+        <header class="header">
+            <div class="header-left">
+                <button class="header-toggle" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <!-- 隱藏：APP使用者管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <!-- 隱藏：廠商管理 -->
+                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <!-- 隱藏：驗屋項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
+                                <!-- 隱藏：巡檢項目管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <!-- 隱藏：驗屋戶別管理 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
+                                <!-- 隱藏：繳款紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <!-- 隱藏：驗屋修繕紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
+                                <!-- 隱藏：巡檢紀錄 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
+                                <!-- 隱藏：驗屋個案單 -->
+                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：報表管理 -->
+                        <li class="menu-item" data-menu-id="report" style="display: none;">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 隱藏：問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html">首頁</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="unit-list.html">戶別管理</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span id="breadcrumb-unit-link"><a href="#" id="backToUnit">戶別資料</a></span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span class="current-page">住戶資料維護</span>
+            </div>
+
+            <div class="page-header">
+                <h1 class="page-title">戶別屬性維護</h1>
+            </div>
+
+            <div class="content-wrapper">
+                <form id="resident-profile-form">
+                    <input type="hidden" id="residentId">
+                    <input type="hidden" id="unitId">
+
+                    <!-- 基本資料 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-user"></i> 基本資料</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="residentUnit" class="form-label">戶別</label>
+                                    <input type="text" class="form-control" id="residentUnit" disabled="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentName" class="form-label">客戶名稱 <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="residentName" required="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentIdentity" class="form-label">身分 <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="residentIdentity" required="">
+                                        <option value="住戶">住戶</option>
+                                        <option value="所有權人">所有權人</option>
+                                        <option value="承租人">承租人</option>
+                                        <option value="同住人">同住人</option>
+                                        <option value="管理員">管理員</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentGender" class="form-label">性別</label>
+                                    <select class="form-control" id="residentGender">
+                                        <option value="male">男</option>
+                                        <option value="female">女</option>
+                                        <option value="other">其他</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentRelationship" class="form-label">補充說明(關係)</label>
+                                    <input type="text" class="form-control" id="residentRelationship" data-listener-added_4e870e8c="true">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentMaritalStatus" class="form-label">婚姻狀況</label>
+                                    <select class="form-control" id="residentMaritalStatus">
+                                        <option value="">請選擇</option>
+                                        <option value="single">未婚</option>
+                                        <option value="married">已婚</option>
+                                        <option value="other">其他</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label">出生年月日</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="number" class="form-control" id="residentBirthdayYear" placeholder="年" style="flex: 1;">
+                                        <input type="number" class="form-control" id="residentBirthdayMonth" placeholder="月" style="flex: 1;">
+                                        <input type="number" class="form-control" id="residentBirthdayDay" placeholder="日" style="flex: 1;">
+                                    </div>
+                                </div>
+                                <!-- 暫時隱藏欄位 -->
+                                <input type="hidden" id="residentIdNumber">
+                                <input type="hidden" id="residentParking">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 聯絡資訊 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-address-book"></i> 聯絡資訊</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="residentPhone" class="form-label">行動電話 <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="residentPhone" required="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentTel" class="form-label">住家/聯絡電話</label>
+                                    <input type="tel" class="form-control" id="residentTel">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentTel2" class="form-label">住家/聯絡電話二</label>
+                                    <input type="tel" class="form-control" id="residentTel2">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentCompanyTel" class="form-label">公司電話</label>
+                                    <input type="tel" class="form-control" id="residentCompanyTel">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentEmail" class="form-label">E_MAIL</label>
+                                    <input type="email" class="form-control" id="residentEmail">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentLineId" class="form-label">Line ID</label>
+                                    <input type="text" class="form-control" id="residentLineId">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 地址資訊 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-map-location-dot"></i> 地址資訊</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label for="residentPermanentZip" class="form-label">戶籍區號</label>
+                                    <input type="text" class="form-control" id="residentPermanentZip">
+                                </div>
+                                <div class="col-md-9 form-group">
+                                    <label for="residentPermanentAddress" class="form-label">戶籍地址</label>
+                                    <input type="text" class="form-control" id="residentPermanentAddress">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="residentMailingZip" class="form-label">通訊區號</label>
+                                    <input type="text" class="form-control" id="residentMailingZip">
+                                </div>
+                                <div class="col-md-9 form-group">
+                                    <label for="residentAddress" class="form-label">通訊地址</label>
+                                    <input type="text" class="form-control" id="residentAddress">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="residentDoorplate" class="form-label">門牌地址</label>
+                                    <input type="text" class="form-control" id="residentDoorplate" placeholder="預設為戶別地址">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 職業與公司 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-briefcase"></i> 職業與公司</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="residentIndustry" class="form-label">行業別</label>
+                                    <input type="text" class="form-control" id="residentIndustry">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentOccupation" class="form-label">職業</label>
+                                    <input type="text" class="form-control" id="residentOccupation">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentCompany" class="form-label">服務公司</label>
+                                    <input type="text" class="form-control" id="residentCompany">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentJobTitle" class="form-label">職稱</label>
+                                    <input type="text" class="form-control" id="residentJobTitle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 家庭與個人 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-people-roof"></i> 家庭與個人</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label for="residentFamilyMembers" class="form-label">家庭成員(含寵物)</label>
+                                    <textarea class="form-control" id="residentFamilyMembers" rows="2"></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="residentInterests" class="form-label">興趣</label>
+                                    <textarea class="form-control" id="residentInterests" rows="2"></textarea>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentDietary" class="form-label">飲食特性</label>
+                                    <input type="text" class="form-control" id="residentDietary">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentResidencyFreq" class="form-label">居住頻率</label>
+                                    <input type="text" class="form-control" id="residentResidencyFreq">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentFamilyChar" class="form-label">家族特性</label>
+                                    <input type="text" class="form-control" id="residentFamilyChar">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentSeniorParticipants" class="form-label">參與尊齡人員</label>
+                                    <input type="text" class="form-control" id="residentSeniorParticipants">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 配偶資訊 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-user-group"></i> 配偶資訊</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="spouseName" class="form-label">配偶姓名</label>
+                                    <input type="text" class="form-control" id="spouseName">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="spouseOccupation" class="form-label">配偶職業</label>
+                                    <input type="text" class="form-control" id="spouseOccupation">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="spouseMobile" class="form-label">配偶行動電話</label>
+                                    <input type="tel" class="form-control" id="spouseMobile">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="spousePhone2" class="form-label">配偶電話二</label>
+                                    <input type="tel" class="form-control" id="spousePhone2">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="spouseAddress" class="form-label">配偶通訊地址</label>
+                                    <input type="text" class="form-control" id="spouseAddress">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="form-label">出生年月日</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="number" class="form-control" id="spouseBirthdayYear" placeholder="年" style="flex: 1;">
+                                        <input type="number" class="form-control" id="spouseBirthdayMonth" placeholder="月" style="flex: 1;">
+                                        <input type="number" class="form-control" id="spouseBirthdayDay" placeholder="日" style="flex: 1;">
+                                    </div>
+                                </div>
+                                <!-- 配偶隱藏欄位 -->
+                                <input type="hidden" id="spouseIdNumber">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 其他聯絡人 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-address-card"></i> 其他聯絡人</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="residentRecipient" class="form-label">收信人</label>
+                                    <input type="text" class="form-control" id="residentRecipient">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentContactPerson" class="form-label">連絡人</label>
+                                    <input type="text" class="form-control" id="residentContactPerson">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentContactPhone" class="form-label">連絡人電話</label>
+                                    <input type="tel" class="form-control" id="residentContactPhone">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="residentContactNotes" class="form-label">連絡人備註</label>
+                                    <input type="text" class="form-control" id="residentContactNotes">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 客服與備註 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-headset"></i> 客服與備註</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="residentHandoverDate" class="form-label">交屋日/喬遷日</label>
+                                    <input type="date" class="form-control" id="residentHandoverDate">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="residentServiceNotes" class="form-label">客服特別注意事項</label>
+                                    <textarea class="form-control" id="residentServiceNotes" rows="3"></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="residentPremiumNotes" class="form-label">精服注意事項</label>
+                                    <textarea class="form-control" id="residentPremiumNotes" rows="3"></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="residentRemarks" class="form-label">備註事項</label>
+                                    <textarea class="form-control" id="residentRemarks" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 綠海養護 -->
+                    <div class="profile-section">
+                        <div class="profile-section-header">
+                            <h3 class="profile-section-title"><i class="fa-solid fa-leaf"></i> 綠海養護</h3>
+                        </div>
+                        <div class="profile-section-body">
+                            <div class="row">
+  
+
+                                <div class="col-md-6 form-group">
+                                    <label for="greenSeaManager" class="form-label">住家園藝掌管人</label>
+                                    <input type="text" class="form-control" id="greenSeaManager">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="greenSeaContact" class="form-label">園藝主要聯繫窗口</label>
+                                    <input type="text" class="form-control" id="greenSeaContact">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="greenSeaSchedule" class="form-label">修剪慣例預約(空檔)</label>
+                                    <input type="text" class="form-control" id="greenSeaSchedule">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="greenSeaSpecialNotes" class="form-label">養護特殊注意事項</label>
+                                    <textarea class="form-control" id="greenSeaSpecialNotes" rows="2"></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="greenSeaRecords" class="form-label">修剪紀錄</label>
+                                    <textarea class="form-control" id="greenSeaRecords" rows="3"></textarea>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="greenSeaNotes" class="form-label">養護備註</label>
+                                    <textarea class="form-control" id="greenSeaNotes" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions-bar">
+                        <button type="submit" class="btn btn-primary">儲存</button>
+                        <button type="button" class="btn btn-secondary" id="btnCancel">取消</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/mock-data.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const unitId = parseInt(urlParams.get('unitId'));
+            const action = urlParams.get('action');
+            const residentId = parseInt(urlParams.get('residentId'));
+            
+            if (!unitId) {
+                alert('無效的戶別 ID');
+                window.location.href = 'unit-list.html';
+                return;
+            }
+
+            // Set hidden fields
+            document.getElementById('unitId').value = unitId;
+            if (residentId) {
+                document.getElementById('residentId').value = residentId;
+            }
+
+            // Set back link
+            const backLink = document.getElementById('backToUnit');
+            if(backLink) backLink.href = `unit-profile.html?id=${unitId}`;
+            
+            const btnCancel = document.getElementById('btnCancel');
+            if(btnCancel) {
+                btnCancel.addEventListener('click', () => {
+                    window.history.back();
+                });
+            }
+
+            // Load Data
+            loadResidentData(unitId, residentId, action);
+
+            // Save Data
+            document.getElementById('resident-profile-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveResidentData(unitId, residentId);
+            });
+        });
+
+        function loadResidentData(unitId, residentId, action) {
+            const units = JSON.parse(localStorage.getItem('crm_units')) || [];
+            const unit = units.find(u => u.id === unitId);
+            
+            if (!unit) {
+                alert('找不到戶別資料');
+                window.location.href = 'unit-list.html';
+                return;
+            }
+
+            // Display Unit Name
+            const unitName = (unit.projectName || '') + ' ' + (unit.building || '') + (unit.doorNumber || '');
+            document.getElementById('residentUnit').value = unitName;
+
+            if (action === 'edit' && residentId) {
+                const members = JSON.parse(localStorage.getItem('crm_members')) || [];
+                const member = members.find(m => m.id === residentId);
+                
+                if (member) {
+                    // Basic Info
+                    setValue('residentName', member.name);
+                    setValue('residentIdentity', member.identity);
+                    setValue('residentGender', member.gender);
+                    setValue('residentRelationship', member.relationship);
+                    setValue('residentMaritalStatus', member.maritalStatus);
+                    
+                    // Handle Resident Birthday
+                    if (member.birthday) {
+                        let parts = member.birthday.split(/[-/]/);
+                        if (parts.length === 3) {
+                            document.getElementById('residentBirthdayYear').value = parts[0];
+                            document.getElementById('residentBirthdayMonth').value = parts[1];
+                            document.getElementById('residentBirthdayDay').value = parts[2];
+                        } else if (parts.length === 2) {
+                            document.getElementById('residentBirthdayMonth').value = parts[0];
+                            document.getElementById('residentBirthdayDay').value = parts[1];
+                        }
+                    }
+                    
+                    // Contact Info
+                    setValue('residentPhone', member.phone);
+                    setValue('residentTel', member.tel);
+                    setValue('residentTel2', member.tel2);
+                    setValue('residentCompanyTel', member.companyTel);
+                    setValue('residentEmail', member.email);
+                    setValue('residentLineId', member.lineId);
+
+                    // Address Info
+                    setValue('residentPermanentZip', member.permanentZip);
+                    setValue('residentPermanentAddress', member.permanentAddress);
+                    setValue('residentMailingZip', member.mailingZip);
+                    setValue('residentAddress', member.mailingAddress); // Assuming this maps to 'residentAddress'
+                    setValue('residentDoorplate', member.doorplate);
+
+                    // Job Info
+                    setValue('residentIndustry', member.industry);
+                    setValue('residentOccupation', member.occupation);
+                    setValue('residentCompany', member.company);
+                    setValue('residentJobTitle', member.jobTitle);
+
+                    // Personal Info
+                    setValue('residentFamilyMembers', member.familyMembers);
+                    setValue('residentInterests', member.interests);
+                    setValue('residentDietary', member.dietary);
+                    setValue('residentResidencyFreq', member.residencyFreq);
+                    setValue('residentFamilyChar', member.familyChar);
+                    setValue('residentSeniorParticipants', member.seniorParticipants);
+
+                    // Spouse Info
+                    setValue('spouseName', member.spouseName);
+                    setValue('spouseOccupation', member.spouseOccupation);
+                    setValue('spouseMobile', member.spouseMobile);
+                    setValue('spousePhone2', member.spousePhone2);
+                    setValue('spouseAddress', member.spouseAddress);
+                    
+                    // Handle Spouse Birthday
+                    if (member.spouseBirthday) {
+                        let parts = member.spouseBirthday.split(/[-/]/);
+                        if (parts.length === 3) {
+                            document.getElementById('spouseBirthdayYear').value = parts[0];
+                            document.getElementById('spouseBirthdayMonth').value = parts[1];
+                            document.getElementById('spouseBirthdayDay').value = parts[2];
+                        } else if (parts.length === 2) {
+                            document.getElementById('spouseBirthdayMonth').value = parts[0];
+                            document.getElementById('spouseBirthdayDay').value = parts[1];
+                        }
+                    }
+
+                    // Other Contact
+                    setValue('residentRecipient', member.recipient);
+                    setValue('residentContactPerson', member.contactPerson);
+                    setValue('residentContactPhone', member.contactPhone);
+                    setValue('residentContactNotes', member.contactNotes);
+
+                    // Service Notes
+                    setValue('residentHandoverDate', member.handoverDate);
+                    setValue('residentServiceNotes', member.serviceNotes);
+                    setValue('residentPremiumNotes', member.premiumNotes);
+                    setValue('residentRemarks', member.remarks);
+
+                    // Green Sea (Read-only mostly, but populate if data exists)
+                    setValue('greenSeaManager', member.greenSeaManager);
+                    setValue('greenSeaContact', member.greenSeaContact);
+                    setValue('greenSeaSchedule', member.greenSeaSchedule);
+                    setValue('greenSeaSpecialNotes', member.greenSeaSpecialNotes);
+                    setValue('greenSeaRecords', member.greenSeaRecords);
+                    setValue('greenSeaNotes', member.greenSeaNotes);
+                }
+            }
+        }
+
+        function setValue(id, value) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.value = value !== undefined && value !== null ? value : '';
+            }
+        }
+
+        function saveResidentData(unitId, residentId) {
+            const units = JSON.parse(localStorage.getItem('crm_units')) || [];
+            const unit = units.find(u => u.id === unitId);
+            
+            if (!unit) {
+                alert('找不到戶別資料');
+                return;
+            }
+
+            const members = JSON.parse(localStorage.getItem('crm_members')) || [];
+            
+            const formData = {
+                name: document.getElementById('residentName').value,
+                identity: document.getElementById('residentIdentity').value,
+                gender: document.getElementById('residentGender').value,
+                relationship: document.getElementById('residentRelationship').value,
+                maritalStatus: document.getElementById('residentMaritalStatus').value,
+                birthday: (function() {
+                    const y = document.getElementById('residentBirthdayYear').value;
+                    const m = document.getElementById('residentBirthdayMonth').value;
+                    const d = document.getElementById('residentBirthdayDay').value;
+                    if (m && d) {
+                        return y ? `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}` : `${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+                    }
+                    return '';
+                })(),
+                
+                phone: document.getElementById('residentPhone').value,
+                tel: document.getElementById('residentTel').value,
+                tel2: document.getElementById('residentTel2').value,
+                companyTel: document.getElementById('residentCompanyTel').value,
+                email: document.getElementById('residentEmail').value,
+                lineId: document.getElementById('residentLineId').value,
+
+                permanentZip: document.getElementById('residentPermanentZip').value,
+                permanentAddress: document.getElementById('residentPermanentAddress').value,
+                mailingZip: document.getElementById('residentMailingZip').value,
+                mailingAddress: document.getElementById('residentAddress').value,
+                doorplate: document.getElementById('residentDoorplate').value,
+
+                industry: document.getElementById('residentIndustry').value,
+                occupation: document.getElementById('residentOccupation').value,
+                company: document.getElementById('residentCompany').value,
+                jobTitle: document.getElementById('residentJobTitle').value,
+
+                familyMembers: document.getElementById('residentFamilyMembers').value,
+                interests: document.getElementById('residentInterests').value,
+                dietary: document.getElementById('residentDietary').value,
+                residencyFreq: document.getElementById('residentResidencyFreq').value,
+                familyChar: document.getElementById('residentFamilyChar').value,
+                seniorParticipants: document.getElementById('residentSeniorParticipants').value,
+
+                spouseName: document.getElementById('spouseName').value,
+                spouseOccupation: document.getElementById('spouseOccupation').value,
+                spouseMobile: document.getElementById('spouseMobile').value,
+                spousePhone2: document.getElementById('spousePhone2').value,
+                spouseAddress: document.getElementById('spouseAddress').value,
+                spouseBirthday: (function() {
+                    const y = document.getElementById('spouseBirthdayYear').value;
+                    const m = document.getElementById('spouseBirthdayMonth').value;
+                    const d = document.getElementById('spouseBirthdayDay').value;
+                    if (m && d) {
+                        return y ? `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}` : `${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+                    }
+                    return '';
+                })(),
+
+                recipient: document.getElementById('residentRecipient').value,
+                contactPerson: document.getElementById('residentContactPerson').value,
+                contactPhone: document.getElementById('residentContactPhone').value,
+                contactNotes: document.getElementById('residentContactNotes').value,
+
+                handoverDate: document.getElementById('residentHandoverDate').value,
+                serviceNotes: document.getElementById('residentServiceNotes').value,
+                premiumNotes: document.getElementById('residentPremiumNotes').value,
+                remarks: document.getElementById('residentRemarks').value,
+
+                // 綠海養護
+                greenSeaManager: document.getElementById('greenSeaManager').value,
+                greenSeaContact: document.getElementById('greenSeaContact').value,
+                greenSeaSchedule: document.getElementById('greenSeaSchedule').value,
+                greenSeaSpecialNotes: document.getElementById('greenSeaSpecialNotes').value,
+                greenSeaRecords: document.getElementById('greenSeaRecords').value,
+                greenSeaNotes: document.getElementById('greenSeaNotes').value,
+
+                // Preserve existing fields
+                projectName: unit.projectName,
+                unitName: (unit.building || '') + (unit.doorNumber || '')
+            };
+
+            if (residentId) {
+                // Update
+                const index = members.findIndex(m => m.id === residentId);
+                if (index !== -1) {
+                    members[index] = { ...members[index], ...formData };
+                }
+            } else {
+                // Create
+                const newId = members.length > 0 ? Math.max(...members.map(m => m.id)) + 1 : 1;
+                const newMember = {
+                    id: newId,
+                    ...formData,
+                    lineBindStatus: '未綁定',
+                    registerDate: new Date().toISOString().split('T')[0]
+                };
+                members.push(newMember);
+            }
+
+            localStorage.setItem('crm_members', JSON.stringify(members));
+            alert('儲存成功');
+            window.location.href = 'unit-list.html';
+        }
+    </script>
+</body>
+</html>
