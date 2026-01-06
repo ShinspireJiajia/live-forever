@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>繳款紀錄管理 - 陸府建設 CRM</title>
+    <title>對保時段管理 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -17,14 +17,17 @@
     <link rel="stylesheet" href="css/breadcrumb.css">
     <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/forms.css">
-    <link rel="stylesheet" href="css/tables.css">
-    <link rel="stylesheet" href="css/pagination.css">
-    <link rel="stylesheet" href="css/modals.css">
-    <link rel="stylesheet" href="css/unit-payment.css">
+    <link rel="stylesheet" href="css/reservation-collateral-schedule.css">
 </head>
 <body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
     <div class="app-container">
+        
+        <!-- ============================================ -->
         <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
         <header class="header">
             <div class="header-left">
                 <!-- 側邊欄切換按鈕 -->
@@ -41,6 +44,7 @@
             </div>
         </header>
 
+        <!-- ============================================ -->
         <!-- 側邊欄選單 -->
         <!-- ============================================ -->
         <aside class="sidebar" id="sidebar">
@@ -253,169 +257,124 @@
 
         <!-- ============================================ -->
         <!-- 主內容區域 -->
+        <!-- ============================================ -->
         <main class="main-content">
+            <!-- 麵包屑導覽 -->
             <div class="breadcrumb">
                 <a href="index.html" class="breadcrumb-item">
                     <i class="fa-solid fa-house"></i>
                     首頁
                 </a>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-item">戶別管理</span>
+                <span class="breadcrumb-item">預約服務</span>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-item active">繳款紀錄管理</span>
+                <a href="reservation-collateral.html" class="breadcrumb-item">對保預約</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">時段管理</span>
             </div>
 
+            <!-- 頁面內容 -->
             <div class="content-wrapper">
-                <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
-                    <h1 class="page-title" style="color: #B8A676;">
-                        <i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i>繳款紀錄管理
-                    </h1>
-                    <button class="btn-primary-gold" id="add-payment-btn">新增期款</button>
-                </div>
-
-                <!-- 搜尋區域 -->
-                <div class="search-area">
-                    <div class="search-group">
-                        <label class="search-label">繳費狀態：</label>
-                        <select class="search-select" id="payment-status">
-                            <option value="all">全部</option>
-                            <option value="paid">已繳費</option>
-                            <option value="unpaid">未繳費</option>
-                        </select>
-                    </div>
-                    <div class="search-group">
-                        <label class="search-label">款項：</label>
-                        <input type="text" class="search-input" id="payment-name" placeholder="請輸入款項名稱">
-                    </div>
-                    <button class="btn-search" id="search-btn">查詢</button>
-                    <button class="btn-clear">清除</button>
-                </div>
-
-                <!-- 表格容器 -->
-                <div class="table-wrapper">
-                    <div class="table-container" id="table-container">
-                        <!-- 滾動進度條 -->
-                        <div class="scroll-progress" id="scroll-progress"></div>
-                        
-                        <!-- 首次訪問滑動提示 -->
-                        <div class="swipe-hint" id="swipe-hint">
-                            <i class="fa-solid fa-hand-pointer"></i> 左右滑動查看完整資料
+                <div class="schedule-container">
+                    <!-- 標題與操作按鈕 -->
+                    <div class="schedule-header">
+                        <div>
+                            <h1 class="schedule-title">對保預約時段管理</h1>
+                            <div class="project-selector">
+                                <label for="projectSelect">案場：</label>
+                                <select id="projectSelect" class="form-select">
+                                    <option value="陸府原森">陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                </select>
+                            </div>
                         </div>
-                        
-                        <table class="payment-table">
-                            <thead>
-                                <tr>
-                                    <th>名稱</th>
-                                    <th>到期日</th>
-                                    <th>金額</th>
-                                    <th>繳費狀態</th>
-                                    <th>發票類型</th>
-                                    <th>發票狀態</th>
-                                    <th>繳款證明</th>
-                                    <th>備註</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>季管理費</td>
-                                    <td>2023-09-10</td>
-                                    <td>NT$ 12,000</td>
-                                    <td><span class="status-paid">已繳費</span></td>
-                                    <td>後開發票</td>
-                                    <td>已開立</td>
-                                    <td>無</td>
-                                    <td class="tooltip">
-                                        提前繳費，享有優惠折扣
-                                        <span class="tooltip-text">提前繳費，享有優惠折扣</span>
-                                    </td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn-action btn-edit" title="編輯"><i class="fa-solid fa-pen-to-square"></i> 編輯</button>
-                                            <button class="btn-action btn-delete" title="刪除"><i class="fa-solid fa-trash"></i> 刪除</button>
-                                            <button class="btn-action btn-notify" onclick="sendNotification('季管理費', '已繳費')" title="推播"><i class="fa-solid fa-bell"></i> 推播</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>季管理費</td>
-                                    <td>2023-12-12</td>
-                                    <td>NT$ 45,000</td>
-                                    <td><span class="status-paid">已繳費</span></td>
-                                    <td>後開發票</td>
-                                    <td>未開立</td>
-                                    <td>無</td>
-                                    <td class="tooltip">
-                                        包含額外清潔服務費用
-                                        <span class="tooltip-text">包含額外清潔服務費用</span>
-                                    </td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn-action btn-edit" title="編輯"><i class="fa-solid fa-pen-to-square"></i> 編輯</button>
-                                            <button class="btn-action btn-delete" title="刪除"><i class="fa-solid fa-trash"></i> 刪除</button>
-                                            <button class="btn-action btn-notify" onclick="sendNotification('季管理費', '已繳費')" title="推播"><i class="fa-solid fa-bell"></i> 推播</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>季管理費</td>
-                                    <td>2024-03-15</td>
-                                    <td>NT$ 78,500</td>
-                                    <td><span class="status-paid">已繳費</span></td>
-                                    <td>後開發票</td>
-                                    <td>處理中</td>
-                                    <td>有</td>
-                                    <td class="tooltip">
-                                        年度總結算，含維護保固費
-                                        <span class="tooltip-text">年度總結算，含維護保固費</span>
-                                    </td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn-action btn-edit" title="編輯"><i class="fa-solid fa-pen-to-square"></i> 編輯</button>
-                                            <button class="btn-action btn-delete" title="刪除"><i class="fa-solid fa-trash"></i> 刪除</button>
-                                            <button class="btn-action btn-notify" onclick="sendNotification('季管理費', '已繳費')" title="推播"><i class="fa-solid fa-bell"></i> 推播</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>季餐飲費</td>
-                                    <td>2023-12-31</td>
-                                    <td>NT$ 35,000</td>
-                                    <td><span class="status-unpaid">未繳費</span></td>
-                                    <td><span class="receipt-type-pre">預開發票</span></td>
-                                    <td>未開立</td>
-                                    <td>無</td>
-                                    <td class="tooltip">
-                                        包含公共區域綠化維護、清潔服務
-                                        <span class="tooltip-text">包含公共區域綠化維護、清潔服務</span>
-                                    </td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn-action btn-edit" title="編輯"><i class="fa-solid fa-pen-to-square"></i> 編輯</button>
-                                            <button class="btn-action btn-delete" title="刪除"><i class="fa-solid fa-trash"></i> 刪除</button>
-                                            <button class="btn-action btn-notify" onclick="sendNotification('季餐飲費', '未繳費')" title="推播"><i class="fa-solid fa-bell"></i> 推播</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="header-actions">
+                            <button class="action-button btn-back" id="btnBack">
+                                <i class="fa-solid fa-arrow-left"></i> 返回列表
+                            </button>
+                            <button class="action-button" id="btnCopyLastWeek">
+                                <i class="fa-solid fa-copy"></i> 複製上一周設定
+                            </button>
+                        </div>
                     </div>
                     
-                    <!-- 滾動指示器 -->
-                    <div class="scroll-indicator-container">
-                        <div class="scroll-arrows">
-                            <span class="arrow-left" id="arrow-left">◀</span>
-                            <span class="scroll-text">左右滑動查看更多</span>
-                            <span class="arrow-right" id="arrow-right">▶</span>
+                    <!-- 圖例說明 -->
+                    <div class="legend-container">
+                        <div class="legend-item">
+                            <div class="legend-color slot-available">0</div>
+                            <span>不可預約</span>
                         </div>
+                        <div class="legend-item">
+                            <div class="legend-color slot-booked-1">1</div>
+                            <span>可預約 1 組</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color slot-booked-2">2</div>
+                            <span>可預約 2 組</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color slot-booked-3">3</div>
+                            <span>可預約 3 組</span>
+                        </div>
+                        <div class="legend-item" style="margin-left: auto;">
+                            <i class="fa-solid fa-hand-pointer" style="color: var(--color-gray-500);"></i>
+                            <span>點擊時段可切換可預約組數 (0→1→2→3→0)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 日期導覽 -->
+                    <div class="date-navigation">
+                        <div class="nav-buttons">
+                            <button id="btnPrevWeek">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        <div class="date-range" id="dateRange">12月 29 - 1月 4, 2026</div>
+                        <div class="nav-buttons">
+                            <button id="btnNextWeek">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 時段表格 -->
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>時段</th>
+                                <th id="dayHeader0">星期日<br>12月 29日</th>
+                                <th id="dayHeader1">星期一<br>12月 30日</th>
+                                <th id="dayHeader2">星期二<br>12月 31日</th>
+                                <th id="dayHeader3">星期三<br>1月 1日</th>
+                                <th id="dayHeader4">星期四<br>1月 2日</th>
+                                <th id="dayHeader5">星期五<br>1月 3日</th>
+                                <th id="dayHeader6">星期六<br>1月 4日</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleBody">
+                            <!-- 由 JavaScript 動態生成 -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- 底部按鈕區域 -->
+                    <div class="footer-actions">
+                        <button class="save-button" id="btnSave">
+                            <i class="fa-solid fa-floppy-disk save-icon"></i>確認儲存
+                        </button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+    
+    <!-- 成功訊息提示 -->
+    <div class="success-message" id="successMessage">
+        時段設定已成功儲存！
+    </div>
 
     <!-- JavaScript -->
     <script src="js/sidebar.js"></script>
-    <script src="js/unit-payment.js"></script>
+    <script src="js/reservation-collateral-schedule.js"></script>
 </body>
 </html>

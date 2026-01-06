@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/reservation-handover.css">
+    <link rel="stylesheet" href="css/case-list.css">
+    <link rel="stylesheet" href="css/case-edit.css">
+    <link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
     <div class="app-container">
@@ -65,8 +69,7 @@
                                 <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
                                 <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
                                 <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
-                                <!-- 隱藏：APP使用者管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
+                                <li class="menu-item"><a href="#" title="APP使用者管理 (未完成)"><span class="menu-title">APP使用者管理 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -78,17 +81,14 @@
                                 <i class="expand-state fa-solid fa-chevron-right"></i>
                             </a>
                             <ul class="menu-items">
-                                <!-- 隱藏：廠商管理 -->
-                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
                                 <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
                                 <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
                                 <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
-                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理 (未完成)"><span class="menu-title">LINE頁面管理 (未完成)</span></a></li>
                                 <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
-                                <!-- 隱藏：驗屋項目管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
-                                <!-- 隱藏：巡檢項目管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋項目管理 (未完成)"><span class="menu-title">驗屋項目管理 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="巡檢項目管理 (未完成)"><span class="menu-title">巡檢項目管理 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -101,10 +101,10 @@
                             </a>
                             <ul class="menu-items">
                                 <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
-                                <!-- 隱藏：驗屋戶別管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
-                                <!-- 隱藏：繳款紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋戶別管理 (未完成)"><span class="menu-title">驗屋戶別管理 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                                <li class="menu-item"><a href="#" title="合約附件 (未完成)"><span class="menu-title">合約附件 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="戶別預約設定 (未完成)"><span class="menu-title">戶別預約設定 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -118,6 +118,7 @@
                             <ul class="menu-items">
                                 <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
                                 <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                                <li class="menu-item"><a href="#" title="活動歷程 (未完成)"><span class="menu-title">活動歷程 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -131,12 +132,9 @@
                             <ul class="menu-items">
                                 <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
                                 <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
-                                <!-- 隱藏：驗屋修繕紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
-                                <!-- 隱藏：巡檢紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
-                                <!-- 隱藏：驗屋個案單 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋修繕紀錄 (未完成)"><span class="menu-title">驗屋修繕紀錄 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="巡檢紀錄 (未完成)"><span class="menu-title">巡檢紀錄 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋個案單 (未完成)"><span class="menu-title">驗屋個案單 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -152,51 +150,6 @@
                             </ul>
                         </li>
 
-                        <!-- 隱藏：報表管理 -->
-                        <li class="menu-item" data-menu-id="report" style="display: none;">
-                            <a href="javascript:void(0)" title="報表管理">
-                                <i class="menu-icon fa-solid fa-chart-pie"></i>
-                                <span class="menu-title">報表管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
-                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
-                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 推播管理 -->
-                        <li class="menu-item" data-menu-id="push">
-                            <a href="javascript:void(0)" title="推播管理">
-                                <i class="menu-icon fa-solid fa-bell"></i>
-                                <span class="menu-title">推播管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 隱藏：問卷管理 -->
-                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
-                            <a href="javascript:void(0)" title="問卷管理">
-                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
-                                <span class="menu-title">問卷管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
-                            </ul>
-                        </li>
-
                         <!-- 綠海養護 -->
                         <li class="menu-item" data-menu-id="green">
                             <a href="javascript:void(0)" title="綠海養護">
@@ -205,8 +158,9 @@
                                 <i class="expand-state fa-solid fa-chevron-right"></i>
                             </a>
                             <ul class="menu-items">
+                                <li class="menu-item"><a href="green-site.html" title="案場管理(綠海)"><span class="menu-title">案場管理(綠海)</span></a></li>
                                 <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
-                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                                <li class="menu-item"><a href="green-reservation.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
                             </ul>
                         </li>
 
@@ -250,6 +204,51 @@
                                 <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
                             </ul>
                         </li>
+
+                        <!-- 報表管理 -->
+                        <li class="menu-item" data-menu-id="report">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表 (未完成)"><span class="menu-title">售後服務管制總表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單 (未完成)"><span class="menu-title">未結案個案單 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修類統計表 (未完成)"><span class="menu-title">全部建案維修類統計表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表 (未完成)"><span class="menu-title">全部建案維修部品統計表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表 (未完成)"><span class="menu-title">全部建案維修位置統計表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="滿意度調查統計 (未完成)"><span class="menu-title">滿意度調查統計 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="客戶滿意度明細表 (未完成)"><span class="menu-title">客戶滿意度明細表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表 (未完成)"><span class="menu-title">全部建案維修狀態統計表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="案件數量統計表 (未完成)"><span class="menu-title">案件數量統計表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="任務完成統計表 (未完成)"><span class="menu-title">任務完成統計表 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理 (未完成)"><span class="menu-title">推播管理 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理 (未完成)"><span class="menu-title">題目管理 (未完成)</span></a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -272,199 +271,176 @@
                     <h1 class="page-title">對保預約管理</h1>
                 </div>
 
-                <!-- 日曆/列表切換 -->
-                <div class="view-toggle">
-                    <button class="view-btn active" id="btnListView">
-                        <i class="fa-solid fa-list"></i>
-                        列表
-                    </button>
-                    <button class="view-btn" id="btnCalendarView">
-                        <i class="fa-solid fa-calendar"></i>
-                        日曆
-                    </button>
-                </div>
-
                 <!-- 查詢條件區 -->
                 <div class="search-panel">
-                    <form class="search-form" id="searchForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">案場</label>
-                                <select class="form-select" id="searchProject">
-                                    <option value="">全部</option>
-                                    <option value="陸府原森">陸府原森</option>
-                                    <option value="陸府觀微">陸府觀微</option>
-                                    <option value="陸府植森">陸府植森</option>
-                                </select>
+                    <form class="search-form case-search-form" id="searchForm">
+                        <div class="search-grid">
+                            <!-- 案場 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">案場</label>
+                                <div class="col-input">
+                                    <select class="form-select" id="searchProject">
+                                        <option value="">請選擇</option>
+                                        <option value="陸府原森">陸府原森</option>
+                                        <option value="陸府觀微">陸府觀微</option>
+                                        <option value="陸府植森">陸府植森</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">戶號</label>
-                                <input type="text" class="form-input" id="searchUnit" placeholder="請輸入戶號">
+                            <!-- 戶別 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">戶別</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="searchUnit" placeholder="請輸入戶別">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">會員姓名</label>
-                                <input type="text" class="form-input" id="searchMember" placeholder="請輸入會員姓名">
+                            <!-- 會員姓名 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">會員姓名</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="searchMember" placeholder="請輸入會員姓名">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">狀態</label>
-                                <select class="form-select" id="searchStatus">
-                                    <option value="">全部</option>
-                                    <option value="待確認">待確認</option>
-                                    <option value="已確認">已確認</option>
-                                    <option value="已完成">已完成</option>
-                                    <option value="已取消">已取消</option>
-                                </select>
+                            <!-- 狀態 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">狀態</label>
+                                <div class="col-input">
+                                    <select class="form-select" id="searchStatus">
+                                        <option value="">請選擇</option>
+                                        <option value="待確認">待確認</option>
+                                        <option value="已確認">已確認</option>
+                                        <option value="已完成">已完成</option>
+                                        <option value="已取消">已取消</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 預約日期 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">預約日期</label>
+                                <div class="col-input">
+                                    <div class="date-range-group">
+                                        <input type="date" class="form-input" id="searchDateFrom">
+                                        <span class="date-separator">~</span>
+                                        <input type="date" class="form-input" id="searchDateTo">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">預約日期起</label>
-                                <input type="date" class="form-input" id="searchDateFrom">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">預約日期迄</label>
-                                <input type="date" class="form-input" id="searchDateTo">
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                查詢
-                            </button>
-                            <button type="reset" class="btn btn-secondary">
+                        <!-- 操作按鈕 -->
+                        <div class="form-actions-right">
+                            <button type="reset" class="btn btn-info">
                                 <i class="fa-solid fa-rotate-left"></i>
                                 重置
                             </button>
-                            <button type="button" class="btn btn-secondary" id="btnExport">
-                                <i class="fa-solid fa-file-export"></i>
+                            <button type="submit" class="btn btn-info">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="button" class="btn btn-info" id="btnExport">
+                                <i class="fa-solid fa-download"></i>
                                 匯出
+                            </button>
+                            <a href="reservation-collateral-schedule.html" class="btn btn-info">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                時段管理
+                            </a>
+                            <button type="button" class="btn btn-success" id="btnAdd">
+                                新增預約
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- 操作按鈕區 -->
-                <div class="toolbar">
-                    <button class="btn btn-primary" id="btnAdd">
-                        <i class="fa-solid fa-plus"></i>
-                        新增預約
-                    </button>
-                    <button class="btn btn-secondary" id="btnBatchNotify">
-                        <i class="fa-solid fa-bell"></i>
-                        批次發送提醒
-                    </button>
+                <!-- 資料表格 -->
+                <div class="table-responsive">
+                    <table class="data-table case-table" id="reservationTable">
+                        <thead>
+                            <tr>
+                                <th class="col-1">序號</th>
+                                <th class="col-1">案場</th>
+                                <th class="col-1">戶別</th>
+                                <th class="col-1">會員姓名</th>
+                                <th class="col-1">聯絡電話</th>
+                                <th class="col-1">可預約時段</th>
+                                <th class="col-1">預約日期</th>
+                                <th class="col-1">預約時段</th>
+                                <th class="col-1">銀行</th>
+                                <th class="col-1">狀態</th>
+                                <th class="col-1">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservationTableBody">
+                        </tbody>
+                    </table>
                 </div>
 
-                <!-- 列表視圖 -->
-                <div class="list-view" id="listView">
-                    <div class="table-container">
-                        <table class="data-table" id="reservationTable">
-                            <thead>
-                                <tr>
-                                    <th width="60">序號</th>
-                                    <th>案場</th>
-                                    <th>戶號</th>
-                                    <th>會員姓名</th>
-                                    <th>聯絡電話</th>
-                                    <th>預約日期</th>
-                                    <th>預約時段</th>
-                                    <th>銀行</th>
-                                    <th>狀態</th>
-                                    <th width="150">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="reservationTableBody">
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- 分頁元件 -->
-                    <div class="pagination-wrapper" id="paginationWrapper">
-                    </div>
-                </div>
-
-                <!-- 日曆視圖 -->
-                <div class="calendar-view" id="calendarView" style="display: none;">
-                    <div class="calendar-header">
-                        <button class="btn btn-secondary" id="btnPrevMonth">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <h2 class="calendar-title" id="calendarTitle">2024年 1月</h2>
-                        <button class="btn btn-secondary" id="btnNextMonth">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    <div class="calendar-grid">
-                        <div class="calendar-weekdays">
-                            <div class="weekday">日</div>
-                            <div class="weekday">一</div>
-                            <div class="weekday">二</div>
-                            <div class="weekday">三</div>
-                            <div class="weekday">四</div>
-                            <div class="weekday">五</div>
-                            <div class="weekday">六</div>
-                        </div>
-                        <div class="calendar-days" id="calendarDays">
-                            <!-- JavaScript 動態產生 -->
-                        </div>
-                    </div>
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
                 </div>
             </div>
         </main>
     </div>
 
     <!-- 新增/編輯預約彈窗 -->
-    <div class="modal" id="reservationModal">
+    <div class="modal modal-sm" id="reservationModal">
         <div class="modal-overlay"></div>
-        <div class="modal-container">
-            <div class="modal-header">
+        <div class="modal-content">
+            <div class="modal-header modal-header-simple">
                 <h3 class="modal-title" id="modalTitle">新增對保預約</h3>
                 <button class="modal-close" id="modalClose">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="reservationForm">
-                    <input type="hidden" id="reservationId">
-                    <div class="form-row">
+                <!-- Tabs -->
+                <div class="modal-tabs">
+                    <button type="button" class="modal-tab active" data-tab="info">預約資訊</button>
+                    <button type="button" class="modal-tab" data-tab="chat">留言板</button>
+                    <button type="button" class="modal-tab" data-tab="completion">完工確認</button>
+                </div>
+
+                <!-- Tab Content: Info -->
+                <div class="modal-tab-content active" id="tab-info">
+                    <p class="modal-description">您可於此為客戶建立一筆對保預約。</p>
+                    <form id="reservationForm">
+                        <input type="hidden" id="reservationId">
+                        <!-- 案場 -->
                         <div class="form-group">
                             <label class="form-label required">案場</label>
                             <select class="form-select" id="rProject" required>
-                                <option value="">請選擇</option>
+                                <option value="">請選擇案場</option>
                                 <option value="陸府原森">陸府原森</option>
                                 <option value="陸府觀微">陸府觀微</option>
                                 <option value="陸府植森">陸府植森</option>
                             </select>
                         </div>
+                        <!-- 戶別 -->
                         <div class="form-group">
-                            <label class="form-label required">戶號</label>
-                            <select class="form-select" id="rUnit" required>
-                                <option value="">請選擇</option>
-                                <option value="A棟12A">A棟12A</option>
-                                <option value="A棟12B">A棟12B</option>
-                                <option value="B棟8A">B棟8A</option>
+                            <label class="form-label required">戶別</label>
+                            <select class="form-select" id="rUnit" required disabled>
+                                <option value="">請先選擇案場</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-row">
+                        <!-- 會員姓名 -->
                         <div class="form-group">
                             <label class="form-label required">會員姓名</label>
-                            <input type="text" class="form-input" id="rMemberName" required readonly>
+                            <input type="text" class="form-input" id="rMemberName" required placeholder="請輸入會員姓名">
                         </div>
+                        <!-- 手機 -->
                         <div class="form-group">
-                            <label class="form-label required">聯絡電話</label>
-                            <input type="tel" class="form-input" id="rPhone" required readonly>
+                            <label class="form-label required">手機</label>
+                            <input type="tel" class="form-input" id="rPhone" required placeholder="請輸入手機號碼" pattern="09[0-9]{8}" title="請輸入有效的手機號碼，格式：09xxxxxxxx">
                         </div>
-                    </div>
-                    <div class="form-row">
+                        <!-- 日期 -->
                         <div class="form-group">
-                            <label class="form-label required">預約日期</label>
+                            <label class="form-label required">日期</label>
                             <input type="date" class="form-input" id="rDate" required>
                         </div>
+                        <!-- 時段 -->
                         <div class="form-group">
-                            <label class="form-label required">預約時段</label>
+                            <label class="form-label required">時段</label>
                             <select class="form-select" id="rTimeSlot" required>
-                                <option value="">請選擇</option>
+                                <option value="">請選擇時段</option>
                                 <option value="09:00-10:00">09:00-10:00</option>
                                 <option value="10:00-11:00">10:00-11:00</option>
                                 <option value="11:00-12:00">11:00-12:00</option>
@@ -473,34 +449,286 @@
                                 <option value="16:00-17:00">16:00-17:00</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-row">
+                        <!-- 銀行 -->
                         <div class="form-group">
-                            <label class="form-label required">貸款銀行</label>
+                            <label class="form-label required">預計對保銀行</label>
                             <select class="form-select" id="rBank" required>
-                                <option value="">請選擇</option>
-                                <option value="台灣銀行">台灣銀行</option>
-                                <option value="中國信託">中國信託</option>
+                                <option value="">請選擇銀行</option>
                                 <option value="國泰世華">國泰世華</option>
-                                <option value="玉山銀行">玉山銀行</option>
-                                <option value="富邦銀行">富邦銀行</option>
+                                <option value="台灣銀行">台灣銀行</option>
+                                <option value="華南銀行">華南銀行</option>
+                                <option value="其他">其他</option>
                             </select>
+                            <small class="form-text text-muted">依據案場對保問卷條件顯示</small>
                         </div>
+                        <!-- 預計貸款金額 -->
                         <div class="form-group">
-                            <label class="form-label required">狀態</label>
-                            <select class="form-select" id="rStatus" required>
-                                <option value="待確認">待確認</option>
-                                <option value="已確認">已確認</option>
-                                <option value="已完成">已完成</option>
-                                <option value="已取消">已取消</option>
-                            </select>
+                            <label class="form-label">預計貸款金額</label>
+                            <div class="input-group">
+                                <input type="number" class="form-input" id="rLoanAmount" placeholder="請輸入金額">
+                                <span class="input-group-text">萬元</span>
+                            </div>
+                        </div>
+                        <!-- 附件 -->
+                        <div class="form-group">
+                            <label class="form-label">附件</label>
+                            <input type="file" class="form-input" id="rAttachment" multiple>
+                            <small class="form-text text-muted">可上傳相關文件或證明</small>
+                        </div>
+                        <!-- 備註 -->
+                        <div class="form-group">
+                            <label class="form-label">備註</label>
+                            <textarea class="form-textarea" id="rRemark" rows="3" placeholder="請輸入備註（選填）"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tab Content: Chat -->
+                <div class="modal-tab-content" id="tab-chat">
+                    <div class="section-block">
+                        <h3 class="section-title">
+                            <i class="fa-regular fa-comments"></i> 留言板
+                        </h3>
+
+                        <div class="chat-container" id="chatContainer">
+                            <!-- 對話訊息區域 -->
+                            <div class="chat-messages" id="chatMessages">
+                                <!-- 用戶訊息（右側）- 含圖片 -->
+                                <div class="message message-right">
+                                    <div class="message-content">請問大約什麼時候可以維修？</div>
+                                    <div class="message-info">陳小明 2025/08/05 10:30 AM</div>
+                                </div>
+
+                                <!-- 用戶訊息（右側）- 含圖片附件 -->
+                                <div class="message message-right">
+                                    <div class="message-media">
+                                        <img src="https://via.placeholder.com/300x200/e0e0e0/666?text=漏水照片" alt="客戶上傳圖片" class="media-image" data-full-src="https://via.placeholder.com/800x600/e0e0e0/666?text=漏水照片">
+                                    </div>
+                                    <div class="message-info">陳小明 2025/08/05 10:31 AM</div>
+                                </div>
+
+                                <!-- 客服回覆（左側） -->
+                                <div class="message message-left">
+                                    <div class="message-content">您好，約下午會派維修人員過去</div>
+                                    <div class="message-file">
+                                        <i class="fa-solid fa-file-pdf file-icon"></i>
+                                        <span class="file-name">聯絡資訊.pdf</span>
+                                        <button class="file-download" title="下載檔案">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <div class="message-info">王曉明 2025/08/05 10:30 AM</div>
+                                </div>
+
+                                <!-- 用戶訊息（右側）- 含影片 -->
+                                <div class="message message-right">
+                                    <div class="message-content">這是漏水的影片</div>
+                                    <div class="message-media">
+                                        <video controls="" class="media-video" preload="metadata">
+                                            <source src="" type="video/mp4">
+                                            您的瀏覽器不支援影片播放
+                                        </video>
+                                        <div class="video-placeholder">
+                                            <i class="fa-solid fa-play-circle"></i>
+                                            <span>漏水情況.mp4</span>
+                                        </div>
+                                    </div>
+                                    <div class="message-info">陳小明 2025/08/05 10:32 AM</div>
+                                </div>
+
+                                <!-- 客服回覆（左側） -->
+                                <div class="message message-left">
+                                    <div class="message-content">維修已完成</div>
+                                    <div class="message-info">王曉明 2025/08/05 15:30 AM</div>
+                                </div>
+                            </div>
+
+                            <!-- 輸入框區域 -->
+                            <div class="chat-input-area">
+                                <!-- 附件按鈕區域 (15%) -->
+                                <div class="chat-input-left">
+                                    <button type="button" class="attach-btn" id="btnAttachFile" title="附加檔案">
+                                        <i class="fa-solid fa-paperclip"></i>
+                                    </button>
+                                    <input type="file" id="chatFileInput" class="hidden-file-input" accept="image/*,video/*,.pdf,.doc,.docx">
+                                    <span class="file-limit-hint">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        檔案限制：10MB，支援格式：圖片、影片、PDF、Word
+                                    </span>
+                                </div>
+                                <!-- 文字輸入區域 (85%) -->
+                                <div class="chat-input-right">
+                                    <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息...">
+                                    <button type="button" class="send-btn" id="btnSendMessage" title="發送訊息">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Tab Content: Completion -->
+                <div class="modal-tab-content" id="tab-completion">
+                    <!-- 完工日期 -->
                     <div class="form-group">
-                        <label class="form-label">備註</label>
-                        <textarea class="form-textarea" id="rRemark" rows="3"></textarea>
+                        <label class="form-label required" for="cCompletedDate">完工日期</label>
+                        <input type="date" class="form-control" id="cCompletedDate" name="cCompletedDate" required="">
                     </div>
-                </form>
+
+                    <!-- 完工說明 -->
+                    <div class="form-group">
+                        <label class="form-label required" for="cCompletedNotes">完工說明</label>
+                        <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" placeholder="完工說明" rows="3" required=""></textarea>
+                        <div class="quick-fill-buttons">
+                            <span class="quick-fill-label">快速填入：</span>
+                            <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有修繕工作">已完成所有修繕工作</button>
+                            <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="待客戶驗收">待客戶驗收</button>
+                            <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有修繕工作，保固三個月">已完成所有修繕工作，保固三個月</button>
+                        </div>
+                    </div>
+
+                    <!-- 分隔線 -->
+                    <hr class="section-divider">
+
+                    <!-- 上傳檔案區塊 -->
+                    <div class="section-block">
+                        <h3 class="section-title">上傳檔案</h3>
+                        <label for="fileUpload" class="upload-wrap">
+                            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                            <p class="text-info text-center" id="uploadPlaceholder">拖曳檔案至此處或點擊上傳</p>
+                            <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.mp4,.heic,.heif" multiple="" class="file-input">
+                            <span class="upload-btn"><i class="fa-solid fa-plus"></i> 選擇檔案</span>
+                        </label>
+                        <p class="upload-hint">*支援圖片 .jpg、影片 .mp4，最大 5MB</p>
+                        <div class="upload-list" id="uploadList">
+                            <!-- 上傳的檔案列表 -->
+                        </div>
+                    </div>
+
+                    <!-- 分隔線 -->
+                    <hr class="section-divider">
+
+                    <!-- 住戶簽名確認區塊 -->
+                    <div class="section-block">
+                        <h3 class="section-title">住戶簽名確認</h3>
+                        <div class="signature-block">
+                            <div class="signature-area" id="signatureArea">
+                                <canvas id="signatureCanvas" width="0" height="200" style="width: 0px; height: 200px;"></canvas>
+                                <div class="signature-placeholder" id="signaturePlaceholder">
+                                    <i class="fa-solid fa-signature"></i>
+                                    <span>點擊此處進行簽名</span>
+                                </div>
+                            </div>
+                            <div class="signature-buttons">
+                                <button type="button" class="btn btn-secondary" id="btnClearSign">
+                                    <i class="fa-solid fa-eraser"></i> 清除簽名
+                                </button>
+                                <button type="button" class="btn btn-primary" id="btnConfirmSign">
+                                    <i class="fa-solid fa-check"></i> 確認簽名
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分隔線 -->
+                    <hr class="section-divider">
+
+                    <!-- 發送次數 -->
+                    <div class="form-group">
+                        <label class="form-label" for="cMessageSendTimes">發送次數</label>
+                        <input type="number" class="form-control" id="cMessageSendTimes" name="cMessageSendTimes" placeholder="發送次數" disabled="" value="0">
+                    </div>
+
+                    <!-- 是否本次不寄發滿意度問卷 -->
+                    <div class="form-group">
+                        <label class="form-label" for="cIsNotSendQuestionnaire">是否本次不寄發滿意度問卷</label>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="cIsNotSendQuestionnaire" name="cIsNotSendQuestionnaire" class="form-checkbox">
+                            <label for="cIsNotSendQuestionnaire" class="checkbox-label">不寄發</label>
+                        </div>
+                    </div>
+
+                    <!-- 滿意度問卷區塊 -->
+                    <div class="section-block questionnaire-block">
+                        <h3 class="section-title">滿意度問卷</h3>
+                        <div class="questionnaire-card">
+                            <div class="questionnaire-body">
+                                <!-- 整體滿意度 -->
+                                <div class="rating-item">
+                                    <span class="rating-label">整體滿意度</span>
+                                    <div class="star-rating" data-rating="0">
+                                        <i class="fa-regular fa-star" data-value="1"></i>
+                                        <i class="fa-regular fa-star" data-value="2"></i>
+                                        <i class="fa-regular fa-star" data-value="3"></i>
+                                        <i class="fa-regular fa-star" data-value="4"></i>
+                                        <i class="fa-regular fa-star" data-value="5"></i>
+                                    </div>
+                                </div>
+                                <!-- 整體報修便利性 -->
+                                <div class="rating-item">
+                                    <span class="rating-label">整體報修便利性</span>
+                                    <div class="star-rating" data-rating="0">
+                                        <i class="fa-regular fa-star" data-value="1"></i>
+                                        <i class="fa-regular fa-star" data-value="2"></i>
+                                        <i class="fa-regular fa-star" data-value="3"></i>
+                                        <i class="fa-regular fa-star" data-value="4"></i>
+                                        <i class="fa-regular fa-star" data-value="5"></i>
+                                    </div>
+                                </div>
+                                <!-- 整體處理時效性 -->
+                                <div class="rating-item">
+                                    <span class="rating-label">整體處理時效性</span>
+                                    <div class="star-rating" data-rating="0">
+                                        <i class="fa-regular fa-star" data-value="1"></i>
+                                        <i class="fa-regular fa-star" data-value="2"></i>
+                                        <i class="fa-regular fa-star" data-value="3"></i>
+                                        <i class="fa-regular fa-star" data-value="4"></i>
+                                        <i class="fa-regular fa-star" data-value="5"></i>
+                                    </div>
+                                </div>
+                                <!-- 服務內容滿意度 -->
+                                <div class="rating-item">
+                                    <span class="rating-label">服務內容滿意度</span>
+                                    <div class="star-rating" data-rating="0">
+                                        <i class="fa-regular fa-star" data-value="1"></i>
+                                        <i class="fa-regular fa-star" data-value="2"></i>
+                                        <i class="fa-regular fa-star" data-value="3"></i>
+                                        <i class="fa-regular fa-star" data-value="4"></i>
+                                        <i class="fa-regular fa-star" data-value="5"></i>
+                                    </div>
+                                </div>
+                                <!-- 服務人員滿意度 -->
+                                <div class="rating-item">
+                                    <span class="rating-label">服務人員滿意度</span>
+                                    <div class="star-rating" data-rating="0">
+                                        <i class="fa-regular fa-star" data-value="1"></i>
+                                        <i class="fa-regular fa-star" data-value="2"></i>
+                                        <i class="fa-regular fa-star" data-value="3"></i>
+                                        <i class="fa-regular fa-star" data-value="4"></i>
+                                        <i class="fa-regular fa-star" data-value="5"></i>
+                                    </div>
+                                </div>
+                                <!-- 寶貴意見 -->
+                                <div class="form-group mt-3">
+                                    <textarea class="form-control" placeholder="寶貴意見或其他建議項目" rows="3" disabled=""></textarea>
+                                </div>
+                                <!-- 建議改善 -->
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="建議改善的資訊" rows="3" disabled=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 重發問卷 -->
+                    <div class="form-group">
+                        <label class="form-label">重發問卷</label>
+                        <div>
+                            <p class="text-danger mb-0" id="resendQuestionnaireMsg">排程尚未發送問卷，無法使用此功能!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="btnCancel">取消</button>
@@ -508,6 +736,8 @@
             </div>
         </div>
     </div>
+
+    <!-- LINE 推播彈窗 (已移除) -->
 
     <!-- JavaScript -->
     <script src="js/sidebar.js"></script>
@@ -517,75 +747,214 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sidebarManager = new SidebarManager();
-            const reservationModal = new Modal('reservationModal');
+            const reservationModal = new Modal({ id: 'reservationModal' });
             
+            // --- Tab Switching Logic ---
+            document.querySelectorAll('.modal-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.modal-tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.dataset.tab;
+                    document.getElementById(`tab-${tabId}`).classList.add('active');
+                    
+                    // Special handling for completion tab (resize canvas)
+                    if (tabId === 'completion') {
+                        setTimeout(resizeCanvas, 50);
+                    }
+                });
+            });
+
+            // --- Signature Canvas Logic ---
+            const canvas = document.getElementById('signatureCanvas');
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+
+            function resizeCanvas() {
+                const parent = canvas.parentElement;
+                if (parent.clientWidth > 0) {
+                    canvas.width = parent.clientWidth;
+                    canvas.height = parent.clientHeight;
+                    // Restore placeholder if empty? No, just keep it as is.
+                    // If we resize, we lose drawing. In a real app, we'd save/restore the image data.
+                }
+            }
+            
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // Touch support
+            canvas.addEventListener('touchstart', handleTouchStart);
+            canvas.addEventListener('touchmove', handleTouchMove);
+            canvas.addEventListener('touchend', stopDrawing);
+
+            function startDrawing(e) {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                document.getElementById('signaturePlaceholder').style.display = 'none';
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+            }
+            
+            function handleTouchStart(e) {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                isDrawing = true;
+                lastX = touch.clientX - rect.left;
+                lastY = touch.clientY - rect.top;
+                document.getElementById('signaturePlaceholder').style.display = 'none';
+            }
+
+            function handleTouchMove(e) {
+                e.preventDefault();
+                if (!isDrawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                lastX = x;
+                lastY = y;
+            }
+
+            document.getElementById('btnClearSign').addEventListener('click', function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                document.getElementById('signaturePlaceholder').style.display = 'flex';
+            });
+
+            // --- Quick Fill Buttons ---
+            document.querySelectorAll('.quick-fill-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.getElementById('cCompletedNotes').value = this.dataset.text;
+                });
+            });
+
+            // --- Chat Attachment ---
+            const btnAttachFile = document.getElementById('btnAttachFile');
+            if (btnAttachFile) {
+                btnAttachFile.addEventListener('click', function() {
+                    document.getElementById('chatFileInput').click();
+                });
+            }
+
             let currentPage = 1;
             const pageSize = 10;
-            let currentDate = new Date();
             
             loadReservationData();
             
-            // 視圖切換
-            document.getElementById('btnListView').addEventListener('click', function() {
-                this.classList.add('active');
-                document.getElementById('btnCalendarView').classList.remove('active');
-                document.getElementById('listView').style.display = 'block';
-                document.getElementById('calendarView').style.display = 'none';
-            });
-            
-            document.getElementById('btnCalendarView').addEventListener('click', function() {
-                this.classList.add('active');
-                document.getElementById('btnListView').classList.remove('active');
-                document.getElementById('listView').style.display = 'none';
-                document.getElementById('calendarView').style.display = 'block';
-                renderCalendar();
-            });
-            
-            function loadReservationData(filters) {
-                const result = CRMMockData.getPaged('collateralReservations', currentPage, pageSize, filters);
-                renderTable(result.items);
-                renderPagination(result);
+            function loadReservationData() {
+                // 1. 收集篩選條件
+                const searchProject = document.getElementById('searchProject').value;
+                const searchUnit = document.getElementById('searchUnit').value.toLowerCase();
+                const searchMember = document.getElementById('searchMember').value.toLowerCase();
+                const searchStatus = document.getElementById('searchStatus').value;
+                const searchDateFrom = document.getElementById('searchDateFrom').value;
+                const searchDateTo = document.getElementById('searchDateTo').value;
+
+                // 2. 取得所有資料
+                let data = CRMMockData.collateralReservations;
+
+                // 3. 篩選資料
+                data = data.filter(item => {
+                    if (searchProject && item.projectName !== searchProject) return false;
+                    if (searchUnit && !item.unitName.toLowerCase().includes(searchUnit)) return false;
+                    if (searchMember && !item.memberName.toLowerCase().includes(searchMember)) return false;
+                    if (searchStatus && item.status !== searchStatus) return false;
+                    if (searchDateFrom && item.reservationDate < searchDateFrom) return false;
+                    if (searchDateTo && item.reservationDate > searchDateTo) return false;
+                    return true;
+                });
+                
+                // 4. 排序 (依日期)
+                data.sort((a, b) => {
+                    return new Date(b.reservationDate) - new Date(a.reservationDate);
+                });
+                
+                // 5. 分頁
+                const total = data.length;
+                const totalPages = Math.ceil(total / pageSize);
+                const start = (currentPage - 1) * pageSize;
+                const pagedItems = data.slice(start, start + pageSize);
+
+                // 6. 渲染
+                renderTable(pagedItems);
+                renderPagination({
+                    page: currentPage,
+                    totalPages: totalPages,
+                    total: total
+                });
             }
             
             function renderTable(data) {
                 const tbody = document.getElementById('reservationTableBody');
                 
                 if (data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="10" class="text-center">無資料</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="11" class="col-1 text-center">無資料</td></tr>';
                     return;
                 }
                 
-                tbody.innerHTML = data.map(function(reservation, index) {
+                tbody.innerHTML = data.map(function(item, index) {
                     let statusClass = '';
-                    switch(reservation.status) {
+                    switch(item.status) {
                         case '待確認': statusClass = 'status-pending'; break;
                         case '已確認': statusClass = 'status-confirmed'; break;
                         case '已完成': statusClass = 'status-completed'; break;
                         case '已取消': statusClass = 'status-cancelled'; break;
                     }
+
+                    const bookableRange = (item.bookableStartDate && item.bookableEndDate) 
+                        ? `${item.bookableStartDate} ~ ${item.bookableEndDate}` 
+                        : '-';
+
+                    const unreadBadge = item.hasUnread 
+                        ? '<span class="unread-badge" title="有未讀訊息"><i class="fa-solid fa-envelope"></i></span>' 
+                        : '';
                     
                     return `
                         <tr>
-                            <td>${(currentPage - 1) * pageSize + index + 1}</td>
-                            <td>${reservation.projectName}</td>
-                            <td>${reservation.unitName}</td>
-                            <td>${reservation.memberName}</td>
-                            <td>${reservation.phone}</td>
-                            <td>${reservation.reservationDate}</td>
-                            <td>${reservation.timeSlot}</td>
-                            <td>${reservation.bank}</td>
-                            <td><span class="status-badge ${statusClass}">${reservation.status}</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-action btn-edit" data-id="${reservation.id}" title="編輯">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                    <button class="btn-action btn-notify" data-id="${reservation.id}" title="發送提醒">
-                                        <i class="fa-solid fa-bell"></i>
-                                    </button>
-                                    <button class="btn-action btn-delete" data-id="${reservation.id}" title="刪除">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+                            <td class="col-1">${(currentPage - 1) * pageSize + index + 1}${unreadBadge}</td>
+                            <td class="col-1">${item.projectName}</td>
+                            <td class="col-1">${item.unitName}</td>
+                            <td class="col-1">${item.memberName}</td>
+                            <td class="col-1">${item.phone}</td>
+                            <td class="col-1">${bookableRange}</td>
+                            <td class="col-1">${item.reservationDate}</td>
+                            <td class="col-1">${item.timeSlot}</td>
+                            <td class="col-1">${item.bank}</td>
+                            <td class="col-1"><span class="status-badge ${statusClass}">${item.status}</span></td>
+                            <td class="col-1">
+                                <div class="table-actions">
+                                    <button class="btn-table-edit" data-id="${item.id}" title="編輯">編輯</button>
+                                    <button class="btn-table-delete" data-id="${item.id}" title="刪除">刪除</button>
                                 </div>
                             </td>
                         </tr>
@@ -596,28 +965,226 @@
             }
             
             function bindTableEvents() {
-                document.querySelectorAll('.btn-edit').forEach(function(btn) {
+                // 編輯按鈕
+                document.querySelectorAll('.btn-table-edit').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         const id = parseInt(this.dataset.id);
                         editReservation(id);
                     });
                 });
                 
-                document.querySelectorAll('.btn-notify').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        const id = parseInt(this.dataset.id);
-                        sendNotify(id);
-                    });
-                });
-                
-                document.querySelectorAll('.btn-delete').forEach(function(btn) {
+                // 刪除按鈕
+                document.querySelectorAll('.btn-table-delete').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         const id = parseInt(this.dataset.id);
                         deleteReservation(id);
                     });
                 });
             }
+
+            // 案場與戶別連動資料
+            const projectUnits = {
+                '陸府原森': ['A棟10F', 'A棟11A', 'A棟12A', 'A棟12B', 'B棟5A', 'B棟8A', 'C棟3A'],
+                '陸府觀微': ['A1-2F', 'A1-3F', 'A2-5F', 'A2-6F', 'B1-3F', 'B1-4F'],
+                '陸府植森': ['1棟-2F', '1棟-3F', '2棟-5F', '2棟-6F', '3棟-2F', '3棟-3F']
+            };
             
+            // 案場選擇變更事件
+            document.getElementById('rProject').addEventListener('change', function() {
+                const projectName = this.value;
+                const unitSelect = document.getElementById('rUnit');
+                
+                // 清空戶別選項
+                unitSelect.innerHTML = '';
+                
+                if (projectName && projectUnits[projectName]) {
+                    unitSelect.disabled = false;
+                    unitSelect.innerHTML = '<option value="">請選擇戶別</option>';
+                    projectUnits[projectName].forEach(function(unit) {
+                        const option = document.createElement('option');
+                        option.value = unit;
+                        option.textContent = unit;
+                        unitSelect.appendChild(option);
+                    });
+                } else {
+                    unitSelect.disabled = true;
+                    unitSelect.innerHTML = '<option value="">請先選擇案場</option>';
+                }
+            });
+            
+            document.getElementById('btnAdd').addEventListener('click', function() {
+                document.getElementById('modalTitle').textContent = '新增對保預約';
+                document.getElementById('reservationForm').reset();
+                document.getElementById('reservationId').value = '';
+                document.getElementById('rRemark').value = '';
+                
+                // 重置案場與戶別
+                document.getElementById('rProject').value = '';
+                const unitSelect = document.getElementById('rUnit');
+                unitSelect.innerHTML = '<option value="">請先選擇案場</option>';
+                unitSelect.disabled = true;
+                
+                // Switch to first tab
+                const firstTab = document.querySelector('.modal-tab[data-tab="info"]');
+                if (firstTab) firstTab.click();
+                
+                reservationModal.open();
+            });
+            
+            function editReservation(id) {
+                const item = CRMMockData.getById('collateralReservations', id);
+                if (!item) return;
+                
+                document.getElementById('modalTitle').textContent = '編輯對保預約';
+                document.getElementById('reservationId').value = item.id;
+                document.getElementById('rProject').value = item.projectName;
+                
+                // 觸發案場變更以載入戶別
+                const event = new Event('change');
+                document.getElementById('rProject').dispatchEvent(event);
+                
+                document.getElementById('rUnit').value = item.unitName;
+                document.getElementById('rMemberName').value = item.memberName;
+                document.getElementById('rPhone').value = item.phone;
+                document.getElementById('rDate').value = item.reservationDate;
+                document.getElementById('rTimeSlot').value = item.timeSlot;
+                document.getElementById('rBank').value = item.bank;
+                document.getElementById('rLoanAmount').value = item.loanAmount || '';
+                // 附件無法直接設定值，僅重置
+                document.getElementById('rAttachment').value = '';
+                document.getElementById('rRemark').value = item.remark || '';
+                
+                // Switch to first tab
+                const firstTab = document.querySelector('.modal-tab[data-tab="info"]');
+                if (firstTab) firstTab.click();
+                
+                reservationModal.open();
+            }
+            
+            function deleteReservation(id) {
+                const item = CRMMockData.getById('collateralReservations', id);
+                if (!item) return;
+                
+                ConfirmDialog.show({
+                    title: '確認刪除',
+                    message: `確定要刪除 ${item.memberName} 的對保預約嗎？`,
+                    onConfirm: function() {
+                        // 實際刪除邏輯需實作於 MockData 或後端
+                        const index = CRMMockData.collateralReservations.findIndex(r => r.id === id);
+                        if (index !== -1) {
+                            CRMMockData.collateralReservations.splice(index, 1);
+                            CRMMockData.save();
+                            alert('已刪除預約');
+                            loadReservationData();
+                        }
+                    }
+                });
+            }
+            
+            document.getElementById('btnSave').addEventListener('click', function() {
+                const form = document.getElementById('reservationForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                const isEdit = document.getElementById('reservationId').value !== '';
+                const projectName = document.getElementById('rProject').value;
+                const unitName = document.getElementById('rUnit').value;
+                const memberName = document.getElementById('rMemberName').value;
+                const phone = document.getElementById('rPhone').value;
+                const reservationDate = document.getElementById('rDate').value;
+                const timeSlot = document.getElementById('rTimeSlot').value;
+                const bank = document.getElementById('rBank').value;
+                const loanAmount = document.getElementById('rLoanAmount').value;
+                const attachmentInput = document.getElementById('rAttachment');
+                const attachment = attachmentInput.files.length > 0 ? attachmentInput.files[0].name : '';
+                const remark = document.getElementById('rRemark').value;
+                
+                // 驗證手機號碼格式
+                const phonePattern = /^09[0-9]{8}$/;
+                if (!phonePattern.test(phone)) {
+                    alert('請輸入有效的手機號碼，格式：09xxxxxxxx');
+                    document.getElementById('rPhone').focus();
+                    return;
+                }
+                
+                if (isEdit) {
+                    // 編輯現有資料
+                    const id = parseInt(document.getElementById('reservationId').value);
+                    const item = CRMMockData.getById('collateralReservations', id);
+                    if (item) {
+                        item.projectName = projectName;
+                        item.unitName = unitName;
+                        item.memberName = memberName;
+                        item.phone = phone;
+                        item.reservationDate = reservationDate;
+                        item.timeSlot = timeSlot;
+                        item.bank = bank;
+                        item.loanAmount = loanAmount;
+                        if (attachment) item.attachment = attachment;
+                        item.remark = remark;
+                    }
+                    CRMMockData.save();
+                    alert('已更新預約資料');
+                } else {
+                    // 新增資料
+                    const newId = Math.max(...CRMMockData.collateralReservations.map(h => h.id), 0) + 1;
+                    
+                    const newItem = {
+                        id: newId,
+                        projectName: projectName,
+                        unitName: unitName,
+                        memberName: memberName,
+                        phone: phone,
+                        reservationDate: reservationDate,
+                        timeSlot: timeSlot,
+                        bank: bank,
+                        loanAmount: loanAmount,
+                        attachment: attachment,
+                        status: '待確認',
+                        remark: remark
+                    };
+                    CRMMockData.collateralReservations.push(newItem);
+                    CRMMockData.save();
+                    alert('已新增預約');
+                }
+                
+                reservationModal.close();
+                loadReservationData();
+            });
+            
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                reservationModal.close();
+            });
+            
+            // 新增預約彈窗 X 按鈕關閉事件
+            document.getElementById('modalClose').addEventListener('click', function() {
+                reservationModal.close();
+            });
+            
+            // 點擊彈窗外部關閉
+            document.querySelector('#reservationModal .modal-overlay').addEventListener('click', function() {
+                reservationModal.close();
+            });
+            
+            document.getElementById('btnExport').addEventListener('click', function() {
+                alert('匯出功能開發中...');
+            });
+            
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                currentPage = 1;
+                loadReservationData();
+            });
+            
+            document.getElementById('searchForm').addEventListener('reset', function() {
+                setTimeout(function() {
+                    currentPage = 1;
+                    loadReservationData();
+                }, 0);
+            });
+
             function renderPagination(result) {
                 const wrapper = document.getElementById('paginationWrapper');
                 
@@ -662,157 +1229,6 @@
                 }
                 return buttons;
             }
-            
-            function renderCalendar() {
-                const year = currentDate.getFullYear();
-                const month = currentDate.getMonth();
-                
-                document.getElementById('calendarTitle').textContent = `${year}年 ${month + 1}月`;
-                
-                const firstDay = new Date(year, month, 1);
-                const lastDay = new Date(year, month + 1, 0);
-                const startDay = firstDay.getDay();
-                const daysInMonth = lastDay.getDate();
-                
-                let html = '';
-                
-                // 空白格
-                for (let i = 0; i < startDay; i++) {
-                    html += '<div class="calendar-day empty"></div>';
-                }
-                
-                // 日期格
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                    const reservations = CRMMockData.collateralReservations.filter(function(r) {
-                        return r.reservationDate === dateStr;
-                    });
-                    
-                    const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
-                    
-                    html += `
-                        <div class="calendar-day ${isToday ? 'today' : ''}" data-date="${dateStr}">
-                            <div class="day-number">${day}</div>
-                            ${reservations.length > 0 ? `
-                                <div class="day-events">
-                                    ${reservations.slice(0, 2).map(function(r) {
-                                        return `<div class="day-event">${r.timeSlot} ${r.memberName}</div>`;
-                                    }).join('')}
-                                    ${reservations.length > 2 ? `<div class="day-more">+${reservations.length - 2} 更多</div>` : ''}
-                                </div>
-                            ` : ''}
-                        </div>
-                    `;
-                }
-                
-                document.getElementById('calendarDays').innerHTML = html;
-            }
-            
-            document.getElementById('btnPrevMonth').addEventListener('click', function() {
-                currentDate.setMonth(currentDate.getMonth() - 1);
-                renderCalendar();
-            });
-            
-            document.getElementById('btnNextMonth').addEventListener('click', function() {
-                currentDate.setMonth(currentDate.getMonth() + 1);
-                renderCalendar();
-            });
-            
-            document.getElementById('btnAdd').addEventListener('click', function() {
-                document.getElementById('modalTitle').textContent = '新增對保預約';
-                document.getElementById('reservationForm').reset();
-                document.getElementById('reservationId').value = '';
-                reservationModal.open();
-            });
-            
-            function editReservation(id) {
-                const reservation = CRMMockData.getById('collateralReservations', id);
-                if (!reservation) return;
-                
-                document.getElementById('modalTitle').textContent = '編輯對保預約';
-                document.getElementById('reservationId').value = reservation.id;
-                document.getElementById('rProject').value = reservation.projectName;
-                document.getElementById('rUnit').value = reservation.unitName;
-                document.getElementById('rMemberName').value = reservation.memberName;
-                document.getElementById('rPhone').value = reservation.phone;
-                document.getElementById('rDate').value = reservation.reservationDate;
-                document.getElementById('rTimeSlot').value = reservation.timeSlot;
-                document.getElementById('rBank').value = reservation.bank;
-                document.getElementById('rStatus').value = reservation.status;
-                document.getElementById('rRemark').value = reservation.remark || '';
-                
-                reservationModal.open();
-            }
-            
-            function sendNotify(id) {
-                const reservation = CRMMockData.getById('collateralReservations', id);
-                if (!reservation) return;
-                
-                alert(`已發送提醒通知給 ${reservation.memberName}`);
-            }
-            
-            function deleteReservation(id) {
-                const reservation = CRMMockData.getById('collateralReservations', id);
-                if (!reservation) return;
-                
-                ConfirmDialog.show({
-                    title: '確認刪除',
-                    message: `確定要刪除 ${reservation.memberName} 的對保預約嗎？`,
-                    onConfirm: function() {
-                        alert('已刪除預約');
-                        loadReservationData();
-                    }
-                });
-            }
-            
-            document.getElementById('btnSave').addEventListener('click', function() {
-                const form = document.getElementById('reservationForm');
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
-                }
-                
-                alert('已儲存預約資料');
-                reservationModal.close();
-                loadReservationData();
-            });
-            
-            document.getElementById('btnCancel').addEventListener('click', function() {
-                reservationModal.close();
-            });
-            
-            document.getElementById('btnBatchNotify').addEventListener('click', function() {
-                alert('已發送批次提醒通知');
-            });
-            
-            document.getElementById('btnExport').addEventListener('click', function() {
-                alert('匯出功能開發中...');
-            });
-            
-            document.getElementById('searchForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                currentPage = 1;
-                loadReservationData();
-            });
-            
-            document.getElementById('searchForm').addEventListener('reset', function() {
-                setTimeout(function() {
-                    currentPage = 1;
-                    loadReservationData();
-                }, 0);
-            });
-            
-            // 戶號選擇時自動帶入會員資料
-            document.getElementById('rUnit').addEventListener('change', function() {
-                const unit = this.value;
-                if (unit) {
-                    document.getElementById('rMemberName').value = '陳美華';
-                    document.getElementById('rPhone').value = '0912-345-678';
-                } else {
-                    document.getElementById('rMemberName').value = '';
-                    document.getElementById('rPhone').value = '';
-                }
-            });
         });
     </script>
 
@@ -871,6 +1287,22 @@
         .status-cancelled {
             background-color: #e2e3e5;
             color: #383d41;
+        }
+
+        /* .unread-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            color: var(--color-danger);
+            font-size: 1.1em;
+            animation: pulse 2s infinite;
+        } */
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         .action-buttons {
@@ -1008,6 +1440,46 @@
             font-size: var(--font-size-xs);
             color: var(--color-gray-500);
             cursor: pointer;
+        }
+
+        /* Modal Tabs */
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .modal-tab {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .modal-tab:hover {
+            color: var(--color-primary);
+        }
+
+        .modal-tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .modal-tab-content {
+            display: none;
+        }
+
+        .modal-tab-content.active {
+            display: block;
+        }
+        
+        /* Adjust modal size for tabs */
+        .modal-sm .modal-content {
+            max-width: 800px; /* Widen the modal to fit chat and completion */
         }
     </style>
 </body>
