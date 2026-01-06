@@ -625,7 +625,8 @@
 
     /* 手機版隱藏新增個案單及個案匯入 */
     #btnAdd,
-    .import-row {
+    .import-row,
+    .hide-on-mobile {
         display: none !important;
     }
 }
