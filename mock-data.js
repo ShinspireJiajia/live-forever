@@ -387,6 +387,23 @@
         ],
 
         /**
+         * 對保預約資料
+         */
+        collateralReservations: (function() {
+            try {
+                const stored = localStorage.getItem('crm_collateralReservations');
+                if (stored) return JSON.parse(stored);
+            } catch (e) {
+                console.error('Failed to load collateralReservations from localStorage', e);
+            }
+            return [
+                { id: 1, projectName: '陸府原森', unitName: 'A棟12A', memberName: '陳美華', phone: '0912-345-678', bookableStartDate: '2024-01-01', bookableEndDate: '2024-01-31', reservationDate: '2024-01-15', timeSlot: '10:00-11:00', bank: '台灣銀行', status: '已確認', remark: '需準備印鑑證明', hasUnread: true },
+                { id: 2, projectName: '陸府觀微', unitName: 'B棟8A', memberName: '林志豪', phone: '0923-456-789', bookableStartDate: '2024-01-05', bookableEndDate: '2024-02-05', reservationDate: '2024-01-16', timeSlot: '14:00-15:00', bank: '中國信託', status: '待確認', remark: '', hasUnread: false },
+                { id: 3, projectName: '陸府植森', unitName: 'C棟5A', memberName: '王小明', phone: '0934-567-890', bookableStartDate: '2024-01-10', bookableEndDate: '2024-02-10', reservationDate: '2024-01-18', timeSlot: '09:00-10:00', bank: '國泰世華', status: '已完成', remark: '已完成對保手續', hasUnread: false }
+            ];
+        })(),
+
+        /**
          * 交屋預約資料
          */
         handoverReservations: (function() {
@@ -611,6 +628,7 @@
         try {
             localStorage.setItem('crm_members', JSON.stringify(this.members));
             localStorage.setItem('crm_handoverReservations', JSON.stringify(this.handoverReservations));
+            localStorage.setItem('crm_collateralReservations', JSON.stringify(this.collateralReservations));
         } catch (e) {
             console.error('Failed to save members to localStorage', e);
         }
