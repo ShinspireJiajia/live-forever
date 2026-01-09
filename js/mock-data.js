@@ -423,6 +423,92 @@
         })(),
 
         // ============================================
+        // 7.0 預約服務(對保)
+        // ============================================
+
+        /**
+         * 對保預約資料
+         */
+        collateralReservations: (function() {
+            try {
+                const stored = localStorage.getItem('crm_collateralReservations');
+                if (stored) return JSON.parse(stored);
+            } catch (e) {
+                console.error('Failed to load collateralReservations from localStorage', e);
+            }
+            return [
+            {  
+                id: 1, 
+                projectName: '陸府原森', 
+                unitName: 'A棟8F', 
+                memberName: '王大明', 
+                phone: '0912-345-678', 
+                bookableStartDate: '2025-10-01',
+                bookableEndDate: '2025-10-31',
+                reservationDate: '2025-10-15', 
+                timeSlot: '10:00-11:00', 
+                bank: '台新銀行',
+                peopleCount: 2,
+                status: '已預約', 
+                hasUnread: true,
+                checkList: { bank: true, location: true, documents: true },
+                notes: '希望能盡快完成手續'
+            },
+            { 
+                id: 2, 
+                projectName: '陸府原森', 
+                unitName: 'B棟12F', 
+                memberName: '張美玲', 
+                phone: '0922-333-444', 
+                bookableStartDate: '2025-10-01',
+                bookableEndDate: '2025-10-31',
+                reservationDate: '2025-10-16', 
+                timeSlot: '14:00-15:00', 
+                bank: '玉山銀行',
+                peopleCount: 1,
+                status: '已完成', 
+                hasUnread: false,
+                checkList: { bank: true, location: true, documents: true },
+                notes: ''
+            },
+            { 
+               id: 3, 
+               projectName: '陸府觀微', 
+               unitName: 'C棟5F', 
+               memberName: '李小華', 
+               phone: '0933-555-666', 
+               bookableStartDate: '2025-11-01',
+               bookableEndDate: '2025-11-30',
+               reservationDate: '2025-11-05', 
+               timeSlot: '09:00-10:00', 
+               bank: '國泰世華', 
+               peopleCount: 3,
+               status: '已取消', 
+               hasUnread: false,
+               checkList: { bank: false, location: false, documents: false },
+               notes: '臨時有事改期'
+           },
+            { 
+               id: 4, 
+               projectName: '陸府原森', 
+               unitName: 'A棟15F', 
+               memberName: '陳志偉', 
+               phone: '0911-222-333', 
+               bookableStartDate: '2025-10-01',
+               bookableEndDate: '2025-10-31',
+               reservationDate: '', 
+               timeSlot: '', 
+               bank: '', 
+               peopleCount: 0,
+               status: '待確認', 
+               hasUnread: false,
+               checkList: { bank: false, location: false, documents: false },
+               notes: '尚未預約'
+           }
+        ];
+        })(),
+
+        // ============================================
         // 11.0 房屋健檢
         // ============================================
         
@@ -611,6 +697,7 @@
         try {
             localStorage.setItem('crm_members', JSON.stringify(this.members));
             localStorage.setItem('crm_handoverReservations', JSON.stringify(this.handoverReservations));
+            localStorage.setItem('crm_collateralReservations', JSON.stringify(this.collateralReservations));
         } catch (e) {
             console.error('Failed to save members to localStorage', e);
         }
