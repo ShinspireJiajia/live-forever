@@ -1,12 +1,13 @@
 /**
- * 個案單列表頁面樣式
- * case-list.css
+ * 派工單列表頁面樣式
+ * work-order.css
+ * (Based on case-list.css)
  */
 
 /* ========================================
    搜尋表單網格佈局
    ======================================== */
-.case-search-form {
+.work-order-search-form {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
@@ -18,13 +19,13 @@
     gap: var(--spacing-sm) var(--spacing-lg);
 }
 
-.case-search-form .form-group.row {
+.work-order-search-form .form-group.row {
     display: flex;
     align-items: center;
     margin-bottom: 0;
 }
 
-.case-search-form .col-label {
+.work-order-search-form .col-label {
     width: 100px;
     min-width: 100px;
     flex-shrink: 0;
@@ -32,12 +33,12 @@
     padding-right: var(--spacing-sm);
 }
 
-.case-search-form .col-input {
+.work-order-search-form .col-input {
     flex: 1;
 }
 
-.case-search-form .col-input .form-select,
-.case-search-form .col-input .form-input {
+.work-order-search-form .col-input .form-select,
+.work-order-search-form .col-input .form-input {
     width: 100%;
 }
 
@@ -159,20 +160,20 @@
 }
 
 /* ========================================
-   個案單表格樣式
+   表格樣式
    ======================================== */
-.case-table {
+.work-order-table {
     min-width: 1200px;
     width: 100%;
     border-collapse: collapse;
 }
 
-.case-table thead tr {
-    background-color: #ad9e8f;
+.work-order-table thead tr {
+    background-color: #ad9e8f; /* Using same color as case-list */
     color: #ffffff;
 }
 
-.case-table thead th {
+.work-order-table thead th {
     padding: 12px 8px;
     font-weight: var(--font-weight-medium);
     text-align: left;
@@ -180,32 +181,41 @@
     border: none;
 }
 
-.case-table thead th.col-1 {
-    width: 8.33%;
+/* Adjust column widths if necessary, or use flex like case-list */
+/* Trying to follow case-list flex-based table header/row if possible but case-list.css uses flex on tr? yes */
+
+.work-order-table thead tr {
+    display: flex;
 }
 
-.case-table tbody tr {
+.work-order-table tbody tr {
     display: flex;
     background-color: #f3f3f3;
 }
 
-.case-table tbody tr:nth-child(odd) {
+.work-order-table tbody tr:nth-child(odd) {
     background-color: #e7e7e7;
 }
 
-.case-table thead tr {
-    display: flex;
-}
-
-.case-table th.col-1,
-.case-table td.col-1 {
+.work-order-table th,
+.work-order-table td {
     flex: 1;
     min-width: 0;
     padding: 10px 8px;
     word-break: break-word;
 }
 
-.case-table tbody td {
+/* Specific widths based on case-list example (col-1 was 8.33% but simplified here to flex:1) 
+   If work-order has specific column needs, we might need to adjust flex grow/shrink or width
+   For now, strictly following case-list philosophy of flex columns. 
+*/
+.work-order-table th.col-1,
+.work-order-table td.col-1 {
+    flex: 1;
+}
+
+
+.work-order-table tbody td {
     border: none;
     vertical-align: middle;
 }
@@ -218,7 +228,7 @@
     color: #dc3545;
 }
 
-.case-table td.col-1.red {
+.work-order-table td.red {
     color: #dc3545;
 }
 
@@ -319,12 +329,12 @@
         min-width: 80px;
     }
 
-    .case-search-form .form-group.row {
+    .work-order-search-form .form-group.row {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .case-search-form .col-label {
+    .work-order-search-form .col-label {
         width: 100%;
         margin-bottom: var(--spacing-xs);
     }
@@ -418,19 +428,19 @@
         transform: rotate(-90deg);
     }
     
-    .search-panel.collapsed .case-search-form {
+    .search-panel.collapsed .work-order-search-form {
         display: none;
     }
     
     /* 展開狀態的表單樣式 */
-    .search-panel .case-search-form {
+    .search-panel .work-order-search-form {
         background-color: var(--color-white);
         border-radius: var(--border-radius-md);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         margin-top: 0;
     }
     /* === 搜尋表單優化 === */
-    .case-search-form {
+    .work-order-search-form {
         padding: var(--spacing-md);
     }
     
@@ -440,32 +450,32 @@
     }
     
     /* 表單群組垂直排列 */
-    .case-search-form .form-group.row {
+    .work-order-search-form .form-group.row {
         flex-direction: column;
         align-items: stretch;
         gap: var(--spacing-xs);
         margin-bottom: var(--spacing-md);
     }
     
-    .case-search-form .col-label {
+    .work-order-search-form .col-label {
         width: 100%;
         min-width: unset;
         margin-bottom: var(--spacing-xs);
         font-weight: var(--font-weight-medium);
     }
     
-    .case-search-form .col-input {
+    .work-order-search-form .col-input {
         width: 100%;
     }
     
     /* 所有輸入框與下拉框 100% 寬度 */
-    .case-search-form .form-select,
-    .case-search-form .form-input,
-    .case-search-form .form-control,
-    .case-search-form input[type="text"],
-    .case-search-form input[type="date"],
-    .case-search-form input[type="file"],
-    .case-search-form select {
+    .work-order-search-form .form-select,
+    .work-order-search-form .form-input,
+    .work-order-search-form .form-control,
+    .work-order-search-form input[type="text"],
+    .work-order-search-form input[type="date"],
+    .work-order-search-form input[type="file"],
+    .work-order-search-form select {
         width: 100% !important;
         min-width: 0;
         box-sizing: border-box;
@@ -499,6 +509,11 @@
         justify-content: center;
         padding: var(--spacing-md);
     }
+
+    /* 手機版隱藏匯出與新增按鈕 */
+    #btnExport, #btnAdd {
+        display: none !important;
+    }
     
     /* 匯入區塊優化 */
     .import-row {
@@ -526,23 +541,23 @@
     }
     
     /* === 表格轉卡片式佈局 === */
-    .case-table {
+    .work-order-table {
         min-width: unset;
         width: 100%;
         display: block;
     }
     
-    .case-table thead {
+    .work-order-table thead {
         display: none;
     }
     
-    .case-table tbody {
+    .work-order-table tbody {
         display: flex;
         flex-direction: column;
         gap: var(--spacing-md);
     }
     
-    .case-table tbody tr {
+    .work-order-table tbody tr {
         display: flex;
         flex-direction: column;
         background-color: var(--color-white);
@@ -553,17 +568,17 @@
         border: none;
     }
     
-    .case-table tbody tr:nth-child(odd),
-    .case-table tbody tr:nth-child(even) {
+    .work-order-table tbody tr:nth-child(odd),
+    .work-order-table tbody tr:nth-child(even) {
         background-color: var(--color-white);
     }
     
-    .case-table tbody tr:hover {
+    .work-order-table tbody tr:hover {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
     
-    .case-table th.col-1,
-    .case-table td.col-1 {
+    .work-order-table th,
+    .work-order-table td {
         flex: unset;
         min-width: unset;
         max-width: unset;
@@ -576,7 +591,7 @@
     }
     
     /* 添加欄位標籤（透過偽元素）*/
-    .case-table tbody td.col-1::before {
+    .work-order-table tbody td::before {
         content: attr(data-label);
         font-weight: var(--font-weight-medium);
         color: var(--color-gray-500);
@@ -586,7 +601,7 @@
     }
     
     /* 操作按鈕區在卡片底部 */
-    .case-table tbody td:last-child {
+    .work-order-table tbody td:last-child {
         border-top: 1px solid var(--color-gray-200);
         padding-top: var(--spacing-md);
         margin-top: var(--spacing-sm);
@@ -610,3 +625,114 @@
         padding: var(--spacing-lg) var(--spacing-md);
     }
 }
+
+/* ========================================
+   ���u��S�w�˦� (Migrated from inline)
+   ======================================== */
+.status-badge, .priority-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-processing {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.priority-high {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.priority-medium {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.priority-low {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.text-ellipsis {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link-order {
+    color: var(--color-info);
+    text-decoration: none;
+}
+
+.link-order:hover {
+    text-decoration: underline;
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+    justify-content: center;
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-gray-300);
+    background: var(--color-white);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.btn-action:hover {
+    background: var(--color-gray-100);
+}
+
+.btn-edit {
+    color: var(--color-gray-700);
+}
+
+.btn-delete {
+    color: var(--color-btn-danger);
+    border-color: var(--color-btn-danger);
+    background-color: transparent; /* Override case-list specific if needed */
+}
+
+.btn-delete:hover {
+    background: var(--color-btn-danger);
+    color: var(--color-white);
+}
+
+.text-center {
+    text-align: center;
+    color: var(--color-gray-500);
+    padding: var(--spacing-xl) !important;
+}
+
+.modal-lg .modal-container {
+    max-width: 800px;
+}
+

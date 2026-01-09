@@ -1,0 +1,661 @@
+/**
+ * ============================================
+ * 基金會活動模組 - CSS 樣式
+ * ============================================
+ * 檔案：foundation-event.css
+ * 說明：基金會活動管理相關樣式定義
+ * ============================================
+ */
+
+/* ============================================
+ * 同步狀態指示器
+ * ============================================ */
+.sync-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+}
+
+.sync-status.synced {
+    background-color: var(--color-success-light);
+    color: var(--color-success-dark);
+}
+
+.sync-status.pending {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning-dark);
+}
+
+.sync-status.error {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger-dark);
+}
+
+/* 同步按鈕動畫 */
+.btn-sync i.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+ * 篩選區域佈局 (新增)
+ * ============================================ */
+.foundation-filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: var(--spacing-md);
+    /* align-items: flex-end; 移除此屬性，預設 stretch */
+}
+
+/* 確保 form-group 在 grid item 中佔滿 */
+.foundation-filter-grid .form-group {
+    width: 100%;
+    margin-bottom: 0; /* 在 grid 中不需要底部邊距 */
+}
+
+/* 搜尋按鈕區塊 */
+.event-search-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.date-range-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.date-range-container .form-input {
+    flex: 1;
+}
+
+.date-separator {
+    color: var(--color-gray-500);
+}
+
+@media (max-width: 768px) {
+    .foundation-filter-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+ * 活動資訊卡片
+ * ============================================ */
+.event-info-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.event-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.event-info-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.event-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.event-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.event-info-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.event-info-value {
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+ * 參與規則設定區塊
+ * ============================================ */
+.rules-section {
+    background: var(--color-gray-50);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.rules-section-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.rules-section-title i {
+    color: var(--color-btn-primary);
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* ============================================
+ * 身分標籤
+ * ============================================ */
+.identity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.identity-badge.resident {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.identity-badge.non-resident {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+/* ============================================
+ * 繳費狀態標籤
+ * ============================================ */
+.payment-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.payment-status.pending {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning-dark);
+}
+
+.payment-status.paid {
+    background-color: var(--color-success-light);
+    color: var(--color-success-dark);
+}
+
+.payment-status.cancelled {
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-700);
+}
+
+.payment-status.refunding {
+    background-color: var(--color-info-light);
+    color: var(--color-info-dark);
+}
+
+/* ============================================
+ * 金額顯示
+ * ============================================ */
+.amount-cell {
+    text-align: right;
+}
+
+.amount-original {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+}
+
+.amount-final {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-success-dark);
+}
+
+.amount-diff {
+    font-size: var(--font-size-xs);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.amount-diff.positive {
+    background-color: var(--color-success-light);
+    color: var(--color-success-dark);
+}
+
+.amount-diff.negative {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger-dark);
+}
+
+/* ============================================
+ * 操作日誌
+ * ============================================ */
+.audit-log-item {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-left: 3px solid var(--color-btn-primary);
+    background: var(--color-gray-50);
+    margin-bottom: var(--spacing-sm);
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.audit-log-time {
+    min-width: 150px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.audit-log-content {
+    flex: 1;
+}
+
+.audit-log-action {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.audit-log-detail {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.audit-log-admin {
+    font-size: var(--font-size-sm);
+    color: var(--color-info);
+    margin-top: var(--spacing-xs);
+}
+
+/* ============================================
+ * 稽核修改標記
+ * ============================================ */
+.manual-audit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background-color: #fce4ec;
+    color: #c2185b;
+    border-radius: 10px;
+    font-size: var(--font-size-xs);
+}
+
+/* ============================================
+ * 統計卡片
+ * ============================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--color-white);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+/* ============================================
+ * 表格樣式 (參考 Green Site)
+ * ============================================ */
+.foundation-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f3f3f3;
+    min-width: 1000px; /* 確保表格不擠壓，配合 overflow-x */
+}
+
+.foundation-table thead tr {
+    background-color: #ad9e8f;
+    color: #ffffff;
+}
+
+.foundation-table th {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.foundation-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--color-gray-300);
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.foundation-table tbody tr:nth-child(odd) {
+    background-color: #e7e7e7;
+}
+
+.foundation-table tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+.foundation-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 操作按鈕樣式調整 */
+.foundation-table .btn-sm {
+    margin-right: 4px;
+}
+
+/* ============================================
+ * 捲軸樣式 (一致化)
+ * ============================================ */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #c0aa70;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a89355;
+}
+
+/* ============================================
+ * 搜尋面板樣式 (參考 Green Site Grid)
+ * ============================================ */
+.foundation-search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    align-items: end;
+}
+
+.foundation-search-form .form-group {
+    margin-bottom: 0;
+}
+
+.foundation-search-form .form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+}
+
+.stat-icon.total { background-color: #5B9BD5; }
+.stat-icon.pending { background-color: #F39C12; }
+.stat-icon.paid { background-color: #27AE60; }
+.stat-icon.cancelled { background-color: #95a5a6; }
+.stat-icon.refunding { background-color: #3498DB; }
+.stat-icon.resident { background-color: #9b59b6; }
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+/* ============================================
+ * 180天退費卡控提示
+ * ============================================ */
+.refund-warning {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-warning-light);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-warning-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.refund-warning i {
+    font-size: var(--font-size-lg);
+}
+
+.days-remaining {
+    font-weight: var(--font-weight-bold);
+}
+
+.btn-disabled-refund {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ============================================
+ * 通知設定區塊
+ * ============================================ */
+.notification-settings {
+    background: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-info-light);
+    color: var(--color-info);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.notification-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.notification-title {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+}
+
+.notification-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+/* ============================================
+ * 繳費方式圖示
+ * ============================================ */
+.payment-method {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+}
+
+.payment-method i {
+    font-size: var(--font-size-base);
+}
+
+.payment-method.credit-card i { color: #3498db; }
+.payment-method.transfer i { color: #27ae60; }
+.payment-method.cash i { color: #f39c12; }
+
+/* ============================================
+ * 活動類別標籤
+ * ============================================ */
+.category-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-700);
+}
+
+/* ============================================
+ * 活動狀態標籤
+ * ============================================ */
+.event-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.event-status.active {
+    background-color: var(--color-success-light);
+    color: var(--color-success-dark);
+}
+
+.event-status.upcoming {
+    background-color: var(--color-info-light);
+    color: var(--color-info-dark);
+}
+
+.event-status.ended {
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-600);
+}
+
+.event-status.cancelled {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger-dark);
+}
+
+/* ============================================
+ * 響應式調整
+ * ============================================ */
+@media (max-width: 767px) {
+    .event-info-header {
+        flex-direction: column;
+    }
+    
+    .event-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .notification-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

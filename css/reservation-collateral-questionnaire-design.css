@@ -1,0 +1,246 @@
+/* css/reservation-collateral-questionnaire-design.css */
+
+.survey-intro-box {
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-lg);
+    border-left: 4px solid var(--color-info);
+    color: var(--color-gray-700);
+}
+
+.survey-preview-container {
+    background-color: #fff;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-sm);
+}
+
+.survey-main-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    color: var(--color-gray-900);
+}
+
+.survey-section {
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    padding: var(--spacing-lg); /* 增加內距 */
+    border: 1px dashed #3498db; /* 藍色虛線邊框 */
+    border-radius: var(--border-radius-lg); /* 更大的圓角 */
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.survey-section:hover {
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 對齊頂部 */
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+    font-size: 18px; /* 調整字體大小 */
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+}
+
+.section-actions {
+    display: flex;
+    gap: 8px; /* 按鈕間距 */
+}
+
+/* 編輯按鈕 (圓形灰色) */
+.btn-edit-section {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f0f0f0;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.btn-edit-section:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* 新增按鈕 (圓形白色, 藍色邊框與圖示) */
+.btn-add-bank {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #3498db;
+    background-color: #fff;
+    color: #3498db;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.btn-add-bank:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* 銀行卡片區塊 */
+.bank-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+    .bank-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bank-card {
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    background: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.bank-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.bank-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.bank-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+}
+
+.bank-card-body {
+    flex: 1;
+    margin-bottom: var(--spacing-md);
+}
+
+.bank-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+    line-height: 1.5;
+}
+
+.bank-card-footer {
+    border-top: 1px solid var(--color-gray-100);
+    padding-top: var(--spacing-sm);
+}
+
+.bank-link {
+    color: var(--color-info);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+}
+
+.bank-link:hover {
+    text-decoration: underline;
+}
+
+/* 卡片操作按鈕 (預設隱藏) */
+.card-overlay-actions {
+    position: absolute;
+    top: var(--spacing-xs);
+    right: 30px; /* 避開 radio */
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.bank-card:hover .card-overlay-actions {
+    opacity: 1;
+}
+
+.btn-sm.btn-edit-card {
+    background-color: #fff;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-gray-700);
+}
+
+.btn-sm.btn-edit-card:hover {
+    background-color: var(--color-info);
+    color: #fff;
+    border-color: var(--color-info);
+}
+
+.btn-sm.btn-delete-card {
+    background-color: #fff;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-danger);
+}
+
+.btn-sm.btn-delete-card:hover {
+    background-color: var(--color-danger);
+    color: #fff;
+    border-color: var(--color-danger);
+}
+
+
+/* 其他欄位樣式 */
+.section-content {
+    /* 模擬唯讀/禁用狀態的背景 */
+}
+
+.form-input[disabled], 
+.form-textarea[disabled],
+.btn.disabled {
+    background-color: #fff; /* 保持白色背景比較好看，或者使用 #f9f9f9 */
+    color: var(--color-gray-500);
+    cursor: not-allowed;
+    border-color: var(--color-gray-300);
+}
+
+/* 星級評分 */
+.star-rating {
+    display: flex;
+    gap: 4px;
+    font-size: 24px;
+    color: var(--color-gray-300); 
+}
+
+/* 預設顯示空心星，這裡為示意 */
+.star-rating i {
+    cursor: default;
+}
+
+.file-upload-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.file-name {
+    color: var(--color-info);
+    text-decoration: underline;
+}
