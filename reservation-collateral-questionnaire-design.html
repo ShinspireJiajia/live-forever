@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>對保問卷設計 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">    <link rel="stylesheet" href="css/modals.css">    <link rel="stylesheet" href="css/reservation-collateral-questionnaire-design.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
+        <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item active" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-down"></i>
+                            </a>
+                            <ul class="menu-items" style="display: block;">
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理" class="active"><span class="menu-title">案場管理</span></a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- 其他選單省略，保持與其他頁面一致 -->
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">CRM設定</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="crm-project.html" class="breadcrumb-item">案場管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">對保問卷設計</span>
+            </div>
+
+            <!-- 頁面內容 -->
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">對保問卷設計 - <span id="projectNameDisplay">Loading...</span></h1>
+                    <div class="page-actions">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">
+                            <i class="fa-solid fa-arrow-left"></i> 返回
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnSaveConfig">
+                            <i class="fa-solid fa-save"></i> 儲存設定
+                        </button>
+                    </div>
+                </div>
+
+                <div class="survey-intro-box">
+                    <p>請在此設計該案場的對保問卷內容。下方預覽區域顯示住戶將看到的畫面，您可以在此新增或修改對保的銀行資訊。</p>
+                </div>
+
+                <!-- 問卷設計/預覽區域 -->
+                <div class="survey-preview-container">
+                    <div class="survey-main-title">對保問卷調查</div>
+
+                    <!-- 摘要說明區塊 -->
+                    <div class="survey-section" id="sectionDescription">
+                        <div class="section-header">
+                            <h3 class="section-title">問卷摘要說明</h3>
+                        </div>
+                        <div class="section-body">
+                            <textarea class="form-control" id="surveyDescriptionText" rows="3" placeholder="請輸入問卷的摘要說明，例如：親愛的住戶您好，請協助填寫以下資訊...">親愛的住戶您好，為協助您順利完成交屋作業，請您協助填寫以下對保相關資訊，以便我們為您安排後續服務。</textarea>
+                        </div>
+                    </div>
+
+                    <!-- 區塊 1: 對保的銀行 -->
+                    <div class="survey-section" id="sectionBank">
+                        <div class="section-header">
+                            <h3 class="section-title">對保的銀行</h3>
+                            <div class="section-actions">
+                                <button class="btn-add-bank" title="新增銀行"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-cards-grid">
+                            <!-- 銀行卡片 1 -->
+                            <div class="bank-card">
+                                <div class="bank-card-header">
+                                    <h4 class="bank-name">國泰世華</h4>
+                                    <input type="radio" name="bank" disabled>
+                                </div>
+                                <div class="bank-card-body">
+                                    <p class="bank-desc">國泰世華銀行提供優惠房貸方案，首購族可享1.31%起的優惠利率。</p>
+                                </div>
+                                <div class="bank-card-footer">
+                                    <a href="#" class="bank-link">前往官網了解更多</a>
+                                </div>
+                                <div class="card-overlay-actions">
+                                    <button class="btn-sm btn-edit-card">編輯</button>
+                                    <button class="btn-sm btn-delete-card">刪除</button>
+                                </div>
+                            </div>
+
+                            <!-- 銀行卡片 2 -->
+                            <div class="bank-card">
+                                <div class="bank-card-header">
+                                    <h4 class="bank-name">台灣銀行</h4>
+                                    <input type="radio" name="bank" disabled>
+                                </div>
+                                <div class="bank-card-body">
+                                    <p class="bank-desc">台灣銀行提供多元房貸方案，首次購屋可享最低1.38%優惠利率。</p>
+                                </div>
+                                <div class="bank-card-footer">
+                                    <a href="#" class="bank-link">前往官網了解更多</a>
+                                </div>
+                                <div class="card-overlay-actions">
+                                    <button class="btn-sm btn-edit-card">編輯</button>
+                                    <button class="btn-sm btn-delete-card">刪除</button>
+                                </div>
+                            </div>
+
+                            <!-- 銀行卡片 3 -->
+                            <div class="bank-card">
+                                <div class="bank-card-header">
+                                    <h4 class="bank-name">華南銀行</h4>
+                                    <input type="radio" name="bank" disabled>
+                                </div>
+                                <div class="bank-card-body">
+                                    <p class="bank-desc">華南銀行提供優惠方案，首購族可享1.31%起的優惠利率。</p>
+                                </div>
+                                <div class="bank-card-footer">
+                                    <a href="#" class="bank-link">前往官網了解更多</a>
+                                </div>
+                                <div class="card-overlay-actions">
+                                    <button class="btn-sm btn-edit-card">編輯</button>
+                                    <button class="btn-sm btn-delete-card">刪除</button>
+                                </div>
+                            </div>
+
+                            <!-- 銀行卡片 4 -->
+                            <div class="bank-card">
+                                <div class="bank-card-header">
+                                    <h4 class="bank-name">其他</h4>
+                                    <input type="radio" name="bank" disabled>
+                                </div>
+                                <div class="bank-card-body">
+                                    <p class="bank-desc">請填寫預計對保的銀行資訊，並上傳對保人員的名片資訊</p>
+                                </div>
+                                <div class="bank-card-footer">
+                                    <a href="#" class="bank-link">前往官網了解更多</a>
+                                </div>
+                                <div class="card-overlay-actions">
+                                    <button class="btn-sm btn-edit-card">編輯</button>
+                                    <button class="btn-sm btn-delete-card">刪除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 區塊 2: 預計貸款金額 -->
+                    <div class="survey-section">
+                        <div class="section-header">
+                            <h3 class="section-title">預計貸款金額</h3>
+                        </div>
+                        <div class="section-content">
+                            <input type="text" class="form-input" placeholder="請輸入預計貸款金額" disabled>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 區塊 4: 其他補充 -->
+                    <div class="survey-section">
+                        <div class="section-header">
+                            <h3 class="section-title">其他補充</h3>
+                        </div>
+                        <div class="section-content">
+                            <textarea class="form-textarea" placeholder="請輸入其他補充說明..." rows="3" disabled></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 區塊 5: 圖片上傳 -->
+                    <div class="survey-section">
+                        <div class="section-header">
+                            <h3 class="section-title">圖片上傳</h3>
+                        </div>
+                        <div class="section-content file-upload-row">
+                            <button class="btn btn-secondary disabled">上傳檔案</button>
+                            <span class="file-name">fileName.jpg</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 新增/編輯銀行彈窗 -->
+    <div class="modal" id="bankModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="bankModalTitle">新增銀行</h3>
+                <button class="modal-close" title="關閉">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bankForm">
+                    <div class="form-group">
+                        <label class="form-label required">銀行名稱</label>
+                        <input type="text" class="form-input" id="bankName" placeholder="例如：國泰世華" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">說明文字</label>
+                        <textarea class="form-input" id="bankDesc" rows="4" placeholder="請輸入優惠方案或相關說明..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">了解更多連結</label>
+                        <input type="url" class="form-input" id="bankLink" placeholder="https://...">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnBankCancel">取消</button>
+                <button class="btn btn-primary" id="btnBankSave">確認</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/reservation-collateral-questionnaire-design.js"></script>
+</body>
+</html>

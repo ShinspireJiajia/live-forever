@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增案場活動 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/site-event.css">
+    <link rel="stylesheet" href="css/site-event-add.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
+        <header class="header">
+            <div class="header-left">
+                <!-- 側邊欄切換按鈕 -->
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Logo/系統名稱 -->
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 隱藏右側內容 -->
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                                <li class="menu-item"><a href="#" title="APP使用者管理 (未完成)"><span class="menu-title">APP使用者管理 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- CRM設定 -->
+                        <li class="menu-item" data-menu-id="crm">
+                            <a href="javascript:void(0)" title="CRM設定">
+                                <i class="menu-icon fa-solid fa-sliders"></i>
+                                <span class="menu-title">CRM設定</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
+                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
+                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
+                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
+                                <li class="menu-item"><a href="#" title="LINE頁面管理 (未完成)"><span class="menu-title">LINE頁面管理 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋項目管理 (未完成)"><span class="menu-title">驗屋項目管理 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="巡檢項目管理 (未完成)"><span class="menu-title">巡檢項目管理 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 戶別管理 -->
+                        <li class="menu-item" data-menu-id="unit">
+                            <a href="javascript:void(0)" title="戶別管理">
+                                <i class="menu-icon fa-solid fa-building"></i>
+                                <span class="menu-title">戶別管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋戶別管理 (未完成)"><span class="menu-title">驗屋戶別管理 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
+                                <li class="menu-item"><a href="#" title="合約附件 (未完成)"><span class="menu-title">合約附件 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="戶別預約設定 (未完成)"><span class="menu-title">戶別預約設定 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 會員管理 -->
+                        <li class="menu-item" data-menu-id="member">
+                            <a href="javascript:void(0)" title="會員管理">
+                                <i class="menu-icon fa-solid fa-users"></i>
+                                <span class="menu-title">會員管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
+                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                                <li class="menu-item"><a href="#" title="活動歷程 (未完成)"><span class="menu-title">活動歷程 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 個案單管理 -->
+                        <li class="menu-item" data-menu-id="case">
+                            <a href="javascript:void(0)" title="個案單管理">
+                                <i class="menu-icon fa-solid fa-file-invoice"></i>
+                                <span class="menu-title">個案單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
+                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋修繕紀錄 (未完成)"><span class="menu-title">驗屋修繕紀錄 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="巡檢紀錄 (未完成)"><span class="menu-title">巡檢紀錄 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="驗屋個案單 (未完成)"><span class="menu-title">驗屋個案單 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 派工單管理 -->
+                        <li class="menu-item" data-menu-id="dispatch">
+                            <a href="javascript:void(0)" title="派工單管理">
+                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
+                                <span class="menu-title">派工單管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 綠海養護 -->
+                        <li class="menu-item" data-menu-id="green">
+                            <a href="javascript:void(0)" title="綠海養護">
+                                <i class="menu-icon fa-solid fa-leaf"></i>
+                                <span class="menu-title">綠海養護</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="green-site.html" title="案場管理(綠海)"><span class="menu-title">案場管理(綠海)</span></a></li>
+                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
+                                <li class="menu-item"><a href="green-reservation.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 預約服務 -->
+                        <li class="menu-item" data-menu-id="reservation">
+                            <a href="javascript:void(0)" title="預約服務">
+                                <i class="menu-icon fa-solid fa-calendar-check"></i>
+                                <span class="menu-title">預約服務</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
+                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 房屋健檢 -->
+                        <li class="menu-item" data-menu-id="checkup">
+                            <a href="javascript:void(0)" title="房屋健檢">
+                                <i class="menu-icon fa-solid fa-stethoscope"></i>
+                                <span class="menu-title">房屋健檢</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
+                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 活動管理 -->
+                        <li class="menu-item" data-menu-id="activity">
+                            <a href="javascript:void(0)" title="活動管理">
+                                <i class="menu-icon fa-solid fa-calendar-days"></i>
+                                <span class="menu-title">活動管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
+                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 官網活動(基金會) -->
+                        <li class="menu-item" data-menu-id="foundation">
+                            <a href="javascript:void(0)" title="官網活動(基金會)">
+                                <i class="menu-icon fa-solid fa-landmark"></i>
+                                <span class="menu-title">官網活動(基金會)</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="foundation-event-list.html" title="活動設定"><span class="menu-title">活動設定</span></a></li>
+                                <li class="menu-item"><a href="foundation-registration.html" title="報名紀錄"><span class="menu-title">報名紀錄</span></a></li>
+                                <li class="menu-item"><a href="foundation-audit-log.html" title="稽核日誌"><span class="menu-title">稽核日誌</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 案場活動 -->
+                        <li class="menu-item expanded" data-menu-id="site-event">
+                            <a href="javascript:void(0)" title="案場活動">
+                                <i class="menu-icon fa-solid fa-building-flag"></i>
+                                <span class="menu-title">案場活動</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item active"><a href="site-event-list.html" title="活動設定"><span class="menu-title">活動設定</span></a></li>
+                                <li class="menu-item"><a href="site-event-registration.html" title="報名紀錄"><span class="menu-title">報名紀錄</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 報表管理 -->
+                        <li class="menu-item" data-menu-id="report">
+                            <a href="javascript:void(0)" title="報表管理">
+                                <i class="menu-icon fa-solid fa-chart-pie"></i>
+                                <span class="menu-title">報表管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="售後服務管制總表 (未完成)"><span class="menu-title">售後服務管制總表 (未完成)</span></a></li>
+                                <li class="menu-item"><a href="#" title="未結案個案單 (未完成)"><span class="menu-title">未結案個案單 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 推播管理 -->
+                        <li class="menu-item" data-menu-id="push">
+                            <a href="javascript:void(0)" title="推播管理">
+                                <i class="menu-icon fa-solid fa-bell"></i>
+                                <span class="menu-title">推播管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="推播管理 (未完成)"><span class="menu-title">推播管理 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 問卷管理 -->
+                        <li class="menu-item" data-menu-id="questionnaire">
+                            <a href="javascript:void(0)" title="問卷管理">
+                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
+                                <span class="menu-title">問卷管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="#" title="題目管理 (未完成)"><span class="menu-title">題目管理 (未完成)</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="site-event-list.html" class="breadcrumb-item">案場活動</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active" id="pageTitle">新增活動</span>
+            </div>
+
+            <!-- 頁面內容 -->
+            <div class="content-wrapper">
+                <!-- 頁面標題 -->
+                <div class="page-header-section">
+                    <h1 class="page-main-title" id="formPageTitle">
+                        新增案場活動
+                    </h1>
+                </div>
+
+                <!-- 活動表單 -->
+                <form id="eventForm" class="event-form">
+                    <!-- 基本資訊區塊 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <i class="fa-solid fa-info-circle"></i>
+                                基本資訊
+                            </h3>
+                        </div>
+                        <div class="form-card-body">
+                            <div class="form-row">
+                                <div class="form-col-6">
+                                    <div class="form-group">
+                                        <label class="form-label required">活動名稱</label>
+                                        <input type="text" class="form-control" id="formTitle" placeholder="請輸入活動名稱" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-col-6">
+                                    <div class="form-group">
+                                        <label class="form-label required">活動類別</label>
+                                        <select class="form-select" id="formCategory" required>
+                                            <option value="">請選擇類別</option>
+                                            <option value="住戶聯誼">住戶聯誼</option>
+                                            <option value="親子活動">親子活動</option>
+                                            <option value="節慶活動">節慶活動</option>
+                                            <option value="社區活動">社區活動</option>
+                                            <option value="講座課程">講座課程</option>
+                                            <option value="設備說明">設備說明</option>
+                                            <option value="公告說明">公告說明</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col-6">
+                                    <div class="form-group">
+                                        <label class="form-label required">開始時間</label>
+                                        <input type="datetime-local" class="form-control" id="formStartDt" required>
+                                    </div>
+                                </div>
+                                <div class="form-col-6">
+                                    <div class="form-group">
+                                        <label class="form-label required">結束時間</label>
+                                        <input type="datetime-local" class="form-control" id="formEndDt" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">活動地點</label>
+                                        <input type="text" class="form-control" id="formLocation" placeholder="請輸入活動地點">
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="form-row">
+                                <div class="form-col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">活動說明</label>
+                                        <!-- 隱藏的 textarea 用於與既有邏輯相容 -->
+                                        <textarea id="formDescription" style="display: none;"></textarea>
+                                        
+                                        <!-- 自製 Rich Text Editor -->
+                                        <div class="editor-container">
+                                            <div class="editor-toolbar">
+                                                <!-- 字型樣式 -->
+                                                <div class="editor-btn-group">
+                                                    <select class="editor-select" id="editorFontSize" title="文字大小">
+                                                        <option value="3">正常大小</option>
+                                                        <option value="1">極小</option>
+                                                        <option value="2">小</option>
+                                                        <option value="4">大</option>
+                                                        <option value="5">特大</option>
+                                                        <option value="6">超大</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <!-- 粗體/斜體/底線 -->
+                                                <div class="editor-btn-group">
+                                                    <button type="button" class="editor-btn" data-command="bold" title="粗體">
+                                                        <i class="fa-solid fa-bold"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="italic" title="斜體">
+                                                        <i class="fa-solid fa-italic"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="underline" title="底線">
+                                                        <i class="fa-solid fa-underline"></i>
+                                                    </button>
+                                                </div>
+
+                                                <!-- 顏色 -->
+                                                <div class="editor-btn-group">
+                                                    <label class="editor-color-label" title="文字顏色">
+                                                        <i class="fa-solid fa-font"></i>
+                                                        <input type="color" class="editor-color-input" id="editorForeColor" value="#000000">
+                                                    </label>
+                                                </div>
+
+                                                <!-- 連結/圖片 -->
+                                                <div class="editor-btn-group">
+                                                    <button type="button" class="editor-btn" id="editorCreateLink" title="插入連結">
+                                                        <i class="fa-solid fa-link"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="unlink" title="移除連結">
+                                                        <i class="fa-solid fa-unlink"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" id="editorInsertImage" title="插入圖片">
+                                                        <i class="fa-solid fa-image"></i>
+                                                    </button>
+                                                    <input type="file" id="editorImageInput" accept="image/*" style="display: none;">
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 編輯內容區 -->
+                                            <div class="editor-content" id="editorContent" contenteditable="true" placeholder="請輸入活動說明..."></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 適用案場區塊 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <i class="fa-solid fa-building"></i>
+                                適用案場設定
+                            </h3>
+                        </div>
+                        <div class="form-card-body">
+
+                            
+                            <!-- 案場單選 Autocomplete -->
+                            <div class="form-group" style="position: relative; max-width: 400px;">
+                                <div class="input-group" style="display: flex; align-items: center;">
+                                    <input type="text" class="form-control" id="projectSearchInput" placeholder="請輸入案場名稱搜尋..." autocomplete="off">
+                                    <button class="btn btn-sm btn-outline" type="button" id="clearProjectBtn" style="display: none; margin-left: 10px;">
+                                        <i class="fa-solid fa-times"></i> 清除
+                                    </button>
+                                </div>
+                                
+                                <ul id="projectSuggestionList" style="display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 1000; max-height: 200px; overflow-y: auto; border: 1px solid #ddd; background: #fff; padding: 0; margin: 0; list-style: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 4px;">
+                                    <!-- JS 會在這裡動態產生選項 -->
+                                </ul>
+                                
+                                <input type="hidden" id="selectedProjectId" name="project_id">
+                                
+                                <div id="selectedProjectDisplay" style="margin-top: 15px; display: none;">
+                                    <div style="display: inline-flex; align-items: center; background-color: #f0f4f8; border: 1px solid #d0e1f0; padding: 8px 16px; border-radius: 30px; color: #333;">
+                                        <div style="width: 24px; height: 24px; background-color: var(--color-content-bg); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 8px;">
+                                            <i class="fa-solid fa-building" style="font-size: 12px;"></i>
+                                        </div>
+                                        <span id="selectedProjectName" style="font-weight: 500;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 報名設定區塊 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <i class="fa-solid fa-user-plus"></i>
+                                報名設定
+                            </h3>
+                        </div>
+                        <div class="form-card-body">
+                            <div class="form-row">
+                                <div class="form-col-4">
+                                    <div class="form-group">
+                                        <label class="form-label required">名額上限</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" class="form-control" id="formMaxSlots" min="1" value="50" required>
+                                            <span class="input-suffix">人</span>
+                                        </div>
+                                        <span class="form-hint">活動可報名的總人數上限</span>
+                                    </div>
+                                </div>
+                                <div class="form-col-4">
+                                    <div class="form-group">
+                                        <label class="form-label">報名費用</label>
+                                        <div class="input-with-prefix">
+                                            <span class="input-prefix">NT$</span>
+                                            <input type="number" class="form-control" id="formPrice" min="0" value="0">
+                                        </div>
+                                        <span class="form-hint">0 表示免費活動</span>
+                                    </div>
+                                </div>
+                                <div class="form-col-4">
+                                    <div class="form-group">
+                                        <label class="form-label">報名截止日</label>
+                                        <input type="date" class="form-control" id="formDeadline">
+                                        <span class="form-hint">不填則預設為活動開始前一天</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col-4">
+                                    <div class="form-group">
+                                        <label class="form-label">允許攜伴人數</label>
+                                        <div class="input-with-suffix">
+                                            <input type="number" class="form-control" id="formMaxCompanion" min="0" max="10" value="0">
+                                            <span class="input-suffix">人</span>
+                                        </div>
+                                        <span class="form-hint">每位報名者可攜帶的同行人數</span>
+                                    </div>
+                                </div>
+                                <div class="form-col-4">
+                                    <div class="form-group checkbox-group-vertical">
+                                        <label class="form-label">其他設定</label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" id="formNeedReceipt">
+                                            <span class="checkbox-text">需開立收據</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 活動圖片區塊 -->
+                    <div class="form-card">
+                        <div class="form-card-header">
+                            <h3 class="form-card-title">
+                                <i class="fa-solid fa-image"></i>
+                                活動圖片
+                            </h3>
+                        </div>
+                        <div class="form-card-body">
+                            <div class="image-upload-area" id="imageUploadArea">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <i class="fa-solid fa-cloud-upload-alt"></i>
+                                    <p>點擊或拖曳圖片至此處上傳</p>
+                                    <span class="upload-hint">建議尺寸：800 x 600 px，檔案大小不超過 2MB</span>
+                                </div>
+                                <img id="imagePreview" class="image-preview" style="display: none;">
+                                <input type="file" id="formImage" accept="image/*" style="display: none;">
+                            </div>
+                            <button type="button" class="btn btn-outline btn-sm remove-image-btn" id="removeImageBtn" style="display: none;">
+                                <i class="fa-solid fa-trash"></i> 移除圖片
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 表單操作按鈕 -->
+                    <div class="form-actions-bar">
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='site-event-list.html'">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            返回列表
+                        </button>
+                        <div class="form-actions-right">
+                            <button type="reset" class="btn btn-outline">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-check"></i>
+                                儲存活動
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 成功彈窗 -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal modal-sm">
+            <div class="modal-body">
+                <div class="success-content">
+                    <div class="success-icon">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <h3 class="success-title" id="successTitle">新增成功</h3>
+                    <p class="success-message" id="successMessage">活動已成功建立</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='site-event-list.html'">
+                    返回列表
+                </button>
+                <button type="button" class="btn btn-primary" onclick="siteEventAddManager.resetAndNew()">
+                    繼續新增
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Toast 提示容器 -->
+    <!-- ============================================ -->
+    <div class="toast-container"></div>
+
+    <!-- ============================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================ -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/site-event-mock-data.js"></script>
+    <script src="js/site-event-add.js"></script>
+    <script>
+        // 初始化側邊欄
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+        });
+    </script>
+
+    <!-- Toast 樣式 (內嵌) -->
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-icon {
+            font-size: 20px;
+        }
+        
+        .toast-success .toast-icon { color: #27AE60; }
+        .toast-error .toast-icon { color: #E74C3C; }
+        .toast-info .toast-icon { color: #3498DB; }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .toast-message {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+        }
+        
+        .toast-close:hover {
+            color: #333;
+        }
+    </style>
+</body>
+</html>

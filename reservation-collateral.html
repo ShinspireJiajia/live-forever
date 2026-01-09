@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/reservation-handover.css">
+    <link rel="stylesheet" href="css/reservation-collateral.css">
     <link rel="stylesheet" href="css/case-list.css">
     <link rel="stylesheet" href="css/case-edit.css">
     <link rel="stylesheet" href="css/chat.css">
@@ -31,7 +32,7 @@
                 <header class="header">
             <div class="header-left">
                 <!-- 側邊欄切換按鈕 -->
-                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                <button type="button" class="header-toggle" id="sidebarToggle" title="展開/收合選單">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <!-- Logo/系統名稱 -->
@@ -344,9 +345,9 @@
                                 <i class="fa-solid fa-calendar-days"></i>
                                 時段管理
                             </a>
-                            <button type="button" class="btn btn-success" id="btnAdd">
+                            <a href="reservation-collateral-edit.html" class="btn btn-success" id="btnAddEditPage" style="text-decoration: none;">
                                 新增預約
-                            </button>
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -362,11 +363,11 @@
                                 <th class="col-1">會員姓名</th>
                                 <th class="col-1">聯絡電話</th>
                                 <th class="col-1">可預約時段</th>
-                                <th class="col-1">預約日期</th>
-                                <th class="col-1">預約時段</th>
+                                <th class="col-1">已預約日期</th>
+                                <th class="col-1">時段</th>
                                 <th class="col-1">銀行</th>
                                 <th class="col-1">狀態</th>
-                                <th class="col-1">操作</th>
+                                <th class="col-2">操作</th>
                             </tr>
                         </thead>
                         <tbody id="reservationTableBody">
@@ -387,7 +388,7 @@
         <div class="modal-content">
             <div class="modal-header modal-header-simple">
                 <h3 class="modal-title" id="modalTitle">新增對保預約</h3>
-                <button class="modal-close" id="modalClose">
+                <button type="button" class="modal-close" id="modalClose">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -502,7 +503,7 @@
                                 <!-- 用戶訊息（右側）- 含圖片附件 -->
                                 <div class="message message-right">
                                     <div class="message-media">
-                                        <img src="https://via.placeholder.com/300x200/e0e0e0/666?text=漏水照片" alt="客戶上傳圖片" class="media-image" data-full-src="https://via.placeholder.com/800x600/e0e0e0/666?text=漏水照片">
+                                        <img src="https://placehold.co/300x200/e0e0e0/666666?text=漏水照片" alt="客戶上傳圖片" class="media-image" data-full-src="https://placehold.co/800x600/e0e0e0/666666?text=漏水照片">
                                     </div>
                                     <div class="message-info">陳小明 2025/08/05 10:31 AM</div>
                                 </div>
@@ -513,7 +514,7 @@
                                     <div class="message-file">
                                         <i class="fa-solid fa-file-pdf file-icon"></i>
                                         <span class="file-name">聯絡資訊.pdf</span>
-                                        <button class="file-download" title="下載檔案">
+                                        <button type="button" class="file-download" title="下載檔案">
                                             <i class="fa-solid fa-download"></i>
                                         </button>
                                     </div>
@@ -731,8 +732,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" id="btnCancel">取消</button>
-                <button class="btn btn-primary" id="btnSave">儲存</button>
+                <button type="button" class="btn btn-secondary" id="btnCancel">取消</button>
+                <button type="button" class="btn btn-primary" id="btnSave">儲存</button>
             </div>
         </div>
     </div>
@@ -894,9 +895,23 @@
                     return true;
                 });
                 
-                // 4. 排序 (依日期)
+                // 4. 排序 (依日期時間倒序)
                 data.sort((a, b) => {
-                    return new Date(b.reservationDate) - new Date(a.reservationDate);
+                    const timeA = (a.reservationDate && a.timeSlot) ? new Date(`${a.reservationDate} ${a.timeSlot.split('-')[0]}`).getTime() : 0;
+                    const timeB = (b.reservationDate && b.timeSlot) ? new Date(`${b.reservationDate} ${b.timeSlot.split('-')[0]}`).getTime() : 0;
+                    return timeB - timeA;
+                });
+                
+                // Generate Serial Number
+                const dateCounts = {};
+                data.forEach(item => {
+                    const dateStr = item.reservationDate.replace(/-/g, '').substring(2); // YYMMDD
+                    if (!dateCounts[dateStr]) {
+                        dateCounts[dateStr] = 0;
+                    }
+                    dateCounts[dateStr]++;
+                    const seq = String(dateCounts[dateStr]).padStart(2, '0');
+                    item.displaySerial = `col${dateStr}${seq}`;
                 });
                 
                 // 5. 分頁
@@ -918,7 +933,7 @@
                 const tbody = document.getElementById('reservationTableBody');
                 
                 if (data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="11" class="col-1 text-center">無資料</td></tr>';
+                   tbody.innerHTML = '<tr><td colspan="11" class="col-1 text-center">無資料</td></tr>';
                     return;
                 }
                 
@@ -941,20 +956,20 @@
                     
                     return `
                         <tr>
-                            <td class="col-1">${(currentPage - 1) * pageSize + index + 1}${unreadBadge}</td>
-                            <td class="col-1">${item.projectName}</td>
-                            <td class="col-1">${item.unitName}</td>
-                            <td class="col-1">${item.memberName}</td>
-                            <td class="col-1">${item.phone}</td>
-                            <td class="col-1">${bookableRange}</td>
-                            <td class="col-1">${item.reservationDate}</td>
-                            <td class="col-1">${item.timeSlot}</td>
-                            <td class="col-1">${item.bank}</td>
-                            <td class="col-1"><span class="status-badge ${statusClass}">${item.status}</span></td>
-                            <td class="col-1">
+                            <td class="col-1" data-label="序號">${item.displaySerial}${unreadBadge}</td>
+                            <td class="col-1" data-label="案場">${item.projectName}</td>
+                            <td class="col-1" data-label="戶別">${item.unitName}</td>
+                            <td class="col-1" data-label="會員姓名">${item.memberName}</td>
+                            <td class="col-1" data-label="聯絡電話">${item.phone}</td>
+                            <td class="col-1" data-label="可預約時段">${bookableRange}</td>
+                            <td class="col-1" data-label="已預約日期">${item.reservationDate || '-'}</td>
+                            <td class="col-1" data-label="時段">${item.timeSlot || '-'}</td>
+                            <td class="col-1" data-label="銀行">${item.bank}</td>
+                            <td class="col-1" data-label="狀態"><span class="status-badge ${statusClass}">${item.status}</span></td>
+                            <td class="col-2" data-label="操作">
                                 <div class="table-actions">
-                                    <button class="btn-table-edit" data-id="${item.id}" title="編輯">編輯</button>
-                                    <button class="btn-table-delete" data-id="${item.id}" title="刪除">刪除</button>
+                                    <a href="reservation-collateral-edit.html?id=${item.id}" class="btn-table-edit" title="編輯" style="text-decoration: none;">編輯</a>
+                                    <button type="button" class="btn-table-delete" data-id="${item.id}" title="刪除">刪除</button>
                                 </div>
                             </td>
                         </tr>
@@ -965,14 +980,6 @@
             }
             
             function bindTableEvents() {
-                // 編輯按鈕
-                document.querySelectorAll('.btn-table-edit').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        const id = parseInt(this.dataset.id);
-                        editReservation(id);
-                    });
-                });
-                
                 // 刪除按鈕
                 document.querySelectorAll('.btn-table-delete').forEach(function(btn) {
                     btn.addEventListener('click', function() {
@@ -1232,256 +1239,7 @@
         });
     </script>
 
-    <style>
-        .view-toggle {
-            display: flex;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .view-btn {
-            padding: var(--spacing-sm) var(--spacing-md);
-            border: 1px solid var(--color-gray-300);
-            background: var(--color-white);
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            transition: all var(--transition-fast);
-        }
-        
-        .view-btn:hover {
-            background: var(--color-gray-100);
-        }
-        
-        .view-btn.active {
-            background: var(--color-btn-primary);
-            color: var(--color-white);
-            border-color: var(--color-btn-primary);
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: var(--border-radius-full);
-            font-size: var(--font-size-xs);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .status-pending {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-confirmed {
-            background-color: #cce5ff;
-            color: #004085;
-        }
-        
-        .status-completed {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .status-cancelled {
-            background-color: #e2e3e5;
-            color: #383d41;
-        }
 
-        /* .unread-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 8px;
-            color: var(--color-danger);
-            font-size: 1.1em;
-            animation: pulse 2s infinite;
-        } */
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: var(--spacing-xs);
-            justify-content: center;
-        }
-        
-        .btn-action {
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--color-gray-300);
-            background: var(--color-white);
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-fast);
-        }
-        
-        .btn-action:hover {
-            background: var(--color-gray-100);
-        }
-        
-        .btn-edit {
-            color: var(--color-gray-700);
-        }
-        
-        .btn-notify {
-            color: var(--color-warning);
-            border-color: var(--color-warning);
-        }
-        
-        .btn-notify:hover {
-            background: var(--color-warning);
-            color: var(--color-white);
-        }
-        
-        .btn-delete {
-            color: var(--color-btn-danger);
-            border-color: var(--color-btn-danger);
-        }
-        
-        .btn-delete:hover {
-            background: var(--color-btn-danger);
-            color: var(--color-white);
-        }
-        
-        .text-center {
-            text-align: center;
-            color: var(--color-gray-500);
-            padding: var(--spacing-xl) !important;
-        }
-        
-        /* 日曆樣式 */
-        .calendar-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .calendar-title {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-gray-900);
-        }
-        
-        .calendar-grid {
-            background: var(--color-white);
-            border-radius: var(--border-radius-md);
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-        }
-        
-        .calendar-weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            background: var(--color-table-header);
-        }
-        
-        .weekday {
-            padding: var(--spacing-md);
-            text-align: center;
-            color: var(--color-white);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-            background: var(--color-gray-300);
-        }
-        
-        .calendar-day {
-            min-height: 100px;
-            padding: var(--spacing-sm);
-            background: var(--color-white);
-        }
-        
-        .calendar-day.empty {
-            background: var(--color-gray-100);
-        }
-        
-        .calendar-day.today {
-            background: #fffde7;
-        }
-        
-        .day-number {
-            font-weight: var(--font-weight-medium);
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .day-events {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        
-        .day-event {
-            font-size: var(--font-size-xs);
-            padding: 2px 4px;
-            background: var(--color-info);
-            color: var(--color-white);
-            border-radius: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .day-more {
-            font-size: var(--font-size-xs);
-            color: var(--color-gray-500);
-            cursor: pointer;
-        }
-
-        /* Modal Tabs */
-        .modal-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--color-border);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .modal-tab {
-            padding: var(--spacing-sm) var(--spacing-md);
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            color: var(--color-text-secondary);
-            font-weight: var(--font-weight-medium);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .modal-tab:hover {
-            color: var(--color-primary);
-        }
-
-        .modal-tab.active {
-            color: var(--color-primary);
-            border-bottom-color: var(--color-primary);
-        }
-
-        .modal-tab-content {
-            display: none;
-        }
-
-        .modal-tab-content.active {
-            display: block;
-        }
-        
-        /* Adjust modal size for tabs */
-        .modal-sm .modal-content {
-            max-width: 800px; /* Widen the modal to fit chat and completion */
-        }
-    </style>
 </body>
 </html>
 

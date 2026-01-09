@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陸府建設 CRM 系統</title>
+    <title>案場活動設定 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/site-event.css">
 </head>
 <body>
     <!-- ============================================ -->
@@ -222,6 +223,19 @@
                             </ul>
                         </li>
 
+                        <!-- 案場活動 -->
+                        <li class="menu-item expanded" data-menu-id="site-event">
+                            <a href="javascript:void(0)" title="案場活動">
+                                <i class="menu-icon fa-solid fa-building-flag"></i>
+                                <span class="menu-title">案場活動</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item active"><a href="site-event-list.html" title="活動設定"><span class="menu-title">活動設定</span></a></li>
+                                <li class="menu-item"><a href="site-event-registration.html" title="報名紀錄"><span class="menu-title">報名紀錄</span></a></li>
+                            </ul>
+                        </li>
+
                         <!-- 報表管理 -->
                         <li class="menu-item" data-menu-id="report">
                             <a href="javascript:void(0)" title="報表管理">
@@ -232,14 +246,6 @@
                             <ul class="menu-items">
                                 <li class="menu-item"><a href="#" title="售後服務管制總表 (未完成)"><span class="menu-title">售後服務管制總表 (未完成)</span></a></li>
                                 <li class="menu-item"><a href="#" title="未結案個案單 (未完成)"><span class="menu-title">未結案個案單 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修類統計表 (未完成)"><span class="menu-title">全部建案維修類統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表 (未完成)"><span class="menu-title">全部建案維修部品統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表 (未完成)"><span class="menu-title">全部建案維修位置統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="滿意度調查統計 (未完成)"><span class="menu-title">滿意度調查統計 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="客戶滿意度明細表 (未完成)"><span class="menu-title">客戶滿意度明細表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表 (未完成)"><span class="menu-title">全部建案維修狀態統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="案件數量統計表 (未完成)"><span class="menu-title">案件數量統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="任務完成統計表 (未完成)"><span class="menu-title">任務完成統計表 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -281,94 +287,280 @@
                     <i class="fa-solid fa-house"></i>
                     首頁
                 </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">案場活動</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">活動設定</span>
             </div>
 
-            <!-- 頁面內容 -->
-            <div class="content-wrapper">
-                <div class="page-header">
-                    <h1 class="page-title">歡迎使用陸府建設 CRM 系統</h1>
-                </div>
-
-                <!-- 首頁儀表板卡片 -->
-                <div class="dashboard-grid">
-                    <!-- 今日預約 -->
-                    <div class="dashboard-card">
-                        <div class="card-icon" style="background-color: #5B9BD5;">
-                            <i class="fa-solid fa-calendar-check"></i>
+           
+            <!-- 查詢條件區 -->
+            <div class="search-panel">
+                <form class="event-search-form" id="searchForm">
+                    <div class="site-event-filter-grid">
+                        <div class="form-group">
+                            <label class="form-label">案場</label>
+                            <select class="form-select" id="searchSite">
+                                <option value="">全部案場</option>
+                                <option value="陸府植森">陸府植森</option>
+                                <option value="陸府原森">陸府原森</option>
+                                <option value="陸府臻觀">陸府臻觀</option>
+                                <option value="陸府日向">陸府日向</option>
+                                <option value="陸府觀微">陸府觀微</option>
+                            </select>
                         </div>
-                        <div class="card-content">
-                            <h3 class="card-title">今日預約</h3>
-                            <p class="card-value">8</p>
-                            <p class="card-label">筆待處理</p>
+                        <div class="form-group">
+                            <label class="form-label">活動名稱</label>
+                            <input type="text" class="form-control" id="searchTitle" placeholder="請輸入活動名稱">
                         </div>
-                    </div>
-
-                    <!-- 待處理派工 -->
-                    <div class="dashboard-card">
-                        <div class="card-icon" style="background-color: #E67E22;">
-                            <i class="fa-solid fa-clipboard-list"></i>
+                        <div class="form-group">
+                            <label class="form-label">活動類別</label>
+                            <select class="form-select" id="searchCategory">
+                                <option value="">全部</option>
+                                <option value="住戶聯誼">住戶聯誼</option>
+                                <option value="親子活動">親子活動</option>
+                                <option value="節慶活動">節慶活動</option>
+                                <option value="社區活動">社區活動</option>
+                                <option value="講座課程">講座課程</option>
+                                <option value="設備說明">設備說明</option>
+                                <option value="公告說明">公告說明</option>
+                            </select>
                         </div>
-                        <div class="card-content">
-                            <h3 class="card-title">待處理派工</h3>
-                            <p class="card-value">12</p>
-                            <p class="card-label">筆待派工</p>
-                        </div>
-                    </div>
-
-                    <!-- 本月新增會員 -->
-                    <div class="dashboard-card">
-                        <div class="card-icon" style="background-color: #27AE60;">
-                            <i class="fa-solid fa-user-plus"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">本月新增會員</h3>
-                            <p class="card-value">25</p>
-                            <p class="card-label">位新會員</p>
-                        </div>
-                    </div>
-
-                    <!-- 進行中活動 -->
-                    <div class="dashboard-card">
-                        <div class="card-icon" style="background-color: #9B59B6;">
-                            <i class="fa-solid fa-calendar-days"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">進行中活動</h3>
-                            <p class="card-value">3</p>
-                            <p class="card-label">場活動報名中</p>
+                        <div class="form-group">
+                            <label class="form-label">活動起訖</label>
+                            <div class="date-range-container">
+                                <input type="date" class="form-control" id="searchDateFrom">
+                                <span class="date-separator">~</span>
+                                <input type="date" class="form-control" id="searchDateTo">
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- 快捷功能區 -->
-                <div class="quick-actions">
-                    <h2 class="section-title">快捷功能</h2>
-                    <div class="action-buttons">
-                        <a href="work-order.html" class="action-btn">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            查詢
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            重置
+                        </button>
+                        <button type="button" class="btn btn-add" id="btnAdd">
                             <i class="fa-solid fa-plus"></i>
-                            新增派工單
-                        </a>
-                        <a href="member-list.html" class="action-btn">
-                            <i class="fa-solid fa-user-plus"></i>
-                            新增會員
-                        </a>
-                        <a href="activity-list.html" class="action-btn">
-                            <i class="fa-solid fa-calendar-plus"></i>
                             新增活動
-                        </a>
-                        <a href="green-contract.html" class="action-btn">
-                            <i class="fa-solid fa-file-contract"></i>
-                            養護合約
-                        </a>
+                        </button>
                     </div>
-                </div>
+                </form>
+            </div>
+
+            <!-- 資料表格 -->
+            <div class="table-container">
+                <table class="site-event-table" id="eventTable">
+                    <thead>
+                        <tr>
+                            <th width="100">序號</th>
+                            <th width="120">適用案場</th>
+                            <th>活動名稱</th>
+                            <th width="100">類別</th>
+                            <th width="140">開始時間</th>
+                            <th width="140">結束時間</th>
+                            <th width="80">名額上限</th>
+                            <th width="100">已報名人數</th>
+                            <th width="160">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eventTableBody">
+                        <!-- JavaScript 動態產生 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 分頁元件 -->
+            <div class="pagination-wrapper" id="paginationWrapper">
             </div>
         </main>
     </div>
 
+    <!-- ============================================ -->
+    <!-- 新增/編輯活動彈窗 -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增案場活動</h3>
+                <button type="button" class="modal-close" onclick="siteEventManager.closeModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <input type="hidden" id="eventId">
+                    
+                    <!-- 基本資訊區塊 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa-solid fa-info-circle"></i>
+                            基本資訊
+                        </h4>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label required">活動名稱</label>
+                                <input type="text" class="form-control" id="formTitle" placeholder="請輸入活動名稱" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">活動類別</label>
+                                <select class="form-select" id="formCategory" required>
+                                    <option value="">請選擇</option>
+                                    <option value="住戶聯誼">住戶聯誼</option>
+                                    <option value="親子活動">親子活動</option>
+                                    <option value="節慶活動">節慶活動</option>
+                                    <option value="社區活動">社區活動</option>
+                                    <option value="講座課程">講座課程</option>
+                                    <option value="設備說明">設備說明</option>
+                                    <option value="公告說明">公告說明</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label required">開始時間</label>
+                                <input type="datetime-local" class="form-control" id="formStartDt" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">結束時間</label>
+                                <input type="datetime-local" class="form-control" id="formEndDt" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">活動說明</label>
+                            <textarea class="form-control" id="formDescription" rows="3" placeholder="請輸入活動說明"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">活動地點</label>
+                            <input type="text" class="form-control" id="formLocation" placeholder="請輸入活動地點">
+                        </div>
+                    </div>
+
+                    <!-- 案場設定區塊 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa-solid fa-building"></i>
+                            適用案場設定
+                        </h4>
+                        <div class="site-hint">
+                            <i class="fa-solid fa-info-circle"></i>
+                            請勾選可參加此活動的案場，僅所選案場的住戶可報名
+                        </div>
+                        <div class="site-checkbox-group" id="siteCheckboxGroup">
+                            <label class="site-checkbox">
+                                <input type="checkbox" name="sites" value="陸府植森">
+                                <span class="checkbox-label">陸府植森</span>
+                            </label>
+                            <label class="site-checkbox">
+                                <input type="checkbox" name="sites" value="陸府原森">
+                                <span class="checkbox-label">陸府原森</span>
+                            </label>
+                            <label class="site-checkbox">
+                                <input type="checkbox" name="sites" value="陸府臻觀">
+                                <span class="checkbox-label">陸府臻觀</span>
+                            </label>
+                            <label class="site-checkbox">
+                                <input type="checkbox" name="sites" value="陸府日向">
+                                <span class="checkbox-label">陸府日向</span>
+                            </label>
+                            <label class="site-checkbox">
+                                <input type="checkbox" name="sites" value="陸府觀微">
+                                <span class="checkbox-label">陸府觀微</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 報名設定區塊 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa-solid fa-user-plus"></i>
+                            報名設定
+                        </h4>
+                        <div class="form-grid form-grid-3">
+                            <div class="form-group">
+                                <label class="form-label required">名額上限</label>
+                                <input type="number" class="form-control" id="formMaxSlots" min="1" value="50" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">報名費用</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">NT$</span>
+                                    <input type="number" class="form-control" id="formPrice" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">報名截止日</label>
+                                <input type="date" class="form-control" id="formDeadline">
+                            </div>
+                        </div>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">允許攜伴人數</label>
+                                <input type="number" class="form-control" id="formMaxCompanion" min="0" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">提前提醒天數</label>
+                                <input type="number" class="form-control" id="formRemindDays" min="0" value="3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="formNeedReceipt">
+                                <span>需開立收據</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="siteEventManager.closeModal()">取消</button>
+                <button type="button" class="btn btn-primary" onclick="siteEventManager.saveEvent()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 刪除確認彈窗 -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3 class="modal-title">確認刪除</h3>
+                <button type="button" class="modal-close" onclick="siteEventManager.closeDeleteModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-confirm-content">
+                    <i class="fa-solid fa-triangle-exclamation delete-warning-icon"></i>
+                    <p>確定要刪除此活動嗎？</p>
+                    <p class="delete-warning-text">此操作無法復原，已報名的紀錄將會一併刪除。</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="siteEventManager.closeDeleteModal()">取消</button>
+                <button type="button" class="btn btn-danger" onclick="siteEventManager.confirmDelete()">確認刪除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Toast 提示容器 -->
+    <!-- ============================================ -->
+    <div class="toast-container"></div>
+
+    <!-- ============================================ -->
     <!-- JavaScript -->
+    <!-- ============================================ -->
     <script src="js/sidebar.js"></script>
-    <script src="js/mock-data.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/site-event-mock-data.js"></script>
+    <script src="js/site-event.js"></script>
     <script>
         // 初始化側邊欄
         document.addEventListener('DOMContentLoaded', function() {
@@ -376,127 +568,181 @@
         });
     </script>
 
+    <!-- Toast 樣式 (內嵌) -->
     <style>
-        /* 首頁儀表板樣式 */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-2xl);
-        }
-
-        .dashboard-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius-lg);
-            padding: var(--spacing-lg);
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
             display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            box-shadow: var(--shadow-md);
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            flex-direction: column;
+            gap: 10px;
         }
-
-        .dashboard-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--border-radius-md);
+        
+        .toast {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
         }
-
-        .card-icon i {
-            font-size: 24px;
-            color: var(--color-white);
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
-
-        .card-content {
+        
+        .toast-icon {
+            font-size: 20px;
+        }
+        
+        .toast-success .toast-icon { color: #27AE60; }
+        .toast-error .toast-icon { color: #E74C3C; }
+        .toast-info .toast-icon { color: #3498DB; }
+        
+        .toast-content {
             flex: 1;
         }
-
-        .card-title {
-            font-size: var(--font-size-sm);
-            color: var(--color-gray-500);
-            margin-bottom: var(--spacing-xs);
+        
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .toast-message {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+        }
+        
+        .toast-close:hover {
+            color: #333;
         }
 
-        .card-value {
-            font-size: var(--font-size-2xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-gray-900);
-            line-height: 1;
+        .text-muted {
+            color: var(--color-text-muted);
         }
 
-        .card-label {
-            font-size: var(--font-size-xs);
-            color: var(--color-gray-500);
-            margin-top: var(--spacing-xs);
+        .text-center {
+            text-align: center;
+            color: #999;
+            padding: 20px !important;
         }
 
-        /* 快捷功能區 */
-        .quick-actions {
-            background: var(--color-white);
-            border-radius: var(--border-radius-lg);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-md);
+        /* 表格容器 */
+        .table-container {
+            background-color: #fff;
+            overflow-x: auto;
         }
 
-        .section-title {
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-gray-900);
-            margin-bottom: var(--spacing-md);
-            padding-bottom: var(--spacing-sm);
-            border-bottom: 2px solid var(--color-gray-300);
-        }
-
+        /* 操作按鈕容器 */
         .action-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--spacing-md);
+            gap: 6px;
         }
 
-        .action-btn {
+        /* 操作按鈕基本樣式 */
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid;
+            background: transparent;
             display: inline-flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            background: var(--color-btn-primary);
-            color: var(--color-white);
-            border-radius: var(--border-radius-md);
-            text-decoration: none;
-            font-size: var(--font-size-sm);
-            transition: background var(--transition-fast), transform var(--transition-fast);
+            gap: 4px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
         }
 
-        .action-btn:hover {
-            background: #8a8578;
-            transform: translateY(-1px);
+        /* 綠色邊框按鈕 */
+        .btn-outline-success {
+            color: #6c9a6c;
+            border-color: #6c9a6c;
+            background-color: #fff;
         }
 
-        .action-btn i {
-            font-size: var(--font-size-base);
+        .btn-outline-success:hover {
+            background-color: #6c9a6c;
+            color: #fff;
         }
 
-        /* 響應式調整 */
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+        /* 刪除按鈕 */
+        .btn-outline-danger {
+            color: #E67E22;
+            border-color: #E67E22;
+            background-color: #fff;
+        }
 
-            .action-buttons {
-                flex-direction: column;
-            }
+        .btn-outline-danger:hover {
+            background-color: #E67E22;
+            color: #fff;
+        }
 
-            .action-btn {
-                justify-content: center;
-            }
+        /* 分頁容器 */
+        .pagination-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            gap: 8px;
+            background-color: #fff;
+        }
+
+        .pagination-info {
+            text-align: center;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* 內容包裝器 */
+        .content-wrapper {
+            background-color: #fff;
+            padding: 0;
+        }
+
+        /* 頁面說明區塊 */
+        .page-description {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: #f0f8ff;
+            border-left: 4px solid #5B9BD5;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .description-icon {
+            font-size: 24px;
+            color: #5B9BD5;
+        }
+
+        .description-content p {
+            margin: 0;
+            color: #333;
+            line-height: 1.6;
         }
     </style>
 </body>

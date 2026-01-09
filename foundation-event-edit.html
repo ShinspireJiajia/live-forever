@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動規則設定 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/foundation-event.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 -->
+        <!-- ============================================ -->
+        <header class="header">
+            <div class="header-left">
+                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right"></div>
+        </header>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="main-container main-container-fixed">
+                <div class="scrollable">
+                    <ul class="menu-items">
+                        <!-- 首頁 -->
+                        <li class="menu-item" data-menu-id="home">
+                            <a href="index.html" title="首頁">
+                                <i class="menu-icon fa-solid fa-house"></i>
+                                <span class="menu-title">首頁</span>
+                            </a>
+                        </li>
+
+                        <!-- 系統管理 -->
+                        <li class="menu-item" data-menu-id="system">
+                            <a href="javascript:void(0)" title="系統管理">
+                                <i class="menu-icon fa-solid fa-gear"></i>
+                                <span class="menu-title">系統管理</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
+                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
+                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 官網活動(基金會) -->
+                        <li class="menu-item" data-menu-id="foundation">
+                            <a href="javascript:void(0)" title="官網活動(基金會)">
+                                <i class="menu-icon fa-solid fa-landmark"></i>
+                                <span class="menu-title">官網活動(基金會)</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="foundation-event-list.html" title="活動設定"><span class="menu-title">活動設定</span></a></li>
+                                <li class="menu-item"><a href="foundation-registration.html" title="報名紀錄"><span class="menu-title">報名紀錄</span></a></li>
+                                <li class="menu-item"><a href="foundation-audit-log.html" title="稽核日誌"><span class="menu-title">稽核日誌</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="foundation-event-list.html" class="breadcrumb-item">官網活動(基金會)</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">活動規則設定</span>
+            </div>
+
+            <!-- 頁面內容 -->
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">活動規則設定</h1>
+                    <p class="page-subtitle">設定活動內部參與規則（同步時不會被覆蓋）</p>
+                </div>
+
+                <!-- 活動基本資訊 (來自外部 API，唯讀) -->
+                <div class="event-info-card">
+                    <div class="event-info-header">
+                        <div>
+                            <h3 style="margin: 0 0 8px 0;">
+                                <i class="fa-solid fa-info-circle" style="color: var(--color-info);"></i>
+                                活動基本資訊 <small class="text-muted">(來自外部 API，不可編輯)</small>
+                            </h3>
+                        </div>
+                        <span class="sync-status synced">
+                            <i class="fa-solid fa-check-circle"></i>
+                            已同步
+                        </span>
+                    </div>
+                    <div class="event-info-grid" id="eventBasicInfo">
+                        <!-- JavaScript 動態產生 -->
+                    </div>
+                </div>
+
+                <!-- 參與規則設定表單 -->
+                <form id="rulesForm">
+                    <!-- 報名資格設定 -->
+                    <div class="rules-section">
+                        <h3 class="rules-section-title">
+                            <i class="fa-solid fa-user-check"></i>
+                            報名資格設定
+                        </h3>
+                        <div class="rules-grid">
+                            <div class="form-group">
+                                <label class="form-label">是否住戶限定</label>
+                                <div class="form-switch-group">
+                                    <label class="form-switch">
+                                        <input type="checkbox" id="isResidentOnly">
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                    <span class="switch-label">僅限住戶報名</span>
+                                </div>
+                                <span class="form-hint">開啟後，僅驗證通過的住戶可報名此活動</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">專用通行碼</label>
+                                <input type="text" class="form-input" id="accessCode" placeholder="請輸入通行碼">
+                                <span class="form-hint">住戶報名時需輸入正確的通行碼驗證身分</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 攜伴設定 -->
+                    <div class="rules-section">
+                        <h3 class="rules-section-title">
+                            <i class="fa-solid fa-users"></i>
+                            攜伴設定
+                        </h3>
+                        <div class="rules-grid">
+                            <div class="form-group">
+                                <label class="form-label">開放攜伴</label>
+                                <div class="form-switch-group">
+                                    <label class="form-switch">
+                                        <input type="checkbox" id="allowCompanion" checked>
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                    <span class="switch-label">允許攜伴報名</span>
+                                </div>
+                            </div>
+                            <div class="form-group" id="companionLimitGroup">
+                                <label class="form-label">攜伴人數上限</label>
+                                <input type="number" class="form-input" id="maxCompanion" min="0" max="10" value="2">
+                                <span class="form-hint">每位報名者可攜帶的同行人數上限</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 費用設定 -->
+                    <div class="rules-section">
+                        <h3 class="rules-section-title">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            費用設定
+                        </h3>
+                        
+                        <!-- 住戶費用 -->
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="font-size: 1.1rem; color: var(--color-gray-800); margin-bottom: 15px; font-weight: 600; padding-bottom: 8px; border-bottom: 1px solid var(--color-gray-200);">住戶費用</h4>
+                            <div class="rules-grid">
+                                <div class="form-group">
+                                    <label class="form-label">住戶大人費用</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="residentAdultPrice" min="0" value="0">
+                                    </div>
+                                    <span class="form-hint">設為 0 表示免費</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">住戶兒童費用</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="residentChildPrice" min="0" value="0">
+                                    </div>
+                                    <span class="form-hint">設為 0 表示免費</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 非住戶費用 -->
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="font-size: 1.1rem; color: var(--color-gray-800); margin-bottom: 15px; font-weight: 600; padding-bottom: 8px; border-bottom: 1px solid var(--color-gray-200);">非住戶費用</h4>
+                            <div class="rules-grid">
+                                <div class="form-group">
+                                    <label class="form-label">非住戶大人費用</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="nonResidentAdultPrice" min="0" value="0">
+                                    </div>
+                                    <span class="form-hint">設為 0 表示免費</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">非住戶兒童費用</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="nonResidentChildPrice" min="0" value="0">
+                                    </div>
+                                    <span class="form-hint">設為 0 表示免費</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 收據選項 -->
+                        <div class="rules-grid">
+                            <div class="form-group">
+                                <label class="form-label">提供收據選項</label>
+                                <div class="form-switch-group">
+                                    <label class="form-switch">
+                                        <input type="checkbox" id="needReceipt" checked>
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                    <span class="switch-label">報名者可選擇是否需要收據</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 操作按鈕 -->
+                    <div class="form-actions" style="margin-top: 24px;">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            返回
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-save"></i>
+                            儲存設定
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Toast 提示容器 -->
+    <!-- ============================================ -->
+    <div class="toast-container"></div>
+
+    <!-- ============================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================ -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/foundation-mock-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+            
+            // 從 URL 取得活動 ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = urlParams.get('id');
+            
+            // 載入活動資料
+            const event = eventId ? FoundationMockData.getEventById(eventId) : FoundationMockData.events[0];
+            
+            if (event) {
+                renderEventInfo(event);
+                populateForm(event);
+            }
+
+            // 監聽攜伴開關
+            document.getElementById('allowCompanion').addEventListener('change', function() {
+                document.getElementById('companionLimitGroup').style.display = this.checked ? 'block' : 'none';
+            });
+
+            // 表單提交
+            document.getElementById('rulesForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showToast('success', '儲存成功', '活動規則設定已更新');
+                setTimeout(() => {
+                    window.location.href = 'foundation-event-list.html';
+                }, 1500);
+            });
+
+            /**
+             * 渲染活動基本資訊
+             */
+            function renderEventInfo(event) {
+                const container = document.getElementById('eventBasicInfo');
+                container.innerHTML = `
+                    <div class="event-info-item">
+                        <span class="event-info-label">活動 ID</span>
+                        <span class="event-info-value">${event.event_id}</span>
+                    </div>
+                    <div class="event-info-item">
+                        <span class="event-info-label">活動名稱</span>
+                        <span class="event-info-value">${event.title}</span>
+                    </div>
+                    <div class="event-info-item">
+                        <span class="event-info-label">活動類別</span>
+                        <span class="event-info-value"><span class="category-tag">${event.category}</span></span>
+                    </div>
+                    <div class="event-info-item">
+                        <span class="event-info-label">活動時間</span>
+                        <span class="event-info-value">${formatDateTime(event.start_dt)} ~ ${formatDateTime(event.end_dt)}</span>
+                    </div>
+                    <div class="event-info-item">
+                        <span class="event-info-label">報名上限</span>
+                        <span class="event-info-value">${event.max_slots} 人 (由外部 API 控制)</span>
+                    </div>
+                    <div class="event-info-item">
+                        <span class="event-info-label">最後同步</span>
+                        <span class="event-info-value">${formatDateTime(event.last_sync_at)}</span>
+                    </div>
+                `;
+            }
+
+            /**
+             * 填入表單資料
+             */
+            function populateForm(event) {
+                document.getElementById('isResidentOnly').checked = event.is_resident_only;
+                document.getElementById('accessCode').value = event.access_code || '';
+                document.getElementById('allowCompanion').checked = event.allow_companion;
+                document.getElementById('maxCompanion').value = event.max_companion;
+                
+                // 費用設定
+                document.getElementById('residentAdultPrice').value = event.resident_adult_price || event.price || 0;
+                document.getElementById('residentChildPrice').value = event.resident_child_price || 0;
+                document.getElementById('nonResidentAdultPrice').value = event.non_resident_adult_price || event.price || 0;
+                document.getElementById('nonResidentChildPrice').value = event.non_resident_child_price || 0;
+
+                document.getElementById('needReceipt').checked = event.need_receipt;
+                
+                // 更新攜伴人數欄位顯示
+                document.getElementById('companionLimitGroup').style.display = event.allow_companion ? 'block' : 'none';
+            }
+
+            /**
+             * 格式化日期時間
+             */
+            function formatDateTime(dateStr) {
+                const date = new Date(dateStr);
+                return date.toLocaleString('zh-TW', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+
+            /**
+             * 顯示提示訊息
+             */
+            function showToast(type, title, message) {
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <i class="fa-solid ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">${title}</div>
+                        <div class="toast-message">${message}</div>
+                    </div>
+                    <button class="toast-close" onclick="this.parentElement.remove()">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                `;
+                
+                let container = document.querySelector('.toast-container');
+                container.appendChild(toast);
+                
+                setTimeout(() => toast.remove(), 5000);
+            }
+        });
+    </script>
+
+    <!-- 頁面專用樣式 -->
+    <style>
+        .page-subtitle { color: var(--color-text-muted); margin-top: 8px; }
+        .text-muted { color: var(--color-text-muted); font-weight: normal; }
+
+        /* Toast 樣式 */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .toast-icon { font-size: 20px; }
+        .toast-success .toast-icon { color: #27AE60; }
+        .toast-content { flex: 1; }
+        .toast-title { font-weight: 600; margin-bottom: 4px; }
+        .toast-message { font-size: 14px; color: #666; }
+        .toast-close { background: none; border: none; cursor: pointer; color: #999; padding: 0; }
+
+        /* 開關樣式 */
+        .form-switch-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+
+        .form-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        .form-switch input:checked + .switch-slider {
+            background-color: var(--color-success);
+        }
+
+        .form-switch input:checked + .switch-slider:before {
+            transform: translateX(22px);
+        }
+
+        .switch-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* 輸入群組 */
+        .input-group {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .input-prefix,
+        .input-suffix {
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            background: var(--color-gray-100);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .input-prefix {
+            border-right: none;
+            border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+        }
+
+        .input-suffix {
+            border-left: none;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+        }
+
+        .input-group .form-input {
+            border-radius: 0;
+            flex: 1;
+        }
+
+        .input-group .form-input:only-child {
+            border-radius: var(--border-radius-sm);
+        }
+
+        .input-prefix + .form-input {
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+        }
+
+        .form-input + .input-suffix {
+            border-left: none;
+        }
+
+        /* 提示文字 */
+        .form-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        /* 徽章 */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 12px;
+        }
+
+        .badge-success {
+            background-color: var(--color-success-light);
+            color: var(--color-success-dark);
+        }
+
+        /* 表單操作區 */
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+    </style>
+</body>
+</html>

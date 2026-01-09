@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>派工單管理 - 陸府建設 CRM</title>
+    <title>基金會活動設定 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,12 +20,18 @@
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
-    <link rel="stylesheet" href="css/work-order.css">
+    <link rel="stylesheet" href="css/foundation-event.css">
 </head>
 <body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
     <div class="app-container">
+        
+        <!-- ============================================ -->
         <!-- 頂部導覽列 -->
-                <header class="header">
+        <!-- ============================================ -->
+        <header class="header">
             <div class="header-left">
                 <!-- 側邊欄切換按鈕 -->
                 <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
@@ -41,6 +47,7 @@
             </div>
         </header>
 
+        <!-- ============================================ -->
         <!-- 側邊欄選單 -->
         <!-- ============================================ -->
         <aside class="sidebar" id="sidebar">
@@ -202,6 +209,20 @@
                             </ul>
                         </li>
 
+                        <!-- 官網活動(基金會) -->
+                        <li class="menu-item" data-menu-id="foundation">
+                            <a href="javascript:void(0)" title="官網活動(基金會)">
+                                <i class="menu-icon fa-solid fa-landmark"></i>
+                                <span class="menu-title">官網活動(基金會)</span>
+                                <i class="expand-state fa-solid fa-chevron-right"></i>
+                            </a>
+                            <ul class="menu-items">
+                                <li class="menu-item"><a href="foundation-event-list.html" title="活動設定"><span class="menu-title">活動設定</span></a></li>
+                                <li class="menu-item"><a href="foundation-registration.html" title="報名紀錄"><span class="menu-title">報名紀錄</span></a></li>
+                                <li class="menu-item"><a href="foundation-audit-log.html" title="稽核日誌"><span class="menu-title">稽核日誌</span></a></li>
+                            </ul>
+                        </li>
+
                         <!-- 報表管理 -->
                         <li class="menu-item" data-menu-id="report">
                             <a href="javascript:void(0)" title="報表管理">
@@ -212,14 +233,6 @@
                             <ul class="menu-items">
                                 <li class="menu-item"><a href="#" title="售後服務管制總表 (未完成)"><span class="menu-title">售後服務管制總表 (未完成)</span></a></li>
                                 <li class="menu-item"><a href="#" title="未結案個案單 (未完成)"><span class="menu-title">未結案個案單 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修類統計表 (未完成)"><span class="menu-title">全部建案維修類統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表 (未完成)"><span class="menu-title">全部建案維修部品統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表 (未完成)"><span class="menu-title">全部建案維修位置統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="滿意度調查統計 (未完成)"><span class="menu-title">滿意度調查統計 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="客戶滿意度明細表 (未完成)"><span class="menu-title">客戶滿意度明細表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表 (未完成)"><span class="menu-title">全部建案維修狀態統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="案件數量統計表 (未完成)"><span class="menu-title">案件數量統計表 (未完成)</span></a></li>
-                                <li class="menu-item"><a href="#" title="任務完成統計表 (未完成)"><span class="menu-title">任務完成統計表 (未完成)</span></a></li>
                             </ul>
                         </li>
 
@@ -253,140 +266,83 @@
 
         <!-- ============================================ -->
         <!-- 主內容區域 -->
+        <!-- ============================================ -->
         <main class="main-content">
             <!-- 麵包屑導覽 -->
             <div class="breadcrumb">
-                <span class="breadcrumb-item">派工單管理</span>
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-item active">派工單管理</span>
+                <span class="breadcrumb-item">官網活動(基金會)</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">活動設定</span>
             </div>
 
-            <div class="content-wrapper">
+          
+           
                 <!-- 查詢條件區 -->
                 <div class="search-panel">
-                    <!-- 手機版收合標題 -->
-                    <div class="search-panel-header" id="searchPanelHeader">
-                        <span class="search-panel-title">
-                            <i class="fa-solid fa-filter"></i>
-                            篩選條件
-                        </span>
-                        <i class="fa-solid fa-chevron-down search-panel-toggle-icon" id="searchPanelToggleIcon"></i>
-                    </div>
-                    
-                    <form class="search-form work-order-search-form" id="searchForm">
-                        <div class="search-grid">
-                            <!-- 單號 -->
-                            <div class="form-group row">
-                                <label class="form-label col-label">單號</label>
-                                <div class="col-input">
-                                    <input type="text" class="form-input" id="searchOrderNo" placeholder="請輸入單號">
-                                </div>
+                    <form class="event-search-form" id="searchForm">
+                        <div class="foundation-filter-grid">
+                            <div class="form-group">
+                                <label class="form-label">活動名稱</label>
+                                <input type="text" class="form-control" id="searchTitle" placeholder="請輸入活動名稱">
                             </div>
-                            <!-- 案場 -->
-                            <div class="form-group row">
-                                <label class="form-label col-label">案場</label>
-                                <div class="col-input">
-                                    <select class="form-select" id="searchProject">
-                                        <option value="">全部</option>
-                                        <option value="陸府原森">陸府原森</option>
-                                        <option value="陸府觀微">陸府觀微</option>
-                                        <option value="陸府植森">陸府植森</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label class="form-label">活動類別</label>
+                                <select class="form-select" id="searchCategory">
+                                    <option value="">全部</option>
+                                    <option value="藝文活動">藝文活動</option>
+                                    <option value="親子活動">親子活動</option>
+                                    <option value="健康講座">健康講座</option>
+                                    <option value="節慶活動">節慶活動</option>
+                                    <option value="戶外活動">戶外活動</option>
+                                    <option value="社區活動">社區活動</option>
+                                    <option value="教育課程">教育課程</option>
+                                    <option value="公益活動">公益活動</option>
+                                </select>
                             </div>
-                            <!-- 類型 -->
-                            <div class="form-group row">
-                                <label class="form-label col-label">類型</label>
-                                <div class="col-input">
-                                    <select class="form-select" id="searchType">
-                                        <option value="">全部</option>
-                                        <option value="維修">維修</option>
-                                        <option value="清潔">清潔</option>
-                                        <option value="客服">客服</option>
-                                        <option value="保養">保養</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- 狀態 -->
-                            <div class="form-group row">
-                                <label class="form-label col-label">狀態</label>
-                                <div class="col-input">
-                                    <select class="form-select" id="searchStatus">
-                                        <option value="">全部</option>
-                                        <option value="待派工">待派工</option>
-                                        <option value="處理中">處理中</option>
-                                        <option value="已完成">已完成</option>
-                                        <option value="已取消">已取消</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- 優先等級 -->
-                            <div class="form-group row">
-                                <label class="form-label col-label">優先等級</label>
-                                <div class="col-input">
-                                    <select class="form-select" id="searchPriority">
-                                        <option value="">全部</option>
-                                        <option value="高">高</option>
-                                        <option value="中">中</option>
-                                        <option value="低">低</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- 建立日期 -->
-                            <div class="form-group row">
-                                <label class="form-label col-label">建立日期</label>
-                                <div class="col-input">
-                                    <div class="date-range-group">
-                                        <input type="date" class="form-input" id="searchDateFrom">
-                                        <span class="date-separator">~</span>
-                                        <input type="date" class="form-input" id="searchDateTo">
-                                    </div>
+                            <div class="form-group">
+                                <label class="form-label">活動起訖</label>
+                                <div class="date-range-container">
+                                    <input type="date" class="form-control" id="searchDateFrom">
+                                    <span class="date-separator">~</span>
+                                    <input type="date" class="form-control" id="searchDateTo">
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 操作按鈕 -->
-                        <div class="form-actions-right">
-                            <button type="reset" class="btn btn-info">
-                                <i class="fa-solid fa-rotate-left"></i>
-                                重置
-                            </button>
-                            <button type="submit" class="btn btn-info">
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                                 查詢
                             </button>
-                            <button type="button" class="btn btn-info" id="btnExport">
-                                <i class="fa-solid fa-file-export"></i>
-                                匯出
-                            </button>
-                            <button type="button" class="btn btn-success" id="btnAdd">
-                                <i class="fa-solid fa-plus"></i>
-                                新增派工單
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
                             </button>
                         </div>
                     </form>
                 </div>
 
                 <!-- 資料表格 -->
-                <div class="table-responsive">
-                    <table class="data-table work-order-table" id="workOrderTable">
+                <div class="table-container">
+                    <table class="foundation-table" id="eventTable">
                         <thead>
                             <tr>
-                                <th class="col-1">序號</th>
-                                <th class="col-1">單號</th>
-                                <th class="col-1">案場</th>
-                                <th class="col-1">戶號</th>
-                                <th class="col-1">類型</th>
-                                <th class="col-1">類別</th>
-                                <th class="col-1">描述</th>
-                                <th class="col-1">承辦單位</th>
-                                <th class="col-1">優先</th>
-                                <th class="col-1">狀態</th>
-                                <th class="col-1">到期日</th>
-                                <th class="col-1">操作</th>
+                                <th width="120">序號</th>
+                                <th>活動名稱</th>
+                                <th width="100">類別</th>
+                                <th width="150">開始時間</th>
+                                <th width="150">結束時間</th>
+                                <th width="80">名額上限</th>
+                                <th width="100">已報名人數</th>
+                                <th width="140">操作</th>
                             </tr>
                         </thead>
-                        <tbody id="workOrderTableBody">
+                        <tbody id="eventTableBody">
+                            <!-- JavaScript 動態產生 -->
                         </tbody>
                     </table>
                 </div>
@@ -398,119 +354,173 @@
         </main>
     </div>
 
-    <!-- 新增/編輯派工單彈窗 -->
-    <div class="modal" id="workOrderModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-container modal-lg">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">新增派工單</h3>
-                <button class="modal-close" id="modalClose">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="workOrderForm">
-                    <input type="hidden" id="workOrderId">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label required">案場</label>
-                            <select class="form-select" id="woProject" required>
-                                <option value="">請選擇</option>
-                                <option value="陸府原森">陸府原森</option>
-                                <option value="陸府觀微">陸府觀微</option>
-                                <option value="陸府植森">陸府植森</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label required">戶號</label>
-                            <select class="form-select" id="woUnit" required>
-                                <option value="">請選擇</option>
-                                <option value="A棟12A">A棟12A</option>
-                                <option value="A棟12B">A棟12B</option>
-                                <option value="B棟8A">B棟8A</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label required">類型</label>
-                            <select class="form-select" id="woType" required>
-                                <option value="">請選擇</option>
-                                <option value="維修">維修</option>
-                                <option value="清潔">清潔</option>
-                                <option value="客服">客服</option>
-                                <option value="保養">保養</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label required">類別</label>
-                            <select class="form-select" id="woCategory" required>
-                                <option value="">請選擇</option>
-                                <option value="水電">水電</option>
-                                <option value="空調">空調</option>
-                                <option value="電梯">電梯</option>
-                                <option value="公區清潔">公區清潔</option>
-                                <option value="諮詢">諮詢</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label required">承辦單位</label>
-                            <select class="form-select" id="woAssignee" required>
-                                <option value="">請選擇</option>
-                                <option value="永信水電工程">永信水電工程</option>
-                                <option value="大同冷氣">大同冷氣</option>
-                                <option value="台灣電梯">台灣電梯</option>
-                                <option value="美麗清潔">美麗清潔</option>
-                                <option value="張美玲">張美玲</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label required">優先等級</label>
-                            <select class="form-select" id="woPriority" required>
-                                <option value="中">中</option>
-                                <option value="高">高</option>
-                                <option value="低">低</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label required">到期日</label>
-                            <input type="date" class="form-input" id="woDueDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label required">狀態</label>
-                            <select class="form-select" id="woStatus" required>
-                                <option value="待派工">待派工</option>
-                                <option value="處理中">處理中</option>
-                                <option value="已完成">已完成</option>
-                                <option value="已取消">已取消</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label required">問題描述</label>
-                        <textarea class="form-textarea" id="woDescription" rows="4" required></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btnCancel">取消</button>
-                <button class="btn btn-primary" id="btnSave">儲存</button>
-            </div>
-        </div>
-    </div>
+    <!-- ============================================ -->
+    <!-- Toast 提示容器 -->
+    <!-- ============================================ -->
+    <div class="toast-container"></div>
 
+    <!-- ============================================ -->
     <!-- JavaScript -->
+    <!-- ============================================ -->
     <script src="js/sidebar.js"></script>
     <script src="js/pagination.js"></script>
     <script src="js/modal.js"></script>
-    <script src="js/mock-data.js"></script>
-    <script src="js/work-order.js"></script>
+    <script src="js/foundation-mock-data.js"></script>
+    <script src="js/foundation-event.js"></script>
+    <script>
+        // 初始化側邊欄
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarManager = new SidebarManager();
+        });
+    </script>
 
+    <!-- Toast 樣式 (內嵌) -->
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-icon {
+            font-size: 20px;
+        }
+        
+        .toast-success .toast-icon { color: #27AE60; }
+        .toast-error .toast-icon { color: #E74C3C; }
+        .toast-info .toast-icon { color: #3498DB; }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .toast-message {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+        }
+        
+        .toast-close:hover {
+            color: #333;
+        }
 
+        .page-subtitle {
+            color: var(--color-text-muted);
+            margin-top: 8px;
+        }
+
+        .text-muted {
+            color: var(--color-text-muted);
+        }
+
+        .text-center {
+            text-align: center;
+            color: #999;
+            padding: 20px !important;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            background-color: #fff;
+            overflow-x: auto;
+        }
+
+        /* 表格樣式 */
+        /* 操作按鈕容器 */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        /* 操作按鈕基本樣式 */
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid;
+            background: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        /* 綠色邊框按鈕 */
+        .btn-outline-success {
+            color: #6c9a6c;
+            border-color: #6c9a6c;
+            background-color: #fff;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #6c9a6c;
+            color: #fff;
+        }
+
+        /* 分頁容器 */
+        .pagination-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            gap: 8px;
+            background-color: #fff;
+        }
+
+        .pagination-info {
+            text-align: center;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* 內容包裝器 */
+        .content-wrapper {
+            background-color: #fff;
+            padding: 0;
+        }
+    </style>
 </body>
 </html>
-

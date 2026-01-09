@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>編輯交屋預約 - 陸府建設 CRM</title>
+    <title>編輯對保預約 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/chat.css">
-    <link rel="stylesheet" href="css/reservation-handover-edit.css">
+    <link rel="stylesheet" href="css/reservation-collateral-edit.css">
 </head>
 <body>
     <div class="app-container">
@@ -194,19 +194,19 @@
                     首頁
                 </a>
                 <span class="breadcrumb-separator">/</span>
-                <a href="reservation-handover.html" class="breadcrumb-item">交屋預約</a>
+                <a href="reservation-collateral.html" class="breadcrumb-item">對保預約</a>
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-item active">編輯預約</span>
             </div>
 
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1 class="page-title">編輯交屋預約</h1>
+                    <h1 class="page-title">編輯對保預約</h1>
                 </div>
 
                 <div class="edit-container">
-                    <form id="handoverEditForm">
-                        <input type="hidden" id="handoverId">
+                    <form id="collateralEditForm">
+                        <input type="hidden" id="collateralId">
                         
                         <!-- 基本資料區塊 -->
                         <div class="section-block">
@@ -242,6 +242,7 @@
                                     <input type="tel" class="form-control" id="hPhone" required placeholder="請輸入手機號碼" pattern="09[0-9]{8}" title="請輸入有效的手機號碼，格式：09xxxxxxxx">
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <!-- 日期 -->
                                 <div class="form-group col-md-6">
@@ -282,8 +283,76 @@
                             </div>
                         </div>
 
-                        <!-- 完工資訊區塊 -->
+                        <!-- 貸款資訊區塊 -->
                         <div class="section-block">
+                            <h3 class="section-title">貸款資訊</h3>
+                            <div class="form-row">
+                                <!-- 銀行選項 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">銀行選項</label>
+                                    <select class="form-select" id="hBankOption">
+                                        <option value="">請選擇銀行</option>
+                                        <option value="台灣銀行">台灣銀行</option>
+                                        <option value="土地銀行">土地銀行</option>
+                                        <option value="中國信託">中國信託</option>
+                                        <option value="玉山銀行">玉山銀行</option>
+                                        <option value="台新銀行">台新銀行</option>
+                                    </select>
+                                    <div class="form-text" style="color: var(--color-gray-500); font-size: var(--font-size-xs); margin-top: 4px;">來源：案場下的對保問卷</div>
+                                </div>
+                                <!-- 預計貸款金額 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">預計貸款金額</label>
+                                    <div style="display: flex; align-items: center;">
+                                        <input type="number" class="form-control" id="hLoanAmount" placeholder="請輸入金額" style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                        <span style="padding: 0 12px; background-color: var(--color-gray-100); border: 1px solid var(--color-gray-300); border-left: 0; height: 38px; display: flex; align-items: center; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">萬元</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- 代辦費金額 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">代辦費金額</label>
+                                    <div style="display: flex; align-items: center;">
+                                        <input type="number" class="form-control" id="hAgencyFee" placeholder="請輸入金額" style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                        <span style="padding: 0 12px; background-color: var(--color-gray-100); border: 1px solid var(--color-gray-300); border-left: 0; height: 38px; display: flex; align-items: center; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">元</span>
+                                    </div>
+                                </div>
+                                <!-- 繳款期限 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">繳款期限</label>
+                                    <input type="date" class="form-control" id="hPaymentDeadline">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- 繳款帳號 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">繳款帳號</label>
+                                    <input type="text" class="form-control" id="hPaymentAccount" placeholder="請輸入繳款帳號">
+                                </div>
+                            </div>
+                            <!-- 其他補充 -->
+                            <div class="form-group">
+                                <label class="form-label">其他補充</label>
+                                <textarea class="form-control" id="hOtherSupplement" rows="3" placeholder="請輸入補充說明"></textarea>
+                            </div>
+                            
+                            <!-- 圖片上傳 -->
+                            <div class="form-group">
+                                <label class="form-label">附件圖片上傳</label>
+                                <div class="upload-box" style="border: 2px dashed var(--color-gray-300); padding: 20px; text-align: center; border-radius: 8px;">
+                                     <input type="file" id="loanImageUpload" accept="image/*" multiple style="display: none;">
+                                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('loanImageUpload').click()">
+                                        <i class="fa-solid fa-image"></i> 選擇圖片
+                                     </button>
+                                     <p style="margin-top: 10px; color: var(--color-gray-500);">支援 jpg, png 格式</p>
+                                </div>
+                                <div id="loanImagePreview" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- 完工資訊區塊 -->
+                        <div class="section-block" id="sectionRecordInfo">
                             <h3 class="section-title">紀錄資訊</h3>
                             <div class="form-group">
                                 <label class="form-label required" for="cCompletedDate">完成日期</label>
@@ -291,12 +360,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label required" for="cCompletedNotes">紀錄說明</label>
-                                <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" placeholder="完工說明" rows="3" required=""></textarea>
+                                <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" placeholder="對保紀錄說明" rows="3" required=""></textarea>
                                 <div class="quick-fill-buttons">
                                     <span class="quick-fill-label">快速填入：</span>
-                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有交屋事項">已完成所有交屋事項</button>
-                                    <!-- <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已說明">以說明</button> -->
-                                    <!-- <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有修繕工作，保固三個月">已完成所有修繕工作，保固三個月</button> -->
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有對保手續">已完成所有對保手續</button>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="資料不齊全，需補件">資料不齊全，需補件</button>
                                 </div>
                             </div>
                         </div>
@@ -307,17 +375,17 @@
                             <label for="fileUpload" class="upload-wrap">
                                 <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
                                 <p class="text-info text-center" id="uploadPlaceholder">拖曳檔案至此處或點擊上傳</p>
-                                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.mp4,.heic,.heif" multiple="" class="file-input">
+                                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.mp4,.heic,.heif,.pdf" multiple="" class="file-input">
                                 <span class="upload-btn"><i class="fa-solid fa-plus"></i> 選擇檔案</span>
                             </label>
-                            <p class="upload-hint">*支援圖片 .jpg、影片 .mp4，最大 5MB</p>
+                            <p class="upload-hint">*支援圖片 .jpg、影片 .mp4、文件 .pdf，最大 5MB</p>
                             <div class="upload-list" id="uploadList">
                                 <!-- 上傳的檔案列表 -->
                             </div>
                         </div>
 
                         <!-- 簽名區塊 -->
-                        <div class="section-block">
+                        <div class="section-block" id="sectionSignature">
                             <h3 class="section-title">住戶簽名確認</h3>
                             <div class="signature-block">
                                 <div class="signature-area" id="signatureArea">
@@ -338,17 +406,8 @@
                             </div>
                         </div>
 
-                        <!-- 其他設定 -->
-                        <div class="form-group">
-                            <label class="form-label" for="cIsNotSendQuestionnaire">是否本次不寄發滿意度問卷</label>
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" id="cIsNotSendQuestionnaire" name="cIsNotSendQuestionnaire" class="form-checkbox">
-                                <label for="cIsNotSendQuestionnaire" class="checkbox-label">不寄發</label>
-                            </div>
-                        </div>
-
                         <!-- 留言板 -->
-                        <div class="section-block">
+                        <div class="section-block" id="sectionChat">
                             <h3 class="section-title">
                                 <i class="fa-regular fa-comments"></i> 留言板
                             </h3>
@@ -358,51 +417,14 @@
                                 <div class="chat-messages" id="chatMessages">
                                     <!-- 用戶訊息（右側）- 含圖片 -->
                                     <div class="message message-right">
-                                        <div class="message-content">請問要攜帶甚麼東西嗎？</div>
+                                        <div class="message-content">請問要準備什麼證件嗎？</div>
                                         <div class="message-info">陳小明 2025/08/05 10:30 AM</div>
                                     </div>
 
-                                    <!-- 用戶訊息（右側）- 含圖片附件 -->
-                                    <div class="message message-right">
-                                        <div class="message-media">
-                                            <img src="https://via.placeholder.com/300x200/e0e0e0/666?text=漏水照片" alt="客戶上傳圖片" class="media-image" data-full-src="https://via.placeholder.com/800x600/e0e0e0/666?text=漏水照片">
-                                        </div>
-                                        <div class="message-info">陳小明 2025/08/05 10:31 AM</div>
-                                    </div>
-
                                     <!-- 客服回覆（左側） -->
                                     <div class="message message-left">
-                                        <div class="message-content">您好，請準備存摺影本、身分證資訊</div>
-                                        <div class="message-file">
-                                            <i class="fa-solid fa-file-pdf file-icon"></i>
-                                            <span class="file-name">交屋說明文件.pdf</span>
-                                            <button class="file-download" title="下載檔案">
-                                                <i class="fa-solid fa-download"></i>
-                                            </button>
-                                        </div>
-                                        <div class="message-info">王曉明 2025/08/05 10:30 AM</div>
-                                    </div>
-
-                                    <!-- 用戶訊息（右側）- 含影片 -->
-                                    <div class="message message-right">
-                                        <div class="message-content">這是我準備的清單影片</div>
-                                        <div class="message-media">
-                                            <video controls="" class="media-video" preload="metadata">
-                                                <source src="" type="video/mp4">
-                                                您的瀏覽器不支援影片播放
-                                            </video>
-                                            <div class="video-placeholder">
-                                                <i class="fa-solid fa-play-circle"></i>
-                                                <span>20250805001.mp4</span>
-                                            </div>
-                                        </div>
-                                        <div class="message-info">陳小明 2025/08/05 10:32 AM</div>
-                                    </div>
-
-                                    <!-- 客服回覆（左側） -->
-                                    <div class="message message-left">
-                                        <div class="message-content">存摺看起來有點破損，建議先至銀行作確認哦</div>
-                                        <div class="message-info">王曉明 2025/08/05 15:30 AM</div>
+                                        <div class="message-content">您好，請攜帶雙證件及印鑑</div>
+                                        <div class="message-info">王曉明 2025/08/05 10:35 AM</div>
                                     </div>
                                 </div>
 
@@ -444,6 +466,6 @@
     <!-- JavaScript -->
     <script src="js/sidebar.js"></script>
     <script src="js/mock-data.js"></script>
-    <script src="js/reservation-handover-edit.js"></script>
+    <script src="js/reservation-collateral-edit.js"></script>
 </body>
 </html>
