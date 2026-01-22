@@ -4,6 +4,16 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // 渲染共用元件 (Header + Sidebar)
+
+    if (typeof initCRMLayout === 'function') {
+
+        initCRMLayout();
+
+    }
+
+    
+
     const sidebarManager = new SidebarManager();
     const workOrderModal = new Modal('workOrderModal');
     

@@ -1,6 +1,16 @@
 // 當文件載入完成後執行
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化側邊欄
+    // 渲染共用元件 (Header + Sidebar)
+
+    if (typeof initCRMLayout === 'function') {
+
+        initCRMLayout();
+
+    }
+
+    
+
     const sidebarManager = new SidebarManager();
     
     // 手動設定 "案場管理" 為 active，因為此頁面是其子頁面

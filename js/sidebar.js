@@ -180,18 +180,46 @@ class SidebarManager {
             'green-contract-add.html': 'green-contract.html',
             'green-contract-payment.html': 'green-contract.html',
             'green-site-schedule.html': 'green-site.html',
+            'green-case-edit.html': 'green-case-list.html',
+            'green-case-quotation.html': 'green-case-list.html',
             
             // 預約服務
             'reservation-collateral-edit.html': 'reservation-collateral.html',
+            'reservation-collateral-schedule.html': 'reservation-collateral.html',
+            'reservation-collateral-questionnaire-design.html': 'reservation-collateral.html',
             'reservation-inspection-edit.html': 'reservation-inspection.html',
             'reservation-handover-edit.html': 'reservation-handover.html',
+            'reservation-handover-schedule.html': 'reservation-handover.html',
+            'reservation-handover-survey.html': 'reservation-handover.html',
             'reservation-custom-edit.html': 'reservation-custom.html',
+            'reservation-custom-schedule.html': 'reservation-custom.html',
             
             // 房屋健檢
-            'house-checkup-schedule-edit.html': 'house-checkup-schedule.html',
+            'house-checkup-activity.html': 'house-checkup-site.html',
+            'house-checkup-activity-edit.html': 'house-checkup-site.html',
+            'house-checkup-report.html': 'house-checkup-reservation.html',
+            
+            // 個案單管理
+            'case-edit.html': 'case-list.html',
             
             // 活動管理
             'activity-registration-edit.html': 'activity-registration.html',
+            
+            // 案場活動
+            'site-event-add.html': 'site-event-list.html',
+            'site-event-category.html': 'site-event-list.html',
+            'site-event-registration.html': 'site-event-list.html',
+            'site-event-registration-edit.html': 'site-event-list.html',
+            
+            // 官網活動(基金會)
+            'foundation-event-edit.html': 'foundation-event-list.html',
+            'foundation-registration-edit.html': 'foundation-registration.html',
+            'foundation-receipt-edit.html': 'foundation-registration.html',
+            
+            // 戶別管理
+            'unit-profile.html': 'unit-list.html',
+            'unit-appointment.html': 'unit-list.html',
+            'resident-profile.html': 'unit-list.html',
             
             // 系統管理
             'system-user-edit.html': 'system-user.html',

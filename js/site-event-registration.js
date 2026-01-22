@@ -40,6 +40,7 @@ class SiteEventRegistrationManager {
     loadMockData() {
         this.registrations = [...SiteEventMockData.registrations];
         this.events = [...SiteEventMockData.events];
+        this.units = SiteEventMockData.units || [];
     }
 
     /**
@@ -97,6 +98,12 @@ class SiteEventRegistrationManager {
             btnExport.addEventListener('click', () => this.handleExport());
         }
 
+        // 表單：戶別選擇變更 (更新案場)
+        const formUnit = document.getElementById('formUnit');
+        if (formUnit) {
+            formUnit.addEventListener('change', (e) => this.handleUnitChange(e.target.value));
+        }
+
         // 點擊彈窗外部關閉
         ['addModal', 'cancelModal', 'notifyModal'].forEach(modalId => {
             const modal = document.getElementById(modalId);
@@ -111,25 +118,30 @@ class SiteEventRegistrationManager {
     }
 
     /**
-     * 填充活動下拉選單
+     * 處理戶別變更
+     */
+    handleUnitChange(unitId) {
+        const formSite = document.getElementById('formSite');
+        const formName = document.getElementById('formName'); // 自動帶入戶主姓名
+        
+        if (!unitId) {
+            if (formSite) formSite.value = '';
+            if (formName) formName.value = '';
+            return;
+        }
+
+        const unit = this.units.find(u => u.unit_id === unitId);
+        if (unit) {
+            if (formSite) formSite.value = unit.site_name;
+            if (formName) formName.value = unit.owner;
+        }
+    }
+
+    /**
+     * 填充活動下拉選單 (僅保留給未來可能擴充，目前表單已改為唯讀)
      */
     populateEventDropdown() {
-        const searchEvent = document.getElementById('searchEvent');
-        const formEvent = document.getElementById('formEvent');
-        
-        const options = this.events.map(e => 
-            `<option value="${e.event_id}">${e.title}</option>`
-        ).join('');
-        
-        if (searchEvent) {
-            searchEvent.innerHTML = '<option value="">全部活動</option>' + options;
-            if (this.eventIdFilter) {
-                searchEvent.value = this.eventIdFilter;
-            }
-        }
-        if (formEvent) {
-            formEvent.innerHTML = '<option value="">請選擇活動</option>' + options;
-        }
+        // Form logic moved to openAddModal
     }
 
     /**
@@ -137,8 +149,6 @@ class SiteEventRegistrationManager {
      */
     handleSearch() {
         this.currentPage = 1;
-        const eventId = document.getElementById('searchEvent')?.value;
-        this.eventIdFilter = eventId || null;
         this.renderTable();
         this.updateStats();
         this.renderEventInfo();
@@ -150,20 +160,20 @@ class SiteEventRegistrationManager {
     getFilters() {
         const filters = {};
         
-        const searchSite = document.getElementById('searchSite');
-        const searchEvent = document.getElementById('searchEvent');
+        // const searchSite = document.getElementById('searchSite'); // Removed
+        // const searchEvent = document.getElementById('searchEvent'); // Removed
         const searchName = document.getElementById('searchName');
         const searchUnit = document.getElementById('searchUnit');
         const searchStatus = document.getElementById('searchStatus');
         
-        if (searchSite?.value) filters.site = searchSite.value;
-        if (searchEvent?.value) filters.eventId = searchEvent.value;
+        // if (searchSite?.value) filters.site = searchSite.value;
+        // if (searchEvent?.value) filters.eventId = searchEvent.value;
         if (searchName?.value) filters.name = searchName.value;
         if (searchUnit?.value) filters.unit = searchUnit.value;
         if (searchStatus?.value) filters.status = searchStatus.value;
         
-        // URL 參數優先
-        if (this.eventIdFilter && !filters.eventId) {
+        // URL 參數作為主要篩選
+        if (this.eventIdFilter) {
             filters.eventId = this.eventIdFilter;
         }
         
@@ -206,6 +216,9 @@ class SiteEventRegistrationManager {
             filtered = filtered.filter(r => r.payment_status === filters.status);
         }
         
+        // 排序：報名序號由小到大 (yymmddnnn)
+        filtered.sort((a, b) => a.reg_id.localeCompare(b.reg_id));
+        
         return filtered;
     }
 
@@ -222,7 +235,7 @@ class SiteEventRegistrationManager {
         const pageData = filtered.slice(start, end);
         
         if (pageData.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="12" class="text-center">無符合條件的報名資料</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="11" class="text-center">無符合條件的報名資料</td></tr>';
             this.renderPagination(0);
             return;
         }
@@ -231,27 +244,25 @@ class SiteEventRegistrationManager {
             const event = this.events.find(e => e.event_id === reg.event_id);
             const eventTitle = event ? event.title : '(未知活動)';
             const statusClass = this.getStatusClass(reg.payment_status);
+            const totalCount = 1 + (reg.companion_count || 0);
             
             return `
                 <tr>
-                    <td>${start + index + 1}</td>
                     <td>${reg.reg_id}</td>
                     <td>${reg.site_name}</td>
                     <td>${eventTitle}</td>
                     <td>${reg.unit_no}</td>
                     <td>${reg.applicant_name}</td>
                     <td>${reg.phone}</td>
-                    <td>${reg.companion_count} 人</td>
+                    <td>${totalCount} 人</td>
                     <td>NT$ ${reg.amount.toLocaleString()}</td>
                     <td><span class="reg-status ${statusClass}">${reg.payment_status}</span></td>
                     <td>${this.formatDate(reg.created_at)}</td>
                     <td>
                         <div class="action-buttons">
-                            ${reg.payment_status !== '已取消' ? `
-                                <button class="btn btn-sm btn-outline-danger" onclick="siteRegManager.cancelRegistration('${reg.reg_id}')">
-                                    <i class="fa-solid fa-ban"></i> 取消
-                                </button>
-                            ` : ''}
+                            <a href="site-event-registration-edit.html?id=${reg.reg_id}" class="btn btn-sm btn-outline-primary" title="編輯">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -431,39 +442,58 @@ class SiteEventRegistrationManager {
      * 開啟新增報名彈窗
      */
     openAddModal() {
-        document.getElementById('addForm').reset();
+        const form = document.getElementById('addForm');
+        if (form) form.reset();
         
-        // 填充活動選單
-        const formEvent = document.getElementById('formEvent');
-        if (formEvent) {
-            formEvent.innerHTML = '<option value="">請選擇活動</option>' + 
-                this.events.map(e => `<option value="${e.event_id}">${e.title}</option>`).join('');
+        // 確保資料存在
+        if (!this.events || this.events.length === 0) {
+            this.loadMockData();
         }
         
-        // 監聽活動選擇以更新案場選單
-        formEvent?.addEventListener('change', () => this.updateFormSites());
+        const formEvent = document.getElementById('formEvent');
+        const formSite = document.getElementById('formSite');
+        const formUnit = document.getElementById('formUnit');
+        
+        // 取得當前活動
+        let currentEvent = null;
+        if (this.eventIdFilter) {
+            currentEvent = this.events.find(e => e.event_id === this.eventIdFilter);
+        }
+
+        if (currentEvent) {
+            // 設定活動名稱 (唯讀)
+            if (formEvent) {
+                formEvent.value = currentEvent.title;
+                formEvent.setAttribute('data-id', currentEvent.event_id);
+            }
+            
+            // 填充戶別下拉選單
+            if (formUnit) {
+                const allowedSites = currentEvent.sites || [];
+                // 過濾出屬於該活動案場的戶別
+                // 這裡假設 mock data 的 units 有 site_name 欄位
+                const availableUnits = this.units.filter(u => allowedSites.includes(u.site_name));
+                
+                // 排序
+                availableUnits.sort((a, b) => a.unit_no.localeCompare(b.unit_no));
+
+                const options = availableUnits.map(u => 
+                    `<option value="${u.unit_id}">${u.site_name} - ${u.unit_no} (${u.owner})</option>`
+                ).join('');
+                formUnit.innerHTML = '<option value="">請選擇戶別</option>' + options;
+            }
+        } else if (formEvent) {
+            formEvent.value = "尚未指定活動";
+            // 提示使用者
+            // alert('請先從活動列表進入');
+        }
+
+        // 清空案場欄位 (等待戶別選擇自動帶入)
+        if (formSite) {
+            formSite.value = '';
+        }
         
         document.getElementById('addModal').classList.add('active');
-    }
-
-    /**
-     * 更新表單案場選單
-     */
-    updateFormSites() {
-        const eventId = document.getElementById('formEvent')?.value;
-        const formSite = document.getElementById('formSite');
-        if (!formSite) return;
-        
-        if (!eventId) {
-            formSite.innerHTML = '<option value="">請先選擇活動</option>';
-            return;
-        }
-        
-        const event = this.events.find(e => e.event_id === eventId);
-        if (!event) return;
-        
-        formSite.innerHTML = '<option value="">請選擇案場</option>' + 
-            event.sites.map(s => `<option value="${s}">${s}</option>`).join('');
     }
 
     /**
@@ -483,18 +513,99 @@ class SiteEventRegistrationManager {
             return;
         }
         
-        const eventId = document.getElementById('formEvent').value;
+        const eventId = document.getElementById('formEvent').getAttribute('data-id');
         const site = document.getElementById('formSite').value;
-        const unit = document.getElementById('formUnit').value;
+        const unitId = document.getElementById('formUnit').value;
+        
+        // 從 unit_id 取得 unit_no
+        const unitObj = this.units.find(u => u.unit_id === unitId);
+        const unit = unitObj ? unitObj.unit_no : unitId; // Fallback or logic
+
         const name = document.getElementById('formName').value;
         const phone = document.getElementById('formPhone').value;
+        // const totalCount = parseInt(document.getElementById('formCount').value) || 1;
+        // const companion = Math.max(0, totalCount - 1);
         const companion = parseInt(document.getElementById('formCompanion').value) || 0;
+        const totalCount = 1 + companion;
+
+        const paymentMethod = document.getElementById('formPaymentMethod').value;
+        const needReceipt = document.getElementById('formReceipt').checked;
         
         const event = this.events.find(e => e.event_id === eventId);
         
+        if (event) {
+            // 0. 檢查報名截止日期
+            if (event.registration_deadline) {
+                const deadline = new Date(event.registration_deadline);
+                deadline.setHours(23, 59, 59, 999);
+                if (new Date() > deadline) {
+                    this.showToast('error', '報名失敗', `已超過報名截止日期 (${event.registration_deadline})`);
+                    return;
+                }
+            }
+
+            // 1. 檢查活動總名額
+            const currentTotal = this.registrations
+                .filter(r => r.event_id === eventId && r.payment_status !== '已取消')
+                .reduce((sum, r) => sum + 1 + r.companion_count, 0);
+            
+            // const newTotal = 1 + companion; // Same as totalCount
+            
+            if (currentTotal + totalCount > event.max_slots) {
+                this.showToast('error', '報名失敗', `活動名額已滿 (剩餘 ${Math.max(0, event.max_slots - currentTotal)} 名)`);
+                return;
+            }
+
+            // 2. 檢查戶別上限 (本人 + 攜伴上限)
+            // 條件：系統根據後台設定的「允許攜伴人數」，計算該戶別的「總報名上限」。
+            // 若同一戶已經有人報名過了，後續報名的人數加總不能超過這個上限。
+            const householdLimit = 1 + (event.max_companion || 0); // 戶別總上限 = 1(住戶本人) + 允許攜伴數
+            
+            const householdCurrent = this.registrations
+                .filter(r => r.event_id === eventId && r.unit_no === unit && r.payment_status !== '已取消')
+                .reduce((sum, r) => sum + 1 + r.companion_count, 0);
+            
+            if (householdCurrent + totalCount > householdLimit) {
+                this.showToast('error', '報名失敗', `該戶別報名人數已達上限 (上限 ${householdLimit} 人，已報名 ${householdCurrent} 人，本次新增 ${totalCount} 人)`);
+                return;
+            }
+
+            // 3. 檢查重複報名 (同一活動、同一姓名、同一電話)
+            const isDuplicate = this.registrations.some(r => 
+                r.event_id === eventId && 
+                r.payment_status !== '已取消' &&
+                r.applicant_name === name && 
+                r.phone === phone
+            );
+            
+            if (isDuplicate) {
+                if (!confirm('該住戶(姓名+電話)已報名過此活動，是否要重複報名？')) {
+                    return;
+                }
+            }
+        }
+
+        // 產生報名序號 (yymmdd + 3碼流水號)
+        const today = new Date();
+        const yymmdd = today.getFullYear().toString().slice(2) + 
+                       String(today.getMonth() + 1).padStart(2, '0') + 
+                       String(today.getDate()).padStart(2, '0');
+        
+        // 找出今日已存在的最大序號 (目前資料都在前端，若有後端需由後端產生)
+        const todayRegs = this.registrations.filter(r => r.reg_id && r.reg_id.startsWith(yymmdd));
+        let nextSeq = 1;
+        if (todayRegs.length > 0) {
+            const seqs = todayRegs.map(r => {
+                const seq = parseInt(r.reg_id.slice(6));
+                return isNaN(seq) ? 0 : seq;
+            });
+            nextSeq = Math.max(...seqs) + 1;
+        }
+        const newRegId = yymmdd + String(nextSeq).padStart(3, '0');
+
         // 建立新報名紀錄
         const newReg = {
-            reg_id: 'SR' + new Date().getFullYear() + String(this.registrations.length + 1).padStart(6, '0'),
+            reg_id: newRegId,
             event_id: eventId,
             site_name: site,
             unit_no: unit,
@@ -502,10 +613,10 @@ class SiteEventRegistrationManager {
             applicant_name: name,
             phone: phone,
             companion_count: companion,
-            payment_status: event && event.price > 0 ? '待繳費' : '已報名',
-            payment_method: '',
-            amount: event ? event.price * (1 + companion) : 0,
-            has_receipt: event ? event.need_receipt : false,
+            payment_status: event && event.price > 0 && paymentMethod !== '現金' ? '待繳費' : '已報名',
+            payment_method: paymentMethod,
+            amount: event ? event.price * totalCount : 0,
+            has_receipt: needReceipt,
             created_at: new Date().toISOString()
         };
         
@@ -522,6 +633,8 @@ class SiteEventRegistrationManager {
      */
     cancelRegistration(regId) {
         this.cancelRegId = regId;
+        const noteInput = document.getElementById('cancelNote');
+        if (noteInput) noteInput.value = '';
         document.getElementById('cancelModal').classList.add('active');
     }
 
@@ -539,15 +652,38 @@ class SiteEventRegistrationManager {
     confirmCancel() {
         if (!this.cancelRegId) return;
         
+        const noteInput = document.getElementById('cancelNote');
+        const note = noteInput ? noteInput.value.trim() : '';
+        
+        if (!note) {
+            alert('請輸入取消原因或備註');
+            return;
+        }
+
         const reg = this.registrations.find(r => r.reg_id === this.cancelRegId);
         if (reg) {
             reg.payment_status = '已取消';
+            reg.cancel_note = note;
+            reg.cancel_time = new Date().toISOString();
+            
             this.showToast('success', '取消成功', '報名紀錄已取消');
             this.renderTable();
             this.updateStats();
         }
         
         this.closeCancelModal();
+    }
+
+    /**
+     * 檢視歷程/原因
+     */
+    viewHistory(regId) {
+        const reg = this.registrations.find(r => r.reg_id === regId);
+        if (reg && reg.cancel_note) {
+            alert(`【取消原因/備註】\n${reg.cancel_note}\n\n【取消時間】\n${this.formatDateTime(reg.cancel_time)}`);
+        } else {
+            this.showToast('info', '無備註', '此紀錄無詳細備註資訊');
+        }
     }
 
     /**

@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================================
     
     // 側邊欄管理
+    // 渲染共用元件 (Header + Sidebar)
+
+    if (typeof initCRMLayout === 'function') {
+
+        initCRMLayout();
+
+    }
+
+    
+
     const sidebarManager = new SidebarManager();
     
     // 彈窗管理

@@ -17,9 +17,14 @@
     
     /**
      * 彈窗管理類別
-     * @param {Object} options - 設定選項
+     * @param {Object|string} options - 設定選項 或 彈窗ID
      */
     function Modal(options) {
+        // 支援字串 ID 參數
+        if (typeof options === 'string') {
+            options = { id: options };
+        }
+
         // 預設設定
         this.options = Object.assign({
             id: null,                  // 彈窗 ID

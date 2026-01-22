@@ -15,7 +15,6 @@ class SiteEventManager {
         this.currentPage = 1;
         this.pageSize = 5;
         this.events = [];
-        this.deleteEventId = null;
         this.editingEventId = null;
         this.init();
     }
@@ -24,9 +23,59 @@ class SiteEventManager {
      * 初始化
      */
     init() {
+        this.loadCategories();
         this.loadMockData();
         this.bindEvents();
         this.renderTable();
+    }
+
+    /**
+     * 載入類別下拉選單
+     */
+    loadCategories() {
+        // 從 localStorage 讀取，若無則使用預設
+        const defaultCategories = [
+            { id: 'CAT001', name: '住戶聯誼', sort: 10, status: true },
+            { id: 'CAT002', name: '親子活動', sort: 20, status: true },
+            { id: 'CAT003', name: '節慶活動', sort: 30, status: true },
+            { id: 'CAT004', name: '社區活動', sort: 40, status: true },
+            { id: 'CAT005', name: '講座課程', sort: 50, status: true },
+            { id: 'CAT006', name: '設備說明', sort: 60, status: true },
+            { id: 'CAT007', name: '公告說明', sort: 70, status: true }
+        ];
+        
+        const storageKey = 'site_event_categories';
+        const stored = localStorage.getItem(storageKey);
+        let categories = [];
+        
+        if (stored) {
+            categories = JSON.parse(stored);
+        } else {
+            categories = defaultCategories;
+        }
+        
+        // 過濾啟用並排序
+        categories = categories.filter(c => c.status).sort((a, b) => a.sort - b.sort);
+        
+        const populateSelect = (elementId) => {
+            const select = document.getElementById(elementId);
+            if (!select) return;
+            
+            // 保留第一個選項 (全部/請選擇)
+            const firstOption = select.options[0];
+            select.innerHTML = '';
+            select.appendChild(firstOption);
+            
+            categories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.name;
+                opt.textContent = cat.name;
+                select.appendChild(opt);
+            });
+        };
+        
+        populateSelect('searchCategory');
+        populateSelect('formCategory');
     }
 
     /**
@@ -63,6 +112,14 @@ class SiteEventManager {
             });
         }
 
+        // 維護活動類別按鈕 - 跳轉到類別設定頁面
+        const btnManageCategory = document.getElementById('btnManageCategory');
+        if (btnManageCategory) {
+            btnManageCategory.addEventListener('click', () => {
+                window.location.href = 'site-event-category.html';
+            });
+        }
+
         // 表單提交
         const eventForm = document.getElementById('eventForm');
         if (eventForm) {
@@ -78,15 +135,6 @@ class SiteEventManager {
             eventModal.addEventListener('click', (e) => {
                 if (e.target === eventModal) {
                     this.closeModal();
-                }
-            });
-        }
-
-        const deleteModal = document.getElementById('deleteModal');
-        if (deleteModal) {
-            deleteModal.addEventListener('click', (e) => {
-                if (e.target === deleteModal) {
-                    this.closeDeleteModal();
                 }
             });
         }
@@ -241,9 +289,6 @@ class SiteEventManager {
                             <button class="btn btn-sm btn-outline-success" onclick="siteEventManager.viewRegistrations('${event.event_id}')">
                                 <i class="fa-solid fa-users"></i> 報名
                             </button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="siteEventManager.deleteEvent('${event.event_id}')">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
                         </div>
                     </td>
                 </tr>
@@ -351,10 +396,9 @@ class SiteEventManager {
         document.getElementById('eventForm').reset();
         document.getElementById('eventId').value = '';
         
-        // 清除所有勾選
-        document.querySelectorAll('#siteCheckboxGroup input[type="checkbox"]').forEach(cb => {
-            cb.checked = false;
-        });
+        // 重置案場選擇
+        const formSite = document.getElementById('formSite');
+        if (formSite) formSite.value = '';
         
         document.getElementById('eventModal').classList.add('active');
     }
@@ -399,10 +443,11 @@ class SiteEventManager {
         document.getElementById('formRemindDays').value = event.remind_days_before;
         document.getElementById('formNeedReceipt').checked = event.need_receipt;
         
-        // 勾選案場
-        document.querySelectorAll('#siteCheckboxGroup input[type="checkbox"]').forEach(cb => {
-            cb.checked = event.sites.includes(cb.value);
-        });
+        // 設定案場
+        const formSite = document.getElementById('formSite');
+        if (formSite) {
+            formSite.value = (event.sites && event.sites.length > 0) ? event.sites[0] : '';
+        }
         
         document.getElementById('eventModal').classList.add('active');
     }
@@ -418,14 +463,12 @@ class SiteEventManager {
             return;
         }
         
-        // 取得勾選的案場
-        const selectedSites = [];
-        document.querySelectorAll('#siteCheckboxGroup input[type="checkbox"]:checked').forEach(cb => {
-            selectedSites.push(cb.value);
-        });
+        // 取得選擇的案場
+        const formSite = document.getElementById('formSite');
+        const selectedSites = formSite && formSite.value ? [formSite.value] : [];
         
         if (selectedSites.length === 0) {
-            this.showToast('error', '錯誤', '請至少選擇一個適用案場');
+            this.showToast('error', '錯誤', '請選擇適用案場');
             return;
         }
         
@@ -467,38 +510,6 @@ class SiteEventManager {
         
         this.closeModal();
         this.renderTable();
-    }
-
-    /**
-     * 刪除活動 (開啟確認彈窗)
-     */
-    deleteEvent(eventId) {
-        this.deleteEventId = eventId;
-        document.getElementById('deleteModal').classList.add('active');
-    }
-
-    /**
-     * 關閉刪除確認彈窗
-     */
-    closeDeleteModal() {
-        document.getElementById('deleteModal').classList.remove('active');
-        this.deleteEventId = null;
-    }
-
-    /**
-     * 確認刪除
-     */
-    confirmDelete() {
-        if (!this.deleteEventId) return;
-        
-        const index = this.events.findIndex(e => e.event_id === this.deleteEventId);
-        if (index !== -1) {
-            this.events.splice(index, 1);
-            this.showToast('success', '刪除成功', '活動已刪除');
-            this.renderTable();
-        }
-        
-        this.closeDeleteModal();
     }
 
     /**

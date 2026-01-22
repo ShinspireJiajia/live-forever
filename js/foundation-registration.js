@@ -30,9 +30,26 @@ class FoundationRegistrationManager {
         
         this.loadEventInfo();
         this.loadRegistrations();
+        this.initProjectFilter();
         this.bindEvents();
         this.renderTable();
         this.updateStats();
+    }
+
+    /**
+     * 初始化案場篩選選項
+     */
+    initProjectFilter() {
+        const select = document.getElementById('searchProject');
+        if (!select) return;
+
+        const projects = ['植森', '原森', '觀止', '臻綠', '織森'];
+        projects.forEach(proj => {
+            const option = document.createElement('option');
+            option.value = proj;
+            option.textContent = proj;
+            select.appendChild(option);
+        });
     }
 
     /**
@@ -50,11 +67,15 @@ class FoundationRegistrationManager {
      */
     renderEventInfo() {
         const event = this.currentEvent;
-        if (!event) return;
-
         const infoEl = document.getElementById('eventInfoCard');
         if (!infoEl) return;
 
+        if (!event) {
+            infoEl.style.display = 'none'; // 無活動資訊時隱藏
+            return;
+        }
+
+        infoEl.style.display = 'block'; // 有活動資訊時顯示
         const status = this.getEventStatus(event);
         const statusClass = this.getStatusClass(status);
 
@@ -65,7 +86,6 @@ class FoundationRegistrationManager {
                     <span class="category-tag">${event.category}</span>
                     ${event.is_resident_only ? '<span class="identity-badge resident" style="margin-left:8px;">住戶限定</span>' : ''}
                 </div>
-                <span class="event-status ${statusClass}">${status}</span>
             </div>
             <div class="event-info-grid">
                 <div class="event-info-item">
@@ -129,7 +149,13 @@ class FoundationRegistrationManager {
         // 新增報名
         const btnAdd = document.getElementById('btnAdd');
         if (btnAdd) {
-            btnAdd.addEventListener('click', () => this.openAddModal());
+            btnAdd.addEventListener('click', () => {
+                if (!this.currentEventId) {
+                    alert('此功能僅限於特定活動下使用，請由「活動設定」列表進入「報名管理」頁面操作。');
+                    return;
+                }
+                this.openAddModal();
+            });
         }
 
         // 匯出
@@ -188,11 +214,15 @@ class FoundationRegistrationManager {
         const searchPhone = document.getElementById('searchPhone');
         const searchIdentity = document.getElementById('searchIdentity');
         const searchPaymentStatus = document.getElementById('searchPaymentStatus');
+        const searchProject = document.getElementById('searchProject');
+        const searchUnit = document.getElementById('searchUnit');
         
         if (searchName?.value) filters.name = searchName.value;
         if (searchPhone?.value) filters.phone = searchPhone.value;
         if (searchIdentity?.value) filters.identity = searchIdentity.value;
         if (searchPaymentStatus?.value) filters.paymentStatus = searchPaymentStatus.value;
+        if (searchProject?.value) filters.project = searchProject.value;
+        if (searchUnit?.value) filters.unit = searchUnit.value;
         
         return filters;
     }
@@ -208,6 +238,28 @@ class FoundationRegistrationManager {
             filtered = filtered.filter(r => 
                 r.applicant_name.toLowerCase().includes(filters.name.toLowerCase())
             );
+        }
+
+        if (filters.project) {
+            filtered = filtered.filter(r => {
+                if (r.user_identity === '住戶' && r.crm_member_id) {
+                    const projects = ['植森', '原森', '觀止', '臻綠', '織森'];
+                    const idSum = r.crm_member_id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                    return projects[idSum % projects.length] === filters.project;
+                }
+                return false;
+            });
+        }
+
+        if (filters.unit) {
+            filtered = filtered.filter(r => {
+                if (r.user_identity === '住戶' && r.crm_member_id) {
+                    const units = ['A棟-3F', 'A棟-5F', 'A棟-8F', 'B棟-2F', 'B棟-7F', 'B棟-11F', 'C棟-5F', 'C棟-9F', 'C棟-10F'];
+                    const idSum = r.crm_member_id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                    return units[idSum % units.length].toLowerCase().includes(filters.unit.toLowerCase());
+                }
+                return false;
+            });
         }
         
         if (filters.phone) {
@@ -240,7 +292,7 @@ class FoundationRegistrationManager {
         const pageData = filtered.slice(start, end);
         
         if (pageData.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="12" class="text-center">無符合條件的報名資料</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="13" class="text-center">無符合條件的報名資料</td></tr>';
             return;
         }
         
@@ -250,24 +302,34 @@ class FoundationRegistrationManager {
             const paymentStatusClass = this.getPaymentStatusClass(reg.payment_status);
             const paymentMethodIcon = this.getPaymentMethodIcon(reg.payment_method);
             
+            // Mock Unit Info
+            let unitInfo = '-';
+            let projectInfo = '-';
+            if (reg.user_identity === '住戶' && reg.crm_member_id) {
+                const units = ['A棟-3F', 'A棟-5F', 'A棟-8F', 'B棟-2F', 'B棟-7F', 'B棟-11F', 'C棟-5F', 'C棟-9F', 'C棟-10F'];
+                const projects = ['植森', '原森', '觀止', '臻綠', '織森'];
+                const idSum = reg.crm_member_id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                unitInfo = units[idSum % units.length];
+                projectInfo = projects[idSum % projects.length];
+            }
+            
             return `
                 <tr>
                     <td>${start + index + 1}</td>
-                    <td>${reg.reg_id}</td>
+                    <td>${projectInfo}</td>
+                    <td>${unitInfo}</td>
                     <td>
                         ${reg.user_identity}
-                        ${reg.is_manual_audit ? '(已稽核)' : ''}
                     </td>
                     <td>
                         ${reg.applicant_name}
-                        ${reg.crm_member_id ? '<br><small class="text-muted">CRM: ' + reg.crm_member_id + '</small>' : ''}
                     </td>
                     <td>${reg.phone}</td>
-                    <td>${reg.companion_count} 人</td>
+                    <td>${(reg.companion_count || 0) + 1} 人</td>
                     <td>
                         $${reg.final_amount.toLocaleString()}
                         ${reg.original_amount !== reg.final_amount ? 
-                            `<br><small class="text-muted">(原$${reg.original_amount.toLocaleString()})</small>` : ''}
+                            `<br><small style="text-decoration: line-through; color: #888;">$${reg.original_amount.toLocaleString()}</small>` : ''}
                     </td>
                     <td>${reg.payment_method || '-'}</td>
                     <td>${reg.payment_status}</td>
@@ -282,9 +344,6 @@ class FoundationRegistrationManager {
                             ` : ''}
                             ${reg.payment_status === '已入帳' && canRefund ? `
                                 <button class="btn btn-sm btn-outline-danger" onclick="registrationManager.markRefund('${reg.reg_id}')">標記退費</button>
-                            ` : ''}
-                            ${reg.payment_status === '已入帳' && !canRefund ? `
-                                <button class="btn btn-sm btn-disabled" title="超過180天不可退費" disabled>不可退費</button>
                             ` : ''}
                         </div>
                     </td>
@@ -492,9 +551,242 @@ class FoundationRegistrationManager {
      * 開啟新增報名彈窗
      */
     openAddModal() {
-        const modal = document.getElementById('addModal');
+        const form = document.getElementById('addRegistrationForm');
+        if (form) {
+            form.reset();
+            
+            // 設定活動 ID (隱藏欄位)
+            const eventInput = document.getElementById('addEvent');
+            if (eventInput) {
+                if (this.currentEventId) {
+                    eventInput.value = this.currentEventId;
+                } else {
+                    eventInput.value = '';
+                    // 若無活動ID環境，因為不允許選擇，可能需要提示或隱藏按鈕 (依需求而定，此處僅處理欄位)
+                }
+            }
+
+            // 預設檢查一次限制
+            this.checkEventRestrictions();
+
+            // 重置收據選項
+            const receiptNo = document.querySelector('input[name="needReceipt"][value="no"]');
+            if (receiptNo) receiptNo.checked = true;
+            
+            this.handleIdentityChange();
+            this.handlePaymentMethodChange();
+        }
+        
+        const modal = document.getElementById('addRegistrationModal');
         if (modal) {
             modal.classList.add('active');
+        }
+
+        // 綁定 Modal 按鈕事件 (如果尚未綁定)
+        if (!this.addModalEventsBound) {
+            this.bindAddModalEvents();
+            this.addModalEventsBound = true;
+        }
+    }
+
+    /**
+     * 檢查活動限制 (住戶限定等)
+     */
+    checkEventRestrictions() {
+        const eventSelect = document.getElementById('addEvent');
+        if (!eventSelect) return;
+
+        const eventId = eventSelect.value;
+        const selectedEvent = eventId ? FoundationMockData.getEventById(eventId) : this.currentEvent;
+
+        // 重置身分選擇狀態
+        const residentRadio = document.querySelector('input[name="identity"][value="resident"]');
+        const visitorRadio = document.querySelector('input[name="identity"][value="visitor"]');
+
+        if (!selectedEvent) {
+             // 未選活動，預設開放
+             if (visitorRadio) visitorRadio.disabled = false;
+             return;
+        }
+
+        // 檢查是否為住戶限定活動
+        if (selectedEvent.is_resident_only) {
+            if (residentRadio) residentRadio.checked = true;
+            if (visitorRadio) {
+                visitorRadio.disabled = true;
+                const label = visitorRadio.closest('label');
+                if (label) {
+                    label.style.opacity = '0.5';
+                    label.style.cursor = 'not-allowed';
+                    label.title = '此活動為住戶限定，無法接受訪客報名';
+                }
+            }
+        } else {
+            if (visitorRadio) {
+                visitorRadio.disabled = false;
+                const label = visitorRadio.closest('label');
+                if (label) {
+                    label.style.opacity = '';
+                    label.style.cursor = 'pointer';
+                    label.title = '';
+                }
+            }
+        }
+        this.handleIdentityChange();
+    }
+
+    /**
+     * 綁定新增 Modal 事件
+     */
+    bindAddModalEvents() {
+        document.getElementById('closeAddModal')?.addEventListener('click', () => {
+             document.getElementById('addRegistrationModal').classList.remove('active');
+        });
+        document.getElementById('cancelAddModal')?.addEventListener('click', () => {
+             document.getElementById('addRegistrationModal').classList.remove('active');
+        });
+        document.getElementById('submitAddModal')?.addEventListener('click', () => {
+             this.submitAddRegistration();
+        });
+        document.getElementById('addPaymentMethod')?.addEventListener('change', () => {
+             this.handlePaymentMethodChange();
+        });
+    }
+
+    /**
+     * 處理繳費方式變更
+     */
+    handlePaymentMethodChange() {
+        const methodSelect = document.getElementById('addPaymentMethod');
+        const deadlineGroup = document.getElementById('paymentDeadlineGroup');
+        const deadlineInput = document.getElementById('addPaymentDeadline');
+        const noteGroup = document.getElementById('paymentNoteGroup');
+
+        if (!methodSelect || !deadlineGroup || !noteGroup) return;
+
+        const method = methodSelect.value;
+        deadlineGroup.style.display = 'none';
+        noteGroup.style.display = 'none';
+        noteGroup.innerHTML = '';
+        if (deadlineInput) deadlineInput.required = false;
+
+        if (method === '現金') {
+            deadlineGroup.style.display = 'block';
+            if (deadlineInput) deadlineInput.required = true;
+            noteGroup.style.display = 'block';
+            noteGroup.innerHTML = '<i class="fa-solid fa-circle-info"></i> 將發送繳費通知，需設定繳費期限。';
+            // Set min date to today
+            if (deadlineInput) deadlineInput.min = new Date().toISOString().split('T')[0];
+        } else if (method === '線上繳費') {
+            noteGroup.style.display = 'block';
+            noteGroup.innerHTML = '<i class="fa-solid fa-circle-info"></i> 將發送線上繳費連結給用戶。';
+        }
+    }
+
+    /**
+     * 處理身分切換
+     */
+    handleIdentityChange() {
+        const identityInput = document.querySelector('input[name="identity"]:checked');
+        if (!identityInput) return;
+
+        const identity = identityInput.value;
+        const residentFields = document.getElementById('residentFields');
+        const projectSelect = document.getElementById('addProject');
+        const unitSelect = document.getElementById('addUnit');
+
+        if (residentFields) {
+            if (identity === 'resident') {
+                residentFields.style.display = 'block';
+                if (projectSelect) projectSelect.required = true;
+                if (unitSelect) unitSelect.required = true;
+            } else {
+                residentFields.style.display = 'none';
+                if (projectSelect) projectSelect.required = false;
+                if (unitSelect) unitSelect.required = false;
+            }
+        }
+    }
+
+    /**
+     * 提交新增報名
+     */
+    submitAddRegistration() {
+        const form = document.getElementById('addRegistrationForm');
+        if (form && !form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const eventSelect = document.getElementById('addEvent');
+        const eventId = eventSelect ? eventSelect.value : '';
+        if (!eventId) {
+            alert('無法確認活動資訊，請先選擇活動');
+            return;
+        }
+
+        // 再次驗證身分限制
+        const currentParamsEvent = FoundationMockData.getEventById(eventId);
+        const identityInput = document.querySelector('input[name="identity"]:checked');
+        const identity = identityInput ? identityInput.value : 'visitor';
+
+        if (currentParamsEvent && currentParamsEvent.is_resident_only && identity === 'visitor') {
+            alert('此活動僅限住戶報名');
+            return;
+        }
+
+        const nameDetails = document.getElementById('addName');
+        const name = nameDetails ? nameDetails.value : '';
+        const phoneDetails = document.getElementById('addPhone');
+        const phone = phoneDetails ? phoneDetails.value : '';
+        const receiptInput = document.querySelector('input[name="needReceipt"]:checked');
+        const needReceipt = receiptInput ? receiptInput.value : 'no';
+        
+        const paymentStatusEl = document.getElementById('addPaymentStatus');
+        const paymentMethodEl = document.getElementById('addPaymentMethod');
+        const paymentDeadlineEl = document.getElementById('addPaymentDeadline');
+        const paymentStatus = paymentStatusEl ? paymentStatusEl.value : '待繳費';
+        const paymentMethod = paymentMethodEl ? paymentMethodEl.value : '-';
+        const paymentDeadline = paymentDeadlineEl ? paymentDeadlineEl.value : '';
+
+        // 模擬API請求
+        this.showToast('success', '新增成功', `已建立${identity === 'resident' ? '住戶' : '訪客'}報名資料`);
+        
+        // 模擬發送通知邏輯
+        if (paymentStatus === '待繳費') {
+            setTimeout(() => {
+                if (paymentMethod === '線上繳費') {
+                    alert(`[系統模擬] 已發送線上繳費連結給：${name} (${phone})\n連結：https://lufu.com.tw/pay/online-link-${Date.now()}`);
+                } else if (paymentMethod === '現金') {
+                    alert(`[系統模擬] 已發送現金繳費通知給：${name} (${phone})\n請於 ${paymentDeadline} 前完成繳費。`);
+                } else {
+                    alert(`[系統模擬] 已發送繳費通知給：${name} (${phone})`);
+                }
+            }, 500);
+        }
+
+        const modal = document.getElementById('addRegistrationModal');
+        if (modal) modal.classList.remove('active');
+        
+        // 重新整理列表
+        if (identity && name) {
+            this.registrations.unshift({
+                event_id: eventId,
+                reg_id: 'MANUAL_' + Date.now(),
+                user_identity: identity === 'resident' ? '住戶' : '非住戶',
+                applicant_name: name,
+                phone: phone,
+                companion_count: 0,
+                final_amount: paymentStatus === '免費' ? 0 : 500, // 假定價格
+                original_amount: 500,
+                payment_method: paymentMethod,
+                payment_status: paymentStatus,
+                created_at: new Date().toISOString(),
+                has_receipt: needReceipt === 'yes',
+                crm_member_id: identity === 'resident' ? 'MOCK_ID' : null
+            });
+            this.renderTable();
+            this.updateStats();
         }
     }
 

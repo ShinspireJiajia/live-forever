@@ -1,10 +1,10 @@
 /**
  * ============================================
- * 陸府建設 CRM 系統 - 交屋時段管理 JavaScript
+ * 陸府建設 CRM 系統 - 客變時段管理 JavaScript
  * ============================================
- * 檔案：reservation-handover-schedule.js
- * 說明：處理交屋時段管理頁面的互動邏輯
- * 建立日期：2025-12-29
+ * 檔案：reservation-custom-schedule.js
+ * 說明：處理客變時段管理頁面的互動邏輯
+ * 建立日期：2026-01-14
  * ============================================
  */
 
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const timeSlots = [];
         for (let hour = 9; hour < 18; hour++) {
             timeSlots.push(`${String(hour).padStart(2, '0')}:00`);
-            if (hour < 17 || (hour === 17 && true)) {
+            if (hour < 17 || (hour === 17 && true)) { // 17:30
                 timeSlots.push(`${String(hour).padStart(2, '0')}:30`);
             }
         }
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 返回列表
     document.getElementById('btnBack')?.addEventListener('click', function() {
-        window.location.href = 'reservation-handover.html';
+        window.location.href = 'reservation-custom.html';
     });
     
     // 案場切換

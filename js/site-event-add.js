@@ -129,8 +129,24 @@ class SiteEventAddManager {
         const endDt = document.getElementById('formEndDt');
         
         if (startDt && endDt) {
-            startDt.addEventListener('change', () => this.validateDateRange());
-            endDt.addEventListener('change', () => this.validateDateRange());
+            startDt.addEventListener('change', () => this.validateDateRange('main'));
+            endDt.addEventListener('change', () => this.validateDateRange('main'));
+        }
+
+        const displayStartDt = document.getElementById('formDisplayStartDt');
+        const displayEndDt = document.getElementById('formDisplayEndDt');
+        
+        if (displayStartDt && displayEndDt) {
+            displayStartDt.addEventListener('change', () => this.validateDateRange('display'));
+            displayEndDt.addEventListener('change', () => this.validateDateRange('display'));
+        }
+
+        const regStartDt = document.getElementById('formRegistrationStartDt');
+        const regEndDt = document.getElementById('formRegistrationEndDt');
+        
+        if (regStartDt && regEndDt) {
+            regStartDt.addEventListener('change', () => this.validateDateRange('registration'));
+            regEndDt.addEventListener('change', () => this.validateDateRange('registration'));
         }
 
         // 成功彈窗外部點擊關閉
@@ -184,16 +200,35 @@ class SiteEventAddManager {
     /**
      * 驗證日期範圍
      */
-    validateDateRange() {
-        const startDt = document.getElementById('formStartDt');
-        const endDt = document.getElementById('formEndDt');
+    validateDateRange(type = 'main') {
+        let startId, endId, label;
         
-        if (startDt.value && endDt.value) {
+        switch(type) {
+            case 'display':
+                startId = 'formDisplayStartDt';
+                endId = 'formDisplayEndDt';
+                label = '顯示';
+                break;
+            case 'registration':
+                startId = 'formRegistrationStartDt';
+                endId = 'formRegistrationEndDt';
+                label = '報名';
+                break;
+            default: // main
+                startId = 'formStartDt';
+                endId = 'formEndDt';
+                label = '';
+        }
+
+        const startDt = document.getElementById(startId);
+        const endDt = document.getElementById(endId);
+        
+        if (startDt && endDt && startDt.value && endDt.value) {
             const startDate = new Date(startDt.value);
             const endDate = new Date(endDt.value);
             
             if (endDate <= startDate) {
-                this.showToast('error', '日期錯誤', '結束時間必須晚於開始時間');
+                this.showToast('error', '日期錯誤', `${label}結束時間必須晚於${label}開始時間`);
                 endDt.value = '';
             }
         }
@@ -530,8 +565,12 @@ class SiteEventAddManager {
         // 填入表單資料
         document.getElementById('formTitle').value = event.title || '';
         document.getElementById('formCategory').value = event.category || '';
-        document.getElementById('formStartDt').value = event.start_dt ? event.start_dt.slice(0, 16) : '';
-        document.getElementById('formEndDt').value = event.end_dt ? event.end_dt.slice(0, 16) : '';
+        // document.getElementById('formStartDt').value = event.start_dt ? event.start_dt.slice(0, 16) : '';
+        // document.getElementById('formEndDt').value = event.end_dt ? event.end_dt.slice(0, 16) : '';
+        document.getElementById('formDisplayStartDt').value = event.display_start_dt ? event.display_start_dt.slice(0, 16) : '';
+        document.getElementById('formDisplayEndDt').value = event.display_end_dt ? event.display_end_dt.slice(0, 16) : '';
+        document.getElementById('formRegistrationStartDt').value = event.registration_start_dt ? event.registration_start_dt.slice(0, 16) : '';
+        document.getElementById('formRegistrationEndDt').value = event.registration_end_dt ? event.registration_end_dt.slice(0, 16) : '';
         document.getElementById('formLocation').value = event.location || '';
         document.getElementById('formDescription').value = event.description || '';
         // 同步到編輯器
@@ -541,7 +580,7 @@ class SiteEventAddManager {
         }
         document.getElementById('formMaxSlots').value = event.max_slots || 50;
         document.getElementById('formPrice').value = event.price || 0;
-        document.getElementById('formDeadline').value = event.registration_deadline || '';
+        // document.getElementById('formDeadline').value = event.registration_deadline || '';
         document.getElementById('formMaxCompanion').value = event.max_companion || 0;
         document.getElementById('formRemindDays').value = event.remind_days_before || 3;
         document.getElementById('formNeedReceipt').checked = event.need_receipt || false;
@@ -592,6 +631,7 @@ class SiteEventAddManager {
         }
 
         // 驗證日期
+        /*
         const startDt = document.getElementById('formStartDt').value;
         const endDt = document.getElementById('formEndDt').value;
         
@@ -599,19 +639,38 @@ class SiteEventAddManager {
             this.showToast('error', '日期錯誤', '結束時間必須晚於開始時間');
             return;
         }
+        */
+
+        const displayStartVal = document.getElementById('formDisplayStartDt').value;
+        const displayEndVal = document.getElementById('formDisplayEndDt').value;
+        if (displayStartVal && displayEndVal && new Date(displayEndVal) <= new Date(displayStartVal)) {
+             this.showToast('error', '日期錯誤', '顯示結束時間必須晚於顯示開始時間');
+             return;
+        }
+
+        const regStartVal = document.getElementById('formRegistrationStartDt').value;
+        const regEndVal = document.getElementById('formRegistrationEndDt').value;
+        if (regStartVal && regEndVal && new Date(regEndVal) <= new Date(regStartVal)) {
+             this.showToast('error', '日期錯誤', '報名結束時間必須晚於報名開始時間');
+             return;
+        }
 
         // 組合活動資料
         const eventData = {
             title: document.getElementById('formTitle').value,
             category: document.getElementById('formCategory').value,
-            start_dt: startDt + ':00',
-            end_dt: endDt + ':00',
+            // start_dt: startDt + ':00',
+            // end_dt: endDt + ':00',
+            display_start_dt: document.getElementById('formDisplayStartDt').value ? document.getElementById('formDisplayStartDt').value + ':00' : null,
+            display_end_dt: document.getElementById('formDisplayEndDt').value ? document.getElementById('formDisplayEndDt').value + ':00' : null,
+            registration_start_dt: document.getElementById('formRegistrationStartDt').value ? document.getElementById('formRegistrationStartDt').value + ':00' : null,
+            registration_end_dt: document.getElementById('formRegistrationEndDt').value ? document.getElementById('formRegistrationEndDt').value + ':00' : null,
             description: document.getElementById('formDescription').value,
             location: document.getElementById('formLocation').value,
             sites: selectedSites,
             max_slots: parseInt(document.getElementById('formMaxSlots').value),
             price: parseInt(document.getElementById('formPrice').value) || 0,
-            registration_deadline: document.getElementById('formDeadline').value,
+            // registration_deadline: document.getElementById('formDeadline').value,
             max_companion: parseInt(document.getElementById('formMaxCompanion').value) || 0,
             allow_companion: parseInt(document.getElementById('formMaxCompanion').value) > 0,
             remind_days_before: parseInt(document.getElementById('formRemindDays').value) || 0,

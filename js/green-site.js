@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化側邊欄
+    // 渲染共用元件 (Header + Sidebar)
+
+    if (typeof initCRMLayout === 'function') {
+
+        initCRMLayout();
+
+    }
+
+    
+
     const sidebarManager = new SidebarManager();
 
     // 綁定搜尋按鈕

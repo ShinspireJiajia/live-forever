@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化側邊欄
+    // 渲染共用元件 (Header + Sidebar)
+
+    if (typeof initCRMLayout === 'function') {
+
+        initCRMLayout();
+
+    }
+
+    
+
     const sidebarManager = new SidebarManager();
     
     // 設定側邊欄選單狀態
@@ -50,6 +60,7 @@ function loadContractData(id, mode) {
         'C-10001': {
             type: '公設',
             contractId: 'C-10001',
+            status: '待簽署',
             year: '2025',
             startDate: '2025-01-01',
             endDate: '2025-12-31',
@@ -65,6 +76,7 @@ function loadContractData(id, mode) {
         'C-10002': {
             type: '專戶',
             contractId: 'C-10002',
+            status: '已生效',
             year: '2025',
             startDate: '2025-02-01',
             endDate: '2025-11-30',
@@ -80,6 +92,7 @@ function loadContractData(id, mode) {
         'C-10003': {
             type: '專戶與公設',
             contractId: 'C-10003',
+            status: '草稿',
             year: '2025',
             startDate: '2025-03-01',
             endDate: '2025-12-31',
@@ -95,6 +108,7 @@ function loadContractData(id, mode) {
         'C-10004': {
             type: '公設',
             contractId: 'C-10004',
+            status: '已失效',
             year: '2025',
             startDate: '2025-01-01',
             endDate: '2025-12-31',
@@ -125,8 +139,12 @@ function loadContractData(id, mode) {
     if (idInput) idInput.value = data.contractId;
 
     // 年度
-    const yearSelect = document.querySelector('select.form-control'); // Assuming first select is year
+    const yearSelect = document.getElementById('contractYear') || document.querySelector('select.form-control'); 
     if (yearSelect) yearSelect.value = data.year;
+
+    // 合約狀態
+    const statusSelect = document.getElementById('contractStatus'); 
+    if (statusSelect && data.status) statusSelect.value = data.status;
 
     // 合約期間
     const dateInputs = document.querySelectorAll('.contract-period input[type="date"]');
@@ -136,7 +154,7 @@ function loadContractData(id, mode) {
     }
 
     // 維護人員
-    const staffSelect = document.querySelectorAll('select.form-control')[1]; // Assuming second select is staff
+    const staffSelect = document.getElementById('contractStaff') || document.querySelectorAll('select.form-control')[2]; 
     if (staffSelect) staffSelect.value = data.staff;
 
     // 合約摘要

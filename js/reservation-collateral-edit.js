@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 渲染共用元件 (Header + Sidebar)
+
+    if (typeof initCRMLayout === 'function') {
+
+        initCRMLayout();
+
+    }
+
+    
+
     const sidebarManager = new SidebarManager();
     
     // 取得 URL 參數中的 ID
