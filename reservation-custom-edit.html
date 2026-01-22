@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>編輯交屋預約 - 陸府建設 CRM</title>
+    <title>編輯客變預約 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/chat.css">
-    <link rel="stylesheet" href="css/reservation-handover-edit.css">
+    <link rel="stylesheet" href="css/reservation-custom-edit.css">
 </head>
 <body>
     <div class="app-container">
@@ -37,19 +37,19 @@
                     首頁
                 </a>
                 <span class="breadcrumb-separator">/</span>
-                <a href="reservation-handover.html" class="breadcrumb-item">交屋預約</a>
+                <a href="reservation-custom.html" class="breadcrumb-item">客變預約</a>
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-item active">編輯預約</span>
             </div>
 
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1 class="page-title">編輯交屋預約</h1>
+                    <h1 class="page-title">編輯客變預約</h1>
                 </div>
 
                 <div class="edit-container">
-                    <form id="handoverEditForm">
-                        <input type="hidden" id="handoverId">
+                    <form id="customEditForm">
+                        <input type="hidden" id="customId">
                         
                         <!-- 基本資料區塊 -->
                         <div class="section-block">
@@ -58,7 +58,7 @@
                                 <!-- 案場 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label required">案場</label>
-                                    <select class="form-select" id="hProject" required>
+                                    <select class="form-select" id="rProject" required>
                                         <option value="">請選擇案場</option>
                                         <option value="陸府原森">陸府原森</option>
                                         <option value="陸府觀微">陸府觀微</option>
@@ -68,33 +68,34 @@
                                 <!-- 戶別 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label required">戶別</label>
-                                    <select class="form-select" id="hUnit" required disabled>
+                                    <select class="form-select" id="rUnit" required disabled>
                                         <option value="">請先選擇案場</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <!-- 預約者姓名 -->
+                                <!-- 會員姓名 -->
                                 <div class="form-group col-md-6">
-                                    <label class="form-label required">預約者姓名</label>
-                                    <input type="text" class="form-control" id="hMemberName" required placeholder="請輸入預約者姓名">
+                                    <label class="form-label required">會員姓名</label>
+                                    <input type="text" class="form-control" id="rMemberName" required placeholder="請輸入會員姓名">
                                 </div>
                                 <!-- 手機 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label required">手機</label>
-                                    <input type="tel" class="form-control" id="hPhone" required placeholder="請輸入手機號碼" pattern="09[0-9]{8}" title="請輸入有效的手機號碼，格式：09xxxxxxxx">
+                                    <input type="tel" class="form-control" id="rPhone" required placeholder="請輸入手機號碼" pattern="09[0-9]{8}" title="請輸入有效的手機號碼，格式：09xxxxxxxx">
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <!-- 日期 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label required">日期</label>
-                                    <input type="date" class="form-control" id="hDate" required>
+                                    <input type="date" class="form-control" id="rDate" required>
                                 </div>
                                 <!-- 時段 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label required">時段</label>
-                                    <select class="form-select" id="hTimeSlot" required>
+                                    <select class="form-select" id="rTimeSlot" required>
                                         <option value="">請選擇時段</option>
                                         <option value="09:00-10:00">09:00-10:00</option>
                                         <option value="10:00-11:00">10:00-11:00</option>
@@ -106,40 +107,82 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <!-- 主責人員 -->
+                                <!-- 出席人數 -->
                                 <div class="form-group col-md-6">
-                                    <label class="form-label required">主責人員</label>
-                                    <select class="form-select" id="hInCharge" required>
-                                        <option value="">請選擇主責人員</option>
-                                        <option value="王大明">王大明</option>
-                                        <option value="李小華">李小華</option>
-                                        <option value="張志豪">張志豪</option>
-                                        <option value="陳淑芬">陳淑芬</option>
-                                    </select>
+                                    <label class="form-label required">出席人數</label>
+                                    <input type="number" class="form-control" id="rAttendees" required placeholder="請輸入出席人數" min="1" value="1">
                                 </div>
+                                <!-- 是否包含設計師 -->
+                                <div class="form-group col-md-6 d-flex align-items-center" style="padding-top: 30px;">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" id="rHasDesigner">
+                                        <label for="rHasDesigner" style="margin-bottom: 0;">是否包含設計師</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 變更需求描述 -->
+                            <div class="form-group">
+                                <label class="form-label">變更需求描述</label>
+                                <textarea class="form-control" id="rChangeDescription" rows="4" placeholder="請詳細描述變更需求內容"></textarea>
                             </div>
                             <!-- 備註 -->
                             <div class="form-group">
                                 <label class="form-label">備註</label>
-                                <textarea class="form-control" id="hRemark" rows="3" placeholder="請輸入備註（選填）"></textarea>
+                                <textarea class="form-control" id="rRemark" rows="3" placeholder="請輸入備註（選填）"></textarea>
                             </div>
                         </div>
 
-                        <!-- 完工資訊區塊 -->
-                        <div class="section-block">
+                        <!-- 繳費資訊區塊 -->
+                        <div class="section-block" id="sectionPaymentInfo">
+                            <h3 class="section-title">繳費資訊</h3>
+                            <div class="form-row">
+                                <!-- 繳費狀態 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">繳費狀態</label>
+                                    <select class="form-select" id="rPaymentStatus">
+                                        <option value="待繳費">待繳費</option>
+                                        <option value="已繳費">已繳費</option>
+                                        <option value="無需繳費">無需繳費</option>
+                                        <option value="逾期未繳">逾期未繳</option>
+                                    </select>
+                                </div>
+                                <!-- 客變費用 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">客變費用</label>
+                                    <div style="display: flex; align-items: center;">
+                                        <input type="number" class="form-control" id="rCustomChangeFee" placeholder="請輸入金額" style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                        <span style="padding: 0 12px; background-color: var(--color-gray-100); border: 1px solid #e9ecef; border-left: 0; height: 40px; display: flex; align-items: center; border-top-right-radius: 4px; border-bottom-right-radius: 4px; color: var(--color-gray-700);">元</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- 繳費期限 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">繳費期限</label>
+                                    <input type="date" class="form-control" id="rPaymentDeadline">
+                                </div>
+                                <!-- 繳款帳號 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">繳款帳號</label>
+                                    <input type="text" class="form-control" id="rPaymentAccount" placeholder="請輸入繳款帳號">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 紀錄資訊區塊 -->
+                        <div class="section-block" id="sectionRecordInfo">
                             <h3 class="section-title">紀錄資訊</h3>
                             <div class="form-group">
                                 <label class="form-label required" for="cCompletedDate">完成日期</label>
-                                <input type="date" class="form-control" id="cCompletedDate" name="cCompletedDate" required="">
+                                <input type="date" class="form-control" id="cCompletedDate" name="cCompletedDate">
                             </div>
                             <div class="form-group">
                                 <label class="form-label required" for="cCompletedNotes">紀錄說明</label>
-                                <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" placeholder="完工說明" rows="3" required=""></textarea>
+                                <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" placeholder="客變紀錄說明" rows="3"></textarea>
                                 <div class="quick-fill-buttons">
                                     <span class="quick-fill-label">快速填入：</span>
-                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有交屋事項">已完成所有交屋事項</button>
-                                    <!-- <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已說明">以說明</button> -->
-                                    <!-- <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成所有修繕工作，保固三個月">已完成所有修繕工作，保固三個月</button> -->
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="客變項目確認無誤">客變項目確認無誤</button>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成簽認">已完成簽認</button>
                                 </div>
                             </div>
                         </div>
@@ -150,21 +193,21 @@
                             <label for="fileUpload" class="upload-wrap">
                                 <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
                                 <p class="text-info text-center" id="uploadPlaceholder">拖曳檔案至此處或點擊上傳</p>
-                                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.mp4,.heic,.heif" multiple="" class="file-input">
+                                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.mp4,.heic,.heif,.pdf" multiple="" class="file-input">
                                 <span class="upload-btn"><i class="fa-solid fa-plus"></i> 選擇檔案</span>
                             </label>
-                            <p class="upload-hint">*支援圖片 .jpg、影片 .mp4，最大 5MB</p>
+                            <p class="upload-hint">*支援圖片 .jpg、影片 .mp4、文件 .pdf，最大 5MB</p>
                             <div class="upload-list" id="uploadList">
                                 <!-- 上傳的檔案列表 -->
                             </div>
                         </div>
 
                         <!-- 簽名區塊 -->
-                        <div class="section-block">
+                        <div class="section-block" id="sectionSignature">
                             <h3 class="section-title">住戶簽名確認</h3>
                             <div class="signature-block">
                                 <div class="signature-area" id="signatureArea">
-                                    <canvas id="signatureCanvas" width="1102" height="200" style="width: 100%; height: 200px;"></canvas>
+                                    <canvas id="signatureCanvas" width="0" height="200" style="width: 100%; height: 200px;"></canvas>
                                     <div class="signature-placeholder" id="signaturePlaceholder">
                                         <i class="fa-solid fa-signature"></i>
                                         <span>點擊此處進行簽名</span>
@@ -181,17 +224,8 @@
                             </div>
                         </div>
 
-                        <!-- 其他設定 -->
-                        <div class="form-group">
-                            <label class="form-label" for="cIsNotSendQuestionnaire">是否本次不寄發滿意度問卷</label>
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" id="cIsNotSendQuestionnaire" name="cIsNotSendQuestionnaire" class="form-checkbox">
-                                <label for="cIsNotSendQuestionnaire" class="checkbox-label">不寄發</label>
-                            </div>
-                        </div>
-
                         <!-- 留言板 -->
-                        <div class="section-block">
+                        <div class="section-block" id="sectionChat">
                             <h3 class="section-title">
                                 <i class="fa-regular fa-comments"></i> 留言板
                             </h3>
@@ -199,70 +233,29 @@
                             <div class="chat-container" id="chatContainer">
                                 <!-- 對話訊息區域 -->
                                 <div class="chat-messages" id="chatMessages">
-                                    <!-- 用戶訊息（右側）- 含圖片 -->
+                                    <!-- 用戶訊息（右側） -->
                                     <div class="message message-right">
-                                        <div class="message-content">請問要攜帶甚麼東西嗎？</div>
+                                        <div class="message-content">請問大約什麼時候可以確認圖面？</div>
                                         <div class="message-info">陳小明 2025/08/05 10:30 AM</div>
                                     </div>
 
-                                    <!-- 用戶訊息（右側）- 含圖片附件 -->
-                                    <div class="message message-right">
-                                        <div class="message-media">
-                                            <img src="https://via.placeholder.com/300x200/e0e0e0/666?text=漏水照片" alt="客戶上傳圖片" class="media-image" data-full-src="https://via.placeholder.com/800x600/e0e0e0/666?text=漏水照片">
-                                        </div>
-                                        <div class="message-info">陳小明 2025/08/05 10:31 AM</div>
-                                    </div>
-
                                     <!-- 客服回覆（左側） -->
                                     <div class="message message-left">
-                                        <div class="message-content">您好，請準備存摺影本、身分證資訊</div>
-                                        <div class="message-file">
-                                            <i class="fa-solid fa-file-pdf file-icon"></i>
-                                            <span class="file-name">交屋說明文件.pdf</span>
-                                            <button class="file-download" title="下載檔案">
-                                                <i class="fa-solid fa-download"></i>
-                                            </button>
-                                        </div>
-                                        <div class="message-info">王曉明 2025/08/05 10:30 AM</div>
-                                    </div>
-
-                                    <!-- 用戶訊息（右側）- 含影片 -->
-                                    <div class="message message-right">
-                                        <div class="message-content">這是我準備的清單影片</div>
-                                        <div class="message-media">
-                                            <video controls="" class="media-video" preload="metadata">
-                                                <source src="" type="video/mp4">
-                                                您的瀏覽器不支援影片播放
-                                            </video>
-                                            <div class="video-placeholder">
-                                                <i class="fa-solid fa-play-circle"></i>
-                                                <span>20250805001.mp4</span>
-                                            </div>
-                                        </div>
-                                        <div class="message-info">陳小明 2025/08/05 10:32 AM</div>
-                                    </div>
-
-                                    <!-- 客服回覆（左側） -->
-                                    <div class="message message-left">
-                                        <div class="message-content">存摺看起來有點破損，建議先至銀行作確認哦</div>
-                                        <div class="message-info">王曉明 2025/08/05 15:30 AM</div>
+                                        <div class="message-content">設計師正在繪製中，預計下週一提供</div>
+                                        <div class="message-info">王曉明 2025/08/05 10:35 AM</div>
                                     </div>
                                 </div>
 
                                 <!-- 輸入框區域 -->
                                 <div class="chat-input-area">
-                                    <!-- 附件按鈕區域 (15%) -->
+                                    <!-- 附件按鈕區域 -->
                                     <div class="chat-input-left">
                                         <button type="button" class="attach-btn" id="btnAttachFile" title="附加檔案">
                                             <i class="fa-solid fa-paperclip"></i>
                                         </button>
                                         <input type="file" id="chatFileInput" class="hidden-file-input" accept="image/*,video/*,.pdf,.doc,.docx">
-                                        <span class="file-limit-hint">
-                                            <i class="fa-solid fa-circle-info"></i>
-                                            檔案限制：10MB，支援格式：圖片、影片、PDF、Word
-                                        </span>
                                     </div>
-                                    <!-- 文字輸入區域 (85%) -->
+                                    <!-- 文字輸入區域 -->
                                     <div class="chat-input-right">
                                         <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息...">
                                         <button type="button" class="send-btn" id="btnSendMessage" title="發送訊息">
@@ -275,7 +268,7 @@
 
                         <!-- 按鈕區 -->
                         <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="history.back()">取消</button>
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='reservation-custom.html'">取消</button>
                             <button type="submit" class="btn btn-primary">儲存</button>
                         </div>
                     </form>
@@ -288,6 +281,6 @@
     <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/mock-data.js"></script>
-    <script src="js/reservation-handover-edit.js"></script>
+    <script src="js/reservation-custom-edit.js"></script>
 </body>
 </html>

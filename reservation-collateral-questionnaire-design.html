@@ -25,56 +25,14 @@
     <div class="app-container">
         
         <!-- ============================================ -->
-        <!-- 頂部導覽列 -->
+        <!-- 頂部導覽列 (動態渲染) -->
         <!-- ============================================ -->
-        <header class="header">
-            <div class="header-left">
-                <!-- 側邊欄切換按鈕 -->
-                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <!-- Logo/系統名稱 -->
-                <div class="header-brand">
-                    <span class="header-title">CRM</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <!-- 隱藏右側內容 -->
-            </div>
-        </header>
+        <div id="header-container"></div>
 
         <!-- ============================================ -->
-        <!-- 側邊欄選單 -->
+        <!-- 側邊欄選單 (動態渲染) -->
         <!-- ============================================ -->
-        <aside class="sidebar" id="sidebar">
-            <div class="main-container main-container-fixed">
-                <div class="scrollable">
-                    <ul class="menu-items">
-                        <!-- 首頁 -->
-                        <li class="menu-item" data-menu-id="home">
-                            <a href="index.html" title="首頁">
-                                <i class="menu-icon fa-solid fa-house"></i>
-                                <span class="menu-title">首頁</span>
-                            </a>
-                        </li>
-
-                        <!-- CRM設定 -->
-                        <li class="menu-item active" data-menu-id="crm">
-                            <a href="javascript:void(0)" title="CRM設定">
-                                <i class="menu-icon fa-solid fa-sliders"></i>
-                                <span class="menu-title">CRM設定</span>
-                                <i class="expand-state fa-solid fa-chevron-down"></i>
-                            </a>
-                            <ul class="menu-items" style="display: block;">
-                                <li class="menu-item"><a href="crm-project.html" title="案場管理" class="active"><span class="menu-title">案場管理</span></a></li>
-                            </ul>
-                        </li>
-                        
-                        <!-- 其他選單省略，保持與其他頁面一致 -->
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        <div id="sidebar-container"></div>
 
         <!-- ============================================ -->
         <!-- 主內容區域 -->
@@ -282,6 +240,7 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/reservation-collateral-questionnaire-design.js"></script>
 </body>

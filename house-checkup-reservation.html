@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房屋健檢預約紀錄 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/house-checkup-activity-chat-tab.css">
+    <link rel="stylesheet" href="css/house-checkup-reservation.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 (動態渲染) -->
+        <!-- ============================================ -->
+        <div id="header-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <div id="sidebar-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">房屋健檢</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">預約紀錄</span>
+            </div>
+
+            <div class="content-wrapper">
+                <h1 class="page-title">房屋健檢預約紀錄</h1>
+
+                <!-- ============================================ -->
+                <!-- 搜尋區塊 -->
+                <!-- ============================================ -->
+                <div class="search-card">
+                    <form class="search-form" id="searchForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">預約編號</label>
+                                <input type="text" class="form-control" id="searchNo" placeholder="請輸入預約編號">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">案場名稱</label>
+                                <select class="form-control" id="searchSite">
+                                    <option value="">全部</option>
+                                    <option value="陸府原森">陸府原森</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                    <option value="陸府沐夏">陸府沐夏</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">住戶姓名</label>
+                                <input type="text" class="form-control" id="searchName" placeholder="請輸入住戶姓名">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">預約狀態</label>
+                                <select class="form-control" id="searchStatus">
+                                    <option value="">全部</option>
+                                    <option value="待確認">待確認</option>
+                                    <option value="已確認">已確認</option>
+                                    <option value="已完成(未簽名)">已完成(未簽名)</option>
+                                    <option value="已完成">已完成</option>
+                                    <option value="已取消">已取消</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">預約日期起</label>
+                                <input type="date" class="form-control" id="searchDateStart">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">預約日期迄</label>
+                                <input type="date" class="form-control" id="searchDateEnd">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i> 查詢
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fa-solid fa-rotate-left"></i> 重置
+                            </button>
+                            <button type="button" class="btn btn-add" id="btnAddReservation">
+                                <i class="fa-solid fa-plus"></i> 手動新增
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 資料表格區塊 -->
+                <!-- ============================================ -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <span class="table-title">預約紀錄列表</span>
+                        <span class="record-count">共 <span id="totalCount">0</span> 筆</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="reservationTable">
+                            <thead>
+                                <tr>
+                                    <th width="12%">預約編號</th>
+                                    <th width="10%">案場</th>
+                                    <th width="10%">活動名稱</th>
+                                    <th width="8%">戶別</th>
+                                    <th width="10%">住戶</th>
+                                    <th width="12%">預約日期</th>
+                                    <th width="10%">時段</th>
+                                    <th width="10%">狀態</th>
+                                    <th width="12%">報告</th>
+                                    <th width="16%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationTableBody">
+                                <!-- 資料由 JavaScript 動態生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 分頁 -->
+                    <div class="table-footer">
+                        <div class="pagination" id="pagination">
+                            <button class="page-btn" id="prevPage" disabled>
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <div class="page-numbers" id="pageNumbers"></div>
+                            <button class="page-btn" id="nextPage">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 詳情彈窗 -->
+    <!-- ============================================ -->
+    <div class="modal" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">預約詳情</h3>
+                <button type="button" class="modal-close" onclick="closeModal('detailModal')">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-section">
+                    <h4 class="detail-section-title">
+                        <i class="fa-solid fa-info-circle"></i> 基本資訊
+                    </h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">預約編號</span>
+                            <span class="detail-value" id="detailNo"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">案場名稱</span>
+                            <span class="detail-value" id="detailSite"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">戶別</span>
+                            <span class="detail-value" id="detailUnit"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">住戶姓名</span>
+                            <span class="detail-value" id="detailName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">聯絡電話</span>
+                            <span class="detail-value" id="detailPhone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">預約狀態</span>
+                            <span class="detail-value" id="detailStatus"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">預約日期</span>
+                            <span class="detail-value" id="detailDate"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">預約時段</span>
+                            <span class="detail-value" id="detailTime"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- 報告檔案區塊 -->
+                <div class="detail-section" id="reportSection" style="display: none;">
+                    <h4 class="detail-section-title">
+                        <i class="fa-solid fa-file-pdf"></i> 健檢報告
+                    </h4>
+                    <div class="file-download-area">
+                        <div class="file-item">
+                            <i class="fa-solid fa-file-pdf file-icon"></i>
+                            <div class="file-info">
+                                <span class="file-name" id="reportFileName"></span>
+                                <span class="file-meta" id="reportFileMeta"></span>
+                            </div>
+                            <a href="#" class="btn btn-info btn-sm" id="btnDownloadReport">
+                                <i class="fa-solid fa-download"></i> 下載
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('detailModal')">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增預約彈窗 -->
+    <div class="modal" id="addModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">新增預約</h3>
+                <button type="button" class="modal-close" onclick="closeModal('addModal')">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">案場名稱</label>
+                            <select class="form-control" id="addSite" required>
+                                <option value="">請選擇案場</option>
+                                <option value="陸府原森">陸府原森</option>
+                                <option value="陸府植森">陸府植森</option>
+                                <option value="陸府沐夏">陸府沐夏</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">活動名稱</label>
+                            <select class="form-control" id="addActivity" required>
+                                <option value="">請選擇活動</option>
+                                <option value="2025春季房屋健檢">2025春季房屋健檢</option>
+                                <option value="2025年度定期檢查">2025年度定期檢查</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">戶別</label>
+                            <select class="form-control" id="addUnit" required>
+                                <option value="">請先選擇案場</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">住戶姓名</label>
+                            <input type="text" class="form-control" id="addResident" placeholder="請輸入姓名" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">聯絡電話</label>
+                            <input type="tel" class="form-control" id="addPhone" placeholder="09xx-xxx-xxx" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">預約狀態</label>
+                            <select class="form-control" id="addStatus" required>
+                                <option value="待確認">待確認</option>
+                                <option value="已確認">已確認</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">預約日期</label>
+                            <input type="date" class="form-control" id="addDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">預約時段</label>
+                            <select class="form-control" id="addTime" required>
+                                <option value="">請選擇時段</option>
+                                <option value="09:00 - 10:00">09:00 - 10:00</option>
+                                <option value="10:00 - 11:00">10:00 - 11:00</option>
+                                <option value="11:00 - 12:00">11:00 - 12:00</option>
+                                <option value="13:00 - 14:00">13:00 - 14:00</option>
+                                <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                <option value="16:00 - 17:00">16:00 - 17:00</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('addModal')">取消</button>
+                <button type="button" class="btn btn-primary" id="btnSaveAdd">確認新增</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 編輯預約彈窗 -->
+    <div class="modal" id="editModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">編輯預約</h3>
+                <button type="button" class="modal-close" onclick="closeModal('editModal')">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 頁籤導航 -->
+                <div class="modal-tabs">
+                    <div class="modal-tab active" data-tab="info" onclick="switchTab('info')">預約資訊</div>
+                    <div class="modal-tab" data-tab="chat" onclick="switchTab('chat')">留言板</div>
+                </div>
+
+                <!-- 頁籤內容：預約資訊 -->
+                <div id="tab-info" class="tab-content active">
+                    <form id="editForm">
+                        <input type="hidden" id="editId">
+                        <div class="form-group">
+                            <label class="form-label">預約編號</label>
+                            <input type="text" class="form-control" id="editNo" disabled style="background-color: var(--color-gray-100);">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">預約日期</label>
+                            <input type="date" class="form-control" id="editDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">預約時段</label>
+                            <select class="form-control" id="editTime" required>
+                                <option value="">請選擇時段</option>
+                                <option value="09:00 - 10:00">09:00 - 10:00</option>
+                                <option value="10:00 - 11:00">10:00 - 11:00</option>
+                                <option value="11:00 - 12:00">11:00 - 12:00</option>
+                                <option value="13:00 - 14:00">13:00 - 14:00</option>
+                                <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                <option value="16:00 - 17:00">16:00 - 17:00</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">預約狀態</label>
+                            <select class="form-control" id="editStatus" required>
+                                <option value="待確認">待確認</option>
+                                <option value="已確認">已確認</option>
+                                <option value="已完成(未簽名)">已完成(未簽名)</option>
+                                <option value="已完成">已完成</option>
+                                <option value="已取消">已取消</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">備註</label>
+                            <textarea class="form-control" id="editRemark" rows="3" placeholder="請輸入備註事項..."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 頁籤內容：留言板 -->
+                <div id="tab-chat" class="tab-content">
+                    <div class="section-block" id="sectionChat" style="border: none; padding: 0; box-shadow: none; margin-bottom: 0;">
+                        <div class="chat-container" id="chatContainer">
+                            <!-- 對話訊息區域 -->
+                            <div class="chat-messages" id="chatMessages">
+                                <!-- 由 JS 動態產生 -->
+                            </div>
+
+                            <!-- 輸入框區域 -->
+                            <div class="chat-input-area">
+                                <!-- 附件按鈕區域 (15%) -->
+                                <div class="chat-input-left">
+                                    <button type="button" class="attach-btn" id="btnAttachFile" title="附加檔案">
+                                        <i class="fa-solid fa-paperclip"></i>
+                                    </button>
+                                    <input type="file" id="chatFileInput" class="hidden-file-input" accept="image/*,video/*,.pdf,.doc,.docx">
+                                    <span class="file-limit-hint">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        檔案限制：10MB，支援格式：圖片、影片、PDF、Word
+                                    </span>
+                                </div>
+                                <!-- 文字輸入區域 (85%) -->
+                                <div class="chat-input-right">
+                                    <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息...">
+                                    <button type="button" class="send-btn" id="btnSendMessage" title="發送訊息">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('editModal')">取消</button>
+                <button type="button" class="btn btn-primary" id="btnSaveEdit">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/house-checkup-reservation.js"></script>
+</body>
+</html>

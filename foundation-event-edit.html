@@ -29,66 +29,14 @@
     <div class="app-container">
         
         <!-- ============================================ -->
-        <!-- 頂部導覽列 -->
+        <!-- 頂部導覽列 (動態渲染) -->
         <!-- ============================================ -->
-        <header class="header">
-            <div class="header-left">
-                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div class="header-brand">
-                    <span class="header-title">CRM</span>
-                </div>
-            </div>
-            <div class="header-right"></div>
-        </header>
+        <div id="header-container"></div>
 
         <!-- ============================================ -->
-        <!-- 側邊欄選單 -->
+        <!-- 側邊欄選單 (動態渲染) -->
         <!-- ============================================ -->
-        <aside class="sidebar" id="sidebar">
-            <div class="main-container main-container-fixed">
-                <div class="scrollable">
-                    <ul class="menu-items">
-                        <!-- 首頁 -->
-                        <li class="menu-item" data-menu-id="home">
-                            <a href="index.html" title="首頁">
-                                <i class="menu-icon fa-solid fa-house"></i>
-                                <span class="menu-title">首頁</span>
-                            </a>
-                        </li>
-
-                        <!-- 系統管理 -->
-                        <li class="menu-item" data-menu-id="system">
-                            <a href="javascript:void(0)" title="系統管理">
-                                <i class="menu-icon fa-solid fa-gear"></i>
-                                <span class="menu-title">系統管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
-                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
-                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 官網活動(基金會) -->
-                        <li class="menu-item" data-menu-id="foundation">
-                            <a href="javascript:void(0)" title="官網活動(基金會)">
-                                <i class="menu-icon fa-solid fa-landmark"></i>
-                                <span class="menu-title">官網活動(基金會)</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="foundation-event-list.html" title="活動設定"><span class="menu-title">活動設定</span></a></li>
-                                <li class="menu-item"><a href="foundation-registration.html" title="報名紀錄"><span class="menu-title">報名紀錄</span></a></li>
-                                <li class="menu-item"><a href="foundation-audit-log.html" title="稽核日誌"><span class="menu-title">稽核日誌</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        <div id="sidebar-container"></div>
 
         <!-- ============================================ -->
         <!-- 主內容區域 -->
@@ -110,22 +58,18 @@
             <div class="content-wrapper">
                 <div class="page-header">
                     <h1 class="page-title">活動規則設定</h1>
-                    <p class="page-subtitle">設定活動內部參與規則（同步時不會被覆蓋）</p>
                 </div>
 
-                <!-- 活動基本資訊 (來自外部 API，唯讀) -->
+                <!-- 活動基本資訊  -->
                 <div class="event-info-card">
                     <div class="event-info-header">
                         <div>
                             <h3 style="margin: 0 0 8px 0;">
                                 <i class="fa-solid fa-info-circle" style="color: var(--color-info);"></i>
-                                活動基本資訊 <small class="text-muted">(來自外部 API，不可編輯)</small>
+                                活動基本資訊 
                             </h3>
                         </div>
-                        <span class="sync-status synced">
-                            <i class="fa-solid fa-check-circle"></i>
-                            已同步
-                        </span>
+
                     </div>
                     <div class="event-info-grid" id="eventBasicInfo">
                         <!-- JavaScript 動態產生 -->
@@ -152,35 +96,20 @@
                                 </div>
                                 <span class="form-hint">開啟後，僅驗證通過的住戶可報名此活動</span>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">專用通行碼</label>
-                                <input type="text" class="form-input" id="accessCode" placeholder="請輸入通行碼">
-                                <span class="form-hint">住戶報名時需輸入正確的通行碼驗證身分</span>
-                            </div>
                         </div>
                     </div>
 
-                    <!-- 攜伴設定 -->
+                    <!-- 人數限制設定 -->
                     <div class="rules-section">
                         <h3 class="rules-section-title">
                             <i class="fa-solid fa-users"></i>
-                            攜伴設定
+                            人數限制設定
                         </h3>
                         <div class="rules-grid">
                             <div class="form-group">
-                                <label class="form-label">開放攜伴</label>
-                                <div class="form-switch-group">
-                                    <label class="form-switch">
-                                        <input type="checkbox" id="allowCompanion" checked>
-                                        <span class="switch-slider"></span>
-                                    </label>
-                                    <span class="switch-label">允許攜伴報名</span>
-                                </div>
-                            </div>
-                            <div class="form-group" id="companionLimitGroup">
-                                <label class="form-label">攜伴人數上限</label>
-                                <input type="number" class="form-input" id="maxCompanion" min="0" max="10" value="2">
-                                <span class="form-hint">每位報名者可攜帶的同行人數上限</span>
+                                <label class="form-label" id="limitLabel">單次報名人數上限</label>
+                                <input type="number" class="form-input" id="registrationLimit" min="1" max="100" value="1">
+                                <span class="form-hint" id="limitHint">限制每次報名可填寫的總人數（含主要報名者）</span>
                             </div>
                         </div>
                     </div>
@@ -191,55 +120,15 @@
                             <i class="fa-solid fa-dollar-sign"></i>
                             費用設定
                         </h3>
-                        
-                        <!-- 住戶費用 -->
-                        <div style="margin-bottom: 20px;">
-                            <h4 style="font-size: 1.1rem; color: var(--color-gray-800); margin-bottom: 15px; font-weight: 600; padding-bottom: 8px; border-bottom: 1px solid var(--color-gray-200);">住戶費用</h4>
-                            <div class="rules-grid">
-                                <div class="form-group">
-                                    <label class="form-label">住戶大人費用</label>
-                                    <div class="input-group">
-                                        <span class="input-prefix">$</span>
-                                        <input type="number" class="form-input" id="residentAdultPrice" min="0" value="0">
-                                    </div>
-                                    <span class="form-hint">設為 0 表示免費</span>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">住戶兒童費用</label>
-                                    <div class="input-group">
-                                        <span class="input-prefix">$</span>
-                                        <input type="number" class="form-input" id="residentChildPrice" min="0" value="0">
-                                    </div>
-                                    <span class="form-hint">設為 0 表示免費</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 非住戶費用 -->
-                        <div style="margin-bottom: 20px;">
-                            <h4 style="font-size: 1.1rem; color: var(--color-gray-800); margin-bottom: 15px; font-weight: 600; padding-bottom: 8px; border-bottom: 1px solid var(--color-gray-200);">非住戶費用</h4>
-                            <div class="rules-grid">
-                                <div class="form-group">
-                                    <label class="form-label">非住戶大人費用</label>
-                                    <div class="input-group">
-                                        <span class="input-prefix">$</span>
-                                        <input type="number" class="form-input" id="nonResidentAdultPrice" min="0" value="0">
-                                    </div>
-                                    <span class="form-hint">設為 0 表示免費</span>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">非住戶兒童費用</label>
-                                    <div class="input-group">
-                                        <span class="input-prefix">$</span>
-                                        <input type="number" class="form-input" id="nonResidentChildPrice" min="0" value="0">
-                                    </div>
-                                    <span class="form-hint">設為 0 表示免費</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 收據選項 -->
                         <div class="rules-grid">
+                            <div class="form-group">
+                                <label class="form-label">每人報名費用</label>
+                                <div class="input-group">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" class="form-input" id="registrationFee" min="0" value="0">
+                                </div>
+                                <span class="form-hint">設為 0 表示免費，不分身分單一票價</span>
+                            </div>
                             <div class="form-group">
                                 <label class="form-label">提供收據選項</label>
                                 <div class="form-switch-group">
@@ -249,6 +138,33 @@
                                     </label>
                                     <span class="switch-label">報名者可選擇是否需要收據</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 取消與退費設定 -->
+                    <div class="rules-section">
+                        <h3 class="rules-section-title">
+                            <i class="fa-solid fa-ban"></i>
+                            取消與退費設定
+                        </h3>
+                        <div class="rules-grid">
+                            <div class="form-group">
+                                <label class="form-label">取消期限 (活動前)</label>
+                                <div class="input-group">
+                                    <span class="input-prefix">前</span>
+                                    <input type="number" class="form-input" id="cancellationDays" min="0" value="7">
+                                    <span class="input-suffix">天</span>
+                                </div>
+                                <span class="form-hint">在此期限前可免費取消或申請退費</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">退費手續費</label>
+                                <div class="input-group">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" class="form-input" id="refundFee" min="0" value="0">
+                                </div>
+                                <span class="form-hint">申請退費時將扣除此金額</span>
                             </div>
                         </div>
                     </div>
@@ -279,10 +195,17 @@
     <!-- ============================================ -->
     <!-- JavaScript -->
     <!-- ============================================ -->
+    <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/foundation-mock-data.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 渲染共用元件
+            if (typeof initCRMLayout === 'function') {
+                initCRMLayout();
+            }
+            
+            // 初始化側邊欄
             const sidebarManager = new SidebarManager();
             
             // 從 URL 取得活動 ID
@@ -292,15 +215,24 @@
             // 載入活動資料
             const event = eventId ? FoundationMockData.getEventById(eventId) : FoundationMockData.events[0];
             
+            // 監聽住戶限定開關
+            const isResidentOnly = document.getElementById('isResidentOnly');
+            isResidentOnly.addEventListener('change', function() {
+                const label = document.getElementById('limitLabel');
+                const hint = document.getElementById('limitHint');
+                if (this.checked) {
+                    label.textContent = '每戶人數上限';
+                    hint.textContent = '限制該戶別總共可報名的人數（例如：設為 3，若同戶已報名 3 人，該戶其他成員不可再報名）';
+                } else {
+                    label.textContent = '單次報名人數上限';
+                    hint.textContent = '限制每次報名可填寫的總人數（含主要報名者）';
+                }
+            });
+
             if (event) {
                 renderEventInfo(event);
                 populateForm(event);
             }
-
-            // 監聽攜伴開關
-            document.getElementById('allowCompanion').addEventListener('change', function() {
-                document.getElementById('companionLimitGroup').style.display = this.checked ? 'block' : 'none';
-            });
 
             // 表單提交
             document.getElementById('rulesForm').addEventListener('submit', function(e) {
@@ -335,7 +267,7 @@
                     </div>
                     <div class="event-info-item">
                         <span class="event-info-label">報名上限</span>
-                        <span class="event-info-value">${event.max_slots} 人 (由外部 API 控制)</span>
+                        <span class="event-info-value">${event.max_slots} 人</span>
                     </div>
                     <div class="event-info-item">
                         <span class="event-info-label">最後同步</span>
@@ -349,20 +281,22 @@
              */
             function populateForm(event) {
                 document.getElementById('isResidentOnly').checked = event.is_resident_only;
-                document.getElementById('accessCode').value = event.access_code || '';
-                document.getElementById('allowCompanion').checked = event.allow_companion;
-                document.getElementById('maxCompanion').value = event.max_companion;
+                
+                // 人數限制
+                const defaultLimit = event.max_companion !== undefined ? (event.max_companion + 1) : 2;
+                document.getElementById('registrationLimit').value = event.registration_limit || defaultLimit;
                 
                 // 費用設定
-                document.getElementById('residentAdultPrice').value = event.resident_adult_price || event.price || 0;
-                document.getElementById('residentChildPrice').value = event.resident_child_price || 0;
-                document.getElementById('nonResidentAdultPrice').value = event.non_resident_adult_price || event.price || 0;
-                document.getElementById('nonResidentChildPrice').value = event.non_resident_child_price || 0;
+                document.getElementById('registrationFee').value = event.resident_adult_price || event.price || 0;
 
                 document.getElementById('needReceipt').checked = event.need_receipt;
                 
-                // 更新攜伴人數欄位顯示
-                document.getElementById('companionLimitGroup').style.display = event.allow_companion ? 'block' : 'none';
+                // 取消與退費設定
+                document.getElementById('cancellationDays').value = event.cancellation_days || 7;
+                document.getElementById('refundFee').value = event.cancellation_fee || 0;
+
+                // 更新文字狀態
+                isResidentOnly.dispatchEvent(new Event('change'));
             }
 
             /**

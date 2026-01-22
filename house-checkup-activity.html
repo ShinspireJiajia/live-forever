@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健診活動管理 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/case-list.css">
+    <link rel="stylesheet" href="css/house-checkup-activity.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 (動態渲染) -->
+        <!-- ============================================ -->
+        <div id="header-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <div id="sidebar-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">房屋健檢</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="house-checkup-site.html" class="breadcrumb-item">案場管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active" id="breadcrumbSite">健診活動管理</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 頁面標題 -->
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <span id="pageSiteName"></span> - 健診活動管理
+                    </h1>
+                    <a href="house-checkup-site.html" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        返回案場列表
+                    </a>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form case-search-form" id="searchForm">
+                        <div class="search-grid">
+                            <!-- 活動名稱 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">活動名稱</label>
+                                <div class="col-input">
+                                    <input type="text" class="form-input" id="searchName" placeholder="請輸入活動名稱">
+                                </div>
+                            </div>
+                            <!-- 狀態 (已移除) -->
+                            <!--
+                            <div class="form-group row">
+                                <label class="form-label col-label">狀態</label>
+                                <div class="col-input">
+                                    <select id="searchStatus" class="form-select">
+                                        <option value="">全部</option>
+                                        <option value="草稿">草稿</option>
+                                        <option value="進行中">進行中</option>
+                                        <option value="已結束">已結束</option>
+                                        <option value="已取消">已取消</option>
+                                    </select>
+                                </div>
+                            </div>
+                            -->
+                            <!-- 活動日期 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">活動日期</label>
+                                <div class="col-input">
+                                    <div class="date-range-group">
+                                        <input type="date" class="form-input" id="searchDateFrom">
+                                        <span class="date-separator">~</span>
+                                        <input type="date" class="form-input" id="searchDateTo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 操作按鈕 -->
+                        <div class="form-actions-right">
+                            <button type="reset" class="btn btn-info">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="submit" class="btn btn-info">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                            <button type="button" class="btn btn-success" id="btnAddActivity">
+                                <i class="fa-solid fa-plus"></i>
+                                新增活動
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-responsive">
+                    <table class="data-table case-table" id="activityTable">
+                        <thead>
+                            <tr>
+                                <th class="col-1">活動名稱</th>
+                                <th class="col-1">報名起訖時間</th>
+                                <th class="col-1">報名上限</th>
+                                <th class="col-1">已報名</th>
+                                <th class="col-1">已完成</th>
+                                <th class="col-1">未完成</th>
+                                <th class="col-1">健檢手冊</th>
+                                <th class="col-1">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityTableBody">
+                            <!-- 資料由 JS 動態產生 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 新增/編輯活動 Modal -->
+    <!-- ============================================ -->
+    <div id="activityModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title" id="activityModalTitle">新增健診活動</h3>
+                <button class="modal-close" onclick="closeActivityModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="activityForm">
+                    <input type="hidden" id="editActivityId">
+                    
+                    <!-- 基本資訊區 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">基本資訊</h4>
+                        <div class="form-grid">
+                            <!-- 活動名稱 -->
+                            <div class="form-group full-width">
+                                <label class="form-label required">活動名稱</label>
+                                <input type="text" class="form-input" id="activityName" placeholder="請輸入活動名稱" required>
+                            </div>
+                            <!-- 顯示起始時間 -->
+                            <div class="form-group">
+                                <label class="form-label required">顯示起始時間</label>
+                                <input type="date" class="form-input" id="displayStartDate" required>
+                            </div>
+                            <!-- 顯示結束時間 -->
+                            <div class="form-group">
+                                <label class="form-label required">顯示結束時間</label>
+                                <input type="date" class="form-input" id="displayEndDate" required>
+                            </div>
+                            <!-- 報名起始時間 -->
+                            <div class="form-group">
+                                <label class="form-label required">報名起始時間</label>
+                                <input type="date" class="form-input" id="regStartDate" required>
+                            </div>
+                            <!-- 報名結束時間 -->
+                            <div class="form-group">
+                                <label class="form-label required">報名結束時間</label>
+                                <input type="date" class="form-input" id="regEndDate" required>
+                            </div>
+                            <!-- 報名戶數上限 -->
+                            <div class="form-group">
+                                <label class="form-label required">報名戶數上限</label>
+                                <input type="number" class="form-input" id="activityMaxUnits" min="1" placeholder="請輸入上限" required>
+                            </div>
+                            <!-- 使用手冊 -->
+                            <div class="form-group full-width">
+                                <label class="form-label required">使用手冊</label>
+                                <div class="file-upload-area" id="manualUploadArea">
+                                    <input type="file" id="manualFile" accept=".pdf,image/*" hidden>
+                                    <div class="file-upload-placeholder" onclick="document.getElementById('manualFile').click()">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        <span>點擊或拖曳上傳使用手冊</span>
+                                        <small>支援 PDF、JPG、PNG 格式</small>
+                                    </div>
+                                    <div class="file-preview" id="manualPreview" style="display: none;">
+                                        <div class="file-info">
+                                            <i class="fa-solid fa-file file-icon"></i>
+                                            <span class="file-name" id="manualFileName"></span>
+                                            <button type="button" class="btn-icon" onclick="removeManual()">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 活動摘要區 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">活動摘要</h4>
+                        <div class="form-group">
+                            <label class="form-label">活動說明</label>
+                            <textarea class="form-textarea" id="activityDescription" rows="4" placeholder="請輸入活動說明內容，此內容將顯示於 LINE 邀請中"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 健診維護清單上傳 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">健診維護清單</h4>
+                        <div class="form-group">
+                            <label class="form-label">上傳清單檔案</label>
+                            <div class="file-upload-area" id="checklistUploadArea">
+                                <input type="file" id="checklistFile" accept=".pdf,.xlsx,.xls" hidden>
+                                <div class="file-upload-placeholder" onclick="document.getElementById('checklistFile').click()">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <span>點擊或拖曳上傳檔案</span>
+                                    <small>支援 PDF、Excel 格式</small>
+                                </div>
+                                <div class="file-preview" id="checklistPreview" style="display: none;">
+                                    <div class="file-info">
+                                        <i class="fa-solid fa-file file-icon"></i>
+                                        <span class="file-name" id="checklistFileName"></span>
+                                        <button type="button" class="btn-icon" onclick="removeChecklist()">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 狀態設定 (已移除) -->
+                    <!--
+                    <div class="form-section">
+                        <h4 class="form-section-title">狀態設定</h4>
+                        <div class="form-group">
+                            <label class="form-label">活動狀態</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="activityStatus" value="草稿" checked>
+                                    <span>草稿</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="activityStatus" value="進行中">
+                                    <span>進行中</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="activityStatus" value="已結束">
+                                    <span>已結束</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="activityStatus" value="已取消">
+                                    <span>已取消</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeActivityModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveActivity()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/house-checkup-activity.js"></script>
+</body>
+</html>

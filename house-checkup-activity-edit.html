@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動編輯 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/case-list.css">
+    <link rel="stylesheet" href="css/case-edit.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/house-checkup-activity.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 (動態渲染) -->
+        <!-- ============================================ -->
+        <div id="header-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <div id="sidebar-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">房屋健檢</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="house-checkup-site.html" class="breadcrumb-item">案場管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="#" class="breadcrumb-item" id="breadcrumbActivity">健診活動管理</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">活動編輯</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 頁面標題 -->
+                <div class="page-header">
+                    <h1 class="page-title" id="pageTitle">活動編輯</h1>
+                    <div class="page-actions">
+                        <a href="#" class="btn btn-secondary" id="btnBack">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            返回活動列表
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 活動資訊區塊 -->
+                <!-- ============================================ -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-solid fa-info-circle"></i>
+                            活動資訊
+                        </h3>
+                        <button type="button" class="btn btn-info btn-sm" id="btnEditActivity">
+                            <i class="fa-solid fa-pen"></i> 編輯
+                        </button>
+                    </div>
+                    <div class="info-grid" id="activityInfo">
+                        <!-- 由 JS 動態產生 -->
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 預約時段管理區塊 -->
+                <!-- ============================================ -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            預約時段管理
+                        </h3>
+                    </div>
+                    <div class="timeslot-management-action" style="padding: 20px; text-align: center; background-color: var(--color-gray-100); border-radius: var(--border-radius-md);">
+                        <p style="margin-bottom: 15px; color: var(--color-gray-700);">設定活動的可預約日期、時間與人數上限</p>
+                        <a href="house-checkup-schedule.html" class="btn btn-primary">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            前往時段管理
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- LINE 邀請發送區塊 -->
+                <!-- ============================================ -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-brands fa-line"></i>
+                            活動邀請
+                        </h3>
+                    </div>
+                    <div class="invite-section">
+                        <div class="invite-content-edit">
+                            <div class="form-group">
+                                <label class="form-label required">邀請文案內容</label>
+                                <textarea class="form-textarea" id="inviteMessage" rows="5" placeholder="請輸入邀請文案內容...">
+【房屋健檢活動邀請】
+2025年度第一期房屋健檢活動
+顯示期間: 2025-02-15 ~ 2025-04-15
+2025年度第一期房屋健檢活動，歡迎住戶踴躍報名參加。本次活動將針對建物外觀、室內設備、水電管線等進行全面檢查。
+                                </textarea>
+                                <div class="form-hint">此內容將發送給選定的 LINE 用戶</div>
+                            </div>
+                        </div>
+                        <div class="invite-actions">
+                            <button type="button" class="btn btn-success" id="btnSendInvite">
+                                <i class="fa-brands fa-line"></i> 發送 LINE 邀請
+                            </button>
+                            <p class="invite-hint">
+                                <i class="fa-solid fa-info-circle"></i>
+                                點擊後將開啟住戶選擇視窗，可選擇個別住戶或批次發送
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 預約清單區塊 -->
+                <!-- ============================================ -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-solid fa-list-check"></i>
+                            預約清單
+                        </h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table case-table" id="reservationTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-1">序號</th>
+                                    <th class="col-1">戶別</th>
+                                    <th class="col-1">住戶姓名</th>
+                                    <th class="col-1">聯絡電話</th>
+                                    <th class="col-1">預約日期</th>
+                                    <th class="col-1">時段</th>
+                                    <th class="col-1">狀態</th>
+                                    <th class="col-1">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationTableBody">
+                                <!-- 由 JS 動態產生 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 編輯活動 Modal -->
+    <!-- ============================================ -->
+    <div id="activityEditModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">編輯活動資訊</h3>
+                <button class="modal-close" onclick="closeActivityEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="activityEditForm">
+                    <div class="form-group">
+                        <label class="form-label required">活動名稱</label>
+                        <input type="text" class="form-input" id="editActivityName" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label class="form-label required">顯示起始日期</label>
+                            <input type="date" class="form-input" id="editDisplayStartDate" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label required">顯示結束日期</label>
+                            <input type="date" class="form-input" id="editDisplayEndDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label class="form-label required">報名起始日期</label>
+                            <input type="date" class="form-input" id="editRegStartDate" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="form-label required">報名結束日期</label>
+                            <input type="date" class="form-input" id="editRegEndDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">報名戶數上限</label>
+                        <input type="number" class="form-input" id="editMaxUnits" min="1" required>
+                        <div class="form-hint">如有已報名資料，上限不可低於已報名數</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">活動說明</label>
+                        <textarea class="form-textarea" id="editDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">使用手冊</label>
+                        <input type="file" class="form-input" id="editManualFile" accept=".pdf,.jpg,.jpeg">
+                        <div class="form-hint">目前檔案: <span id="currentManualName">無</span></div>
+                        <div class="form-hint">限 PDF 或 JPG 檔案，上傳新檔案將取代舊檔案</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">檢查清單</label>
+                        <input type="file" class="form-input" id="editChecklistFile" accept=".xlsx,.xls,.csv">
+                         <div class="form-hint">目前檔案: <span id="currentChecklistName">無</span></div>
+                        <div class="form-hint">限 EXCEL 檔案，上傳新檔案將取代舊檔案</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeActivityEditModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveActivityInfo()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- LINE 邀請發送 Modal -->
+    <!-- ============================================ -->
+    <div id="inviteModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fa-brands fa-line" style="color: #06C755;"></i>
+                    選擇發送對象
+                </h3>
+                <button class="modal-close" onclick="closeInviteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- 篩選與操作 -->
+                <div class="invite-toolbar">
+                    <div class="invite-filter">
+                        <input type="text" class="form-input" id="filterResident" placeholder="搜尋戶別或姓名...">
+                    </div>
+                    <div class="invite-batch">
+                        <button type="button" class="btn btn-info btn-sm" id="btnSelectAll">全選</button>
+                        <button type="button" class="btn btn-secondary btn-sm" id="btnDeselectAll">取消全選</button>
+                    </div>
+                </div>
+                
+                <!-- 住戶列表 -->
+                <div class="resident-list" id="residentList">
+                    <!-- 由 JS 動態產生 -->
+                </div>
+                
+                <div class="selected-count">
+                    已選擇 <span id="selectedCount">0</span> 戶
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeInviteModal()">取消</button>
+                <button class="btn btn-success" onclick="sendLineInvite()">
+                    <i class="fa-brands fa-line"></i> 發送邀請
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 編輯預約 Modal -->
+    <!-- ============================================ -->
+    <div id="reservationEditModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">編輯預約資訊</h3>
+                <button class="modal-close" onclick="closeReservationEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reservationEditForm">
+                    <input type="hidden" id="editReservationId">
+                    <div class="info-grid mb-3">
+                        <div class="info-item">
+                            <span class="info-label">住戶</span>
+                            <span class="info-value" id="resEditName"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">戶別</span>
+                            <span class="info-value" id="resEditUnit"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">狀態</label>
+                        <select class="form-select" id="resEditStatus" required>
+                            <option value="待確認">待確認</option>
+                            <option value="已確認">已確認</option>
+                            <option value="已取消">已取消</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">預約時段</label>
+                        <select class="form-select" id="resEditTimeslot" required>
+                            <!-- 由 JS 動態產生選項 -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">備註</label>
+                        <textarea class="form-textarea" id="resEditNote" rows="2" placeholder="管理員備註用"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">留言訊息</label>
+                        <textarea class="form-textarea" id="resEditMessage" rows="2" placeholder="發送給住戶的訊息"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeReservationEditModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveReservationInfo()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/house-checkup-activity-edit.js"></script>
+</body>
+</html>

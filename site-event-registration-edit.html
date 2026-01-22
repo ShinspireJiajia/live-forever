@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>報名紀錄審核 - 陸府建設 CRM</title>
+    <title>案場活動報名紀錄審核 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,7 +20,81 @@
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
-    <link rel="stylesheet" href="css/foundation-event.css">
+    <link rel="stylesheet" href="css/site-event.css">
+    <style>
+        /* 附件上傳區塊樣式 */
+        .file-upload-area {
+            position: relative;
+            border: 2px dashed var(--color-gray-300);
+            border-radius: var(--border-radius-md);
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background-color: var(--color-gray-100);
+        }
+        .file-upload-area:hover {
+            border-color: var(--color-info);
+            background-color: rgba(91, 155, 213, 0.05);
+        }
+        .file-upload-area.dragover {
+            border-color: var(--color-info);
+            background-color: rgba(91, 155, 213, 0.1);
+        }
+        .file-upload-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-upload-content {
+            pointer-events: none;
+        }
+        /* 已上傳檔案列表 */
+        .uploaded-files-list {
+            margin-top: 12px;
+        }
+        .uploaded-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background-color: var(--color-gray-100);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 8px;
+        }
+        .uploaded-file-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .uploaded-file-info i {
+            color: var(--color-info);
+        }
+        .uploaded-file-name {
+            font-size: 14px;
+            color: var(--color-gray-700);
+        }
+        .uploaded-file-size {
+            font-size: 12px;
+            color: var(--color-gray-500);
+            margin-left: 8px;
+        }
+        .btn-remove-file {
+            background: none;
+            border: none;
+            color: var(--color-danger);
+            cursor: pointer;
+            padding: 4px;
+            font-size: 14px;
+        }
+        .btn-remove-file:hover {
+            color: #c0392b;
+        }
+    </style>
 </head>
 <body>
     <!-- ============================================ -->
@@ -49,7 +123,9 @@
                     首頁
                 </a>
                 <span class="breadcrumb-separator">/</span>
-                <a href="foundation-registration.html" class="breadcrumb-item">報名紀錄</a>
+                <span class="breadcrumb-item">案場活動</span>
+                <span class="breadcrumb-separator">/</span>
+                <a href="site-event-registration.html" class="breadcrumb-item">報名紀錄</a>
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-item active">報名審核</span>
             </div>
@@ -57,8 +133,8 @@
             <!-- 頁面內容 -->
             <div class="content-wrapper">
                 <div class="page-header">
-                    <h1 class="page-title">報名紀錄審核</h1>
-                    <p class="page-subtitle">查看報名詳情並進行帳務處理</p>
+                    <h1 class="page-title">報名紀錄</h1>
+                    <p class="page-subtitle">查看報名詳情</p>
                 </div>
 
                 <!-- 報名者資訊 -->
@@ -113,7 +189,7 @@
                     </button>
                     <button type="button" class="btn btn-danger" id="btnRefundRequest">
                         <i class="fa-solid fa-rotate-left"></i>
-                        執行申請退款
+                        取消報名
                     </button>
                     <button type="button" class="btn btn-primary" id="btnSave">
                         <i class="fa-solid fa-save"></i>
@@ -130,7 +206,7 @@
     <div class="modal" id="refundModal" style="background-color: rgba(0, 0, 0, 0.5);">
         <div class="modal-content" style="max-width: 500px;">
             <div class="modal-header">
-                <h3 class="modal-title">執行申請退款</h3>
+                <h3 class="modal-title">取消報名</h3>
                 <button class="modal-close" onclick="closeModal('refundModal')">
                     <i class="fa-solid fa-times"></i>
                 </button>
@@ -138,15 +214,29 @@
             <div class="modal-body">
                 <div class="alert alert-warning" style="margin-bottom: 16px;">
                     <i class="fa-solid fa-exclamation-triangle"></i>
-                    <span>退款操作將記錄於系統日誌</span>
+                    <span>操作將記錄於系統日誌</span>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">退款金額</label>
+                    <label class="form-label">應退款金額</label>
                     <div class="refund-amount" id="refundAmount">$0</div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">退款備註說明 <span class="text-danger">*</span></label>
-                    <textarea class="form-textarea" id="refundNote" rows="3" placeholder="請輸入退款原因或備註說明..."></textarea>
+                    <label class="form-label">備註說明 <span class="text-danger">*</span></label>
+                    <textarea class="form-textarea" id="refundNote" rows="3" placeholder="請輸入備註說明..."></textarea>
+                </div>
+                <!-- 附件上傳區塊 -->
+                <div class="form-group">
+                    <label class="form-label">附件上傳</label>
+                    <div class="file-upload-area" id="refundFileDropZone">
+                        <input type="file" class="file-upload-input" id="refundFileInput" multiple accept=".jpg,.jpeg,.pdf">
+                        <div class="file-upload-content">
+                            <i class="fa-solid fa-cloud-upload-alt" style="font-size: 32px; color: var(--color-gray-500); margin-bottom: 8px;"></i>
+                            <p style="margin: 0; color: var(--color-gray-700);">點擊或拖曳檔案至此處上傳</p>
+                            <p style="margin: 4px 0 0; font-size: 12px; color: var(--color-gray-500);">支援格式：JPG, PDF（單檔最大 10MB）</p>
+                        </div>
+                    </div>
+                    <!-- 已上傳檔案列表 -->
+                    <div class="uploaded-files-list" id="refundUploadedFiles"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -169,7 +259,7 @@
     <!-- ============================================ -->
     <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
-    <script src="js/foundation-mock-data.js"></script>
+    <script src="js/site-event-mock-data.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // 渲染共用元件
@@ -186,18 +276,32 @@
             
             // 取得報名資料
             const registration = regId 
-                ? FoundationMockData.registrations.find(r => r.reg_id === regId)
-                : FoundationMockData.registrations[0];
+                ? SiteEventMockData.registrations.find(r => r.reg_id === regId)
+                : SiteEventMockData.registrations[3]; // Default to one with a fee for demo
             
             // 取得活動資料
             const event = registration 
-                ? FoundationMockData.getEventById(registration.event_id)
+                ? SiteEventMockData.events.find(e => e.event_id === registration.event_id)
                 : null;
             
-            // 取得稽核日誌
-            const auditLogs = registration 
-                ? FoundationMockData.getAuditLogsByRegId(registration.reg_id)
-                : [];
+            // 產生模擬稽核日誌 (因為 SiteEventMockData 沒有)
+            const auditLogs = registration ? [
+                {
+                    action: '建立報名',
+                    changed_at: registration.created_at,
+                    changed_by: registration.applicant_name,
+                    note: '自行報名'
+                }
+            ] : [];
+
+            if (registration && registration.payment_status === '已繳費' && registration.amount > 0) {
+                 auditLogs.unshift({
+                    action: '完成繳費',
+                    changed_at: new Date(new Date(registration.created_at).getTime() + 3600000).toISOString(),
+                    changed_by: '系統',
+                    note: '信用卡支付成功'
+                });
+            }
             
             if (registration && event) {
                 renderRegistrantInfo(registration);
@@ -206,7 +310,8 @@
                 renderAuditTimeline(auditLogs);
                 
                 // 設定退款金額
-                document.getElementById('refundAmount').textContent = '$' + registration.final_amount.toLocaleString();
+                const amount = registration.amount || 0;
+                document.getElementById('refundAmount').textContent = '$' + amount.toLocaleString();
 
                 // 處理唯讀模式
                 const isReadonly = urlParams.get('readonly') === 'true';
@@ -221,30 +326,26 @@
                     if (btnSave) btnSave.style.display = 'none';
                     if (btnRefundRequest) btnRefundRequest.style.display = 'none';
                     
-                    // 禁用所有表單元素與操作按鈕
+                    // 禁用主內容區的表單元素（排除彈窗內的元素）
                     setTimeout(() => {
-                        const inputs = document.querySelectorAll('input, select, textarea, button'); 
-                        inputs.forEach(input => {
-                            // 排除返回按鈕
-                            if (input.classList.contains('btn-secondary')) return;
-                            // 確保不禁用 header 與 sidebar 的按鈕
-                            if (input.closest('.header') || input.closest('.sidebar')) return;
-
-                            input.disabled = true;
-                        });
-                        
-                        // 移除可點擊的移除圖示或按鈕
-                        const removeButtons = document.querySelectorAll('.fa-times, .btn-remove');
-                        removeButtons.forEach(btn => {
-                            // 排除 Modal 關閉按鈕
-                            if(btn.closest('.modal-header') || btn.closest('.toast-close')) return;
-                            btn.style.display = 'none'
-                        });
+                        const mainContent = document.querySelector('.main-content');
+                        if (mainContent) {
+                            const inputs = mainContent.querySelectorAll('input, select, textarea, button'); 
+                            inputs.forEach(input => {
+                                if (input.classList.contains('btn-secondary')) return;
+                                if (input.closest('.header') || input.closest('.sidebar')) return;
+                                if (input.closest('.modal')) return; // 排除彈窗內的元素
+                                input.disabled = true;
+                            });
+                        }
                     }, 0);
                 }
             }
 
-            // 執行申請退款按鈕
+            // 附件上傳功能初始化
+            initRefundFileUpload();
+
+            // 執行取消報名按鈕
             document.getElementById('btnRefundRequest').addEventListener('click', function() {
                 openModal('refundModal');
             });
@@ -258,7 +359,6 @@
                 }
                 closeModal('refundModal');
                 
-                // 模擬新增日誌
                 const newLog = {
                     action: '申請退款',
                     changed_at: new Date().toISOString(),
@@ -270,7 +370,6 @@
                 auditLogs.unshift(newLog);
                 renderAuditTimeline(auditLogs);
                 
-                // 更新狀態顯示 (模擬)
                 registration.payment_status = '已退費';
                 renderPaymentSection(registration, event);
 
@@ -279,33 +378,10 @@
 
             // 儲存按鈕
             document.getElementById('btnSave').addEventListener('click', function() {
-                // 收集備註與附件資訊
-                const remarks = document.getElementById('paymentRemarks')?.value;
-                const fileInput = document.getElementById('evidenceFile');
-                
-                // 收集身分變更
-                const identitySelect = document.getElementById('userIdentitySelect');
-                if (identitySelect && registration) {
-                    const newIdentity = identitySelect.value;
-                    if (newIdentity !== registration.user_identity) {
-                        const oldIdentity = registration.user_identity;
-                        registration.user_identity = newIdentity;
-                        
-                        // 新增稽核日誌
-                        const newLog = {
-                            action: '修改身分',
-                            changed_at: new Date().toISOString(),
-                            changed_by: '管理人員',
-                            old_value: oldIdentity,
-                            new_value: newIdentity,
-                            note: '手動變更身分別'
-                        };
-                        auditLogs.unshift(newLog);
-                        renderAuditTimeline(auditLogs);
-                    }
-                }
-                
                 let message = '資料已儲存';
+                
+                // 檢查是否上傳附件
+                const fileInput = document.getElementById('evidenceFile');
                 if (fileInput && fileInput.files.length > 0) {
                     message += '，附件已上傳';
                 }
@@ -314,12 +390,141 @@
             });
 
             /**
+             * 初始化退款附件上傳功能
+             */
+            function initRefundFileUpload() {
+                const dropZone = document.getElementById('refundFileDropZone');
+                const fileInput = document.getElementById('refundFileInput');
+                const fileListContainer = document.getElementById('refundUploadedFiles');
+                let uploadedFiles = [];
+
+                if (!dropZone || !fileInput || !fileListContainer) return;
+
+                // 拖曳事件
+                dropZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                });
+
+                dropZone.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                });
+
+                dropZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    handleFiles(files);
+                });
+
+                // 檔案選取事件
+                fileInput.addEventListener('change', function(e) {
+                    handleFiles(e.target.files);
+                });
+
+                /**
+                 * 處理選取的檔案
+                 */
+                function handleFiles(files) {
+                    const validExtensions = ['.jpg', '.jpeg', '.pdf'];
+                    const maxSize = 10 * 1024 * 1024; // 10MB
+
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const ext = '.' + file.name.split('.').pop().toLowerCase();
+
+                        // 驗證檔案格式
+                        if (!validExtensions.includes(ext)) {
+                            showToast('error', '格式錯誤', `檔案 "${file.name}" 格式不支援，僅支援 JPG、PDF`);
+                            continue;
+                        }
+
+                        // 驗證檔案大小
+                        if (file.size > maxSize) {
+                            showToast('error', '檔案過大', `檔案 "${file.name}" 超過 10MB 限制`);
+                            continue;
+                        }
+
+                        // 檢查是否重複
+                        const isDuplicate = uploadedFiles.some(f => f.name === file.name && f.size === file.size);
+                        if (isDuplicate) {
+                            showToast('warning', '重複檔案', `檔案 "${file.name}" 已存在`);
+                            continue;
+                        }
+
+                        uploadedFiles.push(file);
+                    }
+
+                    renderFileList();
+                    // 清空 input 以便重複選取同一檔案
+                    fileInput.value = '';
+                }
+
+                /**
+                 * 渲染已上傳檔案列表
+                 */
+                function renderFileList() {
+                    if (uploadedFiles.length === 0) {
+                        fileListContainer.innerHTML = '';
+                        return;
+                    }
+
+                    fileListContainer.innerHTML = uploadedFiles.map((file, index) => {
+                        const ext = file.name.split('.').pop().toLowerCase();
+                        const icon = ext === 'pdf' ? 'fa-file-pdf' : 'fa-file-image';
+                        const size = formatFileSize(file.size);
+
+                        return `
+                            <div class="uploaded-file-item" data-index="${index}">
+                                <div class="uploaded-file-info">
+                                    <i class="fa-solid ${icon}"></i>
+                                    <span class="uploaded-file-name">${file.name}</span>
+                                    <span class="uploaded-file-size">(${size})</span>
+                                </div>
+                                <button type="button" class="btn-remove-file" onclick="removeRefundFile(${index})" title="移除檔案">
+                                    <i class="fa-solid fa-times"></i>
+                                </button>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                /**
+                 * 格式化檔案大小
+                 */
+                function formatFileSize(bytes) {
+                    if (bytes < 1024) return bytes + ' B';
+                    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+                    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+                }
+
+                // 將移除檔案功能暴露到全域
+                window.removeRefundFile = function(index) {
+                    uploadedFiles.splice(index, 1);
+                    renderFileList();
+                };
+
+                // 取得已上傳檔案（供提交時使用）
+                window.getRefundUploadedFiles = function() {
+                    return uploadedFiles;
+                };
+            }
+
+            /**
              * 渲染報名者資訊
              */
             function renderRegistrantInfo(reg) {
                 const container = document.getElementById('registrantInfo');
-                const isResident = reg.user_identity === '住戶';
                 
+                // 固定顯示住戶身分，不可變更
+                const identityDisplay = `
+                    <div class="detail-value" style="display: flex; align-items: center; gap: 8px;">
+                        <span class="identity-badge resident"><i class="fa-solid fa-home"></i> 住戶</span>
+                        <span class="text-muted" style="font-size: 0.9em;">(${reg.site_name} ${reg.unit_no})</span>
+                    </div>
+                `;
+
                 container.innerHTML = `
                     <div class="detail-item">
                         <span class="detail-label">報名編號</span>
@@ -331,21 +536,11 @@
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">身分識別</span>
-                        <div class="detail-value" style="display: flex; align-items: center; gap: 8px;">
-                            <select class="form-select" id="userIdentitySelect" style="width: auto; padding: 4px 8px;">
-                                <option value="住戶" ${reg.user_identity === '住戶' ? 'selected' : ''}>住戶</option>
-                                <option value="非住戶" ${reg.user_identity === '非住戶' ? 'selected' : ''}>非住戶</option>
-                            </select>
-                            <span id="identityBadgeDisplay">
-                                ${isResident 
-                                    ? '<span class="identity-badge resident"><i class="fa-solid fa-home"></i> 住戶</span>' 
-                                    : '<span class="identity-badge non-resident"><i class="fa-solid fa-user"></i> 非住戶</span>'}
-                            </span>
-                        </div>
+                        ${identityDisplay}
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">CRM 會員編號</span>
-                        <span class="detail-value">${reg.crm_member_id || '-'}</span>
+                        <span class="detail-label">會員編號</span>
+                        <span class="detail-value">${reg.member_id || '-'}</span>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">聯絡電話</span>
@@ -353,7 +548,7 @@
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">繳費方式</span>
-                        <span class="detail-value">${reg.payment_method || '-'}</span>
+                        <span class="detail-value">${reg.payment_method || (reg.amount > 0 ? '待繳費' : '免費')}</span>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">報名人數</span>
@@ -368,7 +563,7 @@
                         <span class="detail-value">
                             ${reg.has_receipt ? '是' : '否'}
                             ${reg.has_receipt ? `
-                                <a href="foundation-receipt-edit.html?receiptNo=${reg.receipt_no || ''}&donorName=${encodeURIComponent(reg.applicant_name)}&donorId=${reg.user_id || ''}&amount=${reg.final_amount}&payMethod=${encodeURIComponent(reg.payment_method || '')}&address=${encodeURIComponent(reg.address || '')}&eventDate=${encodeURIComponent(event.start_dt ? event.start_dt.split('T')[0] : '')}" 
+                                <a href="foundation-receipt-edit.html?receiptNo=${reg.receipt_no || ''}&donorName=${encodeURIComponent(reg.applicant_name)}&amount=${reg.amount}&payMethod=${encodeURIComponent(reg.payment_method || '')}" 
                                    class="btn btn-sm btn-outline" 
                                    style="margin-left: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
                                     <i class="fa-solid fa-file-invoice-dollar"></i> 編輯收據
@@ -377,19 +572,6 @@
                         </span>
                     </div>
                 `;
-
-                // 加入身分切換監聽器
-                const identitySelect = document.getElementById('userIdentitySelect');
-                const badgeDisplay = document.getElementById('identityBadgeDisplay');
-                
-                if (identitySelect && badgeDisplay) {
-                    identitySelect.addEventListener('change', function() {
-                        const isResident = this.value === '住戶';
-                        badgeDisplay.innerHTML = isResident 
-                            ? '<span class="identity-badge resident"><i class="fa-solid fa-home"></i> 住戶</span>' 
-                            : '<span class="identity-badge non-resident"><i class="fa-solid fa-user"></i> 非住戶</span>';
-                    });
-                }
             }
 
             /**
@@ -397,6 +579,9 @@
              */
             function renderEventInfo(event, reg) {
                 const container = document.getElementById('eventInfo');
+                const price = event.price || 0;
+                const totalAmount = reg.amount || 0;
+
                 container.innerHTML = `
                     <div class="detail-item">
                         <span class="detail-label">活動名稱</span>
@@ -404,24 +589,24 @@
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">活動類別</span>
-                        <span class="detail-value"><span class="category-tag">${event.category}</span></span>
+                        <span class="detail-value"><span class="category-tag site-event">${event.category}</span></span>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">活動時間</span>
                         <span class="detail-value">${formatDateTime(event.start_dt)} ~ ${formatDateTime(event.end_dt)}</span>
                     </div>
                     <div class="detail-item">
+                        <span class="detail-label">活動地點</span>
+                        <span class="detail-value">${event.location}</span>
+                    </div>
+                    <div class="detail-item">
                         <span class="detail-label">活動費用</span>
-                        <span class="detail-value">${event.price > 0 ? '$' + event.price.toLocaleString() : '免費'}</span>
+                        <span class="detail-value">${price > 0 ? '$' + price.toLocaleString() : '免費'}</span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">原始金額</span>
-                        <span class="detail-value">$${reg.original_amount.toLocaleString()}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">最終金額</span>
+                        <span class="detail-label">應付金額</span>
                         <span class="detail-value" style="font-weight: 600; color: var(--color-info);">
-                            $${reg.final_amount.toLocaleString()}
+                            $${totalAmount.toLocaleString()}
                         </span>
                     </div>
                 `;
@@ -434,17 +619,26 @@
                 const container = document.getElementById('paymentSection');
                 
                 let displayStatus = reg.payment_status;
+                if (!displayStatus) {
+                     displayStatus = (reg.amount > 0) ? '待付款' : '已付款'; 
+                     // 免費視為已付款(已完成)
+                     if (reg.amount === 0) displayStatus = '已付款';
+                }
+
                 if (displayStatus === '已入帳') displayStatus = '已付款';
                 if (displayStatus === '待繳費') displayStatus = '待付款';
+                // 未繳費 -> 待付款
+                if (displayStatus === '未繳費') displayStatus = '待付款';
 
                 const statusClass = getPaymentStatusClass(displayStatus);
+                const amount = reg.amount || 0;
                 
                 let html = `
                     <div class="payment-card">
                         <div class="payment-card-header">
                             <div class="payment-status-info">
                                 <span class="payment-status ${statusClass}">${displayStatus}</span>
-                                <span class="payment-amount">$${reg.final_amount.toLocaleString()}</span>
+                                <span class="payment-amount">$${amount.toLocaleString()}</span>
                             </div>
                         </div>
                         <div class="payment-card-body">
@@ -460,37 +654,40 @@
                         </div>
                     `;
                 } else if (displayStatus === '已付款') {
-                    html += `
-                        <div class="payment-detail">
-                            <span class="payment-detail-label">繳費方式</span>
-                            <span class="payment-detail-value">${reg.payment_method || '-'}</span>
-                        </div>
-                    `;
-                    
-                    if (reg.payment_method === '現金' || reg.payment_method === '現場繳費' || reg.payment_method === '匯款') {
+                    if (amount > 0) {
+                        html += `
+                            <div class="payment-detail">
+                                <span class="payment-detail-label">繳費方式</span>
+                                <span class="payment-detail-value">${reg.payment_method || '-'}</span>
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 16px;">
+                                <label class="form-label">佐證資料附件</label>
+                                <input type="file" class="form-control" id="evidenceFile">
+                                <p class="text-muted" style="font-size: 12px; margin-top: 4px;">支援格式：JPG, PNG, PDF</p>
+                            </div>
+                            <div class="form-group" style="margin-top: 16px;">
+                                <label class="form-label">備註說明</label>
+                                <textarea class="form-textarea" id="paymentRemarks" rows="3" placeholder="請輸入備註..."></textarea>
+                            </div>
+                        `;
+                    } else {
                          html += `
-                        <div class="form-group" style="margin-top: 16px;">
-                            <label class="form-label">佐證資料附件</label>
-                            <input type="file" class="form-control" id="evidenceFile">
-                            <p class="text-muted" style="font-size: 12px; margin-top: 4px;">支援格式：JPG, PNG, PDF</p>
-                        </div>
+                            <p class="payment-hint">此為免費活動</p>
                         `;
                     }
-
-                    html += `
-                        <div class="form-group" style="margin-top: 16px;">
-                            <label class="form-label">備註說明</label>
-                            <textarea class="form-textarea" id="paymentRemarks" rows="3" placeholder="請輸入備註..."></textarea>
-                        </div>
-                    `;
 
                 } else if (displayStatus === '已退費') {
                     html += `
                         <div class="payment-detail">
                             <span class="payment-detail-label">退款金額</span>
-                            <span class="payment-detail-value">$${reg.final_amount.toLocaleString()}</span>
+                            <span class="payment-detail-value">$${amount.toLocaleString()}</span>
                         </div>
                         <p class="text-muted" style="margin-top: 12px;">已完成退費程序</p>
+                    `;
+                } else if (displayStatus === '已取消') {
+                     html += `
+                        <p class="text-muted" style="margin-top: 0px;">報名已取消</p>
                     `;
                 }
                 
@@ -536,25 +733,19 @@
                 `).join('');
             }
 
-            /**
-             * 取得繳費狀態樣式類別
-             */
             function getPaymentStatusClass(status) {
                 const map = {
                     '待繳費': 'pending',
                     '待付款': 'pending',
+                    '未繳費': 'pending',
                     '已入帳': 'paid',
                     '已付款': 'paid',
                     '已退費': 'refunding',
                     '已取消': 'cancelled'
                 };
-                if (status === '已退費') return 'cancelled';
                 return map[status] || '';
             }
 
-            /**
-             * 取得操作類型樣式類別
-             */
             function getActionClass(action) {
                 if (action.includes('報名')) return 'action-register';
                 if (action.includes('繳費')) return 'action-payment';
@@ -563,9 +754,6 @@
                 return 'action-other';
             }
 
-            /**
-             * 取得操作類型圖示
-             */
             function getActionIcon(action) {
                 if (action.includes('報名')) return 'fa-user-plus';
                 if (action.includes('繳費')) return 'fa-dollar-sign';
@@ -574,10 +762,8 @@
                 return 'fa-edit';
             }
 
-            /**
-             * 格式化日期時間
-             */
             function formatDateTime(dateStr) {
+                if (!dateStr) return '-';
                 const date = new Date(dateStr);
                 return date.toLocaleString('zh-TW', {
                     year: 'numeric',
@@ -588,62 +774,42 @@
                 });
             }
 
-            // 將函式暴露到全域
             window.confirmPayment = function() {
                 if (confirm('確定要手動確認此筆報名已繳費嗎？')) {
                     showToast('success', '繳費確認成功', '報名狀態已更新為已付款');
                     setTimeout(() => location.reload(), 1500);
                 }
             };
-
-            window.openRefundModal = function() {
-                // Not used via button anymore, but kept just in case
-                document.getElementById('refundAmount').textContent = '$' + registration.final_amount.toLocaleString();
-                openModal('refundModal');
-            };
-
-            // Remove openRefundModal if it's not needed, but leave for safety if I missed referencing it in previous blocks.
-            // Actually button calls openModal directly now.
+            
+            window.openModal = function(id) {
+                document.getElementById(id).classList.add('active');
+            }
+            window.closeModal = function(id) {
+                document.getElementById(id).classList.remove('active');
+            }
+            
+            window.showToast = function(type, title, message) {
+                 const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <i class="fa-solid ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-times-circle' : 'fa-exclamation-circle'}"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">${title}</div>
+                        <div class="toast-message">${message}</div>
+                    </div>
+                    <button class="toast-close" onclick="this.parentElement.remove()">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                `;
+                
+                let container = document.querySelector('.toast-container');
+                container.appendChild(toast);
+                
+                setTimeout(() => toast.remove(), 5000);
+            }
         });
-
-        /**
-         * 開啟彈窗
-         */
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        /**
-         * 關閉彈窗
-         */
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        /**
-         * 顯示提示訊息
-         */
-        function showToast(type, title, message) {
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.innerHTML = `
-                <div class="toast-icon">
-                    <i class="fa-solid ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-times-circle' : 'fa-exclamation-circle'}"></i>
-                </div>
-                <div class="toast-content">
-                    <div class="toast-title">${title}</div>
-                    <div class="toast-message">${message}</div>
-                </div>
-                <button class="toast-close" onclick="this.parentElement.remove()">
-                    <i class="fa-solid fa-times"></i>
-                </button>
-            `;
-            
-            let container = document.querySelector('.toast-container');
-            container.appendChild(toast);
-            
-            setTimeout(() => toast.remove(), 5000);
-        }
     </script>
 
     <!-- 頁面專用樣式 -->
@@ -735,6 +901,22 @@
             font-size: 15px;
             color: var(--color-text-primary);
         }
+        
+        /* 身份標籤 */
+        .identity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .identity-badge.resident {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
 
         /* 繳費卡片 */
         .payment-card {
@@ -753,6 +935,33 @@
             display: flex;
             align-items: center;
             gap: 16px;
+        }
+
+        .payment-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .payment-status.paid {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .payment-status.pending {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .payment-status.refunding {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .payment-status.cancelled {
+             background: #f5f5f5;
+             color: #9e9e9e;
         }
 
         .payment-amount {
@@ -789,71 +998,6 @@
 
         .payment-detail-value {
             color: var(--color-text-primary);
-        }
-
-        /* 退款區塊 */
-        .refund-info {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .refund-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .refund-available {
-            background: #e8f5e9;
-            color: #388e3c;
-        }
-
-        .refund-expired {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        .refund-detail {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .refund-detail p {
-            margin: 0 0 8px 0;
-            color: var(--color-text-secondary);
-        }
-
-        .refund-progress {
-            height: 8px;
-            background: var(--color-gray-300);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .refund-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #27ae60, #f39c12);
-            transition: width 0.3s;
-        }
-
-        .refund-progress-label {
-            font-size: 12px;
-            color: var(--color-text-muted);
-        }
-
-        .refund-warning-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            background: #fff3e0;
-            color: #e65100;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-left: 8px;
         }
 
         /* 時間軸 */
@@ -973,23 +1117,6 @@
             color: var(--color-danger);
         }
 
-        .checkbox-group {
-            display: flex;
-            gap: 20px;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .checkbox-label input {
-            width: 18px;
-            height: 18px;
-        }
-
         /* 按鈕樣式補充 */
         .btn-info {
             background-color: var(--color-info);
@@ -1020,6 +1147,14 @@
             display: flex;
             gap: 12px;
             justify-content: flex-end;
+        }
+
+        .category-tag.site-event {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
         }
     </style>
 </body>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動類別設定 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/site-event.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 (動態渲染) -->
+        <!-- ============================================ -->
+        <div id="header-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 (動態渲染) -->
+        <!-- ============================================ -->
+        <div id="sidebar-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">案場活動</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">類別設定</span>
+            </div>
+
+            <!-- 說明區塊 -->
+            <div class="page-description">
+                <div class="description-icon">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <div class="description-content">
+                    <p>在此頁面維護案場活動的類別選項，設定後可於新增活動時選用。</p>
+                </div>
+            </div>
+
+            <!-- 查詢/操作區 -->
+            <div class="search-panel">
+                <form class="event-search-form" id="searchForm">
+                    <div class="site-event-filter-grid">
+                        <div class="form-group" style="flex: 1; max-width: 300px;">
+                            <label class="form-label">類別名稱</label>
+                            <input type="text" class="form-control" id="searchCategoryName" placeholder="請輸入類別名稱">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            查詢
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            重置
+                        </button>
+                        <button type="button" class="btn btn-add" id="btnAdd">
+                            <i class="fa-solid fa-plus"></i>
+                            新增類別
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 資料表格 -->
+            <div class="table-container">
+                <table class="site-event-table" id="categoryTable">
+                    <thead>
+                        <tr>
+                            <th width="80">序號</th>
+                            <th>類別名稱</th>
+                            <th width="100">狀態</th>
+                            <th width="140">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categoryTableBody">
+                        <!-- JavaScript 動態產生 -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 新增/編輯類別彈窗 -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">新增活動類別</h3>
+                <button type="button" class="modal-close" onclick="categoryManager.closeModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <input type="hidden" id="categoryId">
+                    
+                    <div class="form-group">
+                        <label class="form-label required">類別名稱</label>
+                        <input type="text" class="form-control" id="formCategoryName" placeholder="例如：住戶聯誼" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">狀態</label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="formStatus" checked>
+                            <span>啟用</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="categoryManager.closeModal()">取消</button>
+                <button type="button" class="btn btn-primary" onclick="categoryManager.saveCategory()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 刪除確認彈窗 -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3 class="modal-title">確認刪除</h3>
+                <button type="button" class="modal-close" onclick="categoryManager.closeDeleteModal()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-confirm-content">
+                    <i class="fa-solid fa-triangle-exclamation delete-warning-icon"></i>
+                    <p>確定要刪除此類別嗎？</p>
+                    <p class="delete-warning-text">若此類別已有活動使用中，建議改為「停用」。</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="categoryManager.closeDeleteModal()">取消</button>
+                <button type="button" class="btn btn-danger" onclick="categoryManager.confirmDelete()">確認刪除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- Toast 提示容器 -->
+    <!-- ============================================ -->
+    <div class="toast-container"></div>
+
+    <!-- ============================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================ -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/modal.js"></script>
+    <!-- 載入 Mock Data, 但我們會擴充它來包含 Categories -->
+    <script src="js/site-event-mock-data.js"></script> 
+    <script src="js/site-event-category.js"></script>
+    <script>
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 渲染共用元件
+            if (typeof initCRMLayout === 'function') {
+                initCRMLayout();
+            }
+            
+            // 初始化側邊欄
+            const sidebarManager = new SidebarManager();
+            // Category Manager 會在 site-event-category.js 初始化
+        });
+    </script>
+
+    <!-- Toast 樣式 (內嵌) -->
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-icon {
+            font-size: 20px;
+        }
+        
+        .toast-success .toast-icon { color: #27AE60; }
+        .toast-error .toast-icon { color: #E74C3C; }
+        .toast-info .toast-icon { color: #3498DB; }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .toast-message {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+        }
+        
+        .toast-close:hover {
+            color: #333;
+        }
+    </style>
+</body>
+</html>

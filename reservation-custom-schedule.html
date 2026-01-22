@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>交屋時段管理 - 陸府建設 CRM</title>
+    <title>客變時段管理 - 陸府建設 CRM</title>
     
     <!-- Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/breadcrumb.css">
     <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/forms.css">
-    <link rel="stylesheet" href="css/reservation-handover-schedule.css">
+    <link rel="stylesheet" href="css/reservation-custom-schedule.css">
 </head>
 <body>
     <!-- ============================================ -->
@@ -31,7 +31,7 @@
         <div id="header-container"></div>
 
         <!-- ============================================ -->
-        <!-- 側邊欄選單 (動態渲染) -->
+        <!-- 側邊欄選單 -->
         <!-- ============================================ -->
         <div id="sidebar-container"></div>
 
@@ -48,7 +48,7 @@
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-item">預約服務</span>
                 <span class="breadcrumb-separator">/</span>
-                <a href="reservation-handover.html" class="breadcrumb-item">交屋預約</a>
+                <a href="reservation-custom.html" class="breadcrumb-item">客變預約</a>
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-item active">時段管理</span>
             </div>
@@ -59,7 +59,7 @@
                     <!-- 標題與操作按鈕 -->
                     <div class="schedule-header">
                         <div>
-                            <h1 class="schedule-title">交屋預約時段管理</h1>
+                            <h1 class="schedule-title">客變預約時段管理</h1>
                             <div class="project-selector">
                                 <label for="projectSelect">案場：</label>
                                 <select id="projectSelect" class="form-select">
@@ -110,7 +110,7 @@
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
                         </div>
-                        <div class="date-range" id="dateRange">12月 29 - 1月 4, 2026</div>
+                        <div class="date-range" id="dateRange"></div>
                         <div class="nav-buttons">
                             <button id="btnNextWeek">
                                 <i class="fa-solid fa-chevron-right"></i>
@@ -123,13 +123,13 @@
                         <thead>
                             <tr>
                                 <th>時段</th>
-                                <th id="dayHeader0">星期日<br>12月 29日</th>
-                                <th id="dayHeader1">星期一<br>12月 30日</th>
-                                <th id="dayHeader2">星期二<br>12月 31日</th>
-                                <th id="dayHeader3">星期三<br>1月 1日</th>
-                                <th id="dayHeader4">星期四<br>1月 2日</th>
-                                <th id="dayHeader5">星期五<br>1月 3日</th>
-                                <th id="dayHeader6">星期六<br>1月 4日</th>
+                                <th id="dayHeader0">星期日</th>
+                                <th id="dayHeader1">星期一</th>
+                                <th id="dayHeader2">星期二</th>
+                                <th id="dayHeader3">星期三</th>
+                                <th id="dayHeader4">星期四</th>
+                                <th id="dayHeader5">星期五</th>
+                                <th id="dayHeader6">星期六</th>
                             </tr>
                         </thead>
                         <tbody id="scheduleBody">
@@ -156,6 +156,14 @@
     <!-- JavaScript -->
     <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
-    <script src="js/reservation-handover-schedule.js"></script>
+    <script src="js/reservation-custom-schedule.js"></script>
+    <script>
+        // 渲染側邊欄
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof renderSidebar === 'function') {
+                renderSidebar();
+            }
+        });
+    </script>
 </body>
 </html>

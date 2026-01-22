@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房屋健檢案場管理 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/case-list.css">
+    <link rel="stylesheet" href="css/house-checkup-site.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+        
+        <!-- ============================================ -->
+        <!-- 頂部導覽列 (動態渲染) -->
+        <!-- ============================================ -->
+        <div id="header-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 側邊欄選單 -->
+        <!-- ============================================ -->
+        <div id="sidebar-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">房屋健檢</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">案場管理</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- 頁面標題 -->
+                <div class="page-header">
+                    <h1 class="page-title">房屋健檢案場管理</h1>
+                </div>
+
+                <!-- 查詢條件區 -->
+                <div class="search-panel">
+                    <form class="search-form case-search-form" id="searchForm">
+                        <div class="search-grid">
+                            <!-- 案場 -->
+                            <div class="form-group row">
+                                <label class="form-label col-label">案場</label>
+                                <div class="col-input">
+                                    <select id="searchProject" class="form-select">
+                                        <option value="">請選擇</option>
+                                        <option value="陸府原森">陸府原森</option>
+                                        <option value="陸府觀微">陸府觀微</option>
+                                        <option value="陸府植森">陸府植森</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 操作按鈕 -->
+                        <div class="form-actions-right">
+                            <button type="reset" class="btn btn-info">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                重置
+                            </button>
+                            <button type="submit" class="btn btn-info">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                查詢
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="table-responsive">
+                    <table class="data-table case-table" id="siteTable">
+                        <thead>
+                            <tr>
+                                <th class="col-1">案場名稱</th>
+                                <th class="col-1">使照日期</th>
+                                <th class="col-1">點交日期</th>
+                                <th class="col-1">總戶數</th>
+                                <th class="col-1">進行中活動</th>
+                                <th class="col-1">功能</th>
+                            </tr>
+                        </thead>
+                        <tbody id="siteTableBody">
+                            <!-- 資料由 JS 動態產生 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分頁元件 -->
+                <div class="pagination-wrapper" id="paginationWrapper">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 健診手冊維護 Modal -->
+    <!-- ============================================ -->
+    <div id="manualModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">健診手冊維護 - <span id="manualSiteName"></span></h3>
+                <button class="modal-close" onclick="closeManualModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- 新增手冊按鈕 -->
+                <div class="manual-toolbar">
+                    <button type="button" class="btn btn-success" onclick="showAddManualForm()">
+                        <i class="fa-solid fa-plus"></i>
+                        新增手冊
+                    </button>
+                </div>
+
+                <!-- 手冊列表 -->
+                <div class="manual-list" id="manualList">
+                    <!-- 由 JS 動態產生 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeManualModal()">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 新增/編輯手冊 Modal -->
+    <!-- ============================================ -->
+    <div id="manualEditModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="manualEditTitle">新增健診手冊</h3>
+                <button class="modal-close" onclick="closeManualEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="manualEditForm">
+                    <input type="hidden" id="editManualId">
+                    <!-- 手冊名稱 -->
+                    <div class="form-group">
+                        <label class="form-label required">手冊名稱</label>
+                        <input type="text" class="form-input" id="manualName" placeholder="請輸入手冊名稱" required>
+                    </div>
+                    <!-- 啟用日期 -->
+                    <div class="form-group">
+                        <label class="form-label required">啟用日期</label>
+                        <input type="date" class="form-input" id="manualStartDate" required>
+                    </div>
+                    <!-- 停用日期 -->
+                    <div class="form-group">
+                        <label class="form-label">停用日期</label>
+                        <input type="date" class="form-input" id="manualEndDate">
+                        <small class="form-hint">留空表示永久有效</small>
+                    </div>
+                    <!-- 上傳檔案 -->
+                    <div class="form-group">
+                        <label class="form-label required">手冊檔案</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <input type="file" id="manualFile" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            <div class="file-upload-placeholder" onclick="document.getElementById('manualFile').click()">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>點擊或拖曳上傳檔案</span>
+                                <small>支援 PDF、JPG、PNG 格式</small>
+                            </div>
+                            <div class="file-preview" id="filePreview" style="display: none;">
+                                <div class="file-info">
+                                    <i class="fa-solid fa-file-pdf file-icon"></i>
+                                    <span class="file-name" id="fileName"></span>
+                                    <button type="button" class="btn-icon" onclick="removeFile()">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 狀態 -->
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeManualEditModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveManual()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 檔案預覽 Modal -->
+    <!-- ============================================ -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h3 class="modal-title">檔案預覽 - <span id="previewFileName"></span></h3>
+                <button class="modal-close" onclick="closePreviewModal()">&times;</button>
+            </div>
+            <div class="modal-body preview-body">
+                <div class="preview-container" id="previewContainer">
+                    <!-- PDF 或圖片預覽區 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-info" id="downloadBtn" download>
+                    <i class="fa-solid fa-download"></i>
+                    下載檔案
+                </a>
+                <button class="btn btn-secondary" onclick="closePreviewModal()">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/house-checkup-site.js"></script>
+</body>
+</html>

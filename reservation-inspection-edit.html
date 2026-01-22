@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>編輯驗屋預約 - 陸府建設 CRM</title>
+    
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/chat.css">
+    
+    <!-- Reuse styles from custom-edit for consistency -->
+    <link rel="stylesheet" href="css/reservation-custom-edit.css"> 
+    <link rel="stylesheet" href="css/reservation-inspection-edit.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 -->
+        <div id="header-container"></div>
+
+        <!-- 側邊欄選單 -->
+        <div id="sidebar-container"></div>
+
+        <!-- 主內容區域 -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="reservation-inspection.html" class="breadcrumb-item">驗屋預約</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">編輯預約</span>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">編輯驗屋預約</h1>
+                </div>
+
+                <div class="edit-container">
+                    <form id="inspectionEditForm">
+                        <input type="hidden" id="inspectionId">
+                        
+                        <!-- 基本資料區塊 -->
+                        <div class="section-block">
+                            <h3 class="section-title">基本資料</h3>
+                            <div class="form-row">
+                                <!-- 案場 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">案場</label>
+                                    <select class="form-select" id="rProject" required>
+                                        <option value="">請選擇案場</option>
+                                        <option value="陸府原森">陸府原森</option>
+                                        <option value="陸府觀微">陸府觀微</option>
+                                        <option value="陸府植森">陸府植森</option>
+                                    </select>
+                                </div>
+                                <!-- 戶別 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">戶別</label>
+                                    <select class="form-select" id="rUnit" required disabled>
+                                        <option value="">請先選擇案場</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- 會員姓名 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">會員姓名</label>
+                                    <input type="text" class="form-control" id="rMemberName" required placeholder="請輸入會員姓名">
+                                </div>
+                                <!-- 手機 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">手機</label>
+                                    <input type="tel" class="form-control" id="rPhone" required placeholder="請輸入手機號碼" pattern="09[0-9]{8}" title="請輸入有效的手機號碼，格式：09xxxxxxxx">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <!-- 日期 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">驗屋日期</label>
+                                    <input type="date" class="form-control" id="rDate" required>
+                                </div>
+                                <!-- 時段 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">驗屋時段</label>
+                                    <select class="form-select" id="rTimeSlot" required>
+                                        <option value="">請選擇時段</option>
+                                        <option value="09:00-12:00">09:00-12:00</option>
+                                        <option value="14:00-17:00">14:00-17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- 出席人數 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label required">出席人數</label>
+                                    <input type="number" class="form-control" id="rAttendees" required placeholder="請輸入出席人數" min="1" value="1">
+                                </div>
+                            </div>
+
+                            <!-- 第三方代驗公司選項 -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" id="rHasThirdParty">
+                                        <label for="rHasThirdParty">是否聘請第三方驗屋公司</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 驗屋公司名稱 (預設隱藏) -->
+                            <div class="form-row" id="thirdPartyCompanyRow" style="display: none;">
+                                <div class="form-group col-md-12">
+                                    <label class="form-label required">驗屋公司名稱</label>
+                                    <input type="text" class="form-control" id="rThirdPartyCompany" placeholder="請輸入驗屋公司名稱">
+                                </div>
+                            </div>
+
+                            <!-- 備註 -->
+                            <div class="form-group">
+                                <label class="form-label">備註</label>
+                                <textarea class="form-control" id="rRemark" rows="3" placeholder="請輸入備註（選填）"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 紀錄資訊區塊 -->
+                        <div class="section-block" id="sectionRecordInfo">
+                            <h3 class="section-title">驗屋紀錄</h3>
+                            <div class="form-row">
+                                <!-- 完成日期 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="cCompletedDate">完成日期</label>
+                                    <input type="date" class="form-control" id="cCompletedDate" name="cCompletedDate">
+                                </div>
+                                <!-- 驗屋人員 -->
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="cInspector">驗屋人員</label>
+                                    <input type="text" class="form-control" id="cInspector" name="cInspector" placeholder="請輸入負責驗屋人員">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cCompletedNotes">紀錄說明</label>
+                                <textarea class="form-control" id="cCompletedNotes" name="cCompletedNotes" placeholder="驗屋缺失或狀況說明" rows="3"></textarea>
+                                <div class="quick-fill-buttons">
+                                    <span class="quick-fill-label">快速填入：</span>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="驗屋完成，無重大缺失">驗屋完成，無重大缺失</button>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="需複驗">需複驗</button>
+                                    <button type="button" class="btn btn-sm btn-secondary quick-fill-btn" data-text="已完成簽認">已完成簽認</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 檔案上傳區塊 -->
+                        <div class="section-block" id="sectionFileUpload">
+                            <h3 class="section-title">上傳檔案 (驗屋報告/缺失照片)</h3>
+                            <label for="fileUpload" class="upload-wrap">
+                                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                <p class="text-info text-center" id="uploadPlaceholder">拖曳檔案至此處或點擊上傳</p>
+                                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.png,.mp4,.pdf" multiple="" class="file-input">
+                                <span class="upload-btn"><i class="fa-solid fa-plus"></i> 選擇檔案</span>
+                            </label>
+                            <p class="upload-hint">*支援圖片 .jpg, .png、影片 .mp4、文件 .pdf，最大 10MB</p>
+                            <div class="upload-list" id="uploadList">
+                                <!-- 上傳的檔案列表 -->
+                            </div>
+                        </div>
+
+                        <!-- 簽名區塊 -->
+                        <div class="section-block" id="sectionSignature">
+                            <h3 class="section-title">住戶簽名確認</h3>
+                            <div class="signature-block">
+                                <div class="signature-area" id="signatureArea">
+                                    <canvas id="signatureCanvas" width="0" height="200" style="width: 100%; height: 200px;"></canvas>
+                                    <div class="signature-placeholder" id="signaturePlaceholder">
+                                        <i class="fa-solid fa-signature"></i>
+                                        <span>點擊此處進行簽名</span>
+                                    </div>
+                                </div>
+                                <div class="signature-buttons">
+                                    <button type="button" class="btn btn-secondary" id="btnClearSign">
+                                        <i class="fa-solid fa-eraser"></i> 清除簽名
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnConfirmSign">
+                                        <i class="fa-solid fa-check"></i> 確認簽名
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 留言板 -->
+                        <div class="section-block" id="sectionChat">
+                            <h3 class="section-title">
+                                <i class="fa-regular fa-comments"></i> 留言板
+                            </h3>
+
+                            <div class="chat-container" id="chatContainer">
+                                <!-- 對話訊息區域 -->
+                                <div class="chat-messages" id="chatMessages">
+                                    <!-- 初始歡迎訊息或空狀態 -->
+                                    <div class="message message-left">
+                                        <div class="message-content">您好，如有任何驗屋相關問題，請在此留言。</div>
+                                        <div class="message-info">系統自動發送</div>
+                                    </div>
+                                </div>
+
+                                <!-- 輸入框區域 -->
+                                <div class="chat-input-area">
+                                    <!-- 附件按鈕區域 -->
+                                    <div class="chat-input-left">
+                                        <button type="button" class="attach-btn" id="btnAttachFile" title="附加檔案">
+                                            <i class="fa-solid fa-paperclip"></i>
+                                        </button>
+                                        <input type="file" id="chatFileInput" class="hidden-file-input" accept="image/*,video/*,.pdf,.doc,.docx">
+                                    </div>
+                                    <!-- 文字輸入區域 -->
+                                    <div class="chat-input-right">
+                                        <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息...">
+                                        <button type="button" class="send-btn" id="btnSendMessage" title="發送訊息">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 按鈕區 -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='reservation-inspection.html'">取消</button>
+                            <button type="submit" class="btn btn-primary">儲存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/reservation-inspection-edit.js"></script>
+</body>
+</html>

@@ -26,236 +26,11 @@
 <body>
     <div class="app-container">
         <!-- 頂部導覽列 -->
-                <header class="header">
-            <div class="header-left">
-                <!-- 側邊欄切換按鈕 -->
-                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <!-- Logo/系統名稱 -->
-                <div class="header-brand">
-                    <span class="header-title">CRM</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <!-- 隱藏右側內容 -->
-            </div>
-        </header>
+                <div id="header-container"></div>
 
         <!-- 側邊欄選單 -->
         <!-- ============================================ -->
-        <aside class="sidebar" id="sidebar">
-            <div class="main-container main-container-fixed">
-                <div class="scrollable">
-                    <ul class="menu-items">
-                        <!-- 首頁 -->
-                        <li class="menu-item" data-menu-id="home">
-                            <a href="index.html" title="首頁">
-                                <i class="menu-icon fa-solid fa-house"></i>
-                                <span class="menu-title">首頁</span>
-                            </a>
-                        </li>
-
-                        <!-- 系統管理 -->
-                        <li class="menu-item" data-menu-id="system">
-                            <a href="javascript:void(0)" title="系統管理">
-                                <i class="menu-icon fa-solid fa-gear"></i>
-                                <span class="menu-title">系統管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
-                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
-                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
-                                <!-- 隱藏：APP使用者管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- CRM設定 -->
-                        <li class="menu-item" data-menu-id="crm">
-                            <a href="javascript:void(0)" title="CRM設定">
-                                <i class="menu-icon fa-solid fa-sliders"></i>
-                                <span class="menu-title">CRM設定</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <!-- 隱藏：廠商管理 -->
-                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
-                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
-                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
-                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
-                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
-                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
-                                <!-- 隱藏：驗屋項目管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
-                                <!-- 隱藏：巡檢項目管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 戶別管理 -->
-                        <li class="menu-item" data-menu-id="unit">
-                            <a href="javascript:void(0)" title="戶別管理">
-                                <i class="menu-icon fa-solid fa-building"></i>
-                                <span class="menu-title">戶別管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
-                                <!-- 隱藏：驗屋戶別管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
-                                <!-- 隱藏：繳款紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 會員管理 -->
-                        <li class="menu-item" data-menu-id="member">
-                            <a href="javascript:void(0)" title="會員管理">
-                                <i class="menu-icon fa-solid fa-users"></i>
-                                <span class="menu-title">會員管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
-                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 個案單管理 -->
-                        <li class="menu-item" data-menu-id="case">
-                            <a href="javascript:void(0)" title="個案單管理">
-                                <i class="menu-icon fa-solid fa-file-invoice"></i>
-                                <span class="menu-title">個案單管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
-                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
-                                <!-- 隱藏：驗屋修繕紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
-                                <!-- 隱藏：巡檢紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
-                                <!-- 隱藏：驗屋個案單 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 派工單管理 -->
-                        <li class="menu-item" data-menu-id="dispatch">
-                            <a href="javascript:void(0)" title="派工單管理">
-                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
-                                <span class="menu-title">派工單管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 隱藏：報表管理 -->
-                        <li class="menu-item" data-menu-id="report" style="display: none;">
-                            <a href="javascript:void(0)" title="報表管理">
-                                <i class="menu-icon fa-solid fa-chart-pie"></i>
-                                <span class="menu-title">報表管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
-                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
-                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 推播管理 -->
-                        <li class="menu-item" data-menu-id="push">
-                            <a href="javascript:void(0)" title="推播管理">
-                                <i class="menu-icon fa-solid fa-bell"></i>
-                                <span class="menu-title">推播管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 隱藏：問卷管理 -->
-                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
-                            <a href="javascript:void(0)" title="問卷管理">
-                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
-                                <span class="menu-title">問卷管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 綠海養護 -->
-                        <li class="menu-item" data-menu-id="green">
-                            <a href="javascript:void(0)" title="綠海養護">
-                                <i class="menu-icon fa-solid fa-leaf"></i>
-                                <span class="menu-title">綠海養護</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
-                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 預約服務 -->
-                        <li class="menu-item" data-menu-id="reservation">
-                            <a href="javascript:void(0)" title="預約服務">
-                                <i class="menu-icon fa-solid fa-calendar-check"></i>
-                                <span class="menu-title">預約服務</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
-                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
-                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
-                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 房屋健檢 -->
-                        <li class="menu-item" data-menu-id="checkup">
-                            <a href="javascript:void(0)" title="房屋健檢">
-                                <i class="menu-icon fa-solid fa-stethoscope"></i>
-                                <span class="menu-title">房屋健檢</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
-                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 活動管理 -->
-                        <li class="menu-item" data-menu-id="activity">
-                            <a href="javascript:void(0)" title="活動管理">
-                                <i class="menu-icon fa-solid fa-calendar-days"></i>
-                                <span class="menu-title">活動管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
-                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        <div id="sidebar-container"></div>
 
         <!-- ============================================ -->
         <!-- 主內容區域 -->
@@ -571,7 +346,53 @@
         </div>
     </div>
 
+    <!-- 物業管理設定彈窗 -->
+    <div class="modal" id="propertyModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">物業管理設定 - <span id="propertyProjectName"></span></h3>
+                <button type="button" class="modal-close" data-action="close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="propertyForm">
+                    <input type="hidden" id="propertyProjectId">
+                    <div class="form-group">
+                        <label class="form-label">通行碼</label>
+                        <input type="text" class="form-input" id="projectPasscode" placeholder="請輸入通行碼">
+                        <span class="form-hint" style="font-size: 12px; color: #666; margin-top: 4px; display: block;">設定案場專屬的通行碼，供物業人員使用。</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">管理電話</label>
+                        <input type="tel" class="form-input" id="projectPhone" placeholder="例如：04-2255-xxxx">
+                        <span class="form-hint" style="font-size: 12px; color: #666; margin-top: 4px; display: block;">物業管理中心的聯絡電話。</span>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="form-label">服務時間</label>
+                        <input type="text" class="form-input" id="projectServiceHours" placeholder="例如：每日 09:00 - 21:00">
+                        <span class="form-hint" style="font-size: 12px; color: #666; margin-top: 4px; display: block;">物業人員的服務時段。</span>
+                    </div> -->
+                    <div class="form-group">
+                        <label class="form-label">主要管理者 (會員)</label>
+                        <select class="form-select" id="projectManager" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                            <option value="">請選擇主要管理者</option>
+                            <!-- 選項將由 JS 動態產生 -->
+                        </select>
+                        <span class="form-hint" style="font-size: 12px; color: #666; margin-top: 4px; display: block;">指定一位會員作為物業主要管理者。</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnPropertyCancel" data-action="close">取消</button>
+                <button class="btn btn-primary" id="btnPropertySave">儲存</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/mock-data.js"></script>
@@ -579,8 +400,15 @@
     <script src="js/progress-record-modal.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 渲染共用元件
+            if (typeof initCRMLayout === 'function') {
+                initCRMLayout();
+            }
+            
+            // 初始化側邊欄
             const sidebarManager = new SidebarManager();
             const projectModal = new Modal('projectModal');
+            const propertyModal = new Modal('propertyModal');
             
             // 初始化期款管理彈窗
             window.installmentModal = new InstallmentModal('installmentModal');
@@ -689,6 +517,9 @@
                                     <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="invoice">
                                         <i class="fa-solid fa-file-invoice"></i> 案場發票設定
                                     </button>
+                                    <button class="btn-outline-success btn-sm" data-id="${project.id}" data-action="property">
+                                        <i class="fa-solid fa-building-user"></i> 物業管理設定
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -741,6 +572,9 @@
                         break;
                     case 'invoice':
                         alert(`開啟「${project.name}」的案場發票設定`);
+                        break;
+                    case 'property':
+                        openPropertyModal(project);
                         break;
                 }
             }
@@ -796,6 +630,84 @@
                 projectModal.close();
             });
             
+            // 物業管理設定相關函數
+            function openPropertyModal(project) {
+                document.getElementById('propertyProjectName').textContent = project.name;
+                document.getElementById('propertyProjectId').value = project.id;
+                document.getElementById('projectPasscode').value = project.passcode || ''; 
+                document.getElementById('projectPhone').value = project.propertyPhone || ''; 
+                // document.getElementById('projectServiceHours').value = project.propertyServiceHours || ''; 
+                
+                // Get members from MockData if available, otherwise use fallback
+                let members = [];
+                if (window.CRMMockData && window.CRMMockData.members) {
+                    // Filter members by project if possible
+                    members = window.CRMMockData.members.filter(m => m.projectName === project.name || !m.projectName);
+                    if (members.length === 0) {
+                        // If no match, show all or some default
+                         members = window.CRMMockData.members; 
+                    }
+                    // Format for dropdown
+                    members = members.map(m => ({
+                        id: m.id,
+                        name: `${m.name} (${m.unitName || '未知單位'})`
+                    }));
+                } else {
+                    // Fallback
+                    members = [
+                        { id: 1, name: '陳小明 ' },
+                        { id: 2, name: '林美華 (B棟-5F)' },
+                        { id: 3, name: '張志豪 ' },
+                        { id: 4, name: '王大同 ' }
+                    ];
+                }
+                
+                const managerSelect = document.getElementById('projectManager');
+                managerSelect.innerHTML = '<option value="">請選擇主要管理者</option>';
+                members.forEach(m => {
+                    const option = document.createElement('option');
+                    option.value = m.id;
+                    option.textContent = m.name;
+                    if (project.managerId && String(project.managerId) === String(m.id)) {
+                        option.selected = true;
+                    }
+                    managerSelect.appendChild(option);
+                });
+
+                propertyModal.open();
+            }
+
+            document.getElementById('btnPropertySave').addEventListener('click', function() {
+                const id = parseInt(document.getElementById('propertyProjectId').value);
+                const passcode = document.getElementById('projectPasscode').value;
+                const phone = document.getElementById('projectPhone').value;
+                const serviceHours = document.getElementById('projectServiceHours').value;
+                const managerId = document.getElementById('projectManager').value;
+                
+                const project = projectData.find(p => p.id === id);
+                if (project) {
+                    project.passcode = passcode;
+                    project.propertyPhone = phone;
+                    project.propertyServiceHours = serviceHours;
+                    project.managerId = managerId;
+                    
+                    const managerSelect = document.getElementById('projectManager');
+                    const managerName = managerId ? managerSelect.options[managerSelect.selectedIndex].text : '無';
+
+                    alert(`已更新「${project.name}」的物業管理設定：\n通行碼：${passcode}\n電話：${phone}\n服務時間：${serviceHours}\n主要管理者：${managerName}`);
+                    propertyModal.close();
+                }
+            });
+
+            document.getElementById('btnPropertyCancel').addEventListener('click', function() {
+                propertyModal.close();
+            });
+            
+            // Remove manual binding for close button as it's now handled by data-action="close"
+            // But we can keep it if we want to be safe, however getting element by ID might fail if I removed the ID from the button.
+            // I removed id="propertyModalClose" from the button in the HTML.
+            // So removing this listener is required to avoid errors if id is gone.
+
             // 查詢功能
             document.getElementById('btnSearch').addEventListener('click', function() {
                 const searchValue = document.getElementById('searchProject').value;

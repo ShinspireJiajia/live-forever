@@ -25,236 +25,11 @@
 <body>
     <div class="app-container">
         <!-- 頂部導覽列 -->
-                <header class="header">
-            <div class="header-left">
-                <!-- 側邊欄切換按鈕 -->
-                <button class="header-toggle" id="sidebarToggle" title="展開/收合選單">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <!-- Logo/系統名稱 -->
-                <div class="header-brand">
-                    <span class="header-title">CRM</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <!-- 隱藏右側內容 -->
-            </div>
-        </header>
+                <div id="header-container"></div>
 
         <!-- 側邊欄選單 -->
         <!-- ============================================ -->
-        <aside class="sidebar" id="sidebar">
-            <div class="main-container main-container-fixed">
-                <div class="scrollable">
-                    <ul class="menu-items">
-                        <!-- 首頁 -->
-                        <li class="menu-item" data-menu-id="home">
-                            <a href="index.html" title="首頁">
-                                <i class="menu-icon fa-solid fa-house"></i>
-                                <span class="menu-title">首頁</span>
-                            </a>
-                        </li>
-
-                        <!-- 系統管理 -->
-                        <li class="menu-item" data-menu-id="system">
-                            <a href="javascript:void(0)" title="系統管理">
-                                <i class="menu-icon fa-solid fa-gear"></i>
-                                <span class="menu-title">系統管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="system-user.html" title="使用者管理"><span class="menu-title">使用者管理</span></a></li>
-                                <li class="menu-item"><a href="system-role.html" title="角色權限管理"><span class="menu-title">角色權限管理</span></a></li>
-                                <li class="menu-item"><a href="system-log.html" title="操作紀錄查詢"><span class="menu-title">操作紀錄查詢</span></a></li>
-                                <!-- 隱藏：APP使用者管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="APP使用者管理"><span class="menu-title">APP使用者管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- CRM設定 -->
-                        <li class="menu-item" data-menu-id="crm">
-                            <a href="javascript:void(0)" title="CRM設定">
-                                <i class="menu-icon fa-solid fa-sliders"></i>
-                                <span class="menu-title">CRM設定</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <!-- 隱藏：廠商管理 -->
-                                <li class="menu-item" style="display: none;"><a href="crm-vendor.html" title="廠商管理"><span class="menu-title">廠商管理</span></a></li>
-                                <li class="menu-item"><a href="crm-project.html" title="案場管理"><span class="menu-title">案場管理</span></a></li>
-                                <li class="menu-item"><a href="crm-milestone.html" title="里程碑管理"><span class="menu-title">里程碑管理</span></a></li>
-                                <li class="menu-item"><a href="crm-warranty.html" title="案場保固設定"><span class="menu-title">案場保固設定</span></a></li>
-                                <li class="menu-item"><a href="#" title="LINE頁面管理"><span class="menu-title">LINE頁面管理</span></a></li>
-                                <li class="menu-item"><a href="crm-email.html" title="郵件管理"><span class="menu-title">郵件管理</span></a></li>
-                                <!-- 隱藏：驗屋項目管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋項目管理"><span class="menu-title">驗屋項目管理</span></a></li>
-                                <!-- 隱藏：巡檢項目管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢項目管理"><span class="menu-title">巡檢項目管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 戶別管理 -->
-                        <li class="menu-item" data-menu-id="unit">
-                            <a href="javascript:void(0)" title="戶別管理">
-                                <i class="menu-icon fa-solid fa-building"></i>
-                                <span class="menu-title">戶別管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="unit-list.html" title="戶別管理"><span class="menu-title">戶別管理</span></a></li>
-                                <!-- 隱藏：驗屋戶別管理 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋戶別管理"><span class="menu-title">驗屋戶別管理</span></a></li>
-                                <!-- 隱藏：繳款紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="unit-payment.html" title="繳款紀錄"><span class="menu-title">繳款紀錄</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 會員管理 -->
-                        <li class="menu-item" data-menu-id="member">
-                            <a href="javascript:void(0)" title="會員管理">
-                                <i class="menu-icon fa-solid fa-users"></i>
-                                <span class="menu-title">會員管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
-                                <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 個案單管理 -->
-                        <li class="menu-item" data-menu-id="case">
-                            <a href="javascript:void(0)" title="個案單管理">
-                                <i class="menu-icon fa-solid fa-file-invoice"></i>
-                                <span class="menu-title">個案單管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="case-list.html" title="個案單"><span class="menu-title">個案單</span></a></li>
-                                <li class="menu-item"><a href="green-case-list.html" title="綠海報修個案單"><span class="menu-title">綠海報修個案單</span></a></li>
-                                <!-- 隱藏：驗屋修繕紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋修繕紀錄"><span class="menu-title">驗屋修繕紀錄</span></a></li>
-                                <!-- 隱藏：巡檢紀錄 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="巡檢紀錄"><span class="menu-title">巡檢紀錄</span></a></li>
-                                <!-- 隱藏：驗屋個案單 -->
-                                <li class="menu-item" style="display: none;"><a href="#" title="驗屋個案單"><span class="menu-title">驗屋個案單</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 派工單管理 -->
-                        <li class="menu-item" data-menu-id="dispatch">
-                            <a href="javascript:void(0)" title="派工單管理">
-                                <i class="menu-icon fa-solid fa-clipboard-list"></i>
-                                <span class="menu-title">派工單管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="work-order.html" title="派工單管理"><span class="menu-title">派工單管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 隱藏：報表管理 -->
-                        <li class="menu-item" data-menu-id="report" style="display: none;">
-                            <a href="javascript:void(0)" title="報表管理">
-                                <i class="menu-icon fa-solid fa-chart-pie"></i>
-                                <span class="menu-title">報表管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="售後服務管制總表"><span class="menu-title">售後服務管制總表</span></a></li>
-                                <li class="menu-item"><a href="#" title="未結案個案單"><span class="menu-title">未結案個案單</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修類統計表"><span class="menu-title">全部建案維修類統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修部品統計表"><span class="menu-title">全部建案維修部品統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修位置統計表"><span class="menu-title">全部建案維修位置統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="滿意度調查統計"><span class="menu-title">滿意度調查統計</span></a></li>
-                                <li class="menu-item"><a href="#" title="客戶滿意度明細表"><span class="menu-title">客戶滿意度明細表</span></a></li>
-                                <li class="menu-item"><a href="#" title="全部建案維修狀態統計表"><span class="menu-title">全部建案維修狀態統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="案件數量統計表"><span class="menu-title">案件數量統計表</span></a></li>
-                                <li class="menu-item"><a href="#" title="任務完成統計表"><span class="menu-title">任務完成統計表</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 推播管理 -->
-                        <li class="menu-item" data-menu-id="push">
-                            <a href="javascript:void(0)" title="推播管理">
-                                <i class="menu-icon fa-solid fa-bell"></i>
-                                <span class="menu-title">推播管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="推播管理"><span class="menu-title">推播管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 隱藏：問卷管理 -->
-                        <li class="menu-item" data-menu-id="questionnaire" style="display: none;">
-                            <a href="javascript:void(0)" title="問卷管理">
-                                <i class="menu-icon fa-solid fa-clipboard-question"></i>
-                                <span class="menu-title">問卷管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="#" title="題目管理"><span class="menu-title">題目管理</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 綠海養護 -->
-                        <li class="menu-item" data-menu-id="green">
-                            <a href="javascript:void(0)" title="綠海養護">
-                                <i class="menu-icon fa-solid fa-leaf"></i>
-                                <span class="menu-title">綠海養護</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="green-contract.html" title="養護合約"><span class="menu-title">養護合約</span></a></li>
-                                <li class="menu-item"><a href="green-service.html" title="服務紀錄"><span class="menu-title">服務紀錄</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 預約服務 -->
-                        <li class="menu-item" data-menu-id="reservation">
-                            <a href="javascript:void(0)" title="預約服務">
-                                <i class="menu-icon fa-solid fa-calendar-check"></i>
-                                <span class="menu-title">預約服務</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="reservation-collateral.html" title="對保預約"><span class="menu-title">對保預約</span></a></li>
-                                <li class="menu-item"><a href="reservation-inspection.html" title="驗屋預約"><span class="menu-title">驗屋預約</span></a></li>
-                                <li class="menu-item"><a href="reservation-handover.html" title="交屋預約"><span class="menu-title">交屋預約</span></a></li>
-                                <li class="menu-item"><a href="reservation-custom.html" title="客變預約"><span class="menu-title">客變預約</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 房屋健檢 -->
-                        <li class="menu-item" data-menu-id="checkup">
-                            <a href="javascript:void(0)" title="房屋健檢">
-                                <i class="menu-icon fa-solid fa-stethoscope"></i>
-                                <span class="menu-title">房屋健檢</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="house-checkup-schedule.html" title="健檢排程"><span class="menu-title">健檢排程</span></a></li>
-                                <li class="menu-item"><a href="house-checkup-items.html" title="檢查項目"><span class="menu-title">檢查項目</span></a></li>
-                            </ul>
-                        </li>
-
-                        <!-- 活動管理 -->
-                        <li class="menu-item" data-menu-id="activity">
-                            <a href="javascript:void(0)" title="活動管理">
-                                <i class="menu-icon fa-solid fa-calendar-days"></i>
-                                <span class="menu-title">活動管理</span>
-                                <i class="expand-state fa-solid fa-chevron-right"></i>
-                            </a>
-                            <ul class="menu-items">
-                                <li class="menu-item"><a href="activity-list.html" title="活動清單"><span class="menu-title">活動清單</span></a></li>
-                                <li class="menu-item"><a href="activity-registration.html" title="報名管理"><span class="menu-title">報名管理</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        <div id="sidebar-container"></div>
 
         <!-- ============================================ -->
         <!-- 主內容區域 -->
@@ -939,9 +714,23 @@
                                 <div class="col-md-8">
                                     <select class="form-control" id="cIdentity">
                                         <option value="">請選擇</option>
-                                        <option value="屋主">屋主</option>
+                                        <option value="所有權人">所有權人（產權持有者）</option>
                                         <option value="住戶">住戶</option>
+                                        <option value="租客">租客</option>
                                         <option value="管理員">管理員</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="transferTypeGroup" style="display: none;">
+                                <label for="cTransferType" class="col-md-4 col-form-label">異動類別</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" id="cTransferType">
+                                        <option value="新購">新購</option>
+                                        <option value="換約移轉">換約移轉</option>
+                                        <option value="繼承">繼承</option>
+                                        <option value="贈與">贈與</option>
+                                        <option value="法拍">法拍</option>
+                                        <option value="其他">其他</option>
                                     </select>
                                 </div>
                             </div>
@@ -1048,13 +837,186 @@
         </div>
     </div>
 
+    <!-- 產權異動紀錄彈窗 -->
+    <div class="modal" id="ownershipHistoryModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 950px; width: 950px;">
+            <div class="modal-header">
+                <h3 class="modal-title">產權異動紀錄 <span id="historyUnitInfo" style="font-size: 0.9rem; color: #666; margin-left: 10px;"></span></h3>
+                <button class="modal-close" id="btnCloseHistoryModalTop">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="alert alert-info mb-0" style="font-size: 0.9rem; color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb; padding: .5rem 1rem; width: auto; flex-grow: 1; margin-right: 15px;">
+                        <i class="fas fa-info-circle mr-1"></i>此列表顯示該戶別歷來的產權持有狀況，包含前一手資訊。最新紀錄會以黃底標示。
+                    </div>
+                    <button class="btn btn-success btn-sm" id="btnAddOwnershipHistory" style="min-width: 100px;">
+                        <i class="fas fa-plus mr-1"></i>新增紀錄
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped border" style="min-width: 100%; background-color: #f3f3f3;">
+                        <thead style="background-color: #5D4037; color: white;">
+                            <tr>
+                                <th width="5%">序號</th>
+                                <th width="12%">所有權人</th>
+                                <th width="10%">異動類別</th>
+                                <th width="10%">簽約日期</th>
+                                <th width="12%">前手姓名</th>
+                                <th width="10%">前手簽約日</th>
+                                <th width="10%">建檔日期</th>
+                                <th width="16%">備註</th>
+                                <th width="15%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ownershipHistoryTableBody">
+                            <!-- JS 渲染內容 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="btnCloseHistoryModal">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增/編輯產權異動紀錄子彈窗 -->
+    <div class="modal" id="ownershipHistoryEditModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 600px; width: 600px;">
+            <div class="card" style="border: none;">
+                <div class="card-header" style="background-color: #fff; border-bottom: 1px solid #e0e0e0; padding: 1rem; font-size: 1.1rem; font-weight: 500; color: #222;">
+                    <i class="fas fa-edit mr-2"></i><span id="ownershipHistoryEditTitle">新增產權異動紀錄</span>
+                </div>
+                <div class="card-body" style="padding: 1.5rem;">
+                    <form id="ownershipHistoryForm">
+                        <input type="hidden" id="historyRecordId">
+                        <input type="hidden" id="historyUnitId">
+                        
+                        <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-left: -10px;">
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">所有權人 <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="historyOwnerName" placeholder="請輸入所有權人姓名" required>
+                            </div>
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">身分證字號</label>
+                                <input type="text" class="form-control" id="historyOwnerId" placeholder="請輸入身分證字號">
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-left: -10px;">
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">聯絡電話</label>
+                                <input type="tel" class="form-control" id="historyOwnerPhone" placeholder="請輸入聯絡電話">
+                            </div>
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">關係人/配偶</label>
+                                <input type="text" class="form-control" id="historyOwnerRelation" placeholder="請輸入關係人姓名">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label">通訊地址</label>
+                            <input type="text" class="form-control" id="historyOwnerAddress" placeholder="請輸入通訊地址">
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-left: -10px;">
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">異動類別 <span class="text-danger">*</span></label>
+                                <select class="form-control" id="historyTransferType" required>
+                                    <option value="">請選擇異動類別</option>
+                                    <option value="新購">新購</option>
+                                    <option value="換約移轉">換約移轉</option>
+                                    <option value="繼承">繼承</option>
+                                    <option value="贈與">贈與</option>
+                                    <option value="法拍">法拍</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">簽約日期 <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="historyContractDate" required>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-left: -10px;">
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <label class="form-label">過戶日期</label>
+                                <input type="date" class="form-control" id="historyTransferDate">
+                            </div>
+                            <div class="form-group mb-3" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px;">
+                                <!-- 空位保留或放其他日期 -->
+                            </div>
+                        </div>
+                        
+                        <div style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; border: 1px solid #dee2e6; margin-bottom: 1rem;">
+                            <div style="font-size: 0.9rem; font-weight: bold; color: #495057; margin-bottom: 0.5rem; display: flex; align-items: center;">
+                                <i class="fas fa-history mr-2"></i>前手資訊
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-left: -10px;">
+                                <div class="form-group mb-0" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px; margin-bottom: 0.5rem;">
+                                    <label class="form-label" style="font-size: 0.85rem;">前手姓名</label>
+                                    <input type="text" class="form-control form-control-sm" id="historyPreviousOwner" placeholder="若為移轉請填寫前手姓名">
+                                </div>
+                                <div class="form-group mb-0" style="flex: 0 0 50%; max-width: 50%; padding-left: 10px; padding-right: 10px; margin-bottom: 0.5rem;">
+                                    <label class="form-label" style="font-size: 0.85rem;">前手簽約日</label>
+                                    <input type="date" class="form-control form-control-sm" id="historyPreviousContractDate">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">備註</label>
+                            <textarea class="form-control" id="historyRemark" rows="3" placeholder="請輸入備註說明"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center" style="padding: 1rem; border-top: 1px solid #e0e0e0;">
+                    <button class="btn btn-success mr-2" id="btnSaveOwnershipHistory">
+                        <i class="fas fa-save mr-1"></i>儲存
+                    </button>
+                    <button class="btn btn-danger" id="btnCancelOwnershipHistory">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 產權異動詳情彈窗 -->
+    <div class="modal" id="ownershipHistoryDetailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container" style="max-width: 550px; width: 550px;">
+            <div class="card" style="border: none;">
+                <div class="card-header" style="background-color: #fff; border-bottom: 1px solid #e0e0e0; padding: 1rem; font-size: 1.1rem; font-weight: 500; color: #222;">
+                    <i class="fas fa-info-circle mr-2"></i>產權異動詳情
+                </div>
+                <div class="card-body" style="padding: 1.5rem;" id="ownershipHistoryDetailContent">
+                    <!-- JS 渲染內容 -->
+                </div>
+                <div class="card-footer text-center" style="padding: 1rem; border-top: 1px solid #e0e0e0;">
+                    <button class="btn btn-danger" id="btnCloseHistoryDetailModal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
+    <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/pagination.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/mock-data.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 渲染共用元件
+            if (typeof initCRMLayout === 'function') {
+                initCRMLayout();
+            }
+            
+            // 初始化側邊欄
             const sidebarManager = new SidebarManager();
             const unitModal = new Modal('unitModal');
             const residentModal = new Modal({ id: 'residentModal' });
@@ -1101,6 +1063,9 @@
                                 <button type="button" class="btn btn-outline-info btn-sm m-1 btn-resident" data-id="${unit.id}">
                                     <i class="fas fa-edit mr-1"></i>住戶
                                 </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 btn-history" data-id="${unit.id}" title="產權異動">
+                                    <i class="fas fa-history mr-1"></i>產權異動
+                                </button>
                                 <button type="button" class="btn btn-outline-info btn-sm m-1 btn-attribute" data-id="${unit.id}">
                                     <i class="fas fa-pen-to-square mr-1"></i>戶別屬性
                                 </button>
@@ -1137,6 +1102,13 @@
                     btn.addEventListener('click', function() {
                         const id = parseInt(this.dataset.id);
                         openResidentModal(id);
+                    });
+                });
+
+                document.querySelectorAll('.btn-history').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        openOwnershipHistoryModal(id);
                     });
                 });
 
@@ -1383,12 +1355,25 @@
                     return;
                 }
                 
+                // 身分別標籤樣式
+                function getIdentityBadge(identity) {
+                    const badgeStyles = {
+                        '所有權人': 'background-color: #d4edda; color: #155724;',
+                        '前所有權人': 'background-color: #e2e3e5; color: #383d41;',
+                        '住戶': 'background-color: #cce5ff; color: #004085;',
+                        '租客': 'background-color: #fff3cd; color: #856404;',
+                        '管理員': 'background-color: #f8d7da; color: #721c24;'
+                    };
+                    const style = badgeStyles[identity] || 'background-color: #e9ecef; color: #495057;';
+                    return `<span style="display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; ${style}">${identity}</span>`;
+                }
+                
                 tbody.innerHTML = members.map(m => `
                     <tr>
                         <td>${m.id}</td>
                         <td>${m.projectName}</td>
                         <td>${m.name}</td>
-                        <td>${m.identity}</td>
+                        <td>${getIdentityBadge(m.identity)}</td>
                         <td>${m.unitName}</td>
                         <td>
                             <button type="button" class="btn btn-outline-success btn-sm m-1 btn-edit-resident" data-id="${m.id}">
@@ -1448,6 +1433,8 @@
                 document.getElementById('cMemberSearch').value = '';
                 document.getElementById('cMemberSelect').innerHTML = '<option value="">會員姓名</option>';
                 document.getElementById('cIdentity').value = '';
+                document.getElementById('cTransferType').value = '新購';
+                document.getElementById('transferTypeGroup').style.display = 'none';
             });
 
             document.getElementById('btnAddResidentCancel').addEventListener('click', function() {
@@ -1493,6 +1480,16 @@
                 });
             });
 
+            // 當身分別選擇「所有權人」時，顯示異動類別欄位
+            document.getElementById('cIdentity').addEventListener('change', function() {
+                const transferTypeGroup = document.getElementById('transferTypeGroup');
+                if (this.value === '所有權人') {
+                    transferTypeGroup.style.display = 'flex';
+                } else {
+                    transferTypeGroup.style.display = 'none';
+                }
+            });
+
             document.getElementById('btnAddResidentConfirm').addEventListener('click', function() {
                 const select = document.getElementById('cMemberSelect');
                 const memberId = select.value;
@@ -1512,26 +1509,103 @@
                 const selectedOption = select.options[select.selectedIndex];
                 const name = selectedOption.dataset.name;
                 const phone = selectedOption.dataset.phone;
+                const today = new Date().toISOString().split('T')[0];
                 
                 const newResident = {
-                    id: Date.now(), // Generate new ID
+                    id: Date.now(),
                     name: name,
                     phone: phone,
                     identity: identity,
                     unitName: unit.building + unit.doorNumber,
                     projectName: unit.projectName,
-                    email: '', // Mock empty
+                    email: '',
                     lineBindStatus: '未綁定',
                     bindDate: null,
-                    registerDate: new Date().toISOString().split('T')[0]
+                    registerDate: today
                 };
 
                 CRMMockData.members.push(newResident);
-                if (CRMMockData.save) CRMMockData.save();
 
-                alert('新增成功');
+                // ======== 所有權人自動處理產權異動 ========
+                if (identity === '所有權人') {
+                    const transferType = document.getElementById('cTransferType').value;
+                    const previousOwner = unit.owner || '';
+                    
+                    // 初始化產權異動資料存儲
+                    if (!CRMMockData.ownershipHistory) {
+                        CRMMockData.ownershipHistory = [];
+                    }
+
+                    // 查詢前一手的完整資訊（簽約日、建檔日）
+                    let previousContractDate = '';
+                    let previousCreateDate = '';
+                    
+                    if (previousOwner) {
+                        // 從產權異動紀錄中查找前一手的資訊
+                        const previousRecord = CRMMockData.ownershipHistory
+                            .filter(h => h.unitId === unitId && h.ownerName === previousOwner)
+                            .sort((a, b) => new Date(b.contractDate) - new Date(a.contractDate))[0];
+                        
+                        if (previousRecord) {
+                            previousContractDate = previousRecord.contractDate || '';
+                            previousCreateDate = previousRecord.createDate || '';
+                        } else {
+                            // 如果沒有紀錄，嘗試從戶別資訊取得
+                            previousContractDate = unit.contractDate || '';
+                            previousCreateDate = unit.contractDate || ''; // 用簽約日作為建檔日的預設值
+                        }
+                    }
+
+                    // 新增產權異動紀錄（包含前一手完整資訊）
+                    const newHistoryRecord = {
+                        id: Date.now(),
+                        unitId: unitId,
+                        ownerName: name,
+                        ownerId: '',
+                        ownerPhone: phone || '',
+                        transferType: transferType,
+                        contractDate: today,
+                        transferDate: '',
+                        // 前一手完整資訊
+                        previousOwner: previousOwner,
+                        previousContractDate: previousContractDate,
+                        previousCreateDate: previousCreateDate,
+                        remark: previousOwner ? `自 ${previousOwner} 移轉` : '首位所有權人',
+                        createDate: today,
+                        updateDate: today
+                    };
+                    CRMMockData.ownershipHistory.push(newHistoryRecord);
+
+                    // 更新戶別的屋主資訊
+                    const unitIndex = CRMMockData.units.findIndex(u => u.id === unitId);
+                    if (unitIndex > -1) {
+                        CRMMockData.units[unitIndex].owner = name;
+                        CRMMockData.units[unitIndex].ownerPhone = phone;
+                        CRMMockData.units[unitIndex].contractDate = today;
+                    }
+
+                    // 將原屋主的身分改為「前所有權人」
+                    if (previousOwner) {
+                        const targetUnitName = unit.building + unit.doorNumber;
+                        CRMMockData.members.forEach(m => {
+                            if (m.unitName === targetUnitName && 
+                                m.projectName === unit.projectName && 
+                                m.identity === '所有權人' &&
+                                m.name === previousOwner) {
+                                m.identity = '前所有權人';
+                            }
+                        });
+                    }
+
+                    alert('新增成功！已自動更新戶別所有權人並記錄產權異動。');
+                } else {
+                    alert('新增成功');
+                }
+
+                if (CRMMockData.save) CRMMockData.save();
                 addResidentModal.close();
-                loadResidentData(unit); // Refresh the resident list
+                loadResidentData(unit);
+                loadUnitData(); // 重新載入戶別列表以反映屋主變更
             });
 
             // Listener for Add Resident button inside Unit Modal
@@ -1717,6 +1791,445 @@
             document.getElementById('contractModalCloseBtn').addEventListener('click', function() {
                 contractModal.close();
             });
+
+            // ==========================================
+            // 產權異動紀錄功能
+            // ==========================================
+            
+            const ownershipHistoryModal = new Modal({ id: 'ownershipHistoryModal' });
+            const ownershipHistoryEditModal = new Modal({ id: 'ownershipHistoryEditModal' });
+            const ownershipHistoryDetailModal = new Modal({ id: 'ownershipHistoryDetailModal' });
+            
+            // 當前操作的戶別ID
+            let currentHistoryUnitId = null;
+            // 編輯模式（新增或編輯）
+            let historyEditMode = 'add';
+            
+            // 初始化產權異動資料存儲（若不存在）
+            if (!CRMMockData.ownershipHistory) {
+                CRMMockData.ownershipHistory = [];
+            }
+
+            // 關閉主彈窗
+            document.getElementById('btnCloseHistoryModal').addEventListener('click', function() {
+                ownershipHistoryModal.close();
+            });
+
+            // 開啟產權異動紀錄彈窗
+            function openOwnershipHistoryModal(unitId) {
+                const unit = CRMMockData.getById('units', unitId);
+                if (!unit) return;
+                
+                currentHistoryUnitId = unitId;
+                const unitName = `${unit.building}-${unit.doorNumber}`;
+                
+                // 更新標題資訊
+                document.getElementById('historyUnitInfo').textContent = `【${unit.projectName} - ${unitName}】`;
+                
+                // 初始化該戶別的歷史資料（若不存在）
+                initOwnershipHistoryData(unitId, unit);
+                
+                // 載入並渲染資料
+                loadOwnershipHistoryData(unitId);
+                ownershipHistoryModal.open();
+            }
+
+            // 初始化戶別的產權異動資料（模擬資料）
+            function initOwnershipHistoryData(unitId, unit) {
+                // 檢查是否已有該戶別的資料
+                const existingData = CRMMockData.ownershipHistory.filter(h => h.unitId === unitId);
+                if (existingData.length > 0) return;
+                
+                // 若無資料且有屋主，建立模擬資料
+                if (unit.owner) {
+                    const now = new Date();
+                    const dateStr = now.toISOString().split('T')[0];
+                    
+                    // 現任屋主
+                    CRMMockData.ownershipHistory.push({
+                        id: Date.now(),
+                        unitId: unitId,
+                        ownerName: unit.owner,
+                        ownerId: 'A12345****',
+                        ownerPhone: '0912-345-678',
+                        transferType: '換約移轉',
+                        contractDate: unit.contractDate || '2025-01-15',
+                        transferDate: '2025-02-01',
+                        previousOwner: '陳大文',
+                        remark: '自前手接手',
+                        createDate: dateStr,
+                        updateDate: dateStr
+                    });
+
+                    // 前一手
+                    CRMMockData.ownershipHistory.push({
+                        id: Date.now() - 1000,
+                        unitId: unitId,
+                        ownerName: '陳大文',
+                        ownerId: 'B23456****',
+                        ownerPhone: '0923-456-789',
+                        transferType: '新購',
+                        contractDate: '2023-01-10',
+                        transferDate: '2023-03-15',
+                        previousOwner: '',
+                        remark: '原始購買人',
+                        createDate: '2023-01-12',
+                        updateDate: '2023-01-12'
+                    });
+
+                    if (CRMMockData.save) CRMMockData.save();
+                }
+            }
+
+            // 載入產權異動資料
+            function loadOwnershipHistoryData(unitId) {
+                const historyData = CRMMockData.ownershipHistory
+                    .filter(h => h.unitId === unitId)
+                    .sort((a, b) => new Date(b.contractDate) - new Date(a.contractDate));
+                
+                renderHistoryTable(historyData);
+            }
+
+            // 渲染產權異動表格
+            function renderHistoryTable(data) {
+                const tbody = document.getElementById('ownershipHistoryTableBody');
+                
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="9" class="text-center" style="padding: 2rem; color: #666;">目前尚無產權異動紀錄</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = data.map((item, index) => {
+                    // 根據是否為最新一筆(現任屋主)給予樣式區別
+                    const isCurrent = index === 0; 
+                    const rowStyle = isCurrent ? 'style="font-weight: 500; background-color: #fff8e1;"' : '';
+                    const statusBadge = isCurrent ? '<span class="status-badge status-completed" style="font-size: 0.7rem;">現任</span><br>' : '';
+                    
+                    // 前手資訊顯示
+                    const previousInfo = item.previousOwner 
+                        ? `<span style="color: #666;">${item.previousOwner}</span>`
+                        : '<span style="color: #999; font-style: italic;">無</span>';
+                    
+                    const previousContractDateDisplay = item.previousContractDate || '-';
+
+                    return `
+                        <tr ${rowStyle}>
+                            <td>${data.length - index}</td>
+                            <td>${statusBadge}${item.ownerName}</td>
+                            <td><span class="transfer-type-badge transfer-type-${item.transferType}">${item.transferType}</span></td>
+                            <td>${item.contractDate || '-'}</td>
+                            <td>${previousInfo}</td>
+                            <td>${previousContractDateDisplay}</td>
+                            <td>${item.createDate || '-'}</td>
+                            <td title="${item.remark || ''}">${truncateText(item.remark, 8)}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-info btn-sm btn-history-detail" data-id="${item.id}" title="查看詳情">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-success btn-sm btn-history-edit" data-id="${item.id}" title="編輯">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm btn-history-delete" data-id="${item.id}" title="刪除">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+                // 綁定操作按鈕事件
+                bindHistoryTableEvents();
+            }
+
+            // 綁定表格內按鈕事件
+            function bindHistoryTableEvents() {
+                // 查看詳情
+                document.querySelectorAll('.btn-history-detail').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        openHistoryDetailModal(id);
+                    });
+                });
+
+                // 編輯
+                document.querySelectorAll('.btn-history-edit').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        openHistoryEditModal(id);
+                    });
+                });
+
+                // 刪除
+                document.querySelectorAll('.btn-history-delete').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        deleteHistoryRecord(id);
+                    });
+                });
+            }
+
+            // 文字截斷輔助函式
+            function truncateText(text, maxLength) {
+                if (!text) return '-';
+                return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+            }
+
+            // 新增按鈕點擊事件
+            document.getElementById('btnAddOwnershipHistory').addEventListener('click', function() {
+                historyEditMode = 'add';
+                document.getElementById('ownershipHistoryEditTitle').textContent = '新增產權異動紀錄';
+                resetHistoryForm();
+                
+                // 設定預設日期為今天
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('historyContractDate').value = today;
+
+                // 自動填入前手資訊（找該戶別最近一筆紀錄）
+                const unitHistory = CRMMockData.ownershipHistory
+                    .filter(h => h.unitId === currentHistoryUnitId)
+                    .sort((a, b) => new Date(b.contractDate) - new Date(a.contractDate));
+                
+                if (unitHistory.length > 0) {
+                    const lastRecord = unitHistory[0];
+                    document.getElementById('historyPreviousOwner').value = lastRecord.ownerName || '';
+                    document.getElementById('historyPreviousContractDate').value = lastRecord.contractDate || '';
+                }
+                
+                ownershipHistoryEditModal.open();
+            });
+
+            // 開啟編輯彈窗
+            function openHistoryEditModal(recordId) {
+                const record = CRMMockData.ownershipHistory.find(h => h.id === recordId);
+                if (!record) return;
+
+                historyEditMode = 'edit';
+                document.getElementById('ownershipHistoryEditTitle').textContent = '編輯產權異動紀錄';
+                
+                // 填入資料
+                document.getElementById('historyRecordId').value = record.id;
+                document.getElementById('historyOwnerName').value = record.ownerName || '';
+                document.getElementById('historyOwnerId').value = record.ownerId || '';
+                document.getElementById('historyOwnerPhone').value = record.ownerPhone || '';
+                document.getElementById('historyOwnerRelation').value = record.ownerRelation || '';
+                document.getElementById('historyOwnerAddress').value = record.ownerAddress || '';
+                document.getElementById('historyTransferType').value = record.transferType || '';
+                document.getElementById('historyContractDate').value = record.contractDate || '';
+                document.getElementById('historyTransferDate').value = record.transferDate || '';
+                document.getElementById('historyPreviousOwner').value = record.previousOwner || '';
+                document.getElementById('historyPreviousContractDate').value = record.previousContractDate || '';
+                document.getElementById('historyRemark').value = record.remark || '';
+
+                ownershipHistoryEditModal.open();
+            }
+
+            // 開啟詳情彈窗
+            function openHistoryDetailModal(recordId) {
+                const record = CRMMockData.ownershipHistory.find(h => h.id === recordId);
+                if (!record) return;
+
+                const content = document.getElementById('ownershipHistoryDetailContent');
+                content.innerHTML = `
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">所有權人</span>
+                            <span class="detail-value">${record.ownerName || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">身分證字號</span>
+                            <span class="detail-value">${record.ownerId || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">聯絡電話</span>
+                            <span class="detail-value">${record.ownerPhone || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">關係人/配偶</span>
+                            <span class="detail-value">${record.ownerRelation || '-'}</span>
+                        </div>
+                        <div class="detail-row detail-full">
+                            <span class="detail-label">通訊地址</span>
+                            <span class="detail-value">${record.ownerAddress || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">異動類別</span>
+                            <span class="detail-value"><span class="transfer-type-badge transfer-type-${record.transferType}">${record.transferType}</span></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">簽約日期</span>
+                            <span class="detail-value">${record.contractDate || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">過戶日期</span>
+                            <span class="detail-value">${record.transferDate || '-'}</span>
+                        </div>
+                        
+                        <!-- 前一手完整資訊區塊 -->
+                        ${record.previousOwner ? `
+                        <div class="detail-row detail-full" style="background-color: #fff3cd; border-left-color: #ffc107; margin-top: 8px;">
+                            <span class="detail-label" style="color: #856404; font-weight: bold;">
+                                <i class="fas fa-user-clock mr-1"></i>前一手資訊
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">前手姓名</span>
+                            <span class="detail-value">${record.previousOwner}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">前手簽約日</span>
+                            <span class="detail-value">${record.previousContractDate || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">前手建檔日</span>
+                            <span class="detail-value">${record.previousCreateDate || '-'}</span>
+                        </div>
+                        ` : `
+                        <div class="detail-row detail-full" style="background-color: #d4edda; border-left-color: #28a745;">
+                            <span class="detail-label" style="color: #155724;">前手姓名</span>
+                            <span class="detail-value" style="color: #155724;">無（首位所有權人）</span>
+                        </div>
+                        `}
+                        
+                        <div class="detail-row" style="margin-top: 8px;">
+                            <span class="detail-label">建檔日期</span>
+                            <span class="detail-value">${record.createDate || '-'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">最後更新</span>
+                            <span class="detail-value">${record.updateDate || '-'}</span>
+                        </div>
+                        <div class="detail-row detail-full">
+                            <span class="detail-label">備註</span>
+                            <span class="detail-value">${record.remark || '無'}</span>
+                        </div>
+                    </div>
+                `;
+
+                ownershipHistoryDetailModal.open();
+            }
+
+            // 關閉詳情彈窗
+            document.getElementById('btnCloseHistoryDetailModal').addEventListener('click', function() {
+                ownershipHistoryDetailModal.close();
+            });
+
+            // 重置表單
+            function resetHistoryForm() {
+                document.getElementById('ownershipHistoryForm').reset();
+                document.getElementById('historyRecordId').value = '';
+            }
+
+            // 儲存產權異動紀錄
+            document.getElementById('btnSaveOwnershipHistory').addEventListener('click', function() {
+                const ownerName = document.getElementById('historyOwnerName').value.trim();
+                const transferType = document.getElementById('historyTransferType').value;
+                const contractDate = document.getElementById('historyContractDate').value;
+
+                // 驗證必填欄位
+                if (!ownerName) {
+                    alert('請輸入所有權人姓名');
+                    return;
+                }
+                if (!transferType) {
+                    alert('請選擇異動類別');
+                    return;
+                }
+                if (!contractDate) {
+                    alert('請選擇簽約日期');
+                    return;
+                }
+
+                const now = new Date();
+                const dateStr = now.toISOString().split('T')[0];
+
+                if (historyEditMode === 'add') {
+                    // 新增
+                    const newRecord = {
+                        id: Date.now(),
+                        unitId: currentHistoryUnitId,
+                        ownerName: ownerName,
+                        ownerId: document.getElementById('historyOwnerId').value.trim(),
+                        ownerPhone: document.getElementById('historyOwnerPhone').value.trim(),
+                        ownerRelation: document.getElementById('historyOwnerRelation').value.trim(),
+                        ownerAddress: document.getElementById('historyOwnerAddress').value.trim(),
+                        transferType: transferType,
+                        contractDate: contractDate,
+                        transferDate: document.getElementById('historyTransferDate').value,
+                        previousOwner: document.getElementById('historyPreviousOwner').value.trim(),
+                        previousContractDate: document.getElementById('historyPreviousContractDate').value,
+                        remark: document.getElementById('historyRemark').value.trim(),
+                        createDate: dateStr,
+                        updateDate: dateStr
+                    };
+
+                    CRMMockData.ownershipHistory.push(newRecord);
+                    
+                    // 同步更新戶別的屋主資訊（最新一筆）
+                    updateUnitOwner(currentHistoryUnitId, ownerName, contractDate);
+                    
+                    alert('產權異動紀錄新增成功！');
+                } else {
+                    // 編輯
+                    const recordId = parseInt(document.getElementById('historyRecordId').value);
+                    const recordIndex = CRMMockData.ownershipHistory.findIndex(h => h.id === recordId);
+                    
+                    if (recordIndex > -1) {
+                        CRMMockData.ownershipHistory[recordIndex] = {
+                            ...CRMMockData.ownershipHistory[recordIndex],
+                            ownerName: ownerName,
+                            ownerId: document.getElementById('historyOwnerId').value.trim(),
+                            ownerPhone: document.getElementById('historyOwnerPhone').value.trim(),
+                            ownerRelation: document.getElementById('historyOwnerRelation').value.trim(),
+                            ownerAddress: document.getElementById('historyOwnerAddress').value.trim(),
+                            transferType: transferType,
+                            contractDate: contractDate,
+                            transferDate: document.getElementById('historyTransferDate').value,
+                            previousOwner: document.getElementById('historyPreviousOwner').value.trim(),
+                            previousContractDate: document.getElementById('historyPreviousContractDate').value,
+                            remark: document.getElementById('historyRemark').value.trim(),
+                            updateDate: dateStr
+                        };
+                        
+                        alert('產權異動紀錄更新成功！');
+                    }
+                }
+
+                if (CRMMockData.save) CRMMockData.save();
+                ownershipHistoryEditModal.close();
+                loadOwnershipHistoryData(currentHistoryUnitId);
+                
+                // 重新載入戶別列表以反映變更
+                loadUnitData();
+            });
+
+            // 更新戶別的屋主資訊
+            function updateUnitOwner(unitId, ownerName, contractDate) {
+                const unitIndex = CRMMockData.units.findIndex(u => u.id === unitId);
+                if (unitIndex > -1) {
+                    CRMMockData.units[unitIndex].owner = ownerName;
+                    CRMMockData.units[unitIndex].contractDate = contractDate;
+                    if (CRMMockData.save) CRMMockData.save();
+                }
+            }
+
+            // 取消編輯
+            document.getElementById('btnCancelOwnershipHistory').addEventListener('click', function() {
+                ownershipHistoryEditModal.close();
+            });
+
+            // 刪除產權異動紀錄
+            function deleteHistoryRecord(recordId) {
+                if (!confirm('確定要刪除此產權異動紀錄嗎？此操作無法復原。')) return;
+
+                const recordIndex = CRMMockData.ownershipHistory.findIndex(h => h.id === recordId);
+                if (recordIndex > -1) {
+                    CRMMockData.ownershipHistory.splice(recordIndex, 1);
+                    if (CRMMockData.save) CRMMockData.save();
+                    
+                    alert('紀錄已刪除');
+                    loadOwnershipHistoryData(currentHistoryUnitId);
+                }
+            }
         });
     </script>
 
@@ -2002,6 +2515,116 @@
         .page-item:last-child .page-link {
             border-top-right-radius: 0.25rem;
             border-bottom-right-radius: 0.25rem;
+        }
+
+        /* ==========================================
+           產權異動紀錄樣式
+           ========================================== */
+        
+        /* 異動類別標籤 */
+        .transfer-type-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .transfer-type-新購 {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .transfer-type-換約移轉 {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .transfer-type-繼承 {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .transfer-type-贈與 {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .transfer-type-法拍 {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .transfer-type-其他 {
+            background-color: #d6d8db;
+            color: #1b1e21;
+        }
+
+        /* 詳情彈窗樣式 */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .detail-row {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #5D4037;
+        }
+        
+        .detail-row.detail-full {
+            grid-column: 1 / -1;
+        }
+        
+        .detail-label {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        
+        .detail-value {
+            font-size: 0.95rem;
+            color: #212529;
+            font-weight: 400;
+        }
+
+        /* 產權異動表格操作按鈕 */
+        #ownershipHistoryTableBody .btn-sm {
+            padding: 4px 8px;
+            margin: 2px;
+        }
+
+        /* 必填欄位標示 */
+        .text-danger {
+            color: #dc3545;
+        }
+
+        /* 表單欄位間距 */
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        /* 響應式調整 */
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #ownershipHistoryModal .modal-container {
+                width: 95% !important;
+                max-width: 95% !important;
+            }
+            
+            #ownershipHistoryEditModal .modal-container {
+                width: 95% !important;
+                max-width: 95% !important;
+            }
         }
     </style>
 </body>
