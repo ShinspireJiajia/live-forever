@@ -1,10 +1,10 @@
 /**
  * ============================================
- * 陸府建設 CRM 系統 - 對保時段管理 JavaScript
+ * 陸府建設 CRM 系統 - 驗屋時段管理 JavaScript
  * ============================================
- * 檔案：reservation-collateral-schedule.js
- * 說明：處理對保時段管理頁面的互動邏輯
- * 建立日期：2025-12-29
+ * 檔案：reservation-inspection-schedule.js
+ * 說明：處理驗屋時段管理頁面的互動邏輯
+ * 建立日期：2026-01-19
  * ============================================
  */
 
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 返回列表
     document.getElementById('btnBack')?.addEventListener('click', function() {
-        window.location.href = 'reservation-collateral.html';
+        window.location.href = 'reservation-inspection.html';
     });
     
     // 案場切換

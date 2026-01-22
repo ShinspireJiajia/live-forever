@@ -1,25 +1,20 @@
 /**
  * ============================================
- * 陸府建設 CRM 系統 - 對保時段管理 JavaScript
+ * 陸府建設 CRM 系統 - 健檢時段管理 JavaScript
  * ============================================
- * 檔案：reservation-collateral-schedule.js
- * 說明：處理對保時段管理頁面的互動邏輯
- * 建立日期：2025-12-29
+ * 檔案：house-checkup-schedule.js
+ * 說明：處理健檢時段管理頁面的互動邏輯
+ * 建立日期：2026-01-19
  * ============================================
  */
 
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化側邊欄
     // 渲染共用元件 (Header + Sidebar)
-
     if (typeof initCRMLayout === 'function') {
-
         initCRMLayout();
-
     }
-
     
-
     const sidebarManager = new SidebarManager();
     
     // 當前顯示的週次
@@ -106,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const timeSlots = [];
         for (let hour = 9; hour < 18; hour++) {
             timeSlots.push(`${String(hour).padStart(2, '0')}:00`);
-            if (hour < 17 || (hour === 17 && true)) {
+            if (hour < 17 || (hour === 17 && true)) { // 17:30 also included
                 timeSlots.push(`${String(hour).padStart(2, '0')}:30`);
             }
         }
@@ -198,32 +193,36 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 複製上一週設定
     document.getElementById('btnCopyLastWeek')?.addEventListener('click', function() {
-        if (confirm('確定要複製上一週的時段設定嗎？')) {
-            const lastWeekStart = new Date(currentWeekStart);
-            lastWeekStart.setDate(lastWeekStart.getDate() - 7);
-            
-            // 複製上週資料到本週
-            for (let day = 0; day < 7; day++) {
-                const lastDate = new Date(lastWeekStart);
-                lastDate.setDate(lastDate.getDate() + day);
-                const lastDateStr = formatDateKey(lastDate);
+        ConfirmDialog.show({
+            title: '確認複製',
+            message: '確定要複製上一週的時段設定嗎？這將覆蓋本週目前的設定。',
+            onConfirm: function() {
+                const lastWeekStart = new Date(currentWeekStart);
+                lastWeekStart.setDate(lastWeekStart.getDate() - 7);
                 
-                const currentDate = new Date(currentWeekStart);
-                currentDate.setDate(currentDate.getDate() + day);
-                const currentDateStr = formatDateKey(currentDate);
+                // 複製上週資料到本週
+                for (let day = 0; day < 7; day++) {
+                    const lastDate = new Date(lastWeekStart);
+                    lastDate.setDate(lastDate.getDate() + day);
+                    const lastDateStr = formatDateKey(lastDate);
+                    
+                    const currentDate = new Date(currentWeekStart);
+                    currentDate.setDate(currentDate.getDate() + day);
+                    const currentDateStr = formatDateKey(currentDate);
+                    
+                    // 複製所有時段
+                    Object.keys(scheduleData).forEach(function(key) {
+                        if (key.startsWith(lastDateStr)) {
+                            const time = key.split('_')[1];
+                            scheduleData[`${currentDateStr}_${time}`] = scheduleData[key];
+                        }
+                    });
+                }
                 
-                // 複製所有時段
-                Object.keys(scheduleData).forEach(function(key) {
-                    if (key.startsWith(lastDateStr)) {
-                        const time = key.split('_')[1];
-                        scheduleData[`${currentDateStr}_${time}`] = scheduleData[key];
-                    }
-                });
+                generateScheduleTable();
+                showSuccessMessage('已複製上一週設定');
             }
-            
-            generateScheduleTable();
-            showSuccessMessage('已複製上一週設定');
-        }
+        });
     });
     
     // 儲存按鈕
@@ -233,16 +232,9 @@ document.addEventListener('DOMContentLoaded', function() {
         showSuccessMessage('時段設定已成功儲存！');
     });
     
-    // 返回列表
+    // 返回上一頁
     document.getElementById('btnBack')?.addEventListener('click', function() {
-        window.location.href = 'reservation-collateral.html';
-    });
-    
-    // 案場切換
-    document.getElementById('projectSelect')?.addEventListener('change', function() {
-        // 重新載入該案場的時段設定
-        scheduleData = {};
-        generateScheduleTable();
+        window.history.back();
     });
     
     /**
@@ -259,5 +251,16 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             alert(message);
         }
+    }
+
+    // 簡單的確認對話框 Mock (如果系統有統一的 Modal 應該用那個，這裡為了確保獨立運作先寫一個簡單的 fallback)
+    if (typeof ConfirmDialog === 'undefined') {
+        window.ConfirmDialog = {
+            show: function(options) {
+                if (confirm(options.message)) {
+                    options.onConfirm();
+                }
+            }
+        };
     }
 });
