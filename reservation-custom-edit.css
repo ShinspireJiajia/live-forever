@@ -1,0 +1,141 @@
+/* reservation-custom-edit.css */
+
+.edit-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-block {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.section-block:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quick-fill-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.quick-fill-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.upload-wrap {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: block;
+}
+
+.upload-wrap:hover {
+    border-color: #a99e91;
+    background: #f9f9f9;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #a99e91;
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.upload-hint {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.signature-block {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+.signature-area {
+    background: #fff;
+    border: 1px dashed #ccc;
+    height: 200px;
+    position: relative;
+    margin-bottom: 15px;
+    cursor: crosshair;
+}
+
+.signature-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+    text-align: center;
+    pointer-events: none;
+}
+
+.signature-placeholder i {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.signature-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.form-actions .btn {
+    min-width: 120px;
+}

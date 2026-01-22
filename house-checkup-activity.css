@@ -1,0 +1,833 @@
+/* house-checkup-activity.css */
+/* 健診活動管理專用樣式 */
+
+/* ========================================
+   頁面標題區
+   ======================================== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-header .page-title {
+    margin-bottom: 0;
+}
+
+/* ========================================
+   表格樣式覆寫
+   ======================================== */
+#activityTable.case-table {
+    min-width: 1000px;
+}
+
+#activityTable.case-table thead tr,
+#activityTable.case-table tbody tr {
+    display: table-row;
+}
+
+#activityTable.case-table th.col-1,
+#activityTable.case-table td.col-1 {
+    display: table-cell;
+    padding: 12px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#activityTable.case-table th.col-1:first-child,
+#activityTable.case-table td.col-1:first-child {
+    text-align: left;
+}
+
+#activityTable.case-table th.col-1:last-child,
+#activityTable.case-table td.col-1:last-child {
+    text-align: center;
+    min-width: 180px;
+}
+
+#activityTable.case-table tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+#activityTable.case-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========================================
+   表格內操作按鈕區域
+   ======================================== */
+#activityTable .table-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   狀態標籤
+   ======================================== */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    min-width: 60px;
+    text-align: center;
+}
+
+.status-draft {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.status-active {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+}
+
+/* ========================================
+   報名進度條
+   ======================================== */
+.registration-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: var(--color-gray-300);
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #17a2b8;
+    border-radius: var(--border-radius-full);
+    transition: width var(--transition-normal);
+}
+
+.progress-bar.warning {
+    background-color: #ffc107;
+}
+
+.progress-bar.danger {
+    background-color: #dc3545;
+}
+
+.progress-text {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+    text-align: center;
+}
+
+/* ========================================
+   Modal 表單區塊
+   ======================================== */
+.form-section {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.form-section-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-sm);
+    border-left: 3px solid #17a2b8;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.form-grid .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ========================================
+   日期範圍群組
+   ======================================== */
+.date-range-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-separator {
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+}
+
+/* ========================================
+   Radio 群組樣式
+   ======================================== */
+.radio-group {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+}
+
+.radio-item input[type="radio"] {
+    cursor: pointer;
+}
+
+/* ========================================
+   Textarea 樣式
+   ======================================== */
+.form-textarea {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    line-height: var(--line-height-base);
+    resize: vertical;
+    transition: border-color var(--transition-fast);
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #17a2b8;
+}
+
+/* ========================================
+   檔案上傳區域
+   ======================================== */
+.file-upload-area {
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-fast);
+}
+
+.file-upload-area:hover {
+    border-color: #17a2b8;
+}
+
+.file-upload-area.dragover {
+    border-color: #17a2b8;
+    background-color: rgba(23, 162, 184, 0.05);
+}
+
+.file-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    color: var(--color-gray-500);
+}
+
+.file-upload-placeholder i {
+    font-size: 36px;
+    margin-bottom: var(--spacing-sm);
+    color: #17a2b8;
+}
+
+.file-upload-placeholder span {
+    font-size: var(--font-size-base);
+    margin-bottom: 4px;
+}
+
+.file-upload-placeholder small {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+}
+
+.file-preview {
+    padding: var(--spacing-md);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-gray-100);
+    border-radius: var(--border-radius-sm);
+}
+
+.file-info .file-icon {
+    font-size: 24px;
+    color: #17a2b8;
+}
+
+.file-info .file-name {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+}
+
+.file-info .btn-icon {
+    background: none;
+    border: none;
+    color: var(--color-gray-500);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.file-info .btn-icon:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* ========================================
+   必填欄位標記
+   ======================================== */
+.form-label.required::after {
+    content: ' *';
+    color: #dc3545;
+}
+
+/* ========================================
+   大型 Modal
+   ======================================== */
+.modal-lg .modal-content {
+    max-width: 800px;
+    width: 95%;
+}
+
+/* ========================================
+   區塊樣式（編輯頁面）
+   ======================================== */
+.section-block {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--color-gray-300);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.section-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.section-title i {
+    color: #17a2b8;
+}
+
+/* ========================================
+   資訊網格
+   ======================================== */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.info-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    font-weight: var(--font-weight-medium);
+}
+
+.info-value {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-900);
+}
+
+/* ========================================
+   狀態控制區
+   ======================================== */
+.status-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.current-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.current-status .label {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+}
+
+/* ========================================
+   LINE 邀請區域
+   ======================================== */
+.invite-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.invite-preview h4 {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    margin-bottom: var(--spacing-sm);
+}
+
+.line-message-preview {
+    background-color: #f5f5f5;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+}
+
+.line-bubble {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.line-header {
+    background: linear-gradient(135deg, #06C755 0%, #00B900 100%);
+    color: #fff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.line-content {
+    padding: var(--spacing-md);
+}
+
+.line-content h4 {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.line-date {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.line-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+    line-height: 1.5;
+}
+
+.line-button {
+    display: block;
+    background-color: #06C755;
+    color: #fff;
+    text-align: center;
+    padding: var(--spacing-sm);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: background-color var(--transition-fast);
+}
+
+.line-button:hover {
+    background-color: #00B900;
+}
+
+.invite-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+}
+
+.invite-hint {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.invite-hint i {
+    margin-top: 2px;
+}
+
+/* ========================================
+   預約時段列表
+   ======================================== */
+.timeslot-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.timeslot-date-group {
+    background-color: var(--color-gray-100);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.timeslot-date {
+    background-color: #17a2b8;
+    color: #fff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.timeslot-items {
+    padding: var(--spacing-sm);
+}
+
+.timeslot-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: #fff;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeslot-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeslot-item.full {
+    background-color: #fff5f5;
+}
+
+.timeslot-time {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-700);
+}
+
+.timeslot-capacity {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+.timeslot-capacity .text-danger {
+    color: #dc3545;
+}
+
+.timeslot-actions .btn-icon {
+    background: none;
+    border: none;
+    color: var(--color-gray-500);
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.timeslot-actions .btn-icon:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* ========================================
+   預約表格樣式（編輯頁面）
+   ======================================== */
+#reservationTable.case-table {
+    min-width: 900px;
+}
+
+#reservationTable.case-table thead tr,
+#reservationTable.case-table tbody tr {
+    display: table-row;
+}
+
+#reservationTable.case-table th.col-1,
+#reservationTable.case-table td.col-1 {
+    display: table-cell;
+    padding: 12px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#reservationTable.case-table th.col-1:first-child,
+#reservationTable.case-table td.col-1:first-child {
+    text-align: left;
+}
+
+/* 未讀標記 */
+.unread-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* 狀態標籤補充 */
+.status-pending {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.status-confirmed {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+/* ========================================
+   邀請 Modal 樣式
+   ======================================== */
+.invite-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-md);
+}
+
+.invite-filter {
+    flex: 1;
+}
+
+.invite-batch {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.resident-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+}
+
+.resident-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-300);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.resident-item:last-child {
+    border-bottom: none;
+}
+
+.resident-item:hover {
+    background-color: var(--color-gray-100);
+}
+
+.resident-item.selected {
+    background-color: #e8f4fd;
+}
+
+.resident-checkbox {
+    margin-right: var(--spacing-md);
+}
+
+.resident-info {
+    flex: 1;
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.resident-status {
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+    margin-right: var(--spacing-md);
+    min-width: 150px;
+    text-align: right;
+}
+
+.resident-unit {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+}
+
+.resident-name {
+    color: var(--color-gray-700);
+}
+
+.resident-line .no-line {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+}
+
+.selected-count {
+    text-align: right;
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+/* ========================================
+   小型 Modal
+   ======================================== */
+.modal-sm .modal-content {
+    max-width: 400px;
+}
+
+/* 垂直 Radio 群組 */
+.radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.radio-group-vertical .radio-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+}
+
+/* ========================================
+   對話區空狀態
+   ======================================== */
+.chat-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2xl);
+    color: var(--color-gray-500);
+}
+
+.chat-empty i {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+/* ========================================
+   空狀態樣式
+   ======================================== */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    color: var(--color-gray-500);
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+/* ========================================
+   響應式調整
+   ======================================== */
+@media (max-width: 767px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    #activityTable.case-table th.col-1,
+    #activityTable.case-table td.col-1 {
+        padding: 8px 6px;
+        font-size: var(--font-size-sm);
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .date-range-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .date-separator {
+        text-align: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .invite-section {
+        grid-template-columns: 1fr;
+    }
+
+    .status-control {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .invite-toolbar {
+        flex-direction: column;
+    }
+}

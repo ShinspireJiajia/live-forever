@@ -727,8 +727,20 @@
 /* ============================================
  * 表格欄位樣式
  * ============================================ */
+/* 讓表格寬度自適應內容，不要強行撐開 */
+.case-table {
+    width: auto !important; /* 不強制 100% 寬度 */
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.case-table th, .case-table td {
+    white-space: nowrap; /* 防止文字換行 */
+    padding: 8px 12px;   /* 控制內距，調整緊湊度 */
+    text-align: center;
+}
+
+/* 針對「可預約時段」這種較長的欄位設定合理寬度 */
 .col-bookable-range {
-    white-space: nowrap;
-    width: auto;
-    min-width: 180px;
+    min-width: 200px;
 }

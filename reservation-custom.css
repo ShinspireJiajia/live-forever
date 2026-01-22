@@ -1,0 +1,153 @@
+/* reservation-custom.css */
+/* 客變預約頁面專用樣式 */
+
+/* 表格欄位寬度調整 */
+#reservationTable th,
+#reservationTable td {
+    min-width: 0; /* 防止內容撐開 */
+    word-wrap: break-word;
+}
+
+/* 1. 序號 */
+#reservationTable th:nth-child(1),
+#reservationTable td:nth-child(1) {
+    flex: 0 0 150px !important;
+    max-width: 150px !important;
+    text-align: left;
+    justify-content: center;
+}
+
+/* 2. 案場 */
+#reservationTable th:nth-child(2),
+#reservationTable td:nth-child(2) {
+    flex: 0 0 120px !important;
+    max-width: 120px !important;
+}
+
+/* 3. 戶別 */
+#reservationTable th:nth-child(3),
+#reservationTable td:nth-child(3) {
+    flex: 0 0 80px !important;
+    max-width: 80px !important;
+}
+
+/* 4. 會員姓名 */
+#reservationTable th:nth-child(4),
+#reservationTable td:nth-child(4) {
+    flex: 0 0 90px !important;
+    max-width: 90px !important;
+}
+
+/* 5. 聯絡電話 */
+#reservationTable th:nth-child(5),
+#reservationTable td:nth-child(5) {
+    flex: 0 0 130px !important;
+    max-width: 130px !important;
+}
+
+/* 6. 可預約時段 - 不折行 */
+#reservationTable th:nth-child(6),
+#reservationTable td:nth-child(6) {
+    flex: 0 0 200px !important;
+    max-width: 200px !important;
+        text-align: center;
+    white-space: normal; /* 允許換行以顯示多行內容 */
+}
+
+/* 7. 已預約日期 - 不折行 */
+#reservationTable th:nth-child(7),
+#reservationTable td:nth-child(7) {
+    flex: 0 0 150px !important;
+    max-width: 150px !important;
+            text-align: center;
+
+    white-space: normal; /* 允許換行以顯示多行內容 */
+}
+
+/* 8. 出席資訊 */
+#reservationTable th:nth-child(8),
+#reservationTable td:nth-child(8) {
+    flex: 0 0 100px !important;
+    max-width: 100px !important;
+}
+
+/* 9. 狀態 */
+#reservationTable th:nth-child(9),
+#reservationTable td:nth-child(9) {
+    flex: 0 0 90px !important;
+    max-width: 90px !important;
+    text-align: center;
+    justify-content: center;
+}
+
+/* 10. 操作 - 不折行 */
+#reservationTable th:nth-child(10),
+#reservationTable td:nth-child(10) {
+    flex: 0 0 100px !important;
+    max-width: 100px !important;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* =========================================
+   新增樣式：徽章與狀態標籤
+   ========================================= */
+
+/* 1. 未讀訊息徽章 */
+.unread-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-btn-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* 2. 狀態標籤 (依照 reservation-handover.css 規範) */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    min-width: 60px;
+    text-align: center;
+}
+
+.status-pending { /* 待確認 - 灰底深灰字 */
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.status-confirmed { /* 已確認 - 藍底深藍字 (對應 status-reserved) */
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-completed { /* 已完成 - 綠底深綠字 */
+    /* background-color: #d4edda; */
+    color: #155724;
+}
+
+.status-cancelled { /* 已取消 - 淺灰底 */
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+}
+
+/* 手機版響應式調整 */
+@media (max-width: 767px) {
+    #reservationTable th,
+    #reservationTable td {
+        flex: unset !important;
+        max-width: none !important;
+        width: 100% !important;
+        white-space: normal; /* 手機版允許折行 */
+    }
+}

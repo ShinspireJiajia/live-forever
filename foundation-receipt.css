@@ -1,0 +1,299 @@
+﻿/* Print Specifics */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    /* 隱藏不需要列印的元素 */
+    .edit-panel, .no-print {
+        display: none !important;
+    }
+
+    /* 調整預覽區塊為全滿版 */
+    .preview-panel {
+        width: 100% !important;
+        height: 100vh !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        background-color: white !important;
+        display: block !important; /* 確保顯示 */
+    }
+
+    .receipt-container {
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        /* 確保兩份收據能印在同一頁 */
+        height: 100%; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .receipt-copy {
+        /* 控制每份的高度，保留空間切割線 */
+        height: 48%; 
+        page-break-inside: avoid;
+        margin-bottom: 2%;
+        border-bottom: 1px dashed #ccc; /* 虛線切割線 */
+    }
+    
+    .receipt-copy:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+}
+
+/* Screen Layout */
+body {
+    background-color: #f0f2f5;
+    font-family: 'Microsoft JhengHei', sans-serif;
+    height: 100vh;
+    overflow: hidden; /* 避免雙卷軸 */
+    display: flex;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* 左側編輯區 */
+.edit-panel {
+    width: 350px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    z-index: 10;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-panel h2 {
+    color: #5D4037;
+    border-bottom: 2px solid #5D4037;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-group {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #5D4037;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #9e9e9e;
+    color: white;
+}
+
+/* 右側預覽區 */
+.preview-panel {
+    flex: 1;
+    background-color: #585858; /* 深灰背景襯托白紙 */
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.receipt-paper {
+    background-color: white;
+    width: 210mm; /* A4 width */
+    min-height: 297mm; /* A4 height */
+    padding: 15mm;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Copy spacing */
+}
+
+/* Receipt Visual Style */
+.receipt-copy {
+    border: 3px double #5D4037;
+    padding: 20px;
+    position: relative;
+    color: #333;
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.receipt-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5D4037;
+    letter-spacing: 2px;
+}
+
+.receipt-subtitle {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.receipt-type {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid #5D4037;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: #5D4037;
+}
+
+.receipt-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.receipt-body {
+    border-top: 2px solid #5D4037;
+    border-bottom: 2px solid #5D4037;
+    padding: 15px 0;
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+.data-row {
+    margin-bottom: 8px;
+    font-size: 16px;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 2px;
+    display: flex;
+    align-items: baseline;
+}
+
+.data-label {
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.data-content {
+    flex: 1;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.receipt-amount-large {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5D4037;
+}
+
+.receipt-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.footer-section {
+    text-align: center;
+    width: 30%;
+}
+
+.signature-line {
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    padding-top: 5px;
+}
+
+/* 印章樣式 */
+.seal {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #d32f2f;
+    border-radius: 4px; /* 方印 */
+    color: #d32f2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    transform: rotate(-15deg);
+    position: absolute;
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    z-index: 5;
+    text-align: center;
+}
+
+.seal-foundation {
+    right: 20px;
+    top: 130px;
+    width: 100px;
+    height: 100px;
+}
+
+.seal-finance {
+    right: 20px;
+    bottom: 40px;
+    transform: rotate(10deg);
+}
+
+.seal-handler {
+    left: 200px;
+    bottom: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* 圓印 */
+}
+
