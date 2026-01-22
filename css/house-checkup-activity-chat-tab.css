@@ -1,0 +1,197 @@
+
+/* ========================================
+   Modal Tabs
+   ======================================== */
+.modal-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-gray-300);
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-tab {
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--color-gray-500);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.3s ease;
+}
+
+.modal-tab:hover {
+    color: var(--color-gray-700);
+}
+
+.modal-tab.active {
+    color: var(--color-btn-primary);
+    border-bottom-color: var(--color-btn-primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================================
+   Chat Interface in Modal
+   ======================================== */
+.modal-lg .chat-container {
+    height: 500px;
+}
+
+#sectionChat h3.section-title {
+    display: none; /* Hide title inside modal as tab handles it */
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    background-color: var(--color-gray-100);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.message {
+    max-width: 80%;
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    flex-direction: column;
+}
+
+.message-right {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.message-left {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.message-content {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    position: relative;
+    word-break: break-word;
+}
+
+.message-right .message-content {
+    background-color: #dcf8c6; /* WhatsApp style green */
+    color: #000;
+    border-bottom-right-radius: 0;
+}
+
+.message-left .message-content {
+    background-color: white;
+    color: #000;
+    border: 1px solid var(--color-gray-300);
+    border-bottom-left-radius: 0;
+}
+
+.message-info {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+    margin-top: 4px;
+}
+
+.chat-input-area {
+    background-color: white;
+    border-top: 1px solid var(--color-gray-300);
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column; /* 改回直向排列，模仿 chat.css */
+    gap: var(--spacing-sm);
+}
+
+/* Base style */
+.chat-input-left {
+    display: flex;
+    flex-direction: row; /* 改為橫向排列，模仿 chat.css */
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+/* Specific overrides for Modal context using ID selector for higher specificity */
+#reservationEditModal .chat-input-left, 
+#activityEditModal .chat-input-left {
+    flex: 0 0 auto !important;
+    width: 100% !important; /* 滿寬 */
+    border-bottom: 1px solid var(--color-gray-100) !important;
+    padding-bottom: var(--spacing-sm) !important;
+    align-items: center !important;
+    flex-direction: row !important;
+}
+
+.chat-input-right {
+    flex: 1; /* 自動填滿剩餘空間 */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.attach-btn, .send-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--color-gray-500);
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.attach-btn:hover, .send-btn:hover {
+    background-color: var(--color-gray-100);
+    color: var(--color-btn-primary);
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 20px;
+    outline: none;
+    font-size: var(--font-size-base);
+}
+
+.chat-input:focus {
+    border-color: var(--color-btn-primary);
+}
+
+.file-limit-hint {
+    display: block;
+    font-size: 10px;
+    color: var(--color-gray-500);
+    margin-top: 4px;
+    line-height: 1.2;
+}

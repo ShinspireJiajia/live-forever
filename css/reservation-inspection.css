@@ -1,0 +1,96 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 驗屋預約頁面樣式
+ * ============================================
+ * 檔案：reservation-inspection.css
+ * 說明：定義驗屋預約管理頁面的樣式
+ * ============================================
+ */
+
+/* ============================================
+ * 狀態標籤
+ * ============================================ */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.status-fixing {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-reinspect {
+    background-color: #d6d8db;
+    color: #383d41;
+}
+
+/* ============================================
+ * 表格操作按鈕
+ * ============================================ */
+.action-buttons, .table-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    white-space: nowrap;
+    justify-content: flex-start;
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-gray-300);
+    background: var(--color-white);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.btn-action:hover {
+    background: var(--color-gray-100);
+}
+
+.btn-edit {
+    color: var(--color-gray-700);
+}
+
+.btn-delete {
+    color: var(--color-btn-danger);
+    border-color: var(--color-btn-danger);
+}
+
+.btn-delete:hover {
+    background: var(--color-btn-danger);
+    color: var(--color-white);
+}
+
+.text-center {
+    text-align: center;
+    color: var(--color-gray-500);
+    padding: var(--spacing-xl) !important;
+}

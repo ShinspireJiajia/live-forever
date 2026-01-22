@@ -475,3 +475,56 @@ body.modal-open {
         padding: var(--spacing-sm) var(--spacing-md);
     }
 }
+
+/* ============================================
+ * 兼容性樣式 (Compatibility Styles)
+ * 支援 .modal-overlay 與 .modal-container 結構
+ * ============================================ */
+.modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.modal-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    max-height: calc(100vh - var(--spacing-lg) * 2);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.9) translateY(-20px);
+    transition: transform var(--transition-normal);
+}
+
+.modal.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+.modal-sm .modal-container {
+    max-width: 360px;
+}
+
+.modal-lg .modal-container {
+    max-width: 800px;
+}
+
+.modal-xl .modal-container {
+    max-width: 1140px;
+}
+
+.modal-fullscreen .modal-container {
+    max-width: none;
+    width: calc(100% - var(--spacing-lg) * 2);
+    height: calc(100vh - var(--spacing-lg) * 2);
+    border-radius: var(--border-radius-md);
+}
+

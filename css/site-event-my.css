@@ -1,0 +1,196 @@
+/* ============================================
+   我的活動紀錄 - 使用者頁樣式
+   檔案：css/site-event-my.css
+   說明：以卡片呈現個人報名紀錄與繳費狀態
+   ============================================ */
+
+:root {
+  /* 使用設計系統變數 */
+}
+
+.my-event-page {
+  display: block;
+}
+
+/* 篩選區 */
+.filter-section {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.filter-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-md);
+  align-items: end;
+}
+
+.filter-form .form-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+}
+
+/* 狀態分類 chips */
+.status-filter {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.status-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.status-chip {
+  appearance: none;
+  border: var(--border-width) solid var(--color-gray-300);
+  background: #fff;
+  color: var(--color-gray-700);
+  padding: 6px 12px;
+  border-radius: var(--border-radius-full);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.status-chip:hover {
+  border-color: var(--color-menu-active);
+  color: var(--color-menu-active);
+}
+
+.status-chip.active {
+  background: var(--color-menu-active);
+  color: #fff;
+  border-color: var(--color-menu-active);
+}
+
+/* 統計區 */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.stat-item {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-value { font-size: 20px; font-weight: 700; color: var(--color-gray-900); }
+.stat-label { font-size: 12px; color: var(--color-gray-500); }
+
+/* 卡片列表 */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.event-card {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.event-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+}
+
+/* 狀態徽章（依 site-event-registration 標準：已報名/待繳費/已取消） */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+}
+
+.badge-paid { background: #d4edda; color: #155724; }
+.badge-pending { background: #fff3cd; color: #856404; }
+.badge-refund { background: #e8f4fd; color: #0b6fa4; }
+.badge-cancelled { background: #e2e3e5; color: #6c757d; }
+
+.event-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-gray-700);
+  font-size: var(--font-size-base);
+}
+
+.meta-icon { color: #b0a69a; }
+.meta-label { color: var(--color-gray-700); }
+.meta-value { color: var(--color-gray-900); font-weight: var(--font-weight-medium); }
+/* 中文註解：時間欄位避免換行，保持同一行顯示 */
+.meta-value.time-inline { white-space: nowrap; }
+
+.event-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+/* Toast 提示 */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.toast.success .icon { color: var(--color-success); }
+.toast.error .icon { color: var(--color-danger); }
+.toast.info .icon { color: var(--color-info); }
+
+/* 響應式 */
+@media (min-width: 768px) {
+  .event-meta { grid-template-columns: repeat(2, 1fr); }
+}

@@ -224,6 +224,54 @@
 }
 
 /* ============================================
+ * 表格樣式 (基礎增強)
+ * ============================================ */
+.foundation-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-white);
+}
+
+.foundation-table th {
+    background: var(--color-table-header);
+    color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+.foundation-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-200);
+    vertical-align: middle;
+}
+
+.foundation-table tbody tr:nth-child(even) {
+    background-color: var(--color-table-row-even);
+}
+
+.foundation-table tbody tr:nth-child(odd) {
+    background-color: var(--color-table-row-odd);
+}
+
+.foundation-table tbody tr:hover {
+    background-color: var(--color-gray-100);
+}
+
+/* 操作按鈕組 */
+.foundation-table .action-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap; /* 允許換行以適應窄欄位 */
+}
+
+/* 隱藏超過180天不可退費的按鈕 (避免佔位) */
+.btn-disabled {
+    display: none !important;
+}
+
+/* ============================================
  * 金額顯示
  * ============================================ */
 .amount-cell {
@@ -428,31 +476,93 @@
 }
 
 /* ============================================
- * 搜尋面板樣式 (參考 Green Site Grid)
+ * 搜尋面板樣式 (參考 Case List Grid)
  * ============================================ */
 .foundation-search-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-md);
-    align-items: end;
+}
+
+.foundation-search-form .search-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm) var(--spacing-lg);
 }
 
 .foundation-search-form .form-group {
     margin-bottom: 0;
 }
 
-.foundation-search-form .form-actions {
-    grid-column: 1 / -1;
+.foundation-search-form .form-group.row {
+    display: flex;
+    align-items: center;
+}
+
+.foundation-search-form .col-label {
+    width: 100px;
+    min-width: 100px;
+    flex-shrink: 0;
+    text-align: left;
+    padding-right: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.foundation-search-form .col-input {
+    flex: 1;
+}
+
+.foundation-search-form .col-input .form-select,
+.foundation-search-form .col-input .form-input {
+    width: 100%;
+}
+
+.foundation-search-form .form-actions-right {
     display: flex;
     justify-content: flex-end;
     gap: var(--spacing-sm);
-    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-300);
+    margin-top: var(--spacing-sm);
+}
+
+.btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
 }
 
 .stat-icon.total { background-color: #5B9BD5; }
 .stat-icon.pending { background-color: #F39C12; }
 .stat-icon.paid { background-color: #27AE60; }
 .stat-icon.cancelled { background-color: #95a5a6; }
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .foundation-search-form .search-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .foundation-search-form .col-label {
+        width: 80px;
+        min-width: 80px;
+    }
+}
 .stat-icon.refunding { background-color: #3498DB; }
 .stat-icon.resident { background-color: #9b59b6; }
 
@@ -659,3 +769,25 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+ * Modal ����G�� (Manual Registration)
+ * ============================================ */
+.modal-form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.modal-form-row .form-group {
+    flex: 1;
+}
+
+.modal-section-title {
+    margin: 20px 0 10px;
+    border-bottom: 1px solid var(--color-gray-300);
+    padding-bottom: 5px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-700);
+}
+
