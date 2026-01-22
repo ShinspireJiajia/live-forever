@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang='zh-TW'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>收據列印編輯 - 陸府生活美學教育基金會</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>
+    <link rel='stylesheet' href='css/reset.css'>
+    <link rel='stylesheet' href='css/foundation-receipt.css'>
+</head>
+<body>
+
+<div class='main-container'>
+    <!-- 左側編輯區 (列印時隱藏) -->
+    <div class='edit-panel no-print' id='editPanel'>
+        <h2>收據資料編輯</h2>
+        
+        <form id='editForm'>
+            <div class='form-group'>
+                <label for='receiptNo'>收據編號</label>
+                <input type='text' id='receiptNo' class='form-control' readonly>
+            </div>
+            
+            <div class='form-group'>
+                <label for='receiptDate'>開立日期</label>
+                <input type='text' id='receiptDate' class='form-control' placeholder='2024/01/01'>
+            </div>
+
+            <div class='form-group'>
+                <label for='donorName'>住戶姓名</label>
+                <input type='text' id='donorName' class='form-control'>
+            </div>
+
+            <div class='form-group'>
+                <label for='donorId'>身分證字號</label>
+                <input type='text' id='donorId' class='form-control'>
+            </div>
+
+            <div class='form-group'>
+                <label for='amount'>金額</label>
+                <input type='number' id='amount' class='form-control' readonly>
+            </div>
+
+            <div class='form-group'>
+                <label for='payMethod'>付款方式</label>
+                <input type='text' id='payMethod' class='form-control' readonly>
+            </div>
+
+            <div class='form-group'>
+                <label for='purpose'>備註說明</label>
+                <input type='text' id='purpose' class='form-control' readonly>
+            </div>
+        </form>
+
+        <div class='btn-group'>
+            <button type='button' class='btn btn-secondary' id='btnBack'>取消返回</button>
+            <button type='button' class='btn btn-primary' id='btnPrint'>
+                <i class='fa-solid fa-print'></i> 確認列印
+            </button>
+        </div>
+    </div>
+
+    <!-- 右側預覽區 (列印時全版) -->
+    <div class='preview-panel'>
+        <div class='receipt-paper'>
+            
+            <!-- 第一聯：收執聯 -->
+            <div class='receipt-copy'>
+                <div class='receipt-type'>收執聯 (正本)</div>
+                <div class='receipt-header'>
+                    <div class='receipt-title'>財團法人陸府生活美學教育基金會</div>
+                    <div class='receipt-subtitle'>捐款收據</div>
+                </div>
+
+                <div class='receipt-info-row'>
+                    <div>收據編號：<span id='displayReceiptNo1'></span></div>
+                    <div>日期：<span id='displayDate1'></span></div>
+                </div>
+
+                <div class='receipt-body'>
+                    <div class='data-row'>
+                        <span class='data-label'>捐款人：</span>
+                        <span class='data-content' id='displayDonor1'></span>
+                    </div>
+                    <div class='data-row'>
+                        <span class='data-label'>金額：</span>
+                        <span class='data-content receipt-amount-large' id='displayAmount1'></span>
+                    </div>
+                    <div class='data-row'>
+                        <span class='data-label'>付款方式：</span>
+                        <span class='data-content' id='displayPayMethod1'></span>
+                    </div>
+                    <div class='data-row'>
+                        <span class='data-label'>備註：</span>
+                        <span class='data-content' id='displayPurpose1'></span>
+                    </div>
+                </div>
+
+                <div class='receipt-footer'>
+                    <div class='footer-section'>
+                        <div class='signature-line'>經辦人</div>
+                        <!-- 經辦人章 -->
+                        <div class='seal seal-handler'>經辦<br>專用</div>
+                    </div>
+                    <div class='footer-section'>
+                        <div class='signature-line'>會計主管</div>
+                        <!-- 財務章 -->
+                        <div class='seal seal-finance'>財務<br>專用</div>
+                    </div>
+                    <div class='footer-section'>
+                        <div class='signature-line'>董事長</div>
+                        <!-- 基金會大章 -->
+                        <div class='seal seal-foundation'>陸府<br>基金會<br>公印</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二聯：存根聯 -->
+            <div class='receipt-copy'>
+                <div class='receipt-type'>存根聯 (副本)</div>
+                <div class='receipt-header'>
+                    <div class='receipt-title'>財團法人陸府生活美學教育基金會</div>
+                    <div class='receipt-subtitle'>捐款收據</div>
+                </div>
+
+                <div class='receipt-info-row'>
+                    <div>收據編號：<span id='displayReceiptNo2'></span></div>
+                    <div>日期：<span id='displayDate2'></span></div>
+                </div>
+
+                <div class='receipt-body'>
+                    <div class='data-row'>
+                        <span class='data-label'>捐款人：</span>
+                        <span class='data-content' id='displayDonor2'></span>
+                    </div>
+                    <div class='data-row'>
+                        <span class='data-label'>金額：</span>
+                        <span class='data-content receipt-amount-large' id='displayAmount2'></span>
+                    </div>
+                    <div class='data-row'>
+                        <span class='data-label'>付款方式：</span>
+                        <span class='data-content' id='displayPayMethod2'></span>
+                    </div>
+                    <div class='data-row'>
+                        <span class='data-label'>備註：</span>
+                        <span class='data-content' id='displayPurpose2'></span>
+                    </div>
+                </div>
+
+                <div class='receipt-footer'>
+                    <div class='footer-section'>
+                        <div class='signature-line'>經辦人</div>
+                        <!-- 副本通常不需用印，或用不同章，此處比照正本顯示位置但可調整 -->
+                        <div class='seal seal-handler' style='opacity:0.5'>經辦<br>專用</div>
+                    </div>
+                    <div class='footer-section'>
+                        <div class='signature-line'>會計主管</div>
+                    </div>
+                    <div class='footer-section'>
+                        <div class='signature-line'>董事長</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src='js/foundation-receipt.js'></script>
+</body>
+</html>

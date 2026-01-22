@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的活動紀錄 - 陸府建設 CRM</title>
+
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- 基礎樣式與設計系統 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/payment-modal.css">
+    <!-- 本頁專用樣式 -->
+    <link rel="stylesheet" href="css/site-event-my.css">
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="app-container">
+        <!-- 頂部導覽列（沿用後台樣式） -->
+        <header class="header">
+            <div class="header-left">
+                <div class="header-brand">
+                    <span class="header-title">CRM</span>
+                </div>
+            </div>
+            <div class="header-right"></div>
+        </header>
+
+        <!-- 主內容區域 -->
+        <main class="main-content my-event-page">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i>
+                    首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">案場活動</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">我的活動</span>
+            </div>
+
+            <!-- 狀態分類快速篩選：提供一鍵依狀態過濾（全部/已繳費/未繳費/已退費/已取消） -->
+            <section class="status-filter" aria-label="狀態分類快速篩選">
+                <!-- 中文註解：使用 button chips 呈現，具可鍵盤操作與 ARIA 狀態 -->
+                <div id="statusChips" class="status-chips" role="group" aria-label="狀態分類">
+                    <button type="button" class="status-chip active" data-status="" aria-pressed="true">
+                        全部
+                    </button>
+                    <button type="button" class="status-chip" data-status="已繳費" aria-pressed="false">
+                        已繳費
+                    </button>
+                    <button type="button" class="status-chip" data-status="未繳費" aria-pressed="false">
+                        未繳費
+                    </button>
+                    <button type="button" class="status-chip" data-status="已退費" aria-pressed="false">
+                        已退費
+                    </button>
+                    <button type="button" class="status-chip" data-status="已取消" aria-pressed="false">
+                        已取消
+                    </button>
+                </div>
+            </section>
+
+            <!-- 已移除表單式篩選區，改由上方狀態 chips 快速篩選 -->
+
+         
+
+            <!-- 活動卡片列表：個人報名紀錄 -->
+            <section id="myEventList" class="event-list" aria-live="polite">
+                <!-- 由 JS 動態產生卡片內容 -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast 提示容器（本頁使用） -->
+    <div class="toast-container" id="toastContainer" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- JavaScript -->
+    <script src="js/modal.js"></script>
+    <script src="js/site-event-mock-data.js"></script>
+    <script src="js/site-event-my.js"></script>
+</body>
+</html>
