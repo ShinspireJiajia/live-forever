@@ -143,12 +143,11 @@
                         <thead>
                             <tr>
                                 <th class="col-1">合約編號</th>
-                                <th class="col-1">摘要</th>
                                 <th class="col-1">合約類型</th>
                                 <th class="col-1">合約金額</th>
+                                <th class="col-1">摘要</th>
                                 <th class="col-1">合約戶別</th>
-                                <th class="col-1">建立日期</th>
-                                <th class="col-1">預約月份</th>
+                                <th class="col-1">合約狀態</th>
                                 <th class="col-1">維護人員</th>
                                 <th class="col-1">最近推播時間</th>
                                 <th class="col-1">功能</th>
@@ -157,81 +156,96 @@
                         <tbody>
                             <tr>
                                 <td class="col-1">C-10001</td>
-                                <td class="col-1">年度綠化養護方案</td>
                                 <td class="col-1">公設</td>
                                 <td class="col-1">NT$ 120,000</td>
+                                <td class="col-1">年度綠化養護方案</td>
                                 <td class="col-1">A3-3</td>
-                                <td class="col-1">2025-05-20</td>
-                                <td class="col-1">1, 4, 7, 10</td>
+                                <td class="col-1"><span class="status-badge status-pending">待簽署</span></td>
                                 <td class="col-1">王小明</td>
                                 <td class="col-1">2025-05-21 10:00</td>
                                 <td class="col-1">
                                     <div class="table-actions">
-                                        <button class="btn-table-edit">查看</button>
-                                        <button class="btn-table-edit">編輯</button>
+                                        <button class="btn-table-edit action-link">查看</button>
+                                        <button class="btn-table-edit action-link">編輯</button>
                                         <button class="btn-table-edit">下載</button>
-                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html'">款項維護</button>
+                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html?id=C-10001'">款項維護</button>
                                         <button class="btn-table-edit btn-push">推播</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-1">C-10002</td>
-                                <td class="col-1">季度樹木修剪計畫</td>
                                 <td class="col-1">專戶</td>
                                 <td class="col-1">NT$ 45,000</td>
+                                <td class="col-1">季度樹木修剪計畫</td>
                                 <td class="col-1">B2-5</td>
-                                <td class="col-1">2025-05-15</td>
-                                <td class="col-1">2, 5, 8</td>
+                                <td class="col-1"><span class="status-badge status-active">已生效</span></td>
                                 <td class="col-1">陳大華</td>
                                 <td class="col-1">-</td>
                                 <td class="col-1">
                                     <div class="table-actions">
-                                        <button class="btn-table-edit">查看</button>
-                                        <button class="btn-table-edit">編輯</button>
+                                        <button class="btn-table-edit action-link">查看</button>
+                                        <button class="btn-table-edit action-link">編輯</button>
                                         <button class="btn-table-edit">下載</button>
-                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html'">款項維護</button>
+                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html?id=C-10002'">款項維護</button>
                                         <button class="btn-table-edit btn-push">推播</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-1">C-10003</td>
-                                <td class="col-1">水景設施維護合約</td>
                                 <td class="col-1">專戶與公設</td>
                                 <td class="col-1">NT$ 78,500</td>
+                                <td class="col-1">水景設施維護合約</td>
                                 <td class="col-1">C1-1</td>
-                                <td class="col-1">2025-04-10</td>
-                                <td class="col-1">3, 6, 9, 12</td>
+                                <td class="col-1"><span class="status-badge status-draft">草稿</span></td>
                                 <td class="col-1">林志強</td>
                                 <td class="col-1">-</td>
                                 <td class="col-1">
                                     <div class="table-actions">
-                                        <button class="btn-table-edit">查看</button>
-                                        <button class="btn-table-edit">編輯</button>
+                                        <button class="btn-table-edit action-link">查看</button>
+                                        <button class="btn-table-edit action-link">編輯</button>
                                         <button class="btn-table-edit">下載</button>
-                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html'">款項維護</button>
+                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html?id=C-10003'">款項維護</button>
                                         <button class="btn-table-edit btn-push">推播</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-1">C-10004</td>
-                                <td class="col-1">年度綠化養護方案</td>
                                 <td class="col-1">公設</td>
-                                <td class="col-1">NT$ 120,000</td>
+                                <td class="col-1">NT$ 110,000</td>
+                                <td class="col-1">2024年度綠化養護</td>
                                 <td class="col-1">D4-9</td>
-                                <td class="col-1">2025-05-20</td>
-                                <td class="col-1">1, 4, 7, 10</td>
-                                <td class="col-1">已失效</td>
+                                <td class="col-1"><span class="status-badge status-expired">已失效</span></td>
+                                <td class="col-1">王小明</td>
                                 <td class="col-1">2025-05-25 14:30</td>
                                 <td class="col-1">
                                     <div class="table-actions">
-                                        <button class="btn-table-edit">查看</button>
-                                        <button class="btn-table-edit">編輯</button>
+                                        <button class="btn-table-edit action-link">查看</button>
+                                        <button class="btn-table-edit action-link">編輯</button>
                                         <button class="btn-table-edit">下載</button>
-                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html'">款項維護</button>
+                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html?id=C-10004'">款項維護</button>
                                         <button class="btn-table-edit btn-push">推播</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-1">C-10005</td>
+                                <td class="col-1">專戶</td>
+                                <td class="col-1">NT$ 35,000</td>
+                                <td class="col-1">臨時樹木移植工程</td>
+                                <td class="col-1">E5-2</td>
+                                <td class="col-1"><span class="status-badge status-void">作廢</span></td>
+                                <td class="col-1">陳大華</td>
+                                <td class="col-1">-</td>
+                                <td class="col-1">
+                                    <div class="table-actions">
+                                        <button class="btn-table-edit action-link">查看</button>
+                                        <button class="btn-table-edit action-link">編輯</button>
+                                        <button class="btn-table-edit">下載</button>
+                                        <button class="btn-table-edit" onclick="location.href='green-contract-payment.html?id=C-10005'">款項維護</button>
+                                        <button class="btn-table-edit btn-push status-disabled" disabled>推播</button>
                                     </div>
                                 </td>
                             </tr>
