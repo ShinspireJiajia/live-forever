@@ -101,7 +101,7 @@ function loadContractData(id, mode) {
             amount: '78500',
             maxReservations: '6',
             months: ['3', '6', '9', '12'],
-            scope: '社區水景',
+            scope: '中庭水池、入口噴泉',
             households: ['C1-1'],
             contacts: ['林志強']
         },
@@ -109,17 +109,33 @@ function loadContractData(id, mode) {
             type: '公設',
             contractId: 'C-10004',
             status: '已失效',
-            year: '2025',
-            startDate: '2025-01-01',
-            endDate: '2025-12-31',
+            year: '2024',
+            startDate: '2024-01-01',
+            endDate: '2024-12-31',
             staff: '王小明',
-            summary: '年度綠化養護方案第二季',
-            amount: '120000',
+            summary: '2024年度綠化養護',
+            amount: '110000',
             maxReservations: '12',
             months: ['1', '4', '7', '10'],
-            scope: '中庭花園',
+            scope: '全社區植栽',
             households: ['D4-9'],
             contacts: ['王小明']
+        },
+        'C-10005': {
+            type: '專戶',
+            contractId: 'C-10005',
+            status: '作廢',
+            year: '2025',
+            startDate: '2025-06-01',
+            endDate: '2025-12-31',
+            staff: '陳大華',
+            summary: '臨時樹木移植工程',
+            amount: '35000',
+            maxReservations: '1',
+            months: ['6'],
+            scope: '後院',
+            households: ['E5-2'],
+            contacts: ['陳大華']
         }
     };
 

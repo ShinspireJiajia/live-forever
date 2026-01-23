@@ -155,15 +155,15 @@ function handlePushSend() {
     
     if (currentPushRow) {
         // 更新 "最近推播時間" 欄位
-        // 欄位索引: 0:編號, 1:摘要, 2:類型, 3:金額, 4:戶別, 5:日期, 6:月份, 7:人員, 8:推播時間
-        if (currentPushRow.cells.length > 8) {
+        // 欄位索引: 0:編號, 1:摘要, 2:類型, 3:金額, 4:戶別, 5:日期, 6:月份, 7:狀態, 8:人員, 9:推播時間
+        if (currentPushRow.cells.length > 9) {
             const now = new Date();
             const timeString = now.getFullYear() + '-' + 
                               String(now.getMonth() + 1).padStart(2, '0') + '-' + 
                               String(now.getDate()).padStart(2, '0') + ' ' + 
                               String(now.getHours()).padStart(2, '0') + ':' + 
                               String(now.getMinutes()).padStart(2, '0');
-            currentPushRow.cells[8].textContent = timeString;
+            currentPushRow.cells[9].textContent = timeString;
         }
     }
 
