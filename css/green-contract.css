@@ -32,6 +32,14 @@
     min-width: 260px;
 }
 
+/* 合約類型欄位固定寬度（約6個中文字） */
+#contractTable.case-table th.col-1:nth-child(2),
+#contractTable.case-table td.col-1:nth-child(2) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+}
+
 #contractTable.case-table tbody td {
     padding: 12px 10px;
     border-bottom: 1px solid var(--color-gray-300);
