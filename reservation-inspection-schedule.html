@@ -55,7 +55,154 @@
 
             <!-- 頁面內容 -->
             <div class="content-wrapper">
-                <div class="schedule-container">
+                <!-- ============================================ -->
+                <!-- 戶別-驗屋時段管理區塊 (預設隱藏) -->
+                <!-- ============================================ -->
+                <div class="unit-schedule-container" id="unitScheduleSection" style="display: none;">
+                    <!-- 標題區 -->
+                    <div class="unit-schedule-header">
+                        <div>
+                            <h2 class="unit-schedule-title">戶別-驗屋時段管理</h2>
+                            <p class="unit-schedule-description">管理各戶別的驗屋開放時間範圍</p>
+                        </div>
+                        <div class="header-actions">
+                            <button class="action-button btn-back" id="btnBackToTimeSlot">
+                                <i class="fa-solid fa-arrow-left"></i> 返回時段管理
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 篩選條件區 -->
+                    <div class="unit-filter-section">
+                        <div class="filter-row">
+                            <!-- 建案選擇 -->
+                            <div class="filter-group">
+                                <label class="filter-label">建案 <span class="required">*</span></label>
+                                <select id="unitProjectSelect" class="form-select">
+                                    <option value="">請選擇建案</option>
+                                    <option value="陸府原森"selected>陸府原森</option>
+                                    <option value="陸府觀微">陸府觀微</option>
+                                    <option value="陸府植森">陸府植森</option>
+                                </select>
+                            </div>
+                            <!-- 開放日期範圍 -->
+                            <div class="filter-group filter-group-date">
+                                <label class="filter-label">開放日期範圍</label>
+                                <div class="date-range-inputs">
+                                    <div class="date-input-wrapper">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <input type="date" id="unitDateFrom" class="form-input" placeholder="開始日期">
+                                    </div>
+                                    <span class="date-separator">~</span>
+                                    <div class="date-input-wrapper">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <input type="date" id="unitDateTo" class="form-input" placeholder="結束日期">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 搜尋戶別 -->
+                            <div class="filter-group">
+                                <label class="filter-label">搜尋戶別</label>
+                                <div class="search-input-wrapper">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" id="unitKeyword" class="form-input" placeholder="輸入戶別...">
+                                </div>
+                            </div>
+                            <!-- 查詢按鈕 -->
+                            <div class="filter-actions">
+                                <button type="button" class="btn btn-primary" id="btnUnitSearch">
+                                    <i class="fa-solid fa-magnifying-glass"></i> 查詢
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="btnUnitReset" title="重置篩選條件">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 批次操作工具列 -->
+                    <div class="batch-toolbar">
+                        <div class="selection-controls">
+                            <label class="checkbox-wrapper">
+                                <input type="checkbox" id="unitSelectAll">
+                                <span class="checkbox-label">全選</span>
+                            </label>
+                            <div class="batch-actions" id="unitBatchActions" style="display: none;">
+                                <button type="button" class="btn btn-warning btn-sm" id="btnBatchSetup">
+                                    <i class="fa-solid fa-gears"></i> 批次設定 <span class="badge" id="batchCountBadge">0</span>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" id="btnClearSelection">
+                                    <i class="fa-solid fa-times"></i> 清除選擇
+                                </button>
+                            </div>
+                        </div>
+                        <div class="selected-count" id="unitSelectedInfo" style="display: none;">
+                            <i class="fa-solid fa-check-square text-primary"></i> 已選 <strong class="text-primary" id="unitSelectedCount">0</strong> 筆
+                        </div>
+                    </div>
+
+                    <!-- 戶別時段表格 -->
+                    <div class="unit-table-container">
+                        <table class="unit-schedule-table">
+                            <thead>
+                                <tr>
+                                    <th width="50">
+                                        <input type="checkbox" id="unitHeaderCheckAll">
+                                    </th>
+                                    <th width="120" class="sortable" data-sort="unitName">
+                                        <div class="header-content">戶別 <i class="fa-solid fa-sort sort-icon"></i></div>
+                                    </th>
+                                    <th width="140" class="sortable" data-sort="startDate">
+                                        <div class="header-content">開始日期 <i class="fa-solid fa-sort sort-icon"></i></div>
+                                    </th>
+                                    <th width="140" class="sortable" data-sort="endDate">
+                                        <div class="header-content">結束日期 <i class="fa-solid fa-sort sort-icon"></i></div>
+                                    </th>
+                                    <th width="140" class="sortable" data-sort="reservedDate">
+                                        <div class="header-content">已預約日期 <i class="fa-solid fa-sort sort-icon"></i></div>
+                                    </th>
+                                    <th width="130">
+                                        <div class="header-content">預約單號</div>
+                                    </th>
+                                    <th width="140" class="sortable" data-sort="completedDate">
+                                        <div class="header-content">完成驗屋日期 <i class="fa-solid fa-sort sort-icon"></i></div>
+                                    </th>
+                                    <th width="80">
+                                        <div class="header-content">操作</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="unitScheduleTableBody">
+                                <!-- 由 JavaScript 動態生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 分頁與共計 -->
+                    <div class="pagination-wrapper" id="unitPaginationWrapper">
+                        <div class="pagination-info">
+                            <span>共 <strong id="unitTotalCount">25</strong> 筆資料，每頁顯示</span>
+                            <select id="unitPageSize" class="form-select page-size-select">
+                                <option value="25">25</option>
+                                <option value="50" selected>50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span>筆</span>
+                        </div>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- 驗屋預約時段管理區塊 (每時段可接待組數) -->
+                <!-- ============================================ -->
+                <div class="schedule-container" id="timeSlotSection">
                     <!-- 標題與操作按鈕 -->
                     <div class="schedule-header">
                         <div>
@@ -72,6 +219,9 @@
                         <div class="header-actions">
                             <button class="action-button btn-back" id="btnBack">
                                 <i class="fa-solid fa-arrow-left"></i> 返回列表
+                            </button>
+                            <button class="action-button btn-unit-schedule" id="btnUnitSchedule">
+                                <i class="fa-solid fa-building-user"></i> 戶別時段管理
                             </button>
                             <button class="action-button" id="btnCopyLastWeek">
                                 <i class="fa-solid fa-copy"></i> 複製上一周設定
@@ -153,9 +303,440 @@
         時段設定已成功儲存！
     </div>
 
+    <!-- 批次設定彈窗 -->
+    <div class="modal-overlay" id="batchSetupModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">批次設定時段</h3>
+                <button type="button" class="modal-close" id="closeBatchModal">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">將為已選取的 <strong id="modalSelectedCount">0</strong> 個戶別設定以下開放時段：</p>
+                <div class="form-group">
+                    <label class="form-label">開始日期 <span class="required">*</span></label>
+                    <input type="date" id="batchStartDate" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">結束日期 <span class="required">*</span></label>
+                    <input type="date" id="batchEndDate" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBatchSetup">取消</button>
+                <button type="button" class="btn btn-primary" id="confirmBatchSetup">確認設定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 編輯單一戶別彈窗 -->
+    <div class="modal-overlay" id="editUnitModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">編輯時段設定</h3>
+                <button type="button" class="modal-close" id="closeEditModal">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="edit-unit-info">
+                    <p><strong>戶別：</strong><span id="editUnitName">-</span></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">開始日期 <span class="required">*</span></label>
+                    <input type="date" id="editStartDate" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">結束日期 <span class="required">*</span></label>
+                    <input type="date" id="editEndDate" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelEditUnit">取消</button>
+                <button type="button" class="btn btn-primary" id="confirmEditUnit">確認儲存</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/reservation-inspection-schedule.js"></script>
+    
+    <!-- 戶別時段管理 JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ============================================
+            // 戶別時段管理功能
+            // ============================================
+
+            // 模擬戶別資料
+            const unitMockData = [
+                { id: 1, unitName: 'A1-1F', startDate: '2025-06-02', endDate: '2025-12-12', reservedDate: '2025-08-15', reservedNo: 'ins25081501', completedDate: '2025-08-15' },
+                { id: 2, unitName: 'A1-2F', startDate: '2025-06-02', endDate: '2025-12-12', reservedDate: '2025-09-10', reservedNo: 'ins25091002', completedDate: null },
+                { id: 3, unitName: 'A1-3F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 4, unitName: 'A1-4F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 5, unitName: 'A1-5F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 6, unitName: 'A2-1F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 7, unitName: 'A2-2F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 8, unitName: 'A2-3F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 9, unitName: 'A2-4F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 10, unitName: 'A2-5F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 11, unitName: 'A3-1F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 12, unitName: 'A3-2F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 13, unitName: 'A3-3F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 14, unitName: 'A3-4F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 15, unitName: 'A3-5F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 16, unitName: 'A4-1F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 17, unitName: 'A4-2F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 18, unitName: 'A4-3F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 19, unitName: 'A4-4F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 20, unitName: 'A4-5F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 21, unitName: 'A5-1F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 22, unitName: 'A5-2F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 23, unitName: 'A5-3F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 24, unitName: 'A5-4F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+                { id: 25, unitName: 'A5-5F', startDate: null, endDate: null, reservedDate: null, reservedNo: null, completedDate: null },
+            ];
+
+            // 已選取的戶別 ID 集合
+            let selectedUnitIds = new Set();
+            // 當前編輯的戶別
+            let currentEditUnit = null;
+
+            // 渲染戶別表格
+            function renderUnitTable(data) {
+                const tbody = document.getElementById('unitScheduleTableBody');
+                if (!tbody) return;
+
+                tbody.innerHTML = '';
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="text-center">查無資料</td></tr>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    const isSelected = selectedUnitIds.has(item.id);
+                    const rowClass = isSelected ? 'table-row-selected' : '';
+
+                    const startDateDisplay = item.startDate 
+                        ? `<span class="date-display"><i class="fa-solid fa-calendar text-success"></i> ${item.startDate}</span>` 
+                        : `<span class="not-set-text"><i class="fa-solid fa-exclamation-triangle"></i> 未設定</span>`;
+
+                    const endDateDisplay = item.endDate 
+                        ? `<span class="date-display"><i class="fa-solid fa-calendar text-danger"></i> ${item.endDate}</span>` 
+                        : `<span class="not-set-text"><i class="fa-solid fa-exclamation-triangle"></i> 未設定</span>`;
+
+                    // 已預約日期顯示
+                    const reservedDateDisplay = item.reservedDate 
+                        ? `<span class="date-display reserved"><i class="fa-solid fa-calendar-day text-warning"></i> ${item.reservedDate}</span>` 
+                        : `<span class="not-set-text"><i class="fa-solid fa-minus"></i> -</span>`;
+
+                    // 預約單號（點擊連結至詳情頁，唯讀模式）
+                    const reservedNoDisplay = item.reservedDate && item.reservedNo
+                        ? `<a href="reservation-inspection-edit.html?no=${item.reservedNo}&readonly=true" class="reservation-link" title="查看預約詳情"><i class="fa-solid fa-file-lines"></i> ${item.reservedNo}</a>`
+                        : `<span class="not-set-text"><i class="fa-solid fa-minus"></i> -</span>`;
+
+                    // 完成驗屋日期顯示
+                    const completedDateDisplay = item.completedDate 
+                        ? `<span class="date-display completed"><i class="fa-solid fa-calendar-check text-info"></i> ${item.completedDate}</span>` 
+                        : `<span class="not-set-text"><i class="fa-solid fa-minus"></i> -</span>`;
+
+                    const row = document.createElement('tr');
+                    row.className = rowClass;
+                    row.innerHTML = `
+                        <td>
+                            <input type="checkbox" class="unit-checkbox" data-id="${item.id}" ${isSelected ? 'checked' : ''}>
+                        </td>
+                        <td>
+                            <div class="unit-info">
+                                <span class="unit-name">${item.unitName}</span>
+                            </div>
+                        </td>
+                        <td><div class="date-info">${startDateDisplay}</div></td>
+                        <td><div class="date-info">${endDateDisplay}</div></td>
+                        <td><div class="date-info">${reservedDateDisplay}</div></td>
+                        <td><div class="reservation-no-info">${reservedNoDisplay}</div></td>
+                        <td><div class="date-info">${completedDateDisplay}</div></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn-sm btn-outline-primary btn-edit-unit" data-id="${item.id}" title="編輯時段設定">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                // 綁定 checkbox 事件
+                bindCheckboxEvents();
+                // 綁定編輯按鈕事件
+                bindEditButtonEvents();
+            }
+
+            // 綁定 Checkbox 事件
+            function bindCheckboxEvents() {
+                const checkboxes = document.querySelectorAll('.unit-checkbox');
+                checkboxes.forEach(cb => {
+                    cb.addEventListener('change', function() {
+                        const id = parseInt(this.dataset.id);
+                        if (this.checked) {
+                            selectedUnitIds.add(id);
+                            this.closest('tr').classList.add('table-row-selected');
+                        } else {
+                            selectedUnitIds.delete(id);
+                            this.closest('tr').classList.remove('table-row-selected');
+                        }
+                        updateSelectionUI();
+                    });
+                });
+            }
+
+            // 綁定編輯按鈕事件
+            function bindEditButtonEvents() {
+                const editBtns = document.querySelectorAll('.btn-edit-unit');
+                editBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        const unit = unitMockData.find(u => u.id === id);
+                        if (unit) {
+                            openEditModal(unit);
+                        }
+                    });
+                });
+            }
+
+            // 更新選取 UI
+            function updateSelectionUI() {
+                const count = selectedUnitIds.size;
+                const selectedInfo = document.getElementById('unitSelectedInfo');
+                const selectedCount = document.getElementById('unitSelectedCount');
+                const batchActions = document.getElementById('unitBatchActions');
+                const batchCountBadge = document.getElementById('batchCountBadge');
+
+                if (count > 0) {
+                    selectedInfo.style.display = 'inline';
+                    selectedCount.textContent = count;
+                    batchActions.style.display = 'flex';
+                    batchCountBadge.textContent = count;
+                } else {
+                    selectedInfo.style.display = 'none';
+                    batchActions.style.display = 'none';
+                }
+
+                // 更新全選 checkbox 狀態
+                const allCheckbox = document.getElementById('unitSelectAll');
+                const headerCheckbox = document.getElementById('unitHeaderCheckAll');
+                const allChecked = count === unitMockData.length && count > 0;
+                if (allCheckbox) allCheckbox.checked = allChecked;
+                if (headerCheckbox) headerCheckbox.checked = allChecked;
+            }
+
+            // 全選功能
+            function toggleSelectAll(checked) {
+                const checkboxes = document.querySelectorAll('.unit-checkbox');
+                checkboxes.forEach(cb => {
+                    cb.checked = checked;
+                    const id = parseInt(cb.dataset.id);
+                    if (checked) {
+                        selectedUnitIds.add(id);
+                        cb.closest('tr').classList.add('table-row-selected');
+                    } else {
+                        selectedUnitIds.delete(id);
+                        cb.closest('tr').classList.remove('table-row-selected');
+                    }
+                });
+                updateSelectionUI();
+            }
+
+            // 開啟批次設定彈窗
+            function openBatchModal() {
+                const modal = document.getElementById('batchSetupModal');
+                const countSpan = document.getElementById('modalSelectedCount');
+                countSpan.textContent = selectedUnitIds.size;
+                modal.classList.add('show');
+            }
+
+            // 關閉批次設定彈窗
+            function closeBatchModal() {
+                const modal = document.getElementById('batchSetupModal');
+                modal.classList.remove('show');
+            }
+
+            // 開啟編輯單一戶別彈窗
+            function openEditModal(unit) {
+                currentEditUnit = unit;
+                const modal = document.getElementById('editUnitModal');
+                document.getElementById('editUnitName').textContent = unit.unitName;
+                document.getElementById('editStartDate').value = unit.startDate || '';
+                document.getElementById('editEndDate').value = unit.endDate || '';
+                modal.classList.add('show');
+            }
+
+            // 關閉編輯彈窗
+            function closeEditModal() {
+                const modal = document.getElementById('editUnitModal');
+                modal.classList.remove('show');
+                currentEditUnit = null;
+            }
+
+            // 顯示成功訊息
+            function showSuccessMessage(message) {
+                const msgEl = document.getElementById('successMessage');
+                msgEl.textContent = message || '操作成功！';
+                msgEl.classList.add('show');
+                setTimeout(() => {
+                    msgEl.classList.remove('show');
+                }, 3000);
+            }
+
+            // 初始化渲染
+            renderUnitTable(unitMockData);
+
+            // 事件綁定
+            // 全選 checkbox
+            const selectAllCheckbox = document.getElementById('unitSelectAll');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function() {
+                    toggleSelectAll(this.checked);
+                });
+            }
+
+            const headerCheckAll = document.getElementById('unitHeaderCheckAll');
+            if (headerCheckAll) {
+                headerCheckAll.addEventListener('change', function() {
+                    toggleSelectAll(this.checked);
+                });
+            }
+
+            // 批次設定按鈕
+            const btnBatchSetup = document.getElementById('btnBatchSetup');
+            if (btnBatchSetup) {
+                btnBatchSetup.addEventListener('click', openBatchModal);
+            }
+
+            // 清除選擇
+            const btnClearSelection = document.getElementById('btnClearSelection');
+            if (btnClearSelection) {
+                btnClearSelection.addEventListener('click', function() {
+                    toggleSelectAll(false);
+                });
+            }
+
+            // 關閉批次設定彈窗
+            const closeBatchBtn = document.getElementById('closeBatchModal');
+            const cancelBatchBtn = document.getElementById('cancelBatchSetup');
+            if (closeBatchBtn) closeBatchBtn.addEventListener('click', closeBatchModal);
+            if (cancelBatchBtn) cancelBatchBtn.addEventListener('click', closeBatchModal);
+
+            // 確認批次設定
+            const confirmBatchBtn = document.getElementById('confirmBatchSetup');
+            if (confirmBatchBtn) {
+                confirmBatchBtn.addEventListener('click', function() {
+                    const startDate = document.getElementById('batchStartDate').value;
+                    const endDate = document.getElementById('batchEndDate').value;
+                    if (!startDate || !endDate) {
+                        alert('請填寫完整的日期範圍');
+                        return;
+                    }
+                    // 更新選取的戶別資料
+                    selectedUnitIds.forEach(id => {
+                        const unit = unitMockData.find(u => u.id === id);
+                        if (unit) {
+                            unit.startDate = startDate;
+                            unit.endDate = endDate;
+                        }
+                    });
+                    closeBatchModal();
+                    renderUnitTable(unitMockData);
+                    showSuccessMessage('批次設定已完成！');
+                    // 清除選取
+                    selectedUnitIds.clear();
+                    updateSelectionUI();
+                });
+            }
+
+            // 關閉編輯彈窗
+            const closeEditBtn = document.getElementById('closeEditModal');
+            const cancelEditBtn = document.getElementById('cancelEditUnit');
+            if (closeEditBtn) closeEditBtn.addEventListener('click', closeEditModal);
+            if (cancelEditBtn) cancelEditBtn.addEventListener('click', closeEditModal);
+
+            // 確認編輯
+            const confirmEditBtn = document.getElementById('confirmEditUnit');
+            if (confirmEditBtn) {
+                confirmEditBtn.addEventListener('click', function() {
+                    if (!currentEditUnit) return;
+                    const startDate = document.getElementById('editStartDate').value;
+                    const endDate = document.getElementById('editEndDate').value;
+                    if (!startDate || !endDate) {
+                        alert('請填寫完整的日期範圍');
+                        return;
+                    }
+                    currentEditUnit.startDate = startDate;
+                    currentEditUnit.endDate = endDate;
+                    closeEditModal();
+                    renderUnitTable(unitMockData);
+                    showSuccessMessage('時段設定已儲存！');
+                });
+            }
+
+            // 重置篩選
+            const btnUnitReset = document.getElementById('btnUnitReset');
+            if (btnUnitReset) {
+                btnUnitReset.addEventListener('click', function() {
+                    document.getElementById('unitProjectSelect').value = '';
+                    document.getElementById('unitDateFrom').value = '';
+                    document.getElementById('unitDateTo').value = '';
+                    document.getElementById('unitKeyword').value = '';
+                    renderUnitTable(unitMockData);
+                    document.getElementById('unitTotalCount').textContent = unitMockData.length;
+                });
+            }
+
+            // 查詢按鈕
+            const btnUnitSearch = document.getElementById('btnUnitSearch');
+            if (btnUnitSearch) {
+                btnUnitSearch.addEventListener('click', function() {
+                    // 簡單篩選示範
+                    const keyword = document.getElementById('unitKeyword').value.toLowerCase();
+                    
+                    let filtered = unitMockData.filter(u => {
+                        let match = true;
+                        if (keyword && !u.unitName.toLowerCase().includes(keyword)) match = false;
+                        return match;
+                    });
+                    
+                    renderUnitTable(filtered);
+                    document.getElementById('unitTotalCount').textContent = filtered.length;
+                });
+            }
+
+            // ============================================
+            // 區塊切換功能
+            // ============================================
+            
+            // 切換到戶別時段管理
+            const btnUnitSchedule = document.getElementById('btnUnitSchedule');
+            if (btnUnitSchedule) {
+                btnUnitSchedule.addEventListener('click', function() {
+                    document.getElementById('timeSlotSection').style.display = 'none';
+                    document.getElementById('unitScheduleSection').style.display = 'block';
+                });
+            }
+
+            // 返回時段管理
+            const btnBackToTimeSlot = document.getElementById('btnBackToTimeSlot');
+            if (btnBackToTimeSlot) {
+                btnBackToTimeSlot.addEventListener('click', function() {
+                    document.getElementById('unitScheduleSection').style.display = 'none';
+                    document.getElementById('timeSlotSection').style.display = 'block';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

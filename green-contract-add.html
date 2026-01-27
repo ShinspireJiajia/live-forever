@@ -232,7 +232,14 @@
                     <label class="form-label">檢查項目</label>
                     <div>
                         <input type="file" id="inspectionFile" class="hidden-file-input">
-                        <button class="upload-btn" onclick="document.getElementById('inspectionFile').click()">上傳檢查項目檔案</button>
+                        <div class="file-action-buttons">
+                            <button class="upload-btn" onclick="document.getElementById('inspectionFile').click()">
+                                <i class="fa-solid fa-upload"></i> 上傳檢查項目檔案
+                            </button>
+                            <button class="download-template-btn" onclick="downloadInspectionTemplate()">
+                                <i class="fa-solid fa-download"></i> 下載範例檔案
+                            </button>
+                        </div>
                         <div class="file-info">支援多種檔案格式，檔案大小小於10MB</div>
                         <div id="inspectionFileDisplay" class="uploaded-file" style="display: none;">
                             <span class="file-icon">📄</span>

@@ -65,10 +65,19 @@
                 <form id="reservation-form" class="form">
                     <!-- 基本資訊區域 -->
                     <div class="row">
-                        <div class="col col-12">
+                        <div class="col col-6">
                             <div class="form-group">
                                 <label for="unit" class="form-label required">戶別</label>
                                 <input type="text" class="form-control" id="unit" placeholder="請輸入戶別" required>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="form-group">
+                                <label for="contract" class="form-label required">選擇合約</label>
+                                <select class="form-select" id="contract" required disabled>
+                                    <option value="">請先輸入戶別</option>
+                                </select>
+                                <small class="form-hint" id="contract-hint"></small>
                             </div>
                         </div>
                     </div>
