@@ -24,6 +24,7 @@
     
     <!-- 本頁專用 CSS -->
     <link rel="stylesheet" href="css/reservation-inspection.css">
+    <link rel="stylesheet" href="css/reservation-table.css">
 </head>
 <body>
     <div class="app-container">
@@ -55,6 +56,14 @@
 
                 <!-- 查詢條件區 -->
                 <div class="search-panel">
+                    <!-- 手機版收合標題 -->
+                    <div class="search-panel-header" id="searchPanelHeader">
+                        <span class="search-panel-title">
+                            <i class="fa-solid fa-filter"></i>
+                            篩選條件
+                        </span>
+                        <i class="fa-solid fa-chevron-down search-panel-toggle-icon" id="searchPanelToggleIcon"></i>
+                    </div>
                     <form class="search-form case-search-form" id="searchForm">
                         <div class="search-grid">
                             <!-- 案場 -->
@@ -224,16 +233,16 @@
                     
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td class="col-1">${item.displaySerial}</td>
-                        <td class="col-1">${item.project}</td>
-                        <td class="col-1">${item.unit}</td>
-                        <td class="col-1">${item.name}</td>
-                        <td class="col-1">${item.phone}</td>
-                        <td class="col-1">${item.period}</td>
-                        <td class="col-1">${item.date}</td>
-                        <td class="col-1">${item.time}</td>
-                        <td class="col-1"><span class="status-badge ${statusClass}">${item.statusText}</span></td>
-                        <td class="col-2">
+                        <td class="col-1" data-label="序號">${item.displaySerial}</td>
+                        <td class="col-1" data-label="案場">${item.project}</td>
+                        <td class="col-1" data-label="戶別">${item.unit}</td>
+                        <td class="col-1" data-label="會員姓名">${item.name}</td>
+                        <td class="col-1" data-label="聯絡電話">${item.phone}</td>
+                        <td class="col-1" data-label="可預約時段">${item.period}</td>
+                        <td class="col-1" data-label="已預約日期">${item.date}</td>
+                        <td class="col-1" data-label="時段">${item.time}</td>
+                        <td class="col-1" data-label="狀態"><span class="status-badge ${statusClass}">${item.statusText}</span></td>
+                        <td class="col-2" data-label="">
                             <div class="table-actions">
                                 <button type="button" class="btn-action btn-edit" title="編輯" onclick="window.location.href='reservation-inspection-edit.html?id=${item.id}'">
                                     <i class="fa-solid fa-pen-to-square"></i>
@@ -289,6 +298,15 @@
             if (btnAdd) {
                 btnAdd.addEventListener('click', function() {
                     window.location.href = 'reservation-inspection-edit.html';
+                });
+            }
+            
+            // 手機版搜尋面板收合功能
+            const searchPanelHeader = document.getElementById('searchPanelHeader');
+            const searchPanel = searchPanelHeader ? searchPanelHeader.closest('.search-panel') : null;
+            if (searchPanelHeader && searchPanel) {
+                searchPanelHeader.addEventListener('click', function() {
+                    searchPanel.classList.toggle('collapsed');
                 });
             }
         });

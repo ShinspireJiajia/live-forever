@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/case-edit.css">
     <link rel="stylesheet" href="css/reservation-custom.css">
     <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/reservation-table.css">
 </head>
 <body>
     <div class="app-container">
@@ -56,6 +57,14 @@
 
                 <!-- 查詢條件區 -->
                 <div class="search-panel">
+                    <!-- 手機版收合標題 -->
+                    <div class="search-panel-header" id="searchPanelHeader">
+                        <span class="search-panel-title">
+                            <i class="fa-solid fa-filter"></i>
+                            篩選條件
+                        </span>
+                        <i class="fa-solid fa-chevron-down search-panel-toggle-icon" id="searchPanelToggleIcon"></i>
+                    </div>
                     <form class="search-form case-search-form" id="searchForm">
                         <div class="search-grid">
                             <!-- 案場 -->
@@ -509,6 +518,15 @@
                     }
                 }
                 return buttons;
+            }
+            
+            // 手機版搜尋面板收合功能
+            const searchPanelHeader = document.getElementById('searchPanelHeader');
+            const searchPanel = searchPanelHeader ? searchPanelHeader.closest('.search-panel') : null;
+            if (searchPanelHeader && searchPanel) {
+                searchPanelHeader.addEventListener('click', function() {
+                    searchPanel.classList.toggle('collapsed');
+                });
             }
         });
     </script>
