@@ -86,3 +86,29 @@
 .file-remove:hover {
     opacity: 0.8;
 }
+
+/* ============================================
+ * 合約選擇提示 (Contract Hint)
+ * ============================================ */
+.form-hint {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+.form-hint i {
+    margin-right: 4px;
+}
+
+/* 合約選擇下拉選單樣式 */
+#contract option {
+    padding: var(--spacing-sm);
+}
+
+/* 禁用狀態的下拉選單 */
+#contract:disabled {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-500);
+    cursor: not-allowed;
+}
