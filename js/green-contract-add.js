@@ -40,6 +40,108 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+/**
+ * 下載檢查項目範例檔案
+ * 生成並下載一個 Excel 格式的範例檔案
+ */
+function downloadInspectionTemplate() {
+    // 建立範例 CSV 內容 (模擬 Excel 格式)
+    const csvContent = [
+        ['項次', '檢查項目', '檢查標準', '檢查頻率', '備註'],
+        ['1', '草皮修剪', '高度維持在3-5公分', '每月2次', '雨季增加頻率'],
+        ['2', '樹木修剪', '修剪枯枝、病枝', '每季1次', '依樹種調整'],
+        ['3', '澆水灌溉', '土壤濕度檢查', '每週3次', '夏季每日檢查'],
+        ['4', '施肥作業', '有機肥料施用', '每季1次', '依植物生長狀況調整'],
+        ['5', '病蟲害防治', '定期巡檢', '每月1次', '發現立即處理'],
+        ['6', '雜草清除', '人工或機械除草', '每月2次', '避免使用除草劑'],
+        ['7', '落葉清理', '清掃公共區域', '每日1次', '颱風季節增加頻率'],
+        ['8', '水景維護', '水質檢測與清潔', '每週1次', '定期更換濾材']
+    ].map(row => row.join(',')).join('\n');
+
+    // 加上 BOM 以支援中文顯示
+    const BOM = '\uFEFF';
+    const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
+    
+    // 建立下載連結
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', '檢查項目範例.csv');
+    link.style.visibility = 'hidden';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // 釋放 URL 物件
+    URL.revokeObjectURL(url);
+    
+    // 顯示提示訊息
+    showNotification('範例檔案下載成功', 'success');
+}
+
+/**
+ * 顯示通知訊息
+ * @param {string} message - 訊息內容
+ * @param {string} type - 訊息類型 (success, error, info)
+ */
+function showNotification(message, type = 'info') {
+    // 建立通知元素
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        padding: 12px 20px;
+        background-color: ${type === 'success' ? '#27AE60' : type === 'error' ? '#E74C3C' : '#3498DB'};
+        color: white;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // 3 秒後自動移除
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// 添加動畫樣式
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
 function setupFileUpload(inputId, displayId) {
     const input = document.getElementById(inputId);
     const display = document.getElementById(displayId);
