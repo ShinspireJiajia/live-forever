@@ -11,8 +11,8 @@
 /* 1. 序號 */
 #reservationTable th:nth-child(1),
 #reservationTable td:nth-child(1) {
-    flex: 0 0 150px !important;
-    max-width: 150px !important;
+    flex: 0 0 150px ;
+    max-width: 150px ;
     text-align: left;
     justify-content: center;
 }
@@ -20,36 +20,36 @@
 /* 2. 案場 */
 #reservationTable th:nth-child(2),
 #reservationTable td:nth-child(2) {
-    flex: 0 0 120px !important;
-    max-width: 120px !important;
+    flex: 0 0 120px ;
+    max-width: 120px ;
 }
 
 /* 3. 戶別 */
 #reservationTable th:nth-child(3),
 #reservationTable td:nth-child(3) {
-    flex: 0 0 80px !important;
-    max-width: 80px !important;
+    flex: 0 0 80px ;
+    max-width: 80px ;
 }
 
 /* 4. 會員姓名 */
 #reservationTable th:nth-child(4),
 #reservationTable td:nth-child(4) {
-    flex: 0 0 90px !important;
-    max-width: 90px !important;
+    flex: 0 0 90px ;
+    max-width: 90px ;
 }
 
 /* 5. 聯絡電話 */
 #reservationTable th:nth-child(5),
 #reservationTable td:nth-child(5) {
-    flex: 0 0 130px !important;
-    max-width: 130px !important;
+    flex: 0 0 130px ;
+    max-width: 130px ;
 }
 
 /* 6. 可預約時段 - 不折行 */
 #reservationTable th:nth-child(6),
 #reservationTable td:nth-child(6) {
-    flex: 0 0 200px !important;
-    max-width: 200px !important;
+    flex: 0 0 200px ;
+    max-width: 200px ;
         text-align: center;
     white-space: normal; /* 允許換行以顯示多行內容 */
 }
@@ -57,8 +57,8 @@
 /* 7. 已預約日期 - 不折行 */
 #reservationTable th:nth-child(7),
 #reservationTable td:nth-child(7) {
-    flex: 0 0 150px !important;
-    max-width: 150px !important;
+    flex: 0 0 150px ;
+    max-width: 150px ;
             text-align: center;
 
     white-space: normal; /* 允許換行以顯示多行內容 */
@@ -67,15 +67,15 @@
 /* 8. 出席資訊 */
 #reservationTable th:nth-child(8),
 #reservationTable td:nth-child(8) {
-    flex: 0 0 100px !important;
-    max-width: 100px !important;
+    flex: 0 0 100px ;
+    max-width: 100px ;
 }
 
 /* 9. 狀態 */
 #reservationTable th:nth-child(9),
 #reservationTable td:nth-child(9) {
-    flex: 0 0 90px !important;
-    max-width: 90px !important;
+    flex: 0 0 90px ;
+    max-width: 90px ;
     text-align: center;
     justify-content: center;
 }
@@ -83,8 +83,8 @@
 /* 10. 操作 - 不折行 */
 #reservationTable th:nth-child(10),
 #reservationTable td:nth-child(10) {
-    flex: 0 0 100px !important;
-    max-width: 100px !important;
+    flex: 0 0 100px ;
+    max-width: 100px ;
     text-align: center;
     justify-content: center;
     white-space: nowrap;
@@ -141,13 +141,20 @@
     border: 1px solid #dee2e6;
 }
 
-/* 手機版響應式調整 */
+/* 手機版響應式調整 - 移除衝突樣式，由 reservation-table.css 統一處理 */
 @media (max-width: 767px) {
+    /* 桌面版欄位固定寬度在手機版改為自動 */
     #reservationTable th,
     #reservationTable td {
-        flex: unset !important;
-        max-width: none !important;
-        width: 100% !important;
-        white-space: normal; /* 手機版允許折行 */
+        flex: unset ;
+        max-width: none ;
+        min-width: unset ;
+        width: 100% ;
+    }
+    
+    /* 手機版允許內容換行 */
+    #reservationTable td > div,
+    #reservationTable td > span {
+        white-space: normal;
     }
 }

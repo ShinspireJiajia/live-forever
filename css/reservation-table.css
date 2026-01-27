@@ -1,0 +1,305 @@
+/**
+ * ============================================
+ * 陸府建設 CRM 系統 - 預約頁面表格樣式統一規範
+ * ============================================
+ * 檔案：reservation-table.css
+ * 說明：統一處理預約相關頁面的表格樣式
+ *       - 表格最大寬度 1200px
+ *       - 超過時可水平捲動
+ *       - 手機版採卡片式呈現
+ * 適用頁面：
+ *   - reservation-handover.html
+ *   - reservation-inspection.html
+ *   - reservation-collateral.html
+ *   - reservation-custom.html
+ * ============================================
+ */
+
+/* ============================================
+ * 桌面版表格容器樣式
+ * ============================================ */
+.table-responsive {
+    width: 100%;
+    max-width: 1350px;
+    overflow-x: auto;
+    margin-top: var(--spacing-md);
+    background-color: #f3f3f3;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    /* 水平捲動提示 */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 表格容器捲動條樣式 */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: var(--color-gray-100);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-500);
+}
+
+/* ============================================
+ * 預約頁面表格基礎樣式
+ * ============================================ */
+.case-table,
+.data-table {
+    min-width: 1000px;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.case-table thead tr,
+.data-table thead tr {
+    display: flex;
+    background-color: #ad9e8f;
+    color: #ffffff;
+}
+
+.case-table thead th,
+.data-table thead th {
+    padding: 12px 8px;
+    font-weight: var(--font-weight-medium);
+    text-align: left;
+    white-space: nowrap;
+    border: none;
+}
+
+.case-table tbody tr,
+.data-table tbody tr {
+    display: flex;
+    background-color: #f3f3f3;
+}
+
+.case-table tbody tr:nth-child(odd),
+.data-table tbody tr:nth-child(odd) {
+    background-color: #e7e7e7;
+}
+
+.case-table th.col-1,
+.case-table td.col-1,
+.data-table th.col-1,
+.data-table td.col-1 {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+    word-break: break-word;
+    justify-content: center;
+    text-align: center;
+}
+
+.case-table th.col-2,
+.case-table td.col-2,
+.data-table th.col-2,
+.data-table td.col-2 {
+    flex: 1.5;
+    min-width: 0;
+    padding: 10px 8px;
+    word-break: break-word;
+    justify-content: center;
+    text-align: center;
+}
+
+.case-table tbody td,
+.data-table tbody td {
+    border: none;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
+
+/* ============================================
+ * 手機版響應式表格 (< 768px)
+ * 卡片式呈現（參照 case-list.html）
+ * ============================================ */
+@media (max-width: 767px) {
+    /* === 表格容器優化（視覺降噪）=== */
+    .table-responsive {
+        max-width: 100%;
+        border: none;
+        background-color: transparent;
+        overflow-x: visible;
+        margin-top: var(--spacing-lg);
+    }
+    
+    /* === 表格轉卡片式佈局 === */
+    .case-table,
+    .data-table,
+    #reservationTable {
+        min-width: unset;
+        width: 100%;
+        display: block;
+    }
+    
+    .case-table thead,
+    .data-table thead,
+    #reservationTable thead {
+        display: none;
+    }
+    
+    .case-table tbody,
+    .data-table tbody,
+    #reservationTable tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .case-table tbody tr,
+    .data-table tbody tr,
+    #reservationTable tbody tr {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-white);
+        border-radius: var(--border-radius-md);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+        border: none;
+    }
+    
+    .case-table tbody tr:nth-child(odd),
+    .case-table tbody tr:nth-child(even),
+    .data-table tbody tr:nth-child(odd),
+    .data-table tbody tr:nth-child(even),
+    #reservationTable tbody tr:nth-child(odd),
+    #reservationTable tbody tr:nth-child(even) {
+        background-color: var(--color-white);
+    }
+    
+    .case-table tbody tr:hover,
+    .data-table tbody tr:hover,
+    #reservationTable tbody tr:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    
+    .case-table th.col-1,
+    .case-table td.col-1,
+    .case-table th.col-2,
+    .case-table td.col-2,
+    .data-table th.col-1,
+    .data-table td.col-1,
+    .data-table th.col-2,
+    .data-table td.col-2,
+    #reservationTable th.col-1,
+    #reservationTable td.col-1,
+    #reservationTable th.col-2,
+    #reservationTable td.col-2,
+    #reservationTable th,
+    #reservationTable td,
+    .col-bookable-range {
+        flex: unset;
+        min-width: unset;
+        max-width: unset;
+        width: 100%;
+        padding: var(--spacing-xs) 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+        justify-content: flex-start;
+        text-align: left;
+    }
+    
+    /* 添加欄位標籤（透過偽元素）*/
+    .case-table tbody td.col-1::before,
+    .case-table tbody td.col-2::before,
+    .data-table tbody td.col-1::before,
+    .data-table tbody td.col-2::before,
+    .case-table tbody td::before,
+    .data-table tbody td::before,
+    #reservationTable tbody td::before {
+        content: attr(data-label);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-gray-500);
+        min-width: 100px;
+        flex-shrink: 0;
+        font-size: var(--font-size-xs);
+    }
+    
+    /* 若 data-label 為空字串，則不顯示標籤 */
+    .case-table tbody td[data-label=""]::before,
+    .data-table tbody td[data-label=""]::before,
+    #reservationTable tbody td[data-label=""]::before {
+        content: none;
+        display: none;
+    }
+    
+    /* 操作按鈕區在卡片底部 */
+    .case-table tbody td:last-child,
+    .data-table tbody td:last-child,
+    #reservationTable tbody td:last-child {
+        border-top: 1px solid var(--color-gray-200);
+        padding-top: var(--spacing-md);
+        margin-top: var(--spacing-sm);
+    }
+    
+    /* 操作按鈕區特別處理：不顯示標籤 */
+    .case-table tbody td:last-child::before,
+    .data-table tbody td:last-child::before,
+    #reservationTable tbody td:last-child::before {
+        content: '';
+        display: none;
+    }
+    
+    .table-actions {
+        width: 100%;
+        justify-content: flex-end;
+        gap: var(--spacing-sm);
+    }
+    
+    .btn-table-edit,
+    .btn-table-delete,
+    .btn-action {
+        flex: 1;
+        justify-content: center;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+/* ============================================
+ * 特殊欄位樣式調整
+ * ============================================ */
+
+/* 可預約時段欄位 */
+.col-bookable-range {
+    flex: 1.5;
+    min-width: 150px;
+}
+
+/* 狀態標籤統一樣式 */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+/* ============================================
+ * 表格操作按鈕區
+ * ============================================ */
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.table-actions button,
+.table-actions a {
+    flex-shrink: 0;
+}
