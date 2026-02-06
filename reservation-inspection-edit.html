@@ -187,13 +187,25 @@
 
                         <!-- 簽名區塊 -->
                         <div class="section-block" id="sectionSignature">
-                            <h3 class="section-title">住戶簽名確認</h3>
+                            <div class="signature-header">
+                                <h3 class="section-title">住戶簽名確認</h3>
+                                <!-- 此次不用簽名核取方塊 -->
+                                <label class="skip-signature-label">
+                                    <input type="checkbox" id="skipSignature" class="form-checkbox" checked>
+                                    <span>維護人員註記：此次無需簽名</span>
+                                </label>
+                            </div>
                             <div class="signature-block">
                                 <div class="signature-area" id="signatureArea">
                                     <canvas id="signatureCanvas" width="0" height="200" style="width: 100%; height: 200px;"></canvas>
                                     <div class="signature-placeholder" id="signaturePlaceholder">
                                         <i class="fa-solid fa-signature"></i>
                                         <span>點擊此處進行簽名</span>
+                                    </div>
+                                    <!-- 停用簽名時的遮罩層 -->
+                                    <div class="signature-disabled-overlay" id="signatureDisabledOverlay">
+                                        <i class="fa-solid fa-ban"></i>
+                                        <span>已標記為無需簽名</span>
                                     </div>
                                 </div>
                                 <div class="signature-buttons">

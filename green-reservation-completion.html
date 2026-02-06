@@ -917,8 +917,22 @@
             <h2>確認簽名</h2>
             <div class="signature-container">
                 <div class="signature-box">
-                    <h3>住戶簽名</h3>
-                    <canvas id="resident-signature" class="signature-pad" width="400" height="150"></canvas>
+                    <div class="signature-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="margin: 0;">住戶簽名</h3>
+                        <!-- 此次不用簽名核取方塊 -->
+                        <label class="skip-signature-label" style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: #666; cursor: pointer;">
+                            <input type="checkbox" id="skipResidentSignature" class="form-checkbox" checked onchange="toggleResidentSignature()">
+                            <span>此次無需簽名</span>
+                        </label>
+                    </div>
+                    <div style="position: relative;">
+                        <canvas id="resident-signature" class="signature-pad" width="400" height="150"></canvas>
+                        <!-- 停用簽名時的遮罩層 -->
+                        <div class="signature-disabled-overlay" id="residentSignatureDisabledOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(245, 245, 245, 0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #999; border-radius: 4px;">
+                            <i class="fa-solid fa-ban" style="font-size: 32px; margin-bottom: 8px;"></i>
+                            <span>已標記為無需簽名</span>
+                        </div>
+                    </div>
                     <button class="photo-btn" onclick="clearSignature('resident-signature')" style="margin-top: 10px;"><i class="fa-solid fa-eraser"></i> 清除簽名</button>
                 </div>
                 <div class="signature-box">

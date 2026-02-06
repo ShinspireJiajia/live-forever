@@ -129,6 +129,78 @@
                         <!-- 貸款資訊區塊 -->
                         <div class="section-block">
                             <h3 class="section-title">貸款資訊</h3>
+                            
+                            <!-- 問卷結果顯示區塊 -->
+                            <div class="questionnaire-result-block" id="questionnaireResultBlock" style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                                <h4 style="font-size: 1rem; font-weight: bold; margin-bottom: 12px; color: var(--color-gray-700);">
+                                    <i class="fa-solid fa-clipboard-check" style="color: var(--color-info);"></i> 用戶問卷填寫結果
+                                </h4>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">貸款意願</label>
+                                        <input type="text" class="form-control" id="qLoanIntent" readonly style="background-color: #fff;">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">選擇銀行</label>
+                                        <input type="text" class="form-control" id="qSelectedBank" readonly style="background-color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">預計貸款金額</label>
+                                        <input type="text" class="form-control" id="qExpectedLoanAmount" readonly style="background-color: #fff;">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">貸款用途</label>
+                                        <input type="text" class="form-control" id="qLoanPurpose" readonly style="background-color: #fff;">
+                                    </div>
+                                </div>
+                                <!-- 新增對保地址欄位 -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">
+                                            <i class="fa-solid fa-location-dot" style="color: var(--color-danger); margin-right: 4px;"></i>
+                                            對保地點
+                                        </label>
+                                        <input type="text" class="form-control" id="qCollateralLocation" readonly style="background-color: #fff;">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">對保地址</label>
+                                        <input type="text" class="form-control" id="qCollateralAddress" readonly style="background-color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">是否有其他貸款</label>
+                                        <input type="text" class="form-control" id="qHasOtherLoans" readonly style="background-color: #fff;">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">方便聯絡時間</label>
+                                        <input type="text" class="form-control" id="qPreferredContactTime" readonly style="background-color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">產權登記方式</label>
+                                        <input type="text" class="form-control" id="qPropertyRegistration" readonly style="background-color: #fff;">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">登記人姓名</label>
+                                        <input type="text" class="form-control" id="qRegistrationName" readonly style="background-color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label">登記人身分證字號</label>
+                                        <input type="text" class="form-control" id="qRegistrationId" readonly style="background-color: #fff;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">其他備註</label>
+                                    <textarea class="form-control" id="qOtherNotes" rows="2" readonly style="background-color: #fff;"></textarea>
+                                </div>
+                            </div>
+
                             <div class="form-row">
                                 <!-- 銀行選項 -->
                                 <div class="form-group col-md-6">
@@ -140,8 +212,9 @@
                                         <option value="中國信託">中國信託</option>
                                         <option value="玉山銀行">玉山銀行</option>
                                         <option value="台新銀行">台新銀行</option>
+                                        <option value="國泰世華">國泰世華</option>
                                     </select>
-                                    <div class="form-text" style="color: var(--color-gray-500); font-size: var(--font-size-xs); margin-top: 4px;">來源：案場下的對保問卷</div>
+                                    <div class="form-text" style="color: var(--color-gray-500); font-size: var(--font-size-xs); margin-top: 4px;">來源：用戶問卷選擇</div>
                                 </div>
                                 <!-- 預計貸款金額 -->
                                 <div class="form-group col-md-6">
@@ -152,26 +225,35 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            <div class="form-row" id="rowAgencyFeeDeadline">
                                 <!-- 代辦費金額 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label">代辦費金額</label>
                                     <div style="display: flex; align-items: center;">
-                                        <input type="number" class="form-control" id="hAgencyFee" placeholder="請輸入金額" style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                        <input type="number" class="form-control" id="hAgencyFee" placeholder="請輸入金額" readonly style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0; background-color: #f5f5f5;">
                                         <span style="padding: 0 12px; background-color: var(--color-gray-100); border: 1px solid var(--color-gray-300); border-left: 0; height: 38px; display: flex; align-items: center; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">元</span>
+                                    </div>
+                                    <div class="form-text" style="color: var(--color-info); font-size: var(--font-size-xs); margin-top: 4px;">
+                                        <i class="fa-solid fa-circle-info"></i> 來源：戶別預約條件設定
                                     </div>
                                 </div>
                                 <!-- 繳款期限 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label">繳款期限</label>
-                                    <input type="date" class="form-control" id="hPaymentDeadline">
+                                    <input type="date" class="form-control" id="hPaymentDeadline" readonly style="background-color: #f5f5f5;">
+                                    <div class="form-text" style="color: var(--color-info); font-size: var(--font-size-xs); margin-top: 4px;">
+                                        <i class="fa-solid fa-circle-info"></i> 來源：戶別預約條件設定
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            <div class="form-row" id="rowPaymentAccount">
                                 <!-- 繳款帳號 -->
                                 <div class="form-group col-md-6">
                                     <label class="form-label">繳款帳號</label>
-                                    <input type="text" class="form-control" id="hPaymentAccount" placeholder="請輸入繳款帳號">
+                                    <input type="text" class="form-control" id="hPaymentAccount" placeholder="請輸入繳款帳號" readonly style="background-color: #f5f5f5;">
+                                    <div class="form-text" style="color: var(--color-info); font-size: var(--font-size-xs); margin-top: 4px;">
+                                        <i class="fa-solid fa-circle-info"></i> 來源：戶別預約條件設定
+                                    </div>
                                 </div>
                             </div>
                             <!-- 其他補充 -->
@@ -229,13 +311,25 @@
 
                         <!-- 簽名區塊 -->
                         <div class="section-block" id="sectionSignature">
-                            <h3 class="section-title">住戶簽名確認</h3>
+                            <div class="signature-header">
+                                <h3 class="section-title">住戶簽名確認</h3>
+                                <!-- 此次不用簽名核取方塊 -->
+                                <label class="skip-signature-label">
+                                    <input type="checkbox" id="skipSignature" class="form-checkbox" checked>
+                                    <span>維護人員註記：此次無需簽名</span>
+                                </label>
+                            </div>
                             <div class="signature-block">
                                 <div class="signature-area" id="signatureArea">
                                     <canvas id="signatureCanvas" width="1102" height="200" style="width: 100%; height: 200px;"></canvas>
                                     <div class="signature-placeholder" id="signaturePlaceholder">
                                         <i class="fa-solid fa-signature"></i>
                                         <span>點擊此處進行簽名</span>
+                                    </div>
+                                    <!-- 停用簽名時的遮罩層 -->
+                                    <div class="signature-disabled-overlay" id="signatureDisabledOverlay">
+                                        <i class="fa-solid fa-ban"></i>
+                                        <span>已標記為無需簽名</span>
                                     </div>
                                 </div>
                                 <div class="signature-buttons">

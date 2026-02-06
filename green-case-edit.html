@@ -428,7 +428,14 @@
 
                             <!-- 住戶簽名確認區塊 -->
                             <div class="section-block">
-                                <h3 class="section-title">住戶簽名確認</h3>
+                                <div class="signature-header">
+                                    <h3 class="section-title">住戶簽名確認</h3>
+                                    <!-- 此次不用簽名核取方塊 -->
+                                    <label class="skip-signature-label">
+                                        <input type="checkbox" id="skipSignature" class="form-checkbox" checked>
+                                        <span>維護人員註記：此次無需簽名</span>
+                                    </label>
+                                </div>
                                 <p class="help-text mb-3">
                                     <i class="fa-solid fa-circle-info"></i>
                                     維修完成後，請客戶簽名確認滿意度。簽名完成後才可產生支付連結。
@@ -443,6 +450,11 @@
                                         <div class="signature-placeholder" id="signaturePlaceholder">
                                             <i class="fa-solid fa-signature"></i>
                                             <span>點擊此處進行簽名</span>
+                                        </div>
+                                        <!-- 停用簽名時的遮罩層 -->
+                                        <div class="signature-disabled-overlay" id="signatureDisabledOverlay">
+                                            <i class="fa-solid fa-ban"></i>
+                                            <span>已標記為無需簽名</span>
                                         </div>
                                     </div>
                                     <div class="signature-buttons">

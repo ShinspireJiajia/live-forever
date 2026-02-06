@@ -84,13 +84,50 @@
                         </div>
                     </div>
 
-                    <!-- 區塊 1: 對保的銀行 -->
-                    <div class="survey-section" id="sectionBank">
+                    <!-- ====================================== -->
+                    <!-- 區塊 1: 基本貸款意願 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section" id="sectionLoanIntent">
                         <div class="section-header">
-                            <h3 class="section-title">對保的銀行</h3>
+                            <h3 class="section-title">
+                                <span class="section-number">1</span>
+                                基本貸款意願
+                            </h3>
+                        </div>
+                        <div class="section-body">
+                            <p class="question-label">[單選題] 您的購屋資金規劃：</p>
+                            <div class="radio-options-vertical">
+                                <label class="radio-option">
+                                    <input type="radio" name="loanIntent" value="need_loan" disabled>
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">需辦理房屋貸款</span>
+                                    <span class="condition-hint">→ 進入區塊 2 (對保的銀行)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="loanIntent" value="no_loan" disabled>
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">全額自備，無需貸款</span>
+                                    <span class="condition-hint">→ 跳至區塊 4 (產權登記資訊)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ====================================== -->
+                    <!-- 區塊 2: 對保的銀行 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section conditional-section" id="sectionBank" data-show-when="loanIntent:need_loan">
+                        <div class="section-header">
+                            <h3 class="section-title">
+                                <span class="section-number">2</span>
+                                對保的銀行
+                            </h3>
                             <div class="section-actions">
                                 <button class="btn-add-bank" title="新增銀行"><i class="fa-solid fa-plus"></i></button>
                             </div>
+                        </div>
+                        <div class="condition-badge">
+                            <i class="fa-solid fa-code-branch"></i> 條件顯示：選擇「需辦理房屋貸款」時顯示
                         </div>
                         
                         <div class="bank-cards-grid">
@@ -168,32 +205,205 @@
                         </div>
                     </div>
 
-                    <!-- 區塊 2: 預計貸款金額 -->
-                    <div class="survey-section">
+                    <!-- ====================================== -->
+                    <!-- 區塊 3: 對保地址 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section conditional-section" id="sectionCollateralLocation" data-show-when="loanIntent:need_loan">
                         <div class="section-header">
-                            <h3 class="section-title">預計貸款金額</h3>
+                            <h3 class="section-title">
+                                <span class="section-number">3</span>
+                                對保地址
+                            </h3>
+                            <div class="section-actions">
+                                <button class="btn-add-location" title="新增地點"><i class="fa-solid fa-plus"></i></button>
+                            </div>
                         </div>
-                        <div class="section-content">
-                            <input type="text" class="form-input" placeholder="請輸入預計貸款金額" disabled>
+                        <div class="condition-badge">
+                            <i class="fa-solid fa-code-branch"></i> 條件顯示：選擇「需辦理房屋貸款」時顯示
+                        </div>
+                        
+                        <div class="section-body">
+                            <p class="question-label">[單選題] 請選擇您方便的對保地點：</p>
+                            <div class="location-cards-grid">
+                                <!-- 地點卡片 1 -->
+                                <div class="location-card">
+                                    <div class="location-card-header">
+                                        <input type="radio" name="collateralLocation" value="location1" disabled>
+                                        <h4 class="location-name">陸府建設總公司</h4>
+                                    </div>
+                                    <div class="location-card-body">
+                                        <p class="location-address"><i class="fa-solid fa-location-dot"></i> 台中市西屯區市政北二路282號</p>
+                                    </div>
+                                    <div class="card-overlay-actions">
+                                        <button class="btn-sm btn-edit-location">編輯</button>
+                                        <button class="btn-sm btn-delete-location">刪除</button>
+                                    </div>
+                                </div>
+
+                                <!-- 地點卡片 2 -->
+                                <div class="location-card">
+                                    <div class="location-card-header">
+                                        <input type="radio" name="collateralLocation" value="location2" disabled>
+                                        <h4 class="location-name">陸府植森接待中心</h4>
+                                    </div>
+                                    <div class="location-card-body">
+                                        <p class="location-address"><i class="fa-solid fa-location-dot"></i> 台中市南屯區大墩十一街168號</p>
+                                    </div>
+                                    <div class="card-overlay-actions">
+                                        <button class="btn-sm btn-edit-location">編輯</button>
+                                        <button class="btn-sm btn-delete-location">刪除</button>
+                                    </div>
+                                </div>
+
+                                <!-- 其他選項 -->
+                                <div class="location-card location-card-other">
+                                    <div class="location-card-header">
+                                        <input type="radio" name="collateralLocation" value="other" disabled>
+                                        <h4 class="location-name">其他</h4>
+                                    </div>
+                                    <div class="location-card-body">
+                                        <p class="location-desc">選擇此選項，用戶需自行填寫對保地址</p>
+                                        <div class="location-other-input" style="margin-top: 8px;">
+                                            <input type="text" class="form-input" placeholder="請輸入對保地址" disabled style="width: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-
-
-                    <!-- 區塊 4: 其他補充 -->
-                    <div class="survey-section">
+                    <!-- ====================================== -->
+                    <!-- 區塊 4: 貸款需求細節 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section conditional-section" id="sectionLoanDetails" data-show-when="loanIntent:need_loan">
                         <div class="section-header">
-                            <h3 class="section-title">其他補充</h3>
+                            <h3 class="section-title">
+                                <span class="section-number">4</span>
+                                貸款需求細節
+                            </h3>
+                        </div>
+                        <div class="condition-badge">
+                            <i class="fa-solid fa-code-branch"></i> 條件顯示：選擇「需辦理房屋貸款」時顯示
+                        </div>
+                        
+                        <div class="section-body">
+                            <!-- 預計貸款成數 -->
+                            <div class="form-group">
+                                <label class="form-label">預計貸款成數</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-input" id="loanPercentage" placeholder="例如：80" min="0" max="100" disabled>
+                                    <span class="input-unit">%</span>
+                                </div>
+                            </div>
+
+                            <!-- 預計貸款金額 -->
+                            <div class="form-group">
+                                <label class="form-label">預計貸款金額</label>
+                                <div class="input-with-unit">
+                                    <input type="number" class="form-input" id="loanAmount" placeholder="請輸入預計貸款金額" disabled>
+                                    <span class="input-unit">萬元</span>
+                                </div>
+                            </div>
+
+                            <!-- 貸款人職業屬性 -->
+                            <div class="form-group">
+                                <label class="form-label">貸款人職業屬性</label>
+                                <select class="form-select" id="borrowerOccupation" disabled>
+                                    <option value="">請選擇職業屬性</option>
+                                    <option value="公教人員">公教人員</option>
+                                    <option value="軍警消">軍警消</option>
+                                    <option value="上市櫃公司員工">上市櫃公司員工</option>
+                                    <option value="一般企業員工">一般企業員工</option>
+                                    <option value="自營商">自營商</option>
+                                    <option value="自由業">自由業</option>
+                                    <option value="退休人員">退休人員</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+
+                            <!-- 名下是否有其他房貸 -->
+                            <div class="form-group">
+                                <label class="form-label">名下是否有其他房貸？</label>
+                                <div class="radio-options-horizontal">
+                                    <label class="radio-option">
+                                        <input type="radio" name="hasOtherLoan" value="no" disabled>
+                                        <span class="radio-custom"></span>
+                                        <span class="radio-text">否（首購）</span>
+                                    </label>
+                                    <label class="radio-option warning-option">
+                                        <input type="radio" name="hasOtherLoan" value="yes" disabled>
+                                        <span class="radio-custom"></span>
+                                        <span class="radio-text">是（受限貸令規範）</span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ====================================== -->
+                    <!-- 區塊 5: 產權登記資訊 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section" id="sectionPropertyRegistration">
+                        <div class="section-header">
+                            <h3 class="section-title">
+                                <span class="section-number">5</span>
+                                產權登記資訊
+                            </h3>
+                        </div>
+                        <div class="section-body">
+                            <!-- 產權登記人是否與買賣契約人一致 -->
+                            <div class="form-group">
+                                <label class="form-label">[產權登記人] 是否與合約買方一致？</label>
+                                <div class="radio-options-horizontal">
+                                    <label class="radio-option">
+                                        <input type="radio" name="ownerSameAsBuyer" value="yes" disabled>
+                                        <span class="radio-custom"></span>
+                                        <span class="radio-text">是</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="ownerSameAsBuyer" value="no" disabled>
+                                        <span class="radio-custom"></span>
+                                        <span class="radio-text">否（需填寫指定登記人）</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 指定登記人姓名（條件顯示） -->
+                            <div class="form-group conditional-field" id="designatedOwnerGroup" data-show-when="ownerSameAsBuyer:no">
+                                <label class="form-label required">指定登記人姓名</label>
+                                <input type="text" class="form-input" id="designatedOwnerName" placeholder="請輸入指定登記人姓名" disabled>
+                                <div class="condition-hint-inline">
+                                    <i class="fa-solid fa-info-circle"></i> 當選擇「否」時，此欄位將顯示供住戶填寫
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ====================================== -->
+                    <!-- 區塊 6: 其他補充 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section" id="sectionOther">
+                        <div class="section-header">
+                            <h3 class="section-title">
+                                <span class="section-number">6</span>
+                                其他補充
+                            </h3>
                         </div>
                         <div class="section-content">
                             <textarea class="form-textarea" placeholder="請輸入其他補充說明..." rows="3" disabled></textarea>
                         </div>
                     </div>
 
-                    <!-- 區塊 5: 圖片上傳 -->
-                    <div class="survey-section">
+                    <!-- ====================================== -->
+                    <!-- 區塊 7: 圖片上傳 -->
+                    <!-- ====================================== -->
+                    <div class="survey-section" id="sectionUpload">
                         <div class="section-header">
-                            <h3 class="section-title">圖片上傳</h3>
+                            <h3 class="section-title">
+                                <span class="section-number">7</span>
+                                圖片上傳
+                            </h3>
                         </div>
                         <div class="section-content file-upload-row">
                             <button class="btn btn-secondary disabled">上傳檔案</button>
@@ -235,6 +445,35 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="btnBankCancel">取消</button>
                 <button class="btn btn-primary" id="btnBankSave">確認</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增/編輯對保地址彈窗 -->
+    <div class="modal" id="locationModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="locationModalTitle">新增對保地點</h3>
+                <button class="modal-close" title="關閉">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="locationForm">
+                    <div class="form-group">
+                        <label class="form-label required">地點名稱</label>
+                        <input type="text" class="form-input" id="locationName" placeholder="例如：陸府建設總公司" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">地址</label>
+                        <input type="text" class="form-input" id="locationAddress" placeholder="例如：台中市西屯區市政北二路282號" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnLocationCancel">取消</button>
+                <button class="btn btn-primary" id="btnLocationSave">確認</button>
             </div>
         </div>
     </div>
