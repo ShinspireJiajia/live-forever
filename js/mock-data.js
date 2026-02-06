@@ -447,12 +447,35 @@
                 bookableEndDate: '2025-10-31',
                 reservationDate: '2025-10-15', 
                 timeSlot: '10:00-11:00', 
+                inCharge: '李小華',
                 bank: '台新銀行',
+                loanAmount: 800,
                 peopleCount: 2,
                 status: '已預約', 
                 hasUnread: true,
-                checkList: { bank: true, location: true, documents: true },
-                notes: '希望能盡快完成手續'
+                // 戶別條件設定 (來自 unit-appointment)
+                unitCondition: {
+                    agencyFee: 5000,
+                    paymentDeadline: '2025-10-25',
+                    paymentAccount: '12345678901234'
+                },
+                // 問卷結果 (用戶端填寫)
+                questionnaireResult: {
+                    loanIntent: '需辦理房屋貸款',
+                    selectedBank: '台新銀行',
+                    expectedLoanAmount: 800,
+                    loanPurpose: '自住',
+                    collateralLocation: '陸府建設總公司',
+                    collateralAddress: '台中市西屯區市政北二路282號',
+                    hasOtherLoans: false,
+                    preferredContactTime: '平日上午',
+                    propertyRegistration: '單獨登記',
+                    registrationName: '王大明',
+                    registrationId: 'A123456789',
+                    otherNotes: '希望能盡快完成手續'
+                },
+                notes: '希望能盡快完成手續',
+                loanImages: []
             },
             { 
                 id: 2, 
@@ -464,12 +487,36 @@
                 bookableEndDate: '2025-10-31',
                 reservationDate: '2025-10-16', 
                 timeSlot: '14:00-15:00', 
+                inCharge: '王大明',
                 bank: '玉山銀行',
+                loanAmount: 1200,
                 peopleCount: 1,
                 status: '已完成', 
                 hasUnread: false,
-                checkList: { bank: true, location: true, documents: true },
-                notes: ''
+                unitCondition: {
+                    agencyFee: 6000,
+                    paymentDeadline: '2025-10-20',
+                    paymentAccount: '98765432109876'
+                },
+                questionnaireResult: {
+                    loanIntent: '需辦理房屋貸款',
+                    selectedBank: '玉山銀行',
+                    expectedLoanAmount: 1200,
+                    loanPurpose: '自住',
+                    collateralLocation: '陸府植森接待中心',
+                    collateralAddress: '台中市南屯區大墩十一街168號',
+                    hasOtherLoans: true,
+                    otherLoanAmount: 50,
+                    preferredContactTime: '平日下午',
+                    propertyRegistration: '共同登記',
+                    registrationName: '張美玲、張大偉',
+                    registrationId: 'B234567890, C345678901',
+                    otherNotes: ''
+                },
+                completedDate: '2025-10-16',
+                completedNotes: '已完成所有對保手續',
+                notes: '',
+                loanImages: []
             },
             { 
                id: 3, 
@@ -481,12 +528,33 @@
                bookableEndDate: '2025-11-30',
                reservationDate: '2025-11-05', 
                timeSlot: '09:00-10:00', 
+               inCharge: '張志豪',
                bank: '國泰世華', 
+               loanAmount: 950,
                peopleCount: 3,
                status: '已取消', 
                hasUnread: false,
-               checkList: { bank: false, location: false, documents: false },
-               notes: '臨時有事改期'
+               unitCondition: {
+                   agencyFee: 4500,
+                   paymentDeadline: '2025-11-15',
+                   paymentAccount: '55566677788899'
+               },
+               questionnaireResult: {
+                   loanIntent: '需辦理房屋貸款',
+                   selectedBank: '國泰世華',
+                   expectedLoanAmount: 950,
+                   loanPurpose: '投資',
+                   collateralLocation: '其他',
+                   collateralAddress: '台中市北區學士路100號',
+                   hasOtherLoans: false,
+                   preferredContactTime: '假日',
+                   propertyRegistration: '單獨登記',
+                   registrationName: '李小華',
+                   registrationId: 'D456789012',
+                   otherNotes: '臨時有事改期'
+               },
+               notes: '臨時有事改期',
+               loanImages: []
            },
             { 
                id: 4, 
@@ -498,13 +566,307 @@
                bookableEndDate: '2025-10-31',
                reservationDate: '', 
                timeSlot: '', 
+               inCharge: '',
                bank: '', 
+               loanAmount: 0,
                peopleCount: 0,
                status: '待確認', 
                hasUnread: false,
-               checkList: { bank: false, location: false, documents: false },
-               notes: '尚未預約'
+               unitCondition: {
+                   agencyFee: 5500,
+                   paymentDeadline: '2025-10-30',
+                   paymentAccount: '11122233344455'
+               },
+               questionnaireResult: {
+                   loanIntent: '全額自備，無需貸款',
+                   selectedBank: '',
+                   expectedLoanAmount: 0,
+                   loanPurpose: '',
+                   collateralLocation: '',
+                   collateralAddress: '',
+                   hasOtherLoans: false,
+                   preferredContactTime: '',
+                   propertyRegistration: '單獨登記',
+                   registrationName: '陳志偉',
+                   registrationId: 'E567890123',
+                   otherNotes: ''
+               },
+               notes: '尚未預約',
+               loanImages: []
+           },
+           {
+               id: 5,
+               projectName: '陸府植森',
+               unitName: '2棟-5F',
+               memberName: '林雅婷',
+               phone: '0955-666-777',
+               bookableStartDate: '2025-11-01',
+               bookableEndDate: '2025-11-30',
+               reservationDate: '2025-11-10',
+               timeSlot: '14:00-15:00',
+               inCharge: '陳淑芬',
+               bank: '中國信託',
+               loanAmount: 1500,
+               peopleCount: 2,
+               status: '已確認',
+               hasUnread: true,
+               unitCondition: {
+                   agencyFee: 7000,
+                   paymentDeadline: '2025-11-20',
+                   paymentAccount: '66677788899900'
+               },
+               questionnaireResult: {
+                   loanIntent: '需辦理房屋貸款',
+                   selectedBank: '中國信託',
+                   expectedLoanAmount: 1500,
+                   loanPurpose: '自住',
+                   collateralLocation: '陸府建設總公司',
+                   collateralAddress: '台中市西屯區市政北二路282號',
+                   hasOtherLoans: true,
+                   otherLoanAmount: 100,
+                   preferredContactTime: '平日晚間',
+                   propertyRegistration: '共同登記',
+                   registrationName: '林雅婷、林志明',
+                   registrationId: 'F678901234, G789012345',
+                   otherNotes: '配偶會一同出席'
+               },
+               notes: '配偶會一同出席',
+               loanImages: []
            }
+        ];
+        })(),
+
+        // ============================================
+        // 8.0 預約服務(客變)
+        // ============================================
+
+        /**
+         * 客變預約資料
+         */
+        customReservations: (function() {
+            try {
+                const stored = localStorage.getItem('crm_customReservations');
+                if (stored) return JSON.parse(stored);
+            } catch (e) {
+                console.error('Failed to load customReservations from localStorage', e);
+            }
+            return [
+            {
+                id: 1,
+                projectName: '陸府原森',
+                unitName: 'A棟8F',
+                memberName: '王大明',
+                phone: '0912-345-678',
+                bookableStartDate: '2025-10-01',
+                bookableEndDate: '2025-10-31',
+                reservationDate: '2025-10-15',
+                timeSlot: '10:00-11:00',
+                status: '已預約',
+                hasUnread: true,
+                paymentStatus: '待繳費',
+                customChangeFee: 15000,
+                paymentDeadline: '2025-10-25',
+                paymentAccount: '822-123456789012',
+                attendees: 2,
+                hasDesigner: true,
+                changeDescription: '原有三房改兩房，主臥擴大',
+                remark: '希望與設計師討論',
+                completedDate: '',
+                completedNotes: '',
+                attachments: [
+                    { name: '平面配置圖_v1.pdf', size: 2621440 },
+                    { name: '參考圖片.jpg', size: 512000 }
+                ],
+                uploadedImages: []
+            },
+            {
+                id: 2,
+                projectName: '陸府原森',
+                unitName: 'B棟12F',
+                memberName: '張美玲',
+                phone: '0922-333-444',
+                bookableStartDate: '2025-10-01',
+                bookableEndDate: '2025-10-31',
+                reservationDate: '2025-10-16',
+                timeSlot: '14:00-15:00',
+                status: '已完成',
+                hasUnread: false,
+                paymentStatus: '已繳費',
+                customChangeFee: 5000,
+                paymentDeadline: '2025-10-10',
+                paymentAccount: '822-123456789012',
+                attendees: 1,
+                hasDesigner: false,
+                changeDescription: '增加插座，廚房專迴',
+                remark: '',
+                completedDate: '2025-10-16',
+                completedNotes: '客變項目確認無誤，已完成簽認',
+                attachments: [
+                    { name: '插座迴路圖.pdf', size: 819200 }
+                ],
+                uploadedImages: []
+            },
+            {
+                id: 3,
+                projectName: '陸府觀微',
+                unitName: 'C棟5F',
+                memberName: '李小華',
+                phone: '0933-555-666',
+                bookableStartDate: '2025-11-01',
+                bookableEndDate: '2025-11-30',
+                reservationDate: '2025-11-05',
+                timeSlot: '09:00-10:00',
+                status: '已取消',
+                hasUnread: false,
+                paymentStatus: '無需繳費',
+                customChangeFee: 0,
+                paymentDeadline: '',
+                paymentAccount: '',
+                attendees: 3,
+                hasDesigner: true,
+                changeDescription: '客廳地磚升級大理石',
+                remark: '臨時有事改期',
+                completedDate: '',
+                completedNotes: '',
+                attachments: [],
+                uploadedImages: []
+            },
+            {
+                id: 4,
+                projectName: '陸府植森',
+                unitName: '1棟-3F',
+                memberName: '陳志偉',
+                phone: '0911-222-333',
+                bookableStartDate: '2025-11-01',
+                bookableEndDate: '2025-11-30',
+                reservationDate: '',
+                timeSlot: '',
+                status: '待確認',
+                hasUnread: false,
+                paymentStatus: '無需繳費',
+                customChangeFee: 0,
+                paymentDeadline: '',
+                paymentAccount: '',
+                attendees: 1,
+                hasDesigner: false,
+                changeDescription: '',
+                remark: '尚未預約',
+                completedDate: '',
+                completedNotes: '',
+                attachments: [],
+                uploadedImages: []
+            },
+            {
+                id: 5,
+                projectName: '陸府原森',
+                unitName: 'A棟10F',
+                memberName: '林雅婷',
+                phone: '0955-666-777',
+                bookableStartDate: '2025-11-01',
+                bookableEndDate: '2025-11-30',
+                reservationDate: '2025-11-10',
+                timeSlot: '14:00-15:00',
+                status: '已確認',
+                hasUnread: true,
+                paymentStatus: '待繳費',
+                customChangeFee: 25000,
+                paymentDeadline: '2025-11-20',
+                paymentAccount: '822-987654321098',
+                attendees: 2,
+                hasDesigner: true,
+                changeDescription: '主臥衛浴改乾濕分離、廚房中島增設',
+                remark: '需要設計師現場討論中島位置',
+                completedDate: '',
+                completedNotes: '',
+                attachments: [
+                    { name: '中島參考圖.jpg', size: 1048576 },
+                    { name: '乾濕分離規格.pdf', size: 524288 }
+                ],
+                uploadedImages: []
+            },
+            {
+                id: 6,
+                projectName: '陸府觀微',
+                unitName: 'A1-2F',
+                memberName: '黃志明',
+                phone: '0966-888-999',
+                bookableStartDate: '2025-11-15',
+                bookableEndDate: '2025-12-15',
+                reservationDate: '2025-11-25',
+                timeSlot: '10:00-11:00',
+                status: '已預約',
+                hasUnread: false,
+                paymentStatus: '已繳費',
+                customChangeFee: 8000,
+                paymentDeadline: '2025-11-20',
+                paymentAccount: '822-555666777888',
+                attendees: 1,
+                hasDesigner: false,
+                changeDescription: '浴室磁磚更換、臥室木地板升級',
+                remark: '',
+                completedDate: '',
+                completedNotes: '',
+                attachments: [
+                    { name: '磁磚色號.pdf', size: 307200 }
+                ],
+                uploadedImages: []
+            },
+            {
+                id: 7,
+                projectName: '陸府植森',
+                unitName: '2棟-5F',
+                memberName: '許淑芬',
+                phone: '0977-111-222',
+                bookableStartDate: '2025-12-01',
+                bookableEndDate: '2025-12-31',
+                reservationDate: '2025-12-08',
+                timeSlot: '15:00-16:00',
+                status: '已確認',
+                hasUnread: true,
+                paymentStatus: '待繳費',
+                customChangeFee: 35000,
+                paymentDeadline: '2025-12-18',
+                paymentAccount: '822-111222333444',
+                attendees: 3,
+                hasDesigner: true,
+                changeDescription: '整體格局變更：四房改三房、書房合併客廳',
+                remark: '全家人會一同出席討論',
+                completedDate: '',
+                completedNotes: '',
+                attachments: [
+                    { name: '原始格局圖.pdf', size: 1572864 },
+                    { name: '理想格局參考.jpg', size: 921600 }
+                ],
+                uploadedImages: []
+            },
+            {
+                id: 8,
+                projectName: '陸府原森',
+                unitName: 'C棟3A',
+                memberName: '吳建宏',
+                phone: '0988-333-444',
+                bookableStartDate: '2025-10-01',
+                bookableEndDate: '2025-10-31',
+                reservationDate: '2025-10-20',
+                timeSlot: '11:00-12:00',
+                status: '已完成',
+                hasUnread: false,
+                paymentStatus: '已繳費',
+                customChangeFee: 12000,
+                paymentDeadline: '2025-10-15',
+                paymentAccount: '822-999888777666',
+                attendees: 2,
+                hasDesigner: true,
+                changeDescription: '廚房電器櫃增設、冷氣預留孔位調整',
+                remark: '',
+                completedDate: '2025-10-20',
+                completedNotes: '已完成簽認，客變圖面已交付',
+                attachments: [
+                    { name: '電器櫃規格.pdf', size: 409600 },
+                    { name: '冷氣位置圖.jpg', size: 614400 }
+                ],
+                uploadedImages: []
+            }
         ];
         })(),
 
@@ -698,8 +1060,9 @@
             localStorage.setItem('crm_members', JSON.stringify(this.members));
             localStorage.setItem('crm_handoverReservations', JSON.stringify(this.handoverReservations));
             localStorage.setItem('crm_collateralReservations', JSON.stringify(this.collateralReservations));
+            localStorage.setItem('crm_customReservations', JSON.stringify(this.customReservations));
         } catch (e) {
-            console.error('Failed to save members to localStorage', e);
+            console.error('Failed to save data to localStorage', e);
         }
     };
 

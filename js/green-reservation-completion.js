@@ -110,6 +110,25 @@ function clearSignature(canvasId) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+// 切換住戶簽名區塊的啟用/停用狀態
+function toggleResidentSignature() {
+    const skipCheckbox = document.getElementById('skipResidentSignature');
+    const overlay = document.getElementById('residentSignatureDisabledOverlay');
+    const canvas = document.getElementById('resident-signature');
+    
+    if (skipCheckbox && overlay && canvas) {
+        if (skipCheckbox.checked) {
+            // 勾選「無需簽名」時，顯示遮罩層並停用簽名板
+            overlay.style.display = 'flex';
+            canvas.style.pointerEvents = 'none';
+        } else {
+            // 取消勾選時，隱藏遮罩層並啟用簽名板
+            overlay.style.display = 'none';
+            canvas.style.pointerEvents = 'auto';
+        }
+    }
+}
+
 // 提交表單
 function submitForm() {
     const itemStructure = [
@@ -322,4 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initSignatureCanvas('resident-signature');
     initSignatureCanvas('manager-signature');
+    
+    // 初始化住戶簽名區塊的狀態（預設勾選無需簽名）
+    toggleResidentSignature();
 });

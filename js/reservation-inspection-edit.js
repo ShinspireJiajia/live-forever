@@ -224,6 +224,47 @@ document.addEventListener('DOMContentLoaded', function() {
         const ctx = canvas.getContext('2d');
         const placeholder = document.getElementById('signaturePlaceholder');
         let isDrawing = false;
+
+        // 取得相關元素
+        const signatureArea = document.getElementById('signatureArea');
+        const skipSignatureCheckbox = document.getElementById('skipSignature');
+        const clearBtn = document.getElementById('btnClearSign');
+        const confirmBtn = document.getElementById('btnConfirmSign');
+        const overlay = document.getElementById('signatureDisabledOverlay');
+
+        // 「此次無需簽名」核取方塊功能
+        if (skipSignatureCheckbox) {
+            skipSignatureCheckbox.addEventListener('change', function() {
+                const isSkipped = this.checked;
+                
+                if (isSkipped) {
+                    // 停用簽名區域
+                    if (signatureArea) signatureArea.classList.add('disabled');
+                    // 顯示遮罩層
+                    if (overlay) overlay.style.display = 'flex';
+                    // 停用按鈕
+                    if (clearBtn) clearBtn.disabled = true;
+                    if (confirmBtn) confirmBtn.disabled = true;
+                    // 清除已有簽名
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // 隱藏提示文字
+                    if (placeholder) placeholder.style.display = 'none';
+                } else {
+                    // 啟用簽名區域
+                    if (signatureArea) signatureArea.classList.remove('disabled');
+                    // 隱藏遮罩層
+                    if (overlay) overlay.style.display = 'none';
+                    // 啟用按鈕
+                    if (clearBtn) clearBtn.disabled = false;
+                    if (confirmBtn) confirmBtn.disabled = false;
+                    // 顯示提示文字
+                    if (placeholder) placeholder.style.display = 'block';
+                }
+            });
+            
+            // 初始化時觸發一次，以處理預設勾選狀態
+            skipSignatureCheckbox.dispatchEvent(new Event('change'));
+        }
         
         // 設定 Canvas 大小 (需等待容器渲染完成)
         function resizeCanvas() {
@@ -237,6 +278,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 繪圖事件
         function startDraw(e) {
+            // 檢查是否已標記為無需簽名
+            if (skipSignatureCheckbox && skipSignatureCheckbox.checked) return;
+            
             isDrawing = true;
             placeholder.style.display = 'none';
             ctx.beginPath();

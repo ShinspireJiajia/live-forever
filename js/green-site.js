@@ -3,29 +3,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // 渲染共用元件 (Header + Sidebar)
 
     if (typeof initCRMLayout === 'function') {
-
         initCRMLayout();
-
     }
-
-    
 
     const sidebarManager = new SidebarManager();
 
-    // 綁定搜尋按鈕
-    const searchBtn = document.querySelector('.btn-primary');
-    if (searchBtn) {
-        searchBtn.addEventListener('click', function() {
+    // 綁定搜尋表單提交事件
+    const searchForm = document.getElementById('searchForm');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             console.log('執行搜尋...');
             // 實作搜尋邏輯
+            const location = document.getElementById('location-filter').value;
+            const staff = document.getElementById('staff-filter').value;
+            console.log('搜尋條件:', { location, staff });
+            // 可在此加入實際篩選邏輯
         });
-    }
-
-    // 綁定重置按鈕
-    const resetBtn = document.querySelector('.btn-secondary');
-    if (resetBtn) {
-        resetBtn.addEventListener('click', function() {
-            document.querySelectorAll('select').forEach(select => select.value = '');
+        
+        searchForm.addEventListener('reset', function() {
             console.log('重置搜尋條件');
         });
     }
@@ -35,6 +31,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('staffMultiSelect');
         if (container && !container.contains(e.target)) {
             container.classList.remove('active');
+        }
+    });
+    
+    // 點擊 Modal 背景關閉
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        });
+    });
+    
+    // ESC 鍵關閉 Modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.modal.active');
+            if (activeModal) {
+                activeModal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
         }
     });
 });
@@ -72,18 +90,25 @@ function updateSelectedText() {
 
 // 編輯維護人員 Modal 相關
 function openEditModal(siteName, currentStaff) {
+    console.log('開啟編輯 Modal:', siteName, currentStaff);
+    
     const modal = document.getElementById('editModal');
     const titleSpan = document.getElementById('editSiteName');
     const dropdown = document.querySelector('#staffMultiSelect .select-dropdown');
     const siteIdInput = document.getElementById('editSiteId');
+    
+    if (!modal || !titleSpan || !dropdown || !siteIdInput) {
+        console.error('Modal 元素未找到');
+        return;
+    }
     
     titleSpan.textContent = siteName;
     siteIdInput.value = siteName; // 暫存案場名稱作為 ID
     
     // 產生選項
     dropdown.innerHTML = mockStaffList.map(staff => `
-        <div class="select-option" onclick="toggleOption(this)">
-            <input type="checkbox" value="${staff.name}" id="staff_${staff.id}">
+        <div class="select-option">
+            <input type="checkbox" value="${staff.name}" id="staff_${staff.id}" onchange="updateSelectedText()">
             <label for="staff_${staff.id}">${staff.name}</label>
         </div>
     `).join('');
@@ -97,7 +122,10 @@ function openEditModal(siteName, currentStaff) {
     }
     
     updateSelectedText();
+    
+    // 顯示 Modal
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
 }
 
 function toggleOption(optionDiv) {
@@ -113,6 +141,7 @@ function toggleOption(optionDiv) {
 function closeEditModal() {
     const modal = document.getElementById('editModal');
     modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
     document.getElementById('staffMultiSelect').classList.remove('active');
 }
 
@@ -136,20 +165,24 @@ function saveEdit() {
 
 function updateTableStaff(siteName, newStaffList) {
     const table = document.querySelector('.data-table');
+    if (!table) return;
+    
     const rows = table.querySelectorAll('tbody tr');
     
     rows.forEach(row => {
         const nameCell = row.cells[0];
-        if (nameCell.textContent.trim() === siteName) {
+        if (nameCell && nameCell.textContent.trim() === siteName) {
             // 更新維護人員欄位 (第 6 欄，索引 5)
             const staffCell = row.cells[5];
-            staffCell.textContent = newStaffList.join(', ');
+            if (staffCell) {
+                staffCell.textContent = newStaffList.join(', ');
+            }
             
             // 更新編輯按鈕的 onclick 參數
-            const editBtn = row.querySelector('.action-link[onclick^="openEditModal"]');
-            if (editBtn) {
+            const editBtn = row.querySelector('.btn-table-edit');
+            if (editBtn && editBtn.getAttribute('onclick')?.includes('openEditModal')) {
                 // 重新組裝 onclick 字串: openEditModal('SiteName', ['A', 'B'])
-                const staffArrayStr = JSON.stringify(newStaffList).replace(/"/g, "'");
+                const staffArrayStr = JSON.stringify(newStaffList);
                 editBtn.setAttribute('onclick', `openEditModal('${siteName}', ${staffArrayStr})`);
             }
         }
@@ -161,15 +194,22 @@ function openTimeSlotModal(siteName) {
     const modal = document.getElementById('timeSlotModal');
     const titleSpan = document.getElementById('timeSlotSiteName');
     
+    if (!modal || !titleSpan) {
+        console.error('維護時段 Modal 元素未找到');
+        return;
+    }
+    
     titleSpan.textContent = siteName;
     // 這裡可以載入該案場目前的設定值
     
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
 }
 
 function closeTimeSlotModal() {
     const modal = document.getElementById('timeSlotModal');
     modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
 }
 
 function saveTimeSlot() {
@@ -178,11 +218,7 @@ function saveTimeSlot() {
     // 這裡加入實際的儲存邏輯
     
     closeTimeSlotModal();
+    alert('維護時段設定已儲存！');
 }
 
-// 點擊 Modal 外部關閉
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.classList.remove('active');
-    }
-}
+// 移除舊的 window.onclick，已在 DOMContentLoaded 中處理

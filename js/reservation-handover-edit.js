@@ -97,6 +97,43 @@ document.addEventListener('DOMContentLoaded', function() {
         let lastX = 0;
         let lastY = 0;
         
+        // 取得相關元素
+        const signatureArea = document.getElementById('signatureArea');
+        const skipSignatureCheckbox = document.getElementById('skipSignature');
+        const clearBtn = document.getElementById('btnClearSign');
+        const confirmBtn = document.getElementById('btnConfirmSign');
+        const placeholder = document.getElementById('signaturePlaceholder');
+        
+        // 「此次無需簽名」核取方塊功能
+        if (skipSignatureCheckbox) {
+            skipSignatureCheckbox.addEventListener('change', function() {
+                const isSkipped = this.checked;
+                
+                if (isSkipped) {
+                    // 停用簽名區域
+                    signatureArea.classList.add('disabled');
+                    // 停用按鈕
+                    if (clearBtn) clearBtn.disabled = true;
+                    if (confirmBtn) confirmBtn.disabled = true;
+                    // 清除已有簽名
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // 隱藏提示文字
+                    if (placeholder) placeholder.style.display = 'none';
+                } else {
+                    // 啟用簽名區域
+                    signatureArea.classList.remove('disabled');
+                    // 啟用按鈕
+                    if (clearBtn) clearBtn.disabled = false;
+                    if (confirmBtn) confirmBtn.disabled = false;
+                    // 顯示提示文字
+                    if (placeholder) placeholder.style.display = 'block';
+                }
+            });
+            
+            // 初始化時觸發一次，以處理預設勾選狀態
+            skipSignatureCheckbox.dispatchEvent(new Event('change'));
+        }
+        
         // 調整 Canvas 大小
         function resizeCanvas() {
             const parent = canvas.parentElement;
@@ -110,9 +147,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(resizeCanvas, 100);
         
         function startDrawing(e) {
+            // 檢查是否已標記為無需簽名
+            if (skipSignatureCheckbox && skipSignatureCheckbox.checked) return;
+            
             isDrawing = true;
             [lastX, lastY] = [e.offsetX, e.offsetY];
-            const placeholder = document.getElementById('signaturePlaceholder');
             if (placeholder) placeholder.style.display = 'none';
         }
         
@@ -134,11 +173,9 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mouseout', stopDrawing);
         
-        const clearBtn = document.getElementById('btnClearSign');
         if (clearBtn) {
             clearBtn.addEventListener('click', function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                const placeholder = document.getElementById('signaturePlaceholder');
                 if (placeholder) placeholder.style.display = 'block';
             });
         }

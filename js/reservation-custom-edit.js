@@ -21,85 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const sidebarManager = new SidebarManager();
 
-    // 模擬資料 (需與列表頁同步)
-    const customReservations = [
-        {
-            id: 1,
-            projectName: '陸府原森',
-            unitName: 'A棟8F',
-            memberName: '王大明',
-            phone: '0912-345-678',
-            reservationDate: '2025-10-15',
-            timeSlot: '10:00-11:00',
-            status: '已預約',
-            paymentStatus: '待繳費',
-            customChangeFee: 15000,
-            paymentDeadline: '2025-10-25',
-            paymentAccount: '822-123456789012',
-            attendees: 2,
-            hasDesigner: true,
-            remark: '希望與設計師討論',
-            changeDescription: '原有三房改兩房，主臥擴大',
-            attachments: [
-                { name: '平面配置圖_v1.pdf', size: 1024 * 1024 * 2.5 }, // 2.5MB
-                { name: '參考圖片.jpg', size: 1024 * 500 } // 500KB
-            ]
-        },
-        {
-            id: 2,
-            projectName: '陸府原森',
-            unitName: 'B棟12F',
-            memberName: '張美玲',
-            phone: '0922-333-444',
-            reservationDate: '2025-10-16',
-            timeSlot: '14:00-15:00',
-            status: '已完成',
-            paymentStatus: '已繳費',
-            customChangeFee: 5000,
-            paymentDeadline: '2025-10-10',
-            paymentAccount: '822-123456789012',
-            attendees: 1,
-            hasDesigner: false,
-            remark: '',
-            changeDescription: '增加插座，廚房專迴',
-            attachments: [
-                { name: '插座迴路圖.pdf', size: 1024 * 800 }
-            ]
-        },
-        {
-            id: 3,
-            projectName: '陸府觀微',
-            unitName: 'C棟5F',
-            memberName: '李小華',
-            phone: '0933-555-666',
-            reservationDate: '2025-11-05',
-            timeSlot: '09:00-10:00',
-            status: '已取消',
-            paymentStatus: '無需繳費',
-            attendees: 3,
-            hasDesigner: true,
-            remark: '臨時有事改期',
-            changeDescription: '客廳地磚升級大理石'
-        },
-        {
-            id: 4,
-            projectName: '陸府植森',
-            unitName: '1棟-3F',
-            memberName: '陳志偉',
-            phone: '0911-222-333',
-            reservationDate: '',
-            timeSlot: '',
-            status: '待確認',
-            paymentStatus: '無需繳費',
-            attendees: 1,
-            hasDesigner: false,
-            remark: '尚未預約'
-        }
-    ];
+    // 案場與戶別連動資料
+    const projectUnits = {
+        '陸府原森': ['A棟10F', 'A棟11A', 'A棟12A', 'A棟12B', 'B棟5A', 'B棟8A', 'C棟3A', 'A棟8F', 'B棟12F'],
+        '陸府觀微': ['A1-2F', 'A1-3F', 'A2-5F', 'A2-6F', 'B1-3F', 'B1-4F', 'C棟5F'],
+        '陸府植森': ['1棟-2F', '1棟-3F', '2棟-5F', '2棟-6F', '3棟-2F', '3棟-3F']
+    };
+
+    // 用於存放已上傳的圖片
+    let uploadedImages = [];
 
     // 取得 URL 參數
     const urlParams = new URLSearchParams(window.location.search);
-    const id = parseInt(urlParams.get('id'));
+    const id = urlParams.get('id') ? parseInt(urlParams.get('id')) : null;
 
     // 初始化表單
     initForm(id);
@@ -141,11 +75,23 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('rCustomChangeFee').disabled = true;
             document.getElementById('rPaymentDeadline').disabled = true;
             document.getElementById('rPaymentAccount').disabled = true;
+
+            // 新增模式下隱藏以下區塊：紀錄資訊、上傳檔案、住戶簽名確認、留言板
+            // 這些功能僅在編輯模式下顯示
+            const sectionRecordInfo = document.getElementById('sectionRecordInfo');
+            const sectionFileUpload = document.getElementById('sectionFileUpload');
+            const sectionSignature = document.getElementById('sectionSignature');
+            const sectionChat = document.getElementById('sectionChat');
+            
+            if (sectionRecordInfo) sectionRecordInfo.style.display = 'none';
+            if (sectionFileUpload) sectionFileUpload.style.display = 'none';
+            if (sectionSignature) sectionSignature.style.display = 'none';
+            if (sectionChat) sectionChat.style.display = 'none';
             return;
         }
 
-        // 編輯模式
-        const item = customReservations.find(r => r.id === id);
+        // 編輯模式：從 CRMMockData 載入資料
+        const item = CRMMockData.getById('customReservations', id);
         if (!item) {
             alert('查無資料');
             window.location.href = 'reservation-custom.html';
@@ -155,15 +101,42 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('customId').value = item.id;
         document.getElementById('rProject').value = item.projectName;
         
-        // 觸發 change 事件以更新戶別
-        const event = new Event('change');
-        document.getElementById('rProject').dispatchEvent(event);
+        // 手動載入戶別選項
+        const unitSelect = document.getElementById('rUnit');
+        unitSelect.innerHTML = '';
+        if (item.projectName && projectUnits[item.projectName]) {
+            unitSelect.disabled = false;
+            unitSelect.innerHTML = '<option value="">請選擇戶別</option>';
+            projectUnits[item.projectName].forEach(function(unit) {
+                const option = document.createElement('option');
+                option.value = unit;
+                option.textContent = unit;
+                unitSelect.appendChild(option);
+            });
+        }
         
-        document.getElementById('rUnit').value = item.unitName;
+        // 確保戶別選項存在
+        if (item.unitName) {
+            let hasOption = false;
+            for (let i = 0; i < unitSelect.options.length; i++) {
+                if (unitSelect.options[i].value === item.unitName) {
+                    hasOption = true;
+                    break;
+                }
+            }
+            if (!hasOption) {
+                const newOpt = document.createElement('option');
+                newOpt.value = item.unitName;
+                newOpt.textContent = item.unitName;
+                unitSelect.appendChild(newOpt);
+            }
+            unitSelect.value = item.unitName;
+        }
+        
         document.getElementById('rMemberName').value = item.memberName;
         document.getElementById('rPhone').value = item.phone;
-        document.getElementById('rDate').value = item.reservationDate;
-        document.getElementById('rTimeSlot').value = item.timeSlot;
+        document.getElementById('rDate').value = item.reservationDate || '';
+        document.getElementById('rTimeSlot').value = item.timeSlot || '';
         document.getElementById('rAttendees').value = item.attendees || 1;
         document.getElementById('rHasDesigner').checked = item.hasDesigner || false;
         document.getElementById('rChangeDescription').value = item.changeDescription || '';
@@ -173,7 +146,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('rPaymentDeadline').value = item.paymentDeadline || '';
         document.getElementById('rPaymentAccount').value = item.paymentAccount || '';
 
-        // 編輯時，繳費資訊僅能修改繳費狀態，其餘欄位鎖定
+        // 載入紀錄資訊
+        if (document.getElementById('cCompletedDate')) {
+            document.getElementById('cCompletedDate').value = item.completedDate || '';
+        }
+        if (document.getElementById('cCompletedNotes')) {
+            document.getElementById('cCompletedNotes').value = item.completedNotes || '';
+        }
+
+        // 編輯模式：設定不可編輯的欄位
+        document.getElementById('rProject').disabled = true;
+        unitSelect.disabled = true;
+        document.getElementById('rMemberName').readOnly = true;
+        document.getElementById('rPhone').readOnly = true;
+        
+        // 繳費資訊僅能修改繳費狀態，其餘欄位鎖定
         document.getElementById('rCustomChangeFee').disabled = true;
         document.getElementById('rPaymentDeadline').disabled = true;
         document.getElementById('rPaymentAccount').disabled = true;
@@ -185,22 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // 如果已完成或其他狀態，可能需要鎖定欄位或顯示紀錄
-        if (item.status === '已完成') {
-             // 模擬完成資料
-            document.getElementById('cCompletedDate').value = '2025-10-16'; // 範例
-            document.getElementById('cCompletedNotes').value = '客變項目確認無誤，已簽名。';
+        // 載入已上傳的圖片
+        if (item.uploadedImages && Array.isArray(item.uploadedImages)) {
+            uploadedImages = [...item.uploadedImages];
         }
     }
 
     function bindEvents() {
         // 案場與戶別連動
-        const projectUnits = {
-            '陸府原森': ['A棟10F', 'A棟11A', 'A棟12A', 'A棟12B', 'B棟5A', 'B棟8A', 'C棟3A'],
-            '陸府觀微': ['A1-2F', 'A1-3F', 'A2-5F', 'A2-6F', 'B1-3F', 'B1-4F'],
-            '陸府植森': ['1棟-2F', '1棟-3F', '2棟-5F', '2棟-6F', '3棟-2F', '3棟-3F']
-        };
-
         document.getElementById('rProject').addEventListener('change', function() {
             const projectName = this.value;
             const unitSelect = document.getElementById('rUnit');
@@ -267,7 +246,61 @@ document.addEventListener('DOMContentLoaded', function() {
         // 表單提交
         document.getElementById('customEditForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // 驗證邏輯...
+            
+            const idVal = document.getElementById('customId').value;
+            const currentId = idVal ? parseInt(idVal) : null;
+            
+            if (currentId) {
+                // 編輯模式：更新資料
+                const item = CRMMockData.getById('customReservations', currentId);
+                if (item) {
+                    // 可編輯欄位
+                    item.reservationDate = document.getElementById('rDate').value;
+                    item.timeSlot = document.getElementById('rTimeSlot').value;
+                    item.attendees = parseInt(document.getElementById('rAttendees').value) || 1;
+                    item.hasDesigner = document.getElementById('rHasDesigner').checked;
+                    item.changeDescription = document.getElementById('rChangeDescription').value;
+                    item.remark = document.getElementById('rRemark').value;
+                    item.paymentStatus = document.getElementById('rPaymentStatus').value;
+                    
+                    // 紀錄資訊
+                    item.completedDate = document.getElementById('cCompletedDate').value;
+                    item.completedNotes = document.getElementById('cCompletedNotes').value;
+                    
+                    // 儲存上傳的圖片
+                    item.uploadedImages = uploadedImages;
+                    
+                    CRMMockData.save();
+                }
+            } else {
+                // 新增模式
+                const newItem = {
+                    id: Date.now(),
+                    projectName: document.getElementById('rProject').value,
+                    unitName: document.getElementById('rUnit').value,
+                    memberName: document.getElementById('rMemberName').value,
+                    phone: document.getElementById('rPhone').value,
+                    reservationDate: document.getElementById('rDate').value,
+                    timeSlot: document.getElementById('rTimeSlot').value,
+                    status: '待確認',
+                    hasUnread: false,
+                    paymentStatus: document.getElementById('rPaymentStatus').value,
+                    customChangeFee: document.getElementById('rCustomChangeFee').value || 0,
+                    paymentDeadline: document.getElementById('rPaymentDeadline').value,
+                    paymentAccount: document.getElementById('rPaymentAccount').value,
+                    attendees: parseInt(document.getElementById('rAttendees').value) || 1,
+                    hasDesigner: document.getElementById('rHasDesigner').checked,
+                    changeDescription: document.getElementById('rChangeDescription').value,
+                    remark: document.getElementById('rRemark').value,
+                    completedDate: '',
+                    completedNotes: '',
+                    attachments: [],
+                    uploadedImages: uploadedImages
+                };
+                
+                CRMMockData.customReservations.push(newItem);
+                CRMMockData.save();
+            }
             
             alert('儲存成功！');
             window.location.href = 'reservation-custom.html';
@@ -313,6 +346,48 @@ document.addEventListener('DOMContentLoaded', function() {
         let lastX = 0;
         let lastY = 0;
 
+        // 取得相關元素
+        const signatureArea = document.getElementById('signatureArea');
+        const skipSignatureCheckbox = document.getElementById('skipSignature');
+        const clearBtn = document.getElementById('btnClearSign');
+        const confirmBtn = document.getElementById('btnConfirmSign');
+        const placeholder = document.getElementById('signaturePlaceholder');
+        const overlay = document.getElementById('signatureDisabledOverlay');
+
+        // 「此次無需簽名」核取方塊功能
+        if (skipSignatureCheckbox) {
+            skipSignatureCheckbox.addEventListener('change', function() {
+                const isSkipped = this.checked;
+                
+                if (isSkipped) {
+                    // 停用簽名區域
+                    if (signatureArea) signatureArea.classList.add('disabled');
+                    // 顯示遮罩層
+                    if (overlay) overlay.style.display = 'flex';
+                    // 停用按鈕
+                    if (clearBtn) clearBtn.disabled = true;
+                    if (confirmBtn) confirmBtn.disabled = true;
+                    // 清除已有簽名
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // 隱藏提示文字
+                    if (placeholder) placeholder.style.display = 'none';
+                } else {
+                    // 啟用簽名區域
+                    if (signatureArea) signatureArea.classList.remove('disabled');
+                    // 隱藏遮罩層
+                    if (overlay) overlay.style.display = 'none';
+                    // 啟用按鈕
+                    if (clearBtn) clearBtn.disabled = false;
+                    if (confirmBtn) confirmBtn.disabled = false;
+                    // 顯示提示文字
+                    if (placeholder) placeholder.style.display = 'flex';
+                }
+            });
+            
+            // 初始化時觸發一次，以處理預設勾選狀態
+            skipSignatureCheckbox.dispatchEvent(new Event('change'));
+        }
+
         // 設定 Canvas 大小自適應
         function resizeCanvas() {
             const parent = canvas.parentElement;
@@ -339,6 +414,9 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.addEventListener('touchend', stopDrawing);
 
         function startDrawing(e) {
+            // 檢查是否已標記為無需簽名
+            if (skipSignatureCheckbox && skipSignatureCheckbox.checked) return;
+            
             isDrawing = true;
             [lastX, lastY] = [e.offsetX, e.offsetY];
             document.getElementById('signaturePlaceholder').style.display = 'none';
@@ -360,6 +438,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function handleTouchStart(e) {
+            // 檢查是否已標記為無需簽名
+            if (skipSignatureCheckbox && skipSignatureCheckbox.checked) return;
+            
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];

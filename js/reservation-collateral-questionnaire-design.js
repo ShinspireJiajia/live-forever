@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const sidebarManager = new SidebarManager();
     let currentEditCard = null; // Track currently edited card
+    let currentEditLocationCard = null; // Track currently edited location card
 
     // 取得 URL 參數
     const urlParams = new URLSearchParams(window.location.search);
@@ -22,7 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('projectNameDisplay').textContent = decodeURIComponent(projectName);
     }
 
-    // Modal 與操作邏輯
+    // ====================================== 
+    // 銀行 Modal 邏輯
+    // ======================================
     const sectionBank = document.getElementById('sectionBank');
     const bankCardsGrid = document.querySelector('.bank-cards-grid');
 
@@ -61,13 +64,56 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // ====================================== 
+    // 對保地址 Modal 邏輯
+    // ======================================
+    const sectionCollateralLocation = document.getElementById('sectionCollateralLocation');
+    const locationCardsGrid = document.querySelector('.location-cards-grid');
+
+    if (sectionCollateralLocation) {
+        const btnAddLocation = sectionCollateralLocation.querySelector('.btn-add-location');
+        if (btnAddLocation) {
+            btnAddLocation.addEventListener('click', function() {
+                currentEditLocationCard = null;
+                openLocationModal('add');
+            });
+        }
+    }
+
+    // 使用事件委派綁定地點編輯/刪除按鈕
+    if (locationCardsGrid) {
+        locationCardsGrid.addEventListener('click', function(e) {
+            // 編輯地點
+            if (e.target.closest('.btn-edit-location')) {
+                e.preventDefault();
+                currentEditLocationCard = e.target.closest('.location-card');
+                const name = currentEditLocationCard.querySelector('.location-name').textContent;
+                const addressEl = currentEditLocationCard.querySelector('.location-address');
+                // 移除圖示文字，只取地址
+                const address = addressEl ? addressEl.textContent.trim().replace(/^.*?\s/, '') : '';
+                
+                openLocationModal('edit', { name, address });
+            }
+            
+            // 刪除地點
+            if (e.target.closest('.btn-delete-location')) {
+                e.preventDefault();
+                if(confirm('確定要刪除此對保地點嗎？')) {
+                    e.target.closest('.location-card').remove();
+                }
+            }
+        });
+    }
+
     // 儲存設定按鈕
     document.getElementById('btnSaveConfig').addEventListener('click', function() {
         alert('設定已儲存！');
         window.location.href = 'crm-project.html';
     });
 
-    // Modal 元素
+    // ====================================== 
+    // 銀行 Modal 元素與功能
+    // ======================================
     const modal = document.getElementById('bankModal');
     const modalCloseBtn = modal.querySelector('.modal-close');
     const modalCancelBtn = document.getElementById('btnBankCancel');
@@ -156,6 +202,100 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             closeBankModal();
+        });
+    }
+
+    // ====================================== 
+    // 對保地址 Modal 元素與功能
+    // ======================================
+    const locationModal = document.getElementById('locationModal');
+    const locationModalCloseBtn = locationModal ? locationModal.querySelector('.modal-close') : null;
+    const locationModalCancelBtn = document.getElementById('btnLocationCancel');
+    const locationModalSaveBtn = document.getElementById('btnLocationSave');
+
+    // 關閉地點 Modal
+    function closeLocationModal() {
+        if (locationModal) {
+            locationModal.classList.remove('active');
+        }
+        currentEditLocationCard = null;
+    }
+    
+    if (locationModalCloseBtn) locationModalCloseBtn.addEventListener('click', closeLocationModal);
+    if (locationModalCancelBtn) locationModalCancelBtn.addEventListener('click', closeLocationModal);
+
+    // 打開地點 Modal
+    function openLocationModal(mode, data = null) {
+        const title = document.getElementById('locationModalTitle');
+        const form = document.getElementById('locationForm');
+        
+        if (form) form.reset();
+        
+        if (mode === 'add') {
+            title.textContent = '新增對保地點';
+        } else {
+            title.textContent = '編輯對保地點';
+            if (data) {
+                document.getElementById('locationName').value = data.name;
+                document.getElementById('locationAddress').value = data.address;
+            }
+        }
+        
+        if (locationModal) {
+            locationModal.classList.add('active');
+        }
+    }
+
+    // 儲存地點
+    if (locationModalSaveBtn) {
+        locationModalSaveBtn.addEventListener('click', function() {
+            const name = document.getElementById('locationName').value;
+            const address = document.getElementById('locationAddress').value;
+            
+            if (!name) {
+                alert('請輸入地點名稱');
+                return;
+            }
+            if (!address) {
+                alert('請輸入地址');
+                return;
+            }
+
+            if (currentEditLocationCard) {
+                // 更新現有地點
+                currentEditLocationCard.querySelector('.location-name').textContent = name;
+                currentEditLocationCard.querySelector('.location-address').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${address}`;
+            } else {
+                // 新增地點卡片（插入在「其他」卡片之前）
+                const otherCard = locationCardsGrid.querySelector('.location-card-other');
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                
+                const locationId = 'location_' + Date.now();
+
+                card.innerHTML = `
+                    <div class="location-card-header">
+                        <input type="radio" name="collateralLocation" value="${locationId}" disabled>
+                        <h4 class="location-name">${name}</h4>
+                    </div>
+                    <div class="location-card-body">
+                        <p class="location-address"><i class="fa-solid fa-location-dot"></i> ${address}</p>
+                    </div>
+                    <div class="card-overlay-actions">
+                        <button class="btn-sm btn-edit-location">編輯</button>
+                        <button class="btn-sm btn-delete-location">刪除</button>
+                    </div>
+                `;
+                
+                // 插入在「其他」選項之前
+                if (otherCard) {
+                    locationCardsGrid.insertBefore(card, otherCard);
+                } else {
+                    locationCardsGrid.appendChild(card);
+                }
+            }
+
+            closeLocationModal();
         });
     }
 });

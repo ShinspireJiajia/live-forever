@@ -175,10 +175,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const signaturePlaceholder = document.getElementById('signaturePlaceholder');
     const btnClearSign = document.getElementById('btnClearSign');
     const btnConfirmSign = document.getElementById('btnConfirmSign');
+    const signatureArea = document.getElementById('signatureArea');
+    const skipSignatureCheckbox = document.getElementById('skipSignature');
+    const signatureDisabledOverlay = document.getElementById('signatureDisabledOverlay');
     
     let isDrawing = false;
     let signatureCtx = null;
     let hasSignature = false;
+
+    // 「此次無需簽名」核取方塊功能
+    if (skipSignatureCheckbox) {
+        skipSignatureCheckbox.addEventListener('change', function() {
+            const isSkipped = this.checked;
+            
+            if (isSkipped) {
+                // 停用簽名區域
+                if (signatureArea) signatureArea.classList.add('disabled');
+                // 顯示遮罩層
+                if (signatureDisabledOverlay) signatureDisabledOverlay.style.display = 'flex';
+                // 停用按鈕
+                if (btnClearSign) btnClearSign.disabled = true;
+                if (btnConfirmSign) btnConfirmSign.disabled = true;
+                // 清除已有簽名
+                if (signatureCtx && signatureCanvas) {
+                    const dpr = window.devicePixelRatio || 1;
+                    signatureCtx.clearRect(0, 0, signatureCanvas.width / dpr, signatureCanvas.height / dpr);
+                    hasSignature = false;
+                }
+                // 隱藏提示文字
+                if (signaturePlaceholder) signaturePlaceholder.classList.add('hidden');
+            } else {
+                // 啟用簽名區域
+                if (signatureArea) signatureArea.classList.remove('disabled');
+                // 隱藏遮罩層
+                if (signatureDisabledOverlay) signatureDisabledOverlay.style.display = 'none';
+                // 啟用按鈕
+                if (btnClearSign) btnClearSign.disabled = false;
+                if (btnConfirmSign) btnConfirmSign.disabled = false;
+                // 顯示提示文字
+                if (signaturePlaceholder) signaturePlaceholder.classList.remove('hidden');
+            }
+        });
+        
+        // 初始化時觸發一次，以處理預設勾選狀態
+        skipSignatureCheckbox.dispatchEvent(new Event('change'));
+    }
     
     if (signatureCanvas) {
         signatureCtx = signatureCanvas.getContext('2d');
@@ -220,6 +261,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 開始繪製
         function startDrawing(e) {
+            // 檢查是否已標記為無需簽名
+            if (skipSignatureCheckbox && skipSignatureCheckbox.checked) return;
+            
             e.preventDefault();
             isDrawing = true;
             hasSignature = true;
