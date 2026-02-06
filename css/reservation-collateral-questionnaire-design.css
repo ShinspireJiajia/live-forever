@@ -244,3 +244,432 @@
     color: var(--color-info);
     text-decoration: underline;
 }
+
+/* ====================================== */
+/* 區塊編號樣式 */
+/* ====================================== */
+.section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: var(--color-info);
+    color: #fff;
+    border-radius: 50%;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    margin-right: 8px;
+}
+
+/* ====================================== */
+/* 問題標籤樣式 */
+/* ====================================== */
+.question-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ====================================== */
+/* 單選按鈕樣式 */
+/* ====================================== */
+.radio-options-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.radio-options-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.radio-option:hover {
+    border-color: var(--color-info);
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-gray-400);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-info);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s ease;
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom {
+    border-color: var(--color-info);
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.radio-text {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+}
+
+/* 條件提示 */
+.condition-hint {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+    margin-left: auto;
+    padding-left: var(--spacing-md);
+    font-style: italic;
+}
+
+/* ====================================== */
+/* 條件顯示區塊樣式 */
+/* ====================================== */
+.conditional-section {
+    position: relative;
+}
+
+.condition-badge {
+    position: absolute;
+    top: -12px;
+    left: var(--spacing-md);
+    background-color: #e8f4fc;
+    color: var(--color-info);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    border: 1px solid var(--color-info);
+}
+
+.condition-badge i {
+    margin-right: 4px;
+}
+
+.conditional-field {
+    border-left: 3px solid var(--color-info);
+    padding-left: var(--spacing-md);
+    margin-left: var(--spacing-sm);
+}
+
+.condition-hint-inline {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+    margin-top: 4px;
+}
+
+.condition-hint-inline i {
+    margin-right: 4px;
+}
+
+/* ====================================== */
+/* 警告選項與提示樣式 */
+/* ====================================== */
+.warning-option .radio-text {
+    color: #616161
+;
+}
+
+.warning-icon {
+    color: var(--color-danger);
+    margin-left: 4px;
+    cursor: help;
+}
+
+/* 限貸令警告提示框 */
+.loan-limit-warning {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fdecea;
+    border: 1px solid var(--color-danger);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-md);
+    color: var(--color-danger);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.loan-limit-warning i {
+    font-size: var(--font-size-lg);
+}
+
+/* 設計預覽時始終顯示警告框 */
+#loanLimitWarningPreview {
+    opacity: 0.7;
+}
+
+/* ====================================== */
+/* 輸入框附帶單位樣式 */
+/* ====================================== */
+.input-with-unit {
+    display: flex;
+    align-items: center;
+}
+
+.input-with-unit .form-input {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-unit {
+    padding: 0 var(--spacing-md);
+    background-color: var(--color-gray-100);
+    border: 1px solid var(--color-gray-300);
+    border-left: 0;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+    color: var(--color-gray-600);
+    font-size: var(--font-size-sm);
+}
+
+/* ====================================== */
+/* 下拉選單樣式 */
+/* ====================================== */
+.form-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+    background-color: #fff;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23616161' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+}
+
+.form-select:disabled {
+    background-color: #fff;
+    color: var(--color-gray-500);
+    cursor: not-allowed;
+}
+
+/* ====================================== */
+/* 表單群組樣式 */
+/* ====================================== */
+.section-body .form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-body .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.section-body .form-label {
+    display: block;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-body .form-label.required::after {
+    content: ' *';
+    color: var(--color-danger);
+}
+
+/* ====================================== */
+/* 對保地址卡片樣式 */
+/* ====================================== */
+.location-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 992px) {
+    .location-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .location-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.location-card {
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    background: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+}
+
+.location-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-info);
+}
+
+.location-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.location-card-header input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.location-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin: 0;
+}
+
+.location-card-body {
+    flex: 1;
+}
+
+.location-address {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.location-address i {
+    color: var(--color-danger);
+    margin-right: 6px;
+}
+
+.location-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+    font-style: italic;
+    margin: 0;
+}
+
+.location-card-other {
+    border-style: dashed;
+    background-color: #fafafa;
+}
+
+.location-other-input .form-input {
+    font-size: var(--font-size-sm);
+    padding: 8px 12px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-sm);
+}
+
+/* 地點卡片操作按鈕 */
+.location-card .card-overlay-actions {
+    position: absolute;
+    top: var(--spacing-xs);
+    right: var(--spacing-xs);
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.location-card:hover .card-overlay-actions {
+    opacity: 1;
+}
+
+/* 「其他」卡片不顯示編輯/刪除按鈕 */
+.location-card-other .card-overlay-actions {
+    display: none;
+}
+
+.btn-sm.btn-edit-location {
+    background-color: #fff;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-gray-700);
+    padding: 4px 8px;
+    font-size: var(--font-size-xs);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.btn-sm.btn-edit-location:hover {
+    background-color: var(--color-info);
+    color: #fff;
+    border-color: var(--color-info);
+}
+
+.btn-sm.btn-delete-location {
+    background-color: #fff;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-danger);
+    padding: 4px 8px;
+    font-size: var(--font-size-xs);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.btn-sm.btn-delete-location:hover {
+    background-color: var(--color-danger);
+    color: #fff;
+    border-color: var(--color-danger);
+}
+
+/* 新增地點按鈕樣式 */
+.btn-add-location {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #27AE60;
+    background-color: #fff;
+    color: #27AE60;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.btn-add-location:hover {
+    background-color: #27AE60;
+    color: #fff;
+}
+

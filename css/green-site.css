@@ -239,3 +239,106 @@
 #editModal .modal-content {
     overflow: visible; /* 讓下拉選單可以超出 */
 }
+
+/* ========================================
+   Modal 遮罩與顯示樣式
+   ======================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal .modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: var(--color-table-header, #5D4037);
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal .modal-header .modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.modal .modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    line-height: 1;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.modal .modal-close:hover {
+    opacity: 1;
+}
+
+.modal .modal-body {
+    padding: 20px;
+}
+
+.modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 20px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+    border-radius: 0 0 8px 8px;
+}
+
+/* 選中文字樣式 */
+.selected-text {
+    color: #666;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selected-text.has-value {
+    color: #333;
+}
