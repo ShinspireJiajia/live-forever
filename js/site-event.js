@@ -74,7 +74,6 @@ class SiteEventManager {
             });
         };
         
-        populateSelect('searchCategory');
         populateSelect('formCategory');
     }
 
@@ -156,13 +155,11 @@ class SiteEventManager {
         
         const searchSite = document.getElementById('searchSite');
         const searchTitle = document.getElementById('searchTitle');
-        const searchCategory = document.getElementById('searchCategory');
         const searchDateFrom = document.getElementById('searchDateFrom');
         const searchDateTo = document.getElementById('searchDateTo');
         
         if (searchSite?.value) filters.site = searchSite.value;
         if (searchTitle?.value) filters.title = searchTitle.value;
-        if (searchCategory?.value) filters.category = searchCategory.value;
         if (searchDateFrom?.value) filters.dateFrom = searchDateFrom.value;
         if (searchDateTo?.value) filters.dateTo = searchDateTo.value;
         
@@ -178,7 +175,7 @@ class SiteEventManager {
         
         // 案場篩選
         if (filters.site) {
-            filtered = filtered.filter(e => e.sites.includes(filters.site));
+            filtered = filtered.filter(e => e.site === filters.site);
         }
         
         // 活動名稱篩選
@@ -186,11 +183,6 @@ class SiteEventManager {
             filtered = filtered.filter(e => 
                 e.title.toLowerCase().includes(filters.title.toLowerCase())
             );
-        }
-        
-        // 類別篩選
-        if (filters.category) {
-            filtered = filtered.filter(e => e.category === filters.category);
         }
         
         // 日期範圍篩選
@@ -257,7 +249,7 @@ class SiteEventManager {
 
             // 計算已報名人數
             const registeredCount = SiteEventMockData.registrations
-                .filter(r => r.event_id === event.event_id && r.payment_status !== '已取消')
+                .filter(r => r.event_id === event.event_id && r.registration_status !== '已取消')
                 .reduce((sum, r) => sum + 1 + r.companion_count, 0);
             
             // 產生序號
@@ -269,14 +261,18 @@ class SiteEventManager {
             const serialNo = `SE${yymmdd}${sequence}`;
 
             // 案場標籤
-            const sitesHtml = this.renderSiteTags(event.sites);
+            const siteHtml = `<span class="site-tag">${event.site}</span>`;
             
+            // 判斷是否付費
+            const isPaid = event.price > 0;
+            const paidLabel = isPaid ? `<span class="badge badge-paid">付費 NT$${event.price}</span>` : '<span class="badge badge-free">免費</span>';
+
             return `
                 <tr>
                     <td>${serialNo}</td>
-                    <td class="site-tags-cell">${sitesHtml}</td>
+                    <td class="site-tags-cell">${siteHtml}</td>
                     <td>${event.title}</td>
-                    <td>${event.category}</td>
+                    <td>${paidLabel}</td>
                     <td>${this.formatDateTime(event.start_dt)}</td>
                     <td>${this.formatDateTime(event.end_dt)}</td>
                     <td>${event.max_slots} 人</td>
@@ -297,18 +293,6 @@ class SiteEventManager {
         
         // 渲染分頁
         this.renderPagination(filtered.length);
-    }
-
-    /**
-     * 渲染案場標籤
-     */
-    renderSiteTags(sites) {
-        if (sites.length <= 2) {
-            return sites.map(s => `<span class="site-tag">${s}</span>`).join('');
-        } else {
-            const first = sites.slice(0, 1).map(s => `<span class="site-tag">${s}</span>`).join('');
-            return `<div class="site-tags-wrapper">${first}<span class="site-tags-more" title="${sites.join(', ')}">+${sites.length - 1}</span></div>`;
-        }
     }
 
     /**
@@ -446,7 +430,7 @@ class SiteEventManager {
         // 設定案場
         const formSite = document.getElementById('formSite');
         if (formSite) {
-            formSite.value = (event.sites && event.sites.length > 0) ? event.sites[0] : '';
+            formSite.value = event.site || '';
         }
         
         document.getElementById('eventModal').classList.add('active');
@@ -465,9 +449,9 @@ class SiteEventManager {
         
         // 取得選擇的案場
         const formSite = document.getElementById('formSite');
-        const selectedSites = formSite && formSite.value ? [formSite.value] : [];
+        const selectedSite = formSite ? formSite.value : '';
         
-        if (selectedSites.length === 0) {
+        if (!selectedSite) {
             this.showToast('error', '錯誤', '請選擇適用案場');
             return;
         }
@@ -480,7 +464,7 @@ class SiteEventManager {
             end_dt: document.getElementById('formEndDt').value + ':00',
             description: document.getElementById('formDescription').value,
             location: document.getElementById('formLocation').value,
-            sites: selectedSites,
+            site: selectedSite,
             max_slots: parseInt(document.getElementById('formMaxSlots').value),
             price: parseInt(document.getElementById('formPrice').value) || 0,
             registration_deadline: document.getElementById('formDeadline').value,

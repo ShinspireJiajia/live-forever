@@ -51,10 +51,16 @@ class SiteEventRegistrationManager {
         const eventId = params.get('eventId');
         if (eventId) {
             this.eventIdFilter = eventId;
-            const eventSelect = document.getElementById('searchEvent');
+            const eventSelect = document.getElementById('searchEventName');
             if (eventSelect) {
                 eventSelect.value = eventId;
             }
+
+            // 有帶參數時隱藏活動名稱與活動代碼篩選欄位
+            const eventNameGroup = document.getElementById('searchEventName')?.closest('.form-group');
+            const eventCodeGroup = document.getElementById('searchEventCode')?.closest('.form-group');
+            if (eventNameGroup) eventNameGroup.style.display = 'none';
+            if (eventCodeGroup) eventCodeGroup.style.display = 'none';
         }
     }
 
@@ -138,10 +144,27 @@ class SiteEventRegistrationManager {
     }
 
     /**
-     * 填充活動下拉選單 (僅保留給未來可能擴充，目前表單已改為唯讀)
+     * 填充活動下拉選單（查詢區的活動名稱篩選）
      */
     populateEventDropdown() {
-        // Form logic moved to openAddModal
+        const select = document.getElementById('searchEventName');
+        if (!select) return;
+
+        // 保留第一個「全部」選項，清除其餘
+        select.innerHTML = '<option value="">全部</option>';
+
+        // 依活動名稱建立選項
+        this.events.forEach(event => {
+            const option = document.createElement('option');
+            option.value = event.event_id;
+            option.textContent = event.title;
+            select.appendChild(option);
+        });
+
+        // 若有 URL 參數指定活動，自動帶入
+        if (this.eventIdFilter) {
+            select.value = this.eventIdFilter;
+        }
     }
 
     /**
@@ -159,24 +182,28 @@ class SiteEventRegistrationManager {
      */
     getFilters() {
         const filters = {};
-        
-        // const searchSite = document.getElementById('searchSite'); // Removed
-        // const searchEvent = document.getElementById('searchEvent'); // Removed
+
+        const searchEventName = document.getElementById('searchEventName');
+        const searchEventCode = document.getElementById('searchEventCode');
         const searchName = document.getElementById('searchName');
         const searchUnit = document.getElementById('searchUnit');
-        const searchStatus = document.getElementById('searchStatus');
-        
-        // if (searchSite?.value) filters.site = searchSite.value;
-        // if (searchEvent?.value) filters.eventId = searchEvent.value;
+        const searchPaymentStatus = document.getElementById('searchPaymentStatus');
+        const searchRegStatus = document.getElementById('searchRegStatus');
+
+        // 活動名稱（下拉選單，值為 event_id）
+        if (searchEventName?.value) filters.eventId = searchEventName.value;
+        // 活動代碼（文字輸入，模糊比對 event_id）
+        if (searchEventCode?.value) filters.eventCode = searchEventCode.value.trim();
         if (searchName?.value) filters.name = searchName.value;
         if (searchUnit?.value) filters.unit = searchUnit.value;
-        if (searchStatus?.value) filters.status = searchStatus.value;
-        
-        // URL 參數作為主要篩選
+        if (searchPaymentStatus?.value) filters.paymentStatus = searchPaymentStatus.value;
+        if (searchRegStatus?.value) filters.regStatus = searchRegStatus.value;
+
+        // URL 參數作為主要篩選（優先於下拉選單）
         if (this.eventIdFilter) {
             filters.eventId = this.eventIdFilter;
         }
-        
+
         return filters;
     }
 
@@ -192,9 +219,16 @@ class SiteEventRegistrationManager {
             filtered = filtered.filter(r => r.site_name === filters.site);
         }
         
-        // 活動篩選
+        // 活動名稱篩選（精確比對 event_id）
         if (filters.eventId) {
             filtered = filtered.filter(r => r.event_id === filters.eventId);
+        }
+
+        // 活動代碼篩選（模糊比對 event_id）
+        if (filters.eventCode) {
+            filtered = filtered.filter(r =>
+                r.event_id.toLowerCase().includes(filters.eventCode.toLowerCase())
+            );
         }
         
         // 姓名篩選
@@ -211,13 +245,18 @@ class SiteEventRegistrationManager {
             );
         }
         
-        // 狀態篩選
-        if (filters.status) {
-            filtered = filtered.filter(r => r.payment_status === filters.status);
+        // 繳費狀態篩選
+        if (filters.paymentStatus) {
+            filtered = filtered.filter(r => r.payment_status === filters.paymentStatus);
         }
         
-        // 排序：報名序號由小到大 (yymmddnnn)
-        filtered.sort((a, b) => a.reg_id.localeCompare(b.reg_id));
+        // 報名狀態篩選
+        if (filters.regStatus) {
+            filtered = filtered.filter(r => r.registration_status === filters.regStatus);
+        }
+        
+        // 排序：報名序號由大到小 (yymmddnnn)
+        filtered.sort((a, b) => b.reg_id.localeCompare(a.reg_id));
         
         return filtered;
     }
@@ -235,7 +274,7 @@ class SiteEventRegistrationManager {
         const pageData = filtered.slice(start, end);
         
         if (pageData.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="11" class="text-center">無符合條件的報名資料</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="12" class="text-center">無符合條件的報名資料</td></tr>';
             this.renderPagination(0);
             return;
         }
@@ -243,7 +282,8 @@ class SiteEventRegistrationManager {
         tbody.innerHTML = pageData.map((reg, index) => {
             const event = this.events.find(e => e.event_id === reg.event_id);
             const eventTitle = event ? event.title : '(未知活動)';
-            const statusClass = this.getStatusClass(reg.payment_status);
+            const paymentStatusClass = this.getPaymentStatusClass(reg.payment_status);
+            const regStatusClass = this.getRegStatusClass(reg.registration_status);
             const totalCount = 1 + (reg.companion_count || 0);
             
             return `
@@ -256,7 +296,8 @@ class SiteEventRegistrationManager {
                     <td>${reg.phone}</td>
                     <td>${totalCount} 人</td>
                     <td>NT$ ${reg.amount.toLocaleString()}</td>
-                    <td><span class="reg-status ${statusClass}">${reg.payment_status}</span></td>
+                    <td><span class="reg-status ${paymentStatusClass}">${reg.payment_status}</span></td>
+                    <td><span class="reg-status ${regStatusClass}">${reg.registration_status}</span></td>
                     <td>${this.formatDate(reg.created_at)}</td>
                     <td>
                         <div class="action-buttons">
@@ -273,12 +314,25 @@ class SiteEventRegistrationManager {
     }
 
     /**
-     * 取得狀態樣式類別
+     * 取得繳費狀態樣式類別
      */
-    getStatusClass(status) {
+    getPaymentStatusClass(status) {
+        switch (status) {
+            case '免費': return 'free';
+            case '已繳費': return 'paid';
+            case '未繳費': return 'unpaid';
+            case '待退款': return 'refund-pending';
+            case '退款完成': return 'refunded';
+            default: return '';
+        }
+    }
+
+    /**
+     * 取得報名狀態樣式類別
+     */
+    getRegStatusClass(status) {
         switch (status) {
             case '已報名': return 'registered';
-            case '待繳費': return 'pending';
             case '已取消': return 'cancelled';
             default: return '';
         }
@@ -364,11 +418,33 @@ class SiteEventRegistrationManager {
         const statPending = document.getElementById('statPending');
         const statPaid = document.getElementById('statPaid');
         const statCancelled = document.getElementById('statCancelled');
+        const statCollectedAmount = document.getElementById('statCollectedAmount');
+        const statPendingRefund = document.getElementById('statPendingRefund');
+        const statRefundedAmount = document.getElementById('statRefundedAmount');
         
+        // 基本統計
         if (statTotal) statTotal.textContent = filtered.length;
-        if (statPending) statPending.textContent = filtered.filter(r => r.payment_status === '待繳費').length;
-        if (statPaid) statPaid.textContent = filtered.filter(r => r.payment_status === '已報名').length;
-        if (statCancelled) statCancelled.textContent = filtered.filter(r => r.payment_status === '已取消').length;
+        if (statPending) statPending.textContent = filtered.filter(r => r.payment_status === '未繳費').length;
+        if (statPaid) statPaid.textContent = filtered.filter(r => r.registration_status === '已報名').length;
+        if (statCancelled) statCancelled.textContent = filtered.filter(r => r.registration_status === '已取消').length;
+
+        // 已收費金額：payment_status 為「已繳費」的 amount 加總
+        const collectedAmount = filtered
+            .filter(r => r.payment_status === '已繳費')
+            .reduce((sum, r) => sum + (r.amount || 0), 0);
+        if (statCollectedAmount) statCollectedAmount.textContent = 'NT$ ' + collectedAmount.toLocaleString();
+
+        // 應退費金額：payment_status 為「待退款」的 amount 加總
+        const pendingRefundAmount = filtered
+            .filter(r => r.payment_status === '待退款')
+            .reduce((sum, r) => sum + (r.amount || 0), 0);
+        if (statPendingRefund) statPendingRefund.textContent = 'NT$ ' + pendingRefundAmount.toLocaleString();
+
+        // 已退費金額：payment_status 為「退款完成」的 amount 加總
+        const refundedAmount = filtered
+            .filter(r => r.payment_status === '退款完成')
+            .reduce((sum, r) => sum + (r.amount || 0), 0);
+        if (statRefundedAmount) statRefundedAmount.textContent = 'NT$ ' + refundedAmount.toLocaleString();
     }
 
     /**
@@ -391,7 +467,7 @@ class SiteEventRegistrationManager {
         }
         
         const registeredCount = this.registrations
-            .filter(r => r.event_id === event.event_id && r.payment_status !== '已取消')
+            .filter(r => r.event_id === event.event_id && r.registration_status !== '已取消')
             .reduce((sum, r) => sum + 1 + r.companion_count, 0);
         
         card.style.display = 'block';
@@ -405,7 +481,7 @@ class SiteEventRegistrationManager {
             <div class="event-info-grid">
                 <div class="event-info-item">
                     <span class="event-info-label">適用案場</span>
-                    <span class="event-info-value">${event.sites.join(', ')}</span>
+                    <span class="event-info-value">${event.site}</span>
                 </div>
                 <div class="event-info-item">
                     <span class="event-info-label">活動時間</span>
@@ -469,10 +545,10 @@ class SiteEventRegistrationManager {
             
             // 填充戶別下拉選單
             if (formUnit) {
-                const allowedSites = currentEvent.sites || [];
+                const allowedSite = currentEvent.site || '';
                 // 過濾出屬於該活動案場的戶別
                 // 這裡假設 mock data 的 units 有 site_name 欄位
-                const availableUnits = this.units.filter(u => allowedSites.includes(u.site_name));
+                const availableUnits = this.units.filter(u => u.site_name === allowedSite);
                 
                 // 排序
                 availableUnits.sort((a, b) => a.unit_no.localeCompare(b.unit_no));
@@ -546,7 +622,7 @@ class SiteEventRegistrationManager {
 
             // 1. 檢查活動總名額
             const currentTotal = this.registrations
-                .filter(r => r.event_id === eventId && r.payment_status !== '已取消')
+                .filter(r => r.event_id === eventId && r.registration_status !== '已取消')
                 .reduce((sum, r) => sum + 1 + r.companion_count, 0);
             
             // const newTotal = 1 + companion; // Same as totalCount
@@ -562,7 +638,7 @@ class SiteEventRegistrationManager {
             const householdLimit = 1 + (event.max_companion || 0); // 戶別總上限 = 1(住戶本人) + 允許攜伴數
             
             const householdCurrent = this.registrations
-                .filter(r => r.event_id === eventId && r.unit_no === unit && r.payment_status !== '已取消')
+                .filter(r => r.event_id === eventId && r.unit_no === unit && r.registration_status !== '已取消')
                 .reduce((sum, r) => sum + 1 + r.companion_count, 0);
             
             if (householdCurrent + totalCount > householdLimit) {
@@ -573,7 +649,7 @@ class SiteEventRegistrationManager {
             // 3. 檢查重複報名 (同一活動、同一姓名、同一電話)
             const isDuplicate = this.registrations.some(r => 
                 r.event_id === eventId && 
-                r.payment_status !== '已取消' &&
+                r.registration_status !== '已取消' &&
                 r.applicant_name === name && 
                 r.phone === phone
             );
@@ -604,6 +680,14 @@ class SiteEventRegistrationManager {
         const newRegId = yymmdd + String(nextSeq).padStart(3, '0');
 
         // 建立新報名紀錄
+        // 繳費狀態：免費(amount=0)、未繳費(amount>0且非現金)、已繳費(現金)
+        // 報名狀態：已報名
+        const isPaidEvent = event && event.price > 0;
+        let paymentStatusValue = '免費';
+        if (isPaidEvent) {
+            paymentStatusValue = paymentMethod === '現金' ? '已繳費' : '未繳費';
+        }
+        
         const newReg = {
             reg_id: newRegId,
             event_id: eventId,
@@ -613,7 +697,8 @@ class SiteEventRegistrationManager {
             applicant_name: name,
             phone: phone,
             companion_count: companion,
-            payment_status: event && event.price > 0 && paymentMethod !== '現金' ? '待繳費' : '已報名',
+            payment_status: paymentStatusValue,
+            registration_status: '已報名',
             payment_method: paymentMethod,
             amount: event ? event.price * totalCount : 0,
             has_receipt: needReceipt,
@@ -662,7 +747,11 @@ class SiteEventRegistrationManager {
 
         const reg = this.registrations.find(r => r.reg_id === this.cancelRegId);
         if (reg) {
-            reg.payment_status = '已取消';
+            reg.registration_status = '已取消';
+            // 如果是付費活動且已繳費，設定為待退款
+            if (reg.amount > 0 && reg.payment_status === '已繳費') {
+                reg.payment_status = '待退款';
+            }
             reg.cancel_note = note;
             reg.cancel_time = new Date().toISOString();
             
@@ -701,13 +790,101 @@ class SiteEventRegistrationManager {
     }
 
     /**
-     * 處理匯出
+     * 處理匯出（CSV 含摘要資訊）
      */
     handleExport() {
-        this.showToast('info', '匯出中', '正在產生 Excel 檔案...');
+        const filtered = this.filterRegistrations();
+        if (filtered.length === 0) {
+            this.showToast('error', '無資料', '目前沒有符合條件的報名紀錄可匯出');
+            return;
+        }
+
+        this.showToast('info', '匯出中', '正在產生 CSV 檔案...');
+
         setTimeout(() => {
-            this.showToast('success', '匯出成功', '報名名單已匯出');
-        }, 1500);
+            try {
+                const rows = [];
+
+                // === 摘要區塊 ===
+                rows.push(['【報名紀錄摘要】']);
+                rows.push(['總報名數', filtered.length]);
+                rows.push(['已報名', filtered.filter(r => r.registration_status === '已報名').length]);
+                rows.push(['已取消', filtered.filter(r => r.registration_status === '已取消').length]);
+                rows.push(['待繳費', filtered.filter(r => r.payment_status === '未繳費').length]);
+
+                const collectedAmount = filtered
+                    .filter(r => r.payment_status === '已繳費')
+                    .reduce((sum, r) => sum + (r.amount || 0), 0);
+                const pendingRefundAmount = filtered
+                    .filter(r => r.payment_status === '待退款')
+                    .reduce((sum, r) => sum + (r.amount || 0), 0);
+                const refundedAmount = filtered
+                    .filter(r => r.payment_status === '退款完成')
+                    .reduce((sum, r) => sum + (r.amount || 0), 0);
+
+                rows.push(['已收費金額', 'NT$ ' + collectedAmount.toLocaleString()]);
+                rows.push(['應退費金額', 'NT$ ' + pendingRefundAmount.toLocaleString()]);
+                rows.push(['已退費金額', 'NT$ ' + refundedAmount.toLocaleString()]);
+                rows.push([]); // 空行分隔
+
+                // === 明細表頭 ===
+                rows.push([
+                    '報名序號', '活動代碼', '活動名稱', '案場', '戶別',
+                    '報名者', '聯絡電話', '報名人數', '金額',
+                    '繳費狀態', '報名狀態', '報名日期'
+                ]);
+
+                // === 明細資料 ===
+                filtered.forEach(reg => {
+                    const event = this.events.find(e => e.event_id === reg.event_id);
+                    const eventTitle = event ? event.title : '(未知活動)';
+                    const totalCount = 1 + (reg.companion_count || 0);
+
+                    rows.push([
+                        reg.reg_id,
+                        reg.event_id,
+                        eventTitle,
+                        reg.site_name,
+                        reg.unit_no,
+                        reg.applicant_name,
+                        reg.phone,
+                        totalCount + ' 人',
+                        'NT$ ' + (reg.amount || 0).toLocaleString(),
+                        reg.payment_status,
+                        reg.registration_status,
+                        this.formatDate(reg.created_at)
+                    ]);
+                });
+
+                // === 產生 CSV 並下載 ===
+                const BOM = '\uFEFF'; // UTF-8 BOM，確保 Excel 正確顯示中文
+                const csvContent = BOM + rows.map(row =>
+                    row.map(cell => {
+                        const str = String(cell ?? '');
+                        // 若內容含逗號、引號或換行，以雙引號包裹
+                        return str.includes(',') || str.includes('"') || str.includes('\n')
+                            ? '"' + str.replace(/"/g, '""') + '"'
+                            : str;
+                    }).join(',')
+                ).join('\r\n');
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+                link.href = url;
+                link.download = `報名名單_${today}.csv`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                this.showToast('success', '匯出成功', '報名名單已匯出');
+            } catch (err) {
+                console.error('匯出失敗', err);
+                this.showToast('error', '匯出失敗', '產生檔案時發生錯誤');
+            }
+        }, 300);
     }
 
     /**
@@ -752,6 +929,17 @@ window.siteRegManager = null;
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
+    // 渲染共用元件（頂部導覽列、側邊欄等）
+    if (typeof initCRMLayout === 'function') {
+        initCRMLayout();
+    }
+
+    // 初始化側邊欄
+    if (typeof SidebarManager === 'function') {
+        new SidebarManager();
+    }
+
+    // 初始化報名管理
     if (document.getElementById('registrationTableBody')) {
         window.siteRegManager = new SiteEventRegistrationManager();
     }

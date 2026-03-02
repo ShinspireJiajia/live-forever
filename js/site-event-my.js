@@ -77,27 +77,51 @@
     }, 3500);
   }
 
-  /** 狀態正規化：舊值對映到新狀態 */
-  function normalizeStatus(s) {
+  /** 繳費狀態正規化 */
+  function normalizePaymentStatus(s) {
     if (!s) return '';
-    if (s === '待繳費' || s === '未繳費') return '未繳費';
-    if (s === '已報名' || s === '已繳費') return '已繳費';
-    if (s === '已退費') return '已退費';
+    if (s === '免費') return '免費';
+    if (s === '已繳費') return '已繳費';
+    if (s === '未繳費' || s === '待繳費') return '未繳費';
+    if (s === '待退款') return '待退款';
+    if (s === '退款完成' || s === '已退費') return '退款完成';
+    return s;
+  }
+
+  /** 報名狀態正規化 */
+  function normalizeRegStatus(s) {
+    if (!s) return '';
+    if (s === '已報名') return '已報名';
     if (s === '已取消') return '已取消';
     return s;
   }
 
-  /** 依狀態回傳徽章 HTML（採用新四態） */
-  function renderStatusBadge(statusRaw) {
-    const status = normalizeStatus(statusRaw);
+  /** 合併狀態計算（用於筆數統計與篩選） */
+  function getCombinedStatus(reg) {
+    const payStatus = normalizePaymentStatus(reg.payment_status);
+    const regStatus = normalizeRegStatus(reg.registration_status);
+    if (regStatus === '已取消') return '已取消';
+    if (payStatus === '退款完成') return '退款完成';
+    if (payStatus === '待退款') return '待退款';
+    if (payStatus === '已繳費' || payStatus === '免費') return '已繳費';
+    if (payStatus === '未繳費') return '未繳費';
+    return payStatus;
+  }
+
+  /** 依狀態回傳徽章 HTML（採用新狀態） */
+  function renderStatusBadge(reg) {
+    const payStatus = normalizePaymentStatus(reg.payment_status);
+    const regStatus = normalizeRegStatus(reg.registration_status);
+    const combined = getCombinedStatus(reg);
     const map = {
       '已繳費': { cls: 'badge-paid', icon: 'fa-check-circle' },
       '未繳費': { cls: 'badge-pending', icon: 'fa-clock' },
-      '已退費': { cls: 'badge-refund', icon: 'fa-rotate-left' },
+      '待退款': { cls: 'badge-refund', icon: 'fa-hourglass-half' },
+      '退款完成': { cls: 'badge-refund', icon: 'fa-rotate-left' },
       '已取消': { cls: 'badge-cancelled', icon: 'fa-ban' }
     };
-    const m = map[status] || { cls: 'badge-cancelled', icon: 'fa-ban' };
-    return `<span class="badge ${m.cls}" aria-label="${status}"><i class="fa-solid ${m.icon}"></i>${status}</span>`;
+    const m = map[combined] || { cls: 'badge-cancelled', icon: 'fa-ban' };
+    return `<span class="badge ${m.cls}" aria-label="${combined}"><i class="fa-solid ${m.icon}"></i>${combined}</span>`;
   }
 
   /** 建立事件索引方便查詢 */
@@ -159,10 +183,10 @@
     // 產生列表與統計
     function renderStats(list) {
       const total = list.length;
-      const paid = list.filter(x => normalizeStatus(x.payment_status) === '已繳費').length;
-      const pending = list.filter(x => normalizeStatus(x.payment_status) === '未繳費').length;
-      const refunded = list.filter(x => normalizeStatus(x.payment_status) === '已退費').length;
-      const cancelled = list.filter(x => normalizeStatus(x.payment_status) === '已取消').length;
+      const paid = list.filter(x => getCombinedStatus(x) === '已繳費').length;
+      const pending = list.filter(x => getCombinedStatus(x) === '未繳費').length;
+      const refunded = list.filter(x => getCombinedStatus(x) === '退款完成' || getCombinedStatus(x) === '待退款').length;
+      const cancelled = list.filter(x => getCombinedStatus(x) === '已取消').length;
       const t = document.getElementById('statTotal');
       const p = document.getElementById('statPaid');
       const pend = document.getElementById('statPending');
@@ -191,7 +215,7 @@
 
       let list = registrations.slice();
       if (site) list = list.filter(x => x.site_name === site);
-      if (status) list = list.filter(x => normalizeStatus(x.payment_status) === status);
+      if (status) list = list.filter(x => getCombinedStatus(x) === status);
 
       // 更新統計
       renderStats(list);
@@ -212,14 +236,14 @@
         const title = ev.title || '—';
         const location = ev.location || '—';
 
-        const normalized = normalizeStatus(reg.payment_status);
-        const canCancelFree = (amount === 0) && normalized !== '已取消' && normalized !== '已退費';
+        const combined = getCombinedStatus(reg);
+        const canCancelFree = (amount === 0) && combined !== '已取消' && combined !== '退款完成';
 
         return `
           <article class="event-card" aria-label="${title}">
             <div class="event-header">
               <h3 class="event-title">${title}</h3>
-              ${renderStatusBadge(reg.payment_status)}
+              ${renderStatusBadge(reg)}
             </div>
             <div class="event-meta">
               <div class="meta-row" aria-label="地點">
@@ -244,7 +268,7 @@
               </div>
             </div>
             <div class="event-actions">
-              ${normalized === '未繳費' && amount > 0 ? `
+              ${combined === '未繳費' && amount > 0 ? `
                 <button class="btn btn-primary" data-action="pay" data-reg="${reg.reg_id}">
                   <i class="fa-solid fa-credit-card"></i> 前往繳費
                 </button>
@@ -295,7 +319,7 @@
             if (confirmed) {
               const reg = registrations.find(r => r.reg_id === regId);
               if (reg) {
-                reg.payment_status = '已取消';
+                reg.registration_status = '已取消';
                 renderList();
                 showToast('success', '已取消報名');
               }

@@ -16,6 +16,8 @@ class SiteEventAddManager {
         this.editingEventId = null;
         // 是否為編輯模式
         this.isEditMode = false;
+        // 編輯模式時保留原始類別（不可變更）
+        this.originalCategory = null;
         // 初始化
         this.init();
     }
@@ -62,6 +64,25 @@ class SiteEventAddManager {
         // 更新成功訊息
         document.getElementById('successTitle').textContent = '更新成功';
         document.getElementById('successMessage').textContent = '活動資料已成功更新';
+
+        // 編輯模式：報名費用不可變更
+        const formPrice = document.getElementById('formPrice');
+        if (formPrice) {
+            formPrice.disabled = true;
+            formPrice.style.backgroundColor = '#f5f5f5';
+            formPrice.style.cursor = 'not-allowed';
+        }
+        const formNeedReceipt = document.getElementById('formNeedReceipt');
+        if (formNeedReceipt) {
+            formNeedReceipt.disabled = true;
+            formNeedReceipt.style.cursor = 'not-allowed';
+        }
+        // 在費用欄位下方加上提示
+        const priceHint = document.querySelector('#formPrice')?.closest('.form-group')?.querySelector('.form-hint');
+        if (priceHint) {
+            priceHint.textContent = '編輯模式下報名費用不可變更';
+            priceHint.style.color = '#E74C3C';
+        }
     }
 
     /**
@@ -147,6 +168,22 @@ class SiteEventAddManager {
         if (regStartDt && regEndDt) {
             regStartDt.addEventListener('change', () => this.validateDateRange('registration'));
             regEndDt.addEventListener('change', () => this.validateDateRange('registration'));
+        }
+
+        // 無名額上限勾選
+        const formNoLimit = document.getElementById('formNoLimit');
+        const formMaxSlots = document.getElementById('formMaxSlots');
+        if (formNoLimit && formMaxSlots) {
+            formNoLimit.addEventListener('change', () => {
+                if (formNoLimit.checked) {
+                    // 記住原始值以便取消時還原
+                    formMaxSlots.dataset.prevValue = formMaxSlots.value;
+                    formMaxSlots.value = 9999;
+                } else {
+                    // 還原原始值
+                    formMaxSlots.value = formMaxSlots.dataset.prevValue || 50;
+                }
+            });
         }
 
         // 成功彈窗外部點擊關閉
@@ -564,7 +601,6 @@ class SiteEventAddManager {
 
         // 填入表單資料
         document.getElementById('formTitle').value = event.title || '';
-        document.getElementById('formCategory').value = event.category || '';
         // document.getElementById('formStartDt').value = event.start_dt ? event.start_dt.slice(0, 16) : '';
         // document.getElementById('formEndDt').value = event.end_dt ? event.end_dt.slice(0, 16) : '';
         document.getElementById('formDisplayStartDt').value = event.display_start_dt ? event.display_start_dt.slice(0, 16) : '';
@@ -579,15 +615,19 @@ class SiteEventAddManager {
             editorContent.innerHTML = event.description || '';
         }
         document.getElementById('formMaxSlots').value = event.max_slots || 50;
+        // 若名額為 9999 則自動勾選無名額上限
+        if (event.max_slots >= 9999) {
+            document.getElementById('formNoLimit').checked = true;
+        }
         document.getElementById('formPrice').value = event.price || 0;
         // document.getElementById('formDeadline').value = event.registration_deadline || '';
         document.getElementById('formMaxCompanion').value = event.max_companion || 0;
         document.getElementById('formRemindDays').value = event.remind_days_before || 3;
         document.getElementById('formNeedReceipt').checked = event.need_receipt || false;
 
-        // 勾選適用案場 (支援舊資料格式：陣列)
-        if (event.sites && event.sites.length > 0) {
-            const siteName = event.sites[0]; // 只取第一個
+        // 勾選適用案場
+        if (event.site) {
+            const siteName = event.site;
             // 嘗試從 CRMMockData 取得物件以獲得完整資訊
              let project = null;
              if (typeof CRMMockData !== 'undefined' && CRMMockData.projects) {
@@ -621,11 +661,10 @@ class SiteEventAddManager {
         }
 
         // 取得適用案場
-        const selectedProjectName = document.getElementById('selectedProjectId').value;
-        const selectedSites = selectedProjectName ? [selectedProjectName] : [];
+        const selectedSite = document.getElementById('selectedProjectId').value || '';
 
         // 驗證至少選擇一個案場
-        if (selectedSites.length === 0) {
+        if (!selectedSite) {
             this.showToast('error', '錯誤', '請選擇適用案場');
             return;
         }
@@ -658,7 +697,7 @@ class SiteEventAddManager {
         // 組合活動資料
         const eventData = {
             title: document.getElementById('formTitle').value,
-            category: document.getElementById('formCategory').value,
+            category: '',
             // start_dt: startDt + ':00',
             // end_dt: endDt + ':00',
             display_start_dt: document.getElementById('formDisplayStartDt').value ? document.getElementById('formDisplayStartDt').value + ':00' : null,
@@ -667,7 +706,7 @@ class SiteEventAddManager {
             registration_end_dt: document.getElementById('formRegistrationEndDt').value ? document.getElementById('formRegistrationEndDt').value + ':00' : null,
             description: document.getElementById('formDescription').value,
             location: document.getElementById('formLocation').value,
-            sites: selectedSites,
+            site: selectedSite,
             max_slots: parseInt(document.getElementById('formMaxSlots').value),
             price: parseInt(document.getElementById('formPrice').value) || 0,
             // registration_deadline: document.getElementById('formDeadline').value,
@@ -809,5 +848,14 @@ window.siteEventAddManager = null;
 
 // 頁面載入完成後初始化
 document.addEventListener('DOMContentLoaded', function() {
+    // 渲染共用元件
+    if (typeof initCRMLayout === 'function') {
+        initCRMLayout();
+    }
+
+    // 初始化側邊欄
+    const sidebarManager = new SidebarManager();
+
+    // 初始化活動表單管理
     window.siteEventAddManager = new SiteEventAddManager();
 });
