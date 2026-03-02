@@ -148,6 +148,86 @@ header {
 .summary-card {
     flex: 0 0 200px;
     min-width: 200px;
+}
+
+/* 戶別標籤容器 */
+.unit-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+/* 戶別標籤 */
+.unit-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
+/* 公設標籤 */
+.unit-tag.facility {
+    background-color: #e0f2f1;
+    color: #00695c;
+    border-color: #80cbc4;
+    cursor: pointer;
+}
+
+.unit-tag.facility:hover {
+    background-color: #b2dfdb;
+}
+
+/* 更多戶別提示 */
+.unit-more {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    background-color: #f5f5f5;
+    color: #616161;
+    cursor: pointer;
+    position: relative;
+}
+
+.unit-more:hover {
+    background-color: #e0e0e0;
+}
+
+/* 更多戶別 tooltip */
+.unit-more-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #424242;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 100;
+    margin-bottom: 5px;
+}
+
+.unit-more-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #424242;
+}
+
+.unit-more:hover .unit-more-tooltip {
+    display: block;
     background-color: white;
     border-radius: 4px;
     padding: 15px;
@@ -345,6 +425,7 @@ tr:hover td:first-child, tr:hover td:nth-child(2), tr:hover td:nth-child(3), tr:
 .reservation-available {
     background-color: var(--available-bg);
     color: var(--primary);
+    font-weight: bold;
 }
 
 .reservation-scheduled {
@@ -465,6 +546,7 @@ textarea.form-control {
 
 .tooltip-value {
     flex: 1;
+    color: #000000;
 }
 
 .legend {

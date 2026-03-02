@@ -1,0 +1,95 @@
+/* ============================================
+   Toast 提示元件樣式
+   ============================================ */
+
+/* Toast 容器（固定於右上角） */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Toast 基本樣式 */
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 300px;
+    max-width: 450px;
+    animation: toastSlideIn 0.3s ease;
+}
+
+/* Toast 滑入動畫 */
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Toast 圖示 */
+.toast-icon {
+    font-size: 20px;
+}
+
+/* 成功狀態圖示 */
+.toast-success .toast-icon {
+    color: #27AE60;
+}
+
+/* 錯誤狀態圖示 */
+.toast-error .toast-icon {
+    color: #E74C3C;
+}
+
+/* 資訊狀態圖示 */
+.toast-info .toast-icon {
+    color: #3498DB;
+}
+
+/* 警告狀態圖示 */
+.toast-warning .toast-icon {
+    color: #F39C12;
+}
+
+/* Toast 內容區 */
+.toast-content {
+    flex: 1;
+}
+
+/* Toast 標題 */
+.toast-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* Toast 訊息 */
+.toast-message {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Toast 關閉按鈕 */
+.toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+}
+
+.toast-close:hover {
+    color: #333;
+}

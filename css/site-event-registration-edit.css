@@ -1,0 +1,522 @@
+/* ============================================ */
+/* 案場活動報名紀錄審核 - 頁面專用樣式             */
+/* ============================================ */
+
+/* --- 附件上傳區塊 --- */
+.file-upload-area {
+    position: relative;
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background-color: var(--color-gray-100);
+}
+
+.file-upload-area:hover {
+    border-color: var(--color-info);
+    background-color: rgba(91, 155, 213, 0.05);
+}
+
+.file-upload-area.dragover {
+    border-color: var(--color-info);
+    background-color: rgba(91, 155, 213, 0.1);
+}
+
+.file-upload-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-content {
+    pointer-events: none;
+}
+
+/* --- 已上傳檔案列表 --- */
+.uploaded-files-list {
+    margin-top: 12px;
+}
+
+.uploaded-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: var(--color-gray-100);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 8px;
+}
+
+.uploaded-file-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.uploaded-file-info i {
+    color: var(--color-info);
+}
+
+.uploaded-file-name {
+    font-size: 14px;
+    color: var(--color-gray-700);
+}
+
+.uploaded-file-size {
+    font-size: 12px;
+    color: var(--color-gray-500);
+    margin-left: 8px;
+}
+
+.btn-remove-file {
+    background: none;
+    border: none;
+    color: var(--color-danger);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 14px;
+}
+
+.btn-remove-file:hover {
+    color: #c0392b;
+}
+
+/* --- 頁面副標題與輔助文字 --- */
+.page-subtitle {
+    color: var(--color-text-muted);
+    margin-top: 8px;
+}
+
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+.text-danger {
+    color: var(--color-danger);
+}
+
+/* --- Toast 提示 --- */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 300px;
+    max-width: 450px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-icon {
+    font-size: 20px;
+}
+
+.toast-success .toast-icon {
+    color: #27AE60;
+}
+
+.toast-error .toast-icon {
+    color: #E74C3C;
+}
+
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.toast-message {
+    font-size: 14px;
+    color: #666;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+}
+
+/* --- 詳情區塊 --- */
+.detail-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.detail-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.detail-section-title i {
+    color: var(--color-primary);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-label {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.detail-value {
+    font-size: 15px;
+    color: var(--color-text-primary);
+}
+
+/* --- 身份標籤 --- */
+.identity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.identity-badge.resident {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* --- 繳費卡片 --- */
+.payment-card {
+    background: var(--color-gray-100);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.payment-card-header {
+    padding: 16px 20px;
+    background: #fff;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.payment-header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.payment-status-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.payment-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.payment-status.paid {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.payment-status.pending {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.payment-status.refunding {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.payment-status.refunded {
+    background: #e0f2f1;
+    color: #00695c;
+}
+
+.payment-status.free {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.payment-status.cancelled {
+    background: #f5f5f5;
+    color: #9e9e9e;
+}
+
+.payment-status.refund-pending {
+    background: #fff8e1;
+    color: #f57c00;
+}
+
+/* --- 報名狀態標籤 --- */
+.reg-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.reg-status-badge.registered {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.reg-status-badge.cancelled {
+    background-color: #f5f5f5;
+    color: #757575;
+}
+
+.payment-amount {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.payment-card-body {
+    padding: 20px;
+}
+
+.payment-hint {
+    margin: 0 0 16px 0;
+    color: var(--color-text-secondary);
+}
+
+.payment-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.payment-detail {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.payment-detail-label {
+    color: var(--color-text-muted);
+    min-width: 80px;
+}
+
+.payment-detail-value {
+    color: var(--color-text-primary);
+}
+
+/* --- 時間軸 --- */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 24px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -30px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+    background: var(--color-gray-500);
+}
+
+.timeline-marker.action-register {
+    background: #3498db;
+}
+
+.timeline-marker.action-payment {
+    background: #27ae60;
+}
+
+.timeline-marker.action-refund {
+    background: #e74c3c;
+}
+
+.timeline-marker.action-notify {
+    background: #9b59b6;
+}
+
+.timeline-content {
+    background: var(--color-gray-100);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.timeline-action {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.timeline-time {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.timeline-body p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.change-comparison {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.old-value {
+    padding: 4px 8px;
+    background: #ffebee;
+    color: #c62828;
+    border-radius: 4px;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+
+.new-value {
+    padding: 4px 8px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* --- 彈窗額外樣式 --- */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.alert-warning {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.refund-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-danger);
+}
+
+/* --- 按鈕樣式補充 --- */
+.btn-info {
+    background-color: var(--color-info);
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #2980b9;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.btn-outline:hover {
+    background: var(--color-gray-100);
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* --- 表單操作區 --- */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}

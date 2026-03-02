@@ -23,6 +23,11 @@
     color: #856404;
 }
 
+.status-reserved {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
 .status-confirmed {
     background-color: #cce5ff;
     color: #004085;
@@ -93,4 +98,453 @@
     text-align: center;
     color: var(--color-gray-500);
     padding: var(--spacing-xl) !important;
+}
+
+/* ============================================
+ * 未讀訊息樣式
+ * ============================================ */
+
+/* 訊息狀態容器 */
+.msg-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.msg-icon {
+    font-size: 1.1rem;
+    color: var(--color-gray-400);
+    transition: color var(--transition-fast);
+}
+
+/* 有未讀訊息 */
+.msg-unread .msg-icon {
+    color: #3498db;
+}
+
+/* 未讀訊息數量徽章 */
+.msg-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: #E74C3C;
+    color: var(--color-white);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-white);
+}
+
+/* 有未讀訊息的列高亮 */
+.has-unread-message {
+    background-color: rgba(52, 152, 219, 0.05) !important;
+}
+
+.has-unread-message:hover {
+    background-color: rgba(52, 152, 219, 0.1) !important;
+}
+
+/* 未讀訊息徽章 (序號欄位) */
+.unread-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    background-color: #E74C3C;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.unread-badge i {
+    font-size: 10px;
+}
+
+/* ============================================
+ * 通知發送彈窗樣式
+ * ============================================ */
+
+/* 彈窗內容容器 */
+.notify-modal-content {
+    max-width: 600px;
+    width: 90%;
+}
+
+.notify-modal-content .modal-header {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: var(--color-white);
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+}
+
+.notify-modal-content .modal-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-white);
+}
+
+.notify-modal-content .modal-title i {
+    font-size: 1.2rem;
+}
+
+.notify-modal-content .modal-close {
+    color: var(--color-white);
+    opacity: 0.8;
+}
+
+.notify-modal-content .modal-close:hover {
+    opacity: 1;
+}
+
+/* 通知區塊 */
+.notify-section {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.notify-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.notify-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-base);
+}
+
+.notify-section-title i {
+    color: var(--color-btn-primary);
+}
+
+/* 通知類型列表 */
+.notify-type-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.notify-type-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.notify-type-item:hover {
+    border-color: var(--color-btn-primary);
+    background-color: rgba(169, 158, 145, 0.05);
+}
+
+.notify-type-item.selected {
+    border-color: var(--color-btn-primary);
+    background-color: rgba(169, 158, 145, 0.1);
+}
+
+.notify-type-radio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-gray-400);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.notify-type-item.selected .notify-type-radio {
+    border-color: var(--color-btn-primary);
+}
+
+.notify-type-item.selected .notify-type-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-btn-primary);
+    border-radius: 50%;
+}
+
+.notify-type-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.notify-type-icon.confirm {
+    background-color: #e8f5e9;
+    color: #27ae60;
+}
+
+.notify-type-icon.reminder {
+    background-color: #fff3e0;
+    color: #f39c12;
+}
+
+.notify-type-icon.complete {
+    background-color: #e3f2fd;
+    color: #3498db;
+}
+
+.notify-type-info {
+    flex: 1;
+}
+
+.notify-type-title {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-900);
+    margin-bottom: 2px;
+}
+
+.notify-type-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+/* 發送管道選項 */
+.notify-channel-options {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.notify-channel-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.notify-channel-item:hover {
+    border-color: var(--color-btn-primary);
+}
+
+.notify-channel-item input[type="checkbox"] {
+    display: none;
+}
+
+.notify-channel-item input[type="checkbox"]:checked + .channel-icon {
+    opacity: 1;
+}
+
+.notify-channel-item input[type="checkbox"]:not(:checked) + .channel-icon {
+    opacity: 0.4;
+}
+
+.notify-channel-item input[type="checkbox"]:checked ~ .channel-label {
+    color: var(--color-gray-900);
+}
+
+.notify-channel-item input[type="checkbox"]:not(:checked) ~ .channel-label {
+    color: var(--color-gray-400);
+}
+
+.channel-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: opacity var(--transition-fast);
+}
+
+.channel-icon.sms {
+    background-color: #e8f5e9;
+    color: #27ae60;
+}
+
+.channel-icon.email {
+    background-color: #e3f2fd;
+    color: #3498db;
+}
+
+.channel-icon.line {
+    background-color: #e8f5e9;
+    color: #00c300;
+}
+
+.channel-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-fast);
+}
+
+/* 通知內容編輯器 */
+.notify-content-editor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.notify-textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
+    resize: vertical;
+    min-height: 120px;
+}
+
+.notify-textarea:focus {
+    outline: none;
+    border-color: var(--color-btn-primary);
+    box-shadow: 0 0 0 3px rgba(169, 158, 145, 0.15);
+}
+
+.notify-variable-hint {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+}
+
+.hint-label {
+    color: var(--color-gray-500);
+}
+
+.hint-tag {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-700);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.hint-tag:hover {
+    background-color: var(--color-btn-primary);
+    color: var(--color-white);
+}
+
+/* 發送對象統計 */
+.notify-target-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.target-stat {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-xs);
+}
+
+.stat-label {
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+}
+
+.stat-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-btn-primary);
+}
+
+.stat-unit {
+    color: var(--color-gray-500);
+    font-size: var(--font-size-sm);
+}
+
+.target-filter {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+    cursor: pointer;
+}
+
+.filter-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* 排程選項 */
+.notify-schedule-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.schedule-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-700);
+    cursor: pointer;
+}
+
+.schedule-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .notify-modal-content {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .notify-channel-options {
+        flex-direction: column;
+    }
+
+    .notify-target-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .target-filter {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
 }

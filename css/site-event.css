@@ -12,7 +12,7 @@
  * ============================================ */
 .site-event-filter-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 1fr 1.5fr;
     gap: var(--spacing-md);
 }
 
@@ -46,7 +46,7 @@
 
 @media (max-width: 1200px) {
     .site-event-filter-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -387,4 +387,26 @@
         max-height: calc(90vh - 140px);
         overflow-y: auto;
     }
+}
+
+/* ============================================
+ * 付費/免費標籤
+ * ============================================ */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+.badge-paid {
+    background-color: #ffecd3;
+    color: #c96800;
+}
+
+.badge-free {
+    background-color: #d4edda;
+    color: #155724;
 }
