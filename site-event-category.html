@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/site-event.css">
+    <link rel="stylesheet" href="css/toast.css">
 </head>
 <body>
     <!-- ============================================ -->
@@ -198,75 +199,5 @@
         });
     </script>
 
-    <!-- Toast 樣式 (內嵌) -->
-    <style>
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .toast {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            min-width: 300px;
-            max-width: 450px;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        .toast-icon {
-            font-size: 20px;
-        }
-        
-        .toast-success .toast-icon { color: #27AE60; }
-        .toast-error .toast-icon { color: #E74C3C; }
-        .toast-info .toast-icon { color: #3498DB; }
-        
-        .toast-content {
-            flex: 1;
-        }
-        
-        .toast-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .toast-message {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .toast-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #999;
-            padding: 0;
-        }
-        
-        .toast-close:hover {
-            color: #333;
-        }
-    </style>
 </body>
 </html>

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/site-event.css">
     <link rel="stylesheet" href="css/site-event-add.css">
+    <link rel="stylesheet" href="css/toast.css">
 </head>
 <body>
     <!-- ============================================ -->
@@ -75,26 +76,10 @@
                         </div>
                         <div class="form-card-body">
                             <div class="form-row">
-                                <div class="form-col-6">
+                                <div class="form-col-12">
                                     <div class="form-group">
                                         <label class="form-label required">活動名稱</label>
                                         <input type="text" class="form-control" id="formTitle" placeholder="請輸入活動名稱" required>
-
-                                    </div>
-                                </div>
-                                <div class="form-col-6">
-                                    <div class="form-group">
-                                        <label class="form-label required">活動類別</label>
-                                        <select class="form-select" id="formCategory" required>
-                                            <option value="">請選擇類別</option>
-                                            <option value="住戶聯誼">住戶聯誼</option>
-                                            <option value="親子活動">親子活動</option>
-                                            <option value="節慶活動">節慶活動</option>
-                                            <option value="社區活動">社區活動</option>
-                                            <option value="講座課程">講座課程</option>
-                                            <option value="設備說明">設備說明</option>
-                                            <option value="公告說明">公告說明</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -255,50 +240,49 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-col-4">
+                                <div class="form-col-6">
                                     <div class="form-group">
                                         <label class="form-label required">名額上限</label>
-                                        <label class="checkbox-option" style="margin-bottom: 8px;">
-                                            <input type="checkbox" id="formNoLimit">
-                                            <span class="checkbox-text">無名額上限</span>
-                                        </label>
-                                        <div class="input-with-suffix">
-                                            <input type="number" class="form-control" id="formMaxSlots" min="1" value="50" required>
-                                            <span class="input-suffix">人</span>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div class="input-with-suffix" style="flex: 0 0 auto; width: 160px;">
+                                                <input type="number" class="form-control" id="formMaxSlots" min="1" value="50" required>
+                                                <span class="input-suffix">人</span>
+                                            </div>
+                                            <label class="checkbox-option" style="margin: 0;">
+                                                <input type="checkbox" id="formNoLimit">
+                                                <span class="checkbox-text">無名額上限</span>
+                                            </label>
                                         </div>
                                         <span class="form-hint">活動可報名的總人數上限</span>
                                     </div>
                                 </div>
-                                <div class="form-col-4">
-                                    <div class="form-group">
-                                        <label class="form-label">報名費用</label>
-                                        <div class="input-with-prefix">
-                                            <span class="input-prefix">NT$</span>
-                                            <input type="number" class="form-control" id="formPrice" min="0" value="0">
-                                        </div>
-                                        <span class="form-hint">0 表示免費活動</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-col-4">
+                                <div class="form-col-6">
                                     <div class="form-group">
                                         <label class="form-label">允許單戶報名人數上限</label>
-                                        <div class="input-with-suffix">
+                                        <div class="input-with-suffix" style="width: 160px;">
                                             <input type="number" class="form-control" id="formMaxCompanion" min="0" max="10" value="0">
                                             <span class="input-suffix">人</span>
                                         </div>
                                         <span class="form-hint">每位報名者可攜帶的人數。系統將以此計算單戶總上限（本人+攜伴），若同一戶多次報名，總人數不可超過此上限。</span>
                                     </div>
                                 </div>
-                                <div class="form-col-4">
-                                    <div class="form-group checkbox-group-vertical">
-                                        <label class="form-label">其他設定</label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" id="formNeedReceipt">
-                                            <span class="checkbox-text">需開立收據</span>
-                                        </label>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col-6">
+                                    <div class="form-group">
+                                        <label class="form-label">報名費用</label>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div class="input-with-prefix" style="flex: 0 0 auto; width: 200px;">
+                                                <span class="input-prefix">NT$</span>
+                                                <input type="number" class="form-control" id="formPrice" min="0" value="0">
+                                            </div>
+                                            <label class="checkbox-option" style="margin: 0;">
+                                                <input type="checkbox" id="formNeedReceipt">
+                                                <span class="checkbox-text">需開立收據</span>
+                                            </label>
+                                        </div>
+                                        <span class="form-hint">0 表示免費活動</span>
                                     </div>
                                 </div>
                             </div>
@@ -390,88 +374,5 @@
     <script src="js/mock-data.js"></script>
     <script src="js/site-event-mock-data.js"></script>
     <script src="js/site-event-add.js"></script>
-    <script>
-        // 初始化側邊欄
-        document.addEventListener('DOMContentLoaded', function() {
-            // 渲染共用元件
-            if (typeof initCRMLayout === 'function') {
-                initCRMLayout();
-            }
-            
-            // 初始化側邊欄
-            const sidebarManager = new SidebarManager();
-        });
-    </script>
-
-    <!-- Toast 樣式 (內嵌) -->
-    <style>
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .toast {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            min-width: 300px;
-            max-width: 450px;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        .toast-icon {
-            font-size: 20px;
-        }
-        
-        .toast-success .toast-icon { color: #27AE60; }
-        .toast-error .toast-icon { color: #E74C3C; }
-        .toast-info .toast-icon { color: #3498DB; }
-        
-        .toast-content {
-            flex: 1;
-        }
-        
-        .toast-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .toast-message {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .toast-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #999;
-            padding: 0;
-        }
-        
-        .toast-close:hover {
-            color: #333;
-        }
-    </style>
 </body>
 </html>

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/pagination.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/site-event.css">
+    <link rel="stylesheet" href="css/site-event-registration.css">
 </head>
 <body>
     <!-- ============================================ -->
@@ -59,11 +60,37 @@
                 <!-- JavaScript 動態產生 -->
             </div>
 
-            
+            <!-- 統計摘要列 -->
+            <div class="stats-summary" id="statsGrid">
+                <span class="stats-item">總報名數：<strong id="statTotal">0</strong></span>
+                <span class="stats-divider">|</span>
+                <span class="stats-item">待繳費：<strong id="statPending">0</strong></span>
+                <span class="stats-divider">|</span>
+                <span class="stats-item">已報名：<strong id="statPaid">0</strong></span>
+                <span class="stats-divider">|</span>
+                <span class="stats-item">已取消：<strong id="statCancelled">0</strong></span>
+                <span class="stats-divider">|</span>
+                <span class="stats-item">已收費：<strong id="statCollectedAmount">NT$ 0</strong></span>
+                <span class="stats-divider">|</span>
+                <span class="stats-item">應退費：<strong id="statPendingRefund">NT$ 0</strong></span>
+                <span class="stats-divider">|</span>
+                <span class="stats-item">已退費：<strong id="statRefundedAmount">NT$ 0</strong></span>
+            </div>
 
             <!-- 查詢條件區 -->
             <div class="search-panel">
                 <form class="site-reg-search-form" id="searchForm">
+                    <div class="form-group">
+                        <label class="form-label">活動名稱</label>
+                        <select class="form-select" id="searchEventName">
+                            <option value="">全部</option>
+                            <!-- JavaScript 動態產生選項 -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">活動代碼</label>
+                        <input type="text" class="form-control" id="searchEventCode" placeholder="請輸入活動代碼">
+                    </div>
                     <div class="form-group">
                         <label class="form-label">報名者姓名</label>
                         <input type="text" class="form-control" id="searchName" placeholder="請輸入姓名">
@@ -327,420 +354,5 @@
     <script src="js/modal.js"></script>
     <script src="js/site-event-mock-data.js"></script>
     <script src="js/site-event-registration.js"></script>
-    <script>
-        // 初始化側邊欄
-        document.addEventListener('DOMContentLoaded', function() {
-            // 渲染共用元件
-            if (typeof initCRMLayout === 'function') {
-                initCRMLayout();
-            }
-            
-            // 初始化側邊欄
-            const sidebarManager = new SidebarManager();
-        });
-    </script>
-
-    <!-- 內嵌樣式 -->
-    <style>
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .toast {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            min-width: 300px;
-            max-width: 450px;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .toast-icon { font-size: 20px; }
-        .toast-success .toast-icon { color: #27AE60; }
-        .toast-error .toast-icon { color: #E74C3C; }
-        .toast-info .toast-icon { color: #3498DB; }
-        
-        .toast-content { flex: 1; }
-        .toast-title { font-weight: 600; margin-bottom: 4px; }
-        .toast-message { font-size: 14px; color: #666; }
-        
-        .toast-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #999;
-            padding: 0;
-        }
-        .toast-close:hover { color: #333; }
-
-        .text-center {
-            text-align: center;
-            color: #999;
-            padding: 20px !important;
-        }
-
-        /* 表格容器 */
-        .table-container {
-            background-color: #fff;
-            overflow-x: auto;
-        }
-
-        /* 操作按鈕容器 */
-        .action-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .btn-sm {
-            padding: 4px 10px;
-            font-size: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            border: 1px solid;
-            background: transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-
-        .btn-outline-success {
-            color: #6c9a6c;
-            border-color: #6c9a6c;
-            background-color: #fff;
-        }
-        .btn-outline-success:hover {
-            background-color: #6c9a6c;
-            color: #fff;
-        }
-
-        .btn-outline-danger {
-            color: #E67E22;
-            border-color: #E67E22;
-            background-color: #fff;
-        }
-        .btn-outline-danger:hover {
-            background-color: #E67E22;
-            color: #fff;
-        }
-
-        .btn-outline-info {
-            color: #3498DB;
-            border-color: #3498DB;
-            background-color: #fff;
-        }
-        .btn-outline-info:hover {
-            background-color: #3498DB;
-            color: #fff;
-        }
-
-        /* 統計卡片 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .stat-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius-md);
-            box-shadow: var(--shadow-sm);
-            padding: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--border-radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--color-white);
-        }
-
-        .stat-icon.total { background-color: #5B9BD5; }
-        .stat-icon.pending { background-color: #F39C12; }
-        .stat-icon.paid { background-color: #27AE60; }
-        .stat-icon.cancelled { background-color: #95a5a6; }
-
-        .stat-content { flex: 1; }
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
-            line-height: 1.2;
-        }
-        .stat-label {
-            font-size: 14px;
-            color: #999;
-        }
-
-        /* 查詢表單 */
-        .site-reg-search-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--spacing-md);
-            align-items: end;
-        }
-
-        .site-reg-search-form .form-group {
-            margin-bottom: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .site-reg-search-form .form-select {
-            position: relative;
-            z-index: 2;
-            min-width: 100%;
-        }
-
-        .site-reg-search-form .form-actions {
-            display: flex;
-            gap: var(--spacing-sm);
-            justify-content: flex-end;
-        }
-
-        @media (max-width: 768px) {
-            .site-reg-search-form {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* 工具列 */
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-md);
-            flex-wrap: wrap;
-            gap: var(--spacing-sm);
-        }
-
-        .toolbar-left, .toolbar-right {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        /* 狀態標籤 */
-        .reg-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        /* 報名狀態 */
-        .reg-status.registered {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .reg-status.cancelled {
-            background-color: #e2e3e5;
-            color: #6c757d;
-        }
-
-        /* 繳費狀態 */
-        .reg-status.free {
-            background-color: #e8f4fd;
-            color: #1565c0;
-        }
-
-        .reg-status.paid {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .reg-status.unpaid {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-
-        .reg-status.refund-pending {
-            background-color: #ffeeba;
-            color: #856404;
-        }
-
-        .reg-status.refunded {
-            background-color: #cce5ff;
-            color: #004085;
-        }
-
-        /* 通知設定 */
-        .notification-settings {
-            padding: var(--spacing-sm);
-        }
-
-        .notification-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: var(--spacing-md);
-            border-bottom: 1px solid #eee;
-        }
-
-        .notification-item:last-child {
-            border-bottom: none;
-        }
-
-        .notification-info {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-        }
-
-        .notification-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background-color: #e3f2fd;
-            color: #1976d2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .notification-text {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .notification-title {
-            font-weight: 500;
-            color: #333;
-        }
-
-        .notification-desc {
-            font-size: 12px;
-            color: #999;
-        }
-
-        /* 活動資訊卡片 */
-        .event-info-card {
-            background: var(--color-white);
-            border-radius: var(--border-radius-md);
-            box-shadow: var(--shadow-sm);
-            padding: var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .event-info-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .event-info-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .event-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
-        }
-
-        .event-info-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .event-info-label {
-            font-size: 12px;
-            color: #999;
-        }
-
-        .event-info-value {
-            font-size: 14px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        /* -----------------------------------------------------
-           修正：補上 Modal Overlay 樣式
-           ----------------------------------------------------- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        /* 覆寫 modal.css 的設定，使其適應 modal-overlay 結構 */
-        .modal-overlay .modal {
-            position: relative;
-            top: auto;
-            left: auto;
-            right: auto;
-            bottom: auto;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-            background: #fff; /* 確保有背景色 */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-overlay.active .modal {
-            transform: translateY(0);
-        }
-
-        /* 確保 modal-body 可以滾動且不會溢出視窗 */
-        .modal-overlay .modal-body {
-            overflow-y: auto;
-            max-height: calc(90vh - 120px);
-        }
-    </style>
 </body>
 </html>
