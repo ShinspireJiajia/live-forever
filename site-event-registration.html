@@ -73,11 +73,21 @@
                         <input type="text" class="form-control" id="searchUnit" placeholder="請輸入戶別">
                     </div>
                     <div class="form-group">
+                        <label class="form-label">繳費狀態</label>
+                        <select class="form-select" id="searchPaymentStatus">
+                            <option value="">全部</option>
+                            <option value="免費">免費</option>
+                            <option value="未繳費">未繳費</option>
+                            <option value="已繳費">已繳費</option>
+                            <option value="待退款">待退款</option>
+                            <option value="退款完成">退款完成</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">報名狀態</label>
-                        <select class="form-select" id="searchStatus">
+                        <select class="form-select" id="searchRegStatus">
                             <option value="">全部</option>
                             <option value="已報名">已報名</option>
-                            <option value="待繳費">待繳費</option>
                             <option value="已取消">已取消</option>
                         </select>
                     </div>
@@ -124,7 +134,8 @@
                             <th width="120">聯絡電話</th>
                             <th width="70">報名人數</th>
                             <th width="100">金額</th>
-                            <th width="90">狀態</th>
+                            <th width="90">繳費狀態</th>
+                            <th width="90">報名狀態</th>
                             <th width="130">報名日期</th>
                             <th width="160">操作</th>
                         </tr>
@@ -489,13 +500,21 @@
         /* 查詢表單 */
         .site-reg-search-form {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: var(--spacing-md);
             align-items: end;
         }
 
         .site-reg-search-form .form-group {
             margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .site-reg-search-form .form-select {
+            position: relative;
+            z-index: 2;
+            min-width: 100%;
         }
 
         .site-reg-search-form .form-actions {
@@ -536,19 +555,41 @@
             font-weight: 500;
         }
 
+        /* 報名狀態 */
         .reg-status.registered {
             background-color: #d4edda;
             color: #155724;
         }
 
-        .reg-status.pending {
+        .reg-status.cancelled {
+            background-color: #e2e3e5;
+            color: #6c757d;
+        }
+
+        /* 繳費狀態 */
+        .reg-status.free {
+            background-color: #e8f4fd;
+            color: #1565c0;
+        }
+
+        .reg-status.paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .reg-status.unpaid {
             background-color: #fff3cd;
             color: #856404;
         }
 
-        .reg-status.cancelled {
-            background-color: #e2e3e5;
-            color: #6c757d;
+        .reg-status.refund-pending {
+            background-color: #ffeeba;
+            color: #856404;
+        }
+
+        .reg-status.refunded {
+            background-color: #cce5ff;
+            color: #004085;
         }
 
         /* 通知設定 */
@@ -665,12 +706,14 @@
             justify-content: center;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
             transition: all 0.3s ease;
         }
 
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
         }
 
         /* 覆寫 modal.css 的設定，使其適應 modal-overlay 結構 */

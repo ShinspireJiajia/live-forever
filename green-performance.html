@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>物業預約管理系統</title>
+    <title>綠海養護預約管理</title>
     <link rel="stylesheet" href="css/green-performance.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
         </div>
         
         <header>
-            <h1>物業預約管理系統</h1>
+            <h1>綠海養護預約管理</h1>
         </header>
         
         <!--<div class="tab-nav">
@@ -24,20 +24,24 @@
         
         <!-- 預約管理頁籤 -->
         <div id="reservationTab" class="tab-content active">
+            <!-- 總攬計數區塊 -->
+            <!-- 狀態對應說明：
+                 待執行 = green-reservation.html 的「預約中 (pending)」+「預約完成 (confirmed)」
+                 已完成 = green-reservation.html 的「已完成 (completed)」
+            -->
             <div class="summary-section">
                 <div class="summary-card">
                     <h3>本月預約總數</h3>
                     <div class="value">18</div>
                 </div>
                 <div class="summary-card">
-                    <h3>待執行預約</h3>
+                    <h3>待執行</h3>
                     <div class="value">9</div>
                 </div>
                 <div class="summary-card">
-                    <h3>已執行預約</h3>
+                    <h3>已完成</h3>
                     <div class="value">9</div>
                 </div>
-
                 <div class="summary-card">
                     <h3>即將到期合約</h3>
                     <div class="value">2</div>
@@ -55,11 +59,11 @@
                 </div>
                 <div class="legend-item">
                     <div class="legend-color legend-pending"></div>
-                    <span>已預約未執行</span>
+                    <span>待執行</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color legend-completed"></div>
-                    <span>已預約已執行</span>
+                    <span>已完成</span>
                 </div>
             </div>
             
@@ -104,8 +108,8 @@
                         <label for="reservationStatusFilter">預約狀態</label>
                         <select id="reservationStatusFilter">
                             <option value="">全部</option>
-                            <option value="pending">已預約未執行</option>
-                            <option value="completed">已預約已執行</option>
+                            <option value="pending">待執行</option>
+                            <option value="completed">已完成</option>
                         </select>
                     </div>
                     <div class="filter-item">
@@ -169,7 +173,11 @@
                     <tbody>
                         <!-- 一般戶別預約資料 -->
                         <tr>
-                            <td>A1-5</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">A1-5</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-001')">CT-2025-001</span></td>
                             <td><span class="status-badge status-active">有效</span></td>
                             <td>2025/12/31</td>
@@ -187,7 +195,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -215,7 +223,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -233,7 +241,12 @@
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>B2-3</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">B2-3</span>
+                                    <span class="unit-tag">B2-4</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-002')">CT-2025-002</span></td>
                             <td><span class="status-badge status-expiring">即將到期</span></td>
                             <td class="contract-expiring">2025/10/31</td>
@@ -249,7 +262,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -273,7 +286,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -297,7 +310,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -323,7 +336,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -341,7 +354,11 @@
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>C3-7</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">C3-7</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-003')">CT-2023-003</span></td>
                             <td><span class="status-badge status-expired">已逾期</span></td>
                             <td class="contract-expired">2024/10/31</td>
@@ -358,7 +375,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -383,7 +400,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -408,7 +425,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -428,7 +445,16 @@
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>D4-2</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">D4-1</span>
+                                    <span class="unit-tag">D4-2</span>
+                                    <span class="unit-tag">D4-3</span>
+                                    <span class="unit-more">+2
+                                        <span class="unit-more-tooltip">D4-4, D4-5</span>
+                                    </span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-004')">CT-2025-004</span></td>
                             <td><span class="status-badge status-active">有效</span></td>
                             <td>2026/08/30</td>
@@ -452,7 +478,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -470,7 +496,11 @@
                             <td class="reservation-available">-</td>
                         </tr>
                         <tr>
-                            <td>E5-9</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">E5-9</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-005')">CT-2025-005</span></td>
                             <td><span class="status-badge status-active">有效</span></td>
                             <td>2026/09/30</td>
@@ -489,7 +519,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -514,7 +544,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -534,7 +564,12 @@
                             <td class="reservation-available">-</td>
                         </tr>
                         <tr>
-                            <td>E5-10</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">E5-10</span>
+                                    <span class="unit-tag">E5-11</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-006')">CT-2025-006</span></td>
                             <td><span class="status-badge status-expiring">即將到期</span></td>
                             <td class="contract-expiring">2025/10/15</td>
@@ -555,7 +590,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -580,7 +615,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -598,7 +633,11 @@
                             <td>-</td>
                         </tr>
                         <tr>
-                            <td>E5-11</td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag">E5-11</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-006')">CT-2025-006</span></td>
                             <td><span class="status-badge status-expiring">即將到期</span></td>
                             <td class="contract-expiring">2025/10/15</td>
@@ -619,7 +658,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -644,7 +683,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -663,7 +702,11 @@
                         </tr>
                         <!-- 公設預約資料 -->
                         <tr class="facility-row">
-                            <td><span class="facility-id" onclick="openFacilityInfo('F-大廳')">F-大廳</span></td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag facility" onclick="openFacilityInfo('F-大廳')">F-大廳</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-F01')">CT-2025-F01</span></td>
                             <td><span class="status-badge status-active">有效</span></td>
                             <td>2025/12/30</td>
@@ -679,7 +722,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -707,7 +750,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -735,7 +778,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -762,7 +805,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -791,7 +834,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -818,7 +861,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -846,7 +889,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -865,7 +908,11 @@
                             </td>
                         </tr>
                         <tr class="facility-row">
-                            <td><span class="facility-id" onclick="openFacilityInfo('F-健身房')">F-健身房</span></td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag facility" onclick="openFacilityInfo('F-健身房')">F-健身房</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-F02')">CT-2025-F02</span></td>
                             <td><span class="status-badge status-active">有效</span></td>
                             <td>2025/12/30</td>
@@ -882,7 +929,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -913,7 +960,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -942,7 +989,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -963,7 +1010,11 @@
                             <td class="reservation-available">-</td>
                         </tr>
                         <tr class="facility-row">
-                            <td><span class="facility-id" onclick="openFacilityInfo('F-游泳池')">F-游泳池</span></td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag facility" onclick="openFacilityInfo('F-游泳池')">F-游泳池</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-F03')">CT-2025-F03</span></td>
                             <td><span class="status-badge status-active">有效</span></td>
                             <td>2025/12/30</td>
@@ -982,7 +1033,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1010,7 +1061,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1037,7 +1088,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1065,7 +1116,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1093,7 +1144,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1112,7 +1163,11 @@
                             </td>
                         </tr>
                         <tr class="facility-row">
-                            <td><span class="facility-id" onclick="openFacilityInfo('F-會議室')">F-會議室</span></td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag facility" onclick="openFacilityInfo('F-會議室')">F-會議室</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-F04')">CT-2023-F04</span></td>
                             <td><span class="status-badge status-expired">已逾期</span></td>
                             <td>2023/12/30</td>
@@ -1130,7 +1185,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1158,7 +1213,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1186,7 +1241,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1213,7 +1268,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1240,7 +1295,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1267,7 +1322,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1288,7 +1343,11 @@
                             <td class="reservation-available">-</td>
                         </tr>
                         <tr class="facility-row">
-                            <td><span class="facility-id" onclick="openFacilityInfo('F-兒童遊戲區')">F-兒童遊戲區</span></td>
+                            <td>
+                                <div class="unit-tags">
+                                    <span class="unit-tag facility" onclick="openFacilityInfo('F-兒童遊戲區')">F-兒童遊戲區</span>
+                                </div>
+                            </td>
                             <td><span class="contract-id" onclick="viewContract('CT-2023-F05')">CT-2023-F05</span></td>
                             <td><span class="status-badge status-expired">已逾期</span></td>
                             <td>2023/12/30</td>
@@ -1308,7 +1367,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約已執行</div>
+                                            <div class="tooltip-value">已完成</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>
@@ -1339,7 +1398,7 @@
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約狀態:</div>
-                                            <div class="tooltip-value">已預約未執行</div>
+                                            <div class="tooltip-value">待執行</div>
                                         </div>
                                         <div class="tooltip-row">
                                             <div class="tooltip-label">預約時間:</div>

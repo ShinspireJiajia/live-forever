@@ -258,6 +258,10 @@
                                 <div class="form-col-4">
                                     <div class="form-group">
                                         <label class="form-label required">名額上限</label>
+                                        <label class="checkbox-option" style="margin-bottom: 8px;">
+                                            <input type="checkbox" id="formNoLimit">
+                                            <span class="checkbox-text">無名額上限</span>
+                                        </label>
                                         <div class="input-with-suffix">
                                             <input type="number" class="form-control" id="formMaxSlots" min="1" value="50" required>
                                             <span class="input-suffix">人</span>
@@ -280,7 +284,7 @@
                             <div class="form-row">
                                 <div class="form-col-4">
                                     <div class="form-group">
-                                        <label class="form-label">允許攜伴人數</label>
+                                        <label class="form-label">允許單戶報名人數上限</label>
                                         <div class="input-with-suffix">
                                             <input type="number" class="form-control" id="formMaxCompanion" min="0" max="10" value="0">
                                             <span class="input-suffix">人</span>
