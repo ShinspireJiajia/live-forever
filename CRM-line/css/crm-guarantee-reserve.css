@@ -1,0 +1,493 @@
+/* ============================================
+   預約對保服務表單樣式
+   根據 Figma 設計稿 (node-id: 29:1464)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-border-input: #b3b09e;
+  --color-required: #e06060;
+  --color-hint-bg: rgba(179, 176, 158, 0.16);
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-guarantee-reserve {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列（凍結固定） --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* --- 主要內容區域 --- */
+.form-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 80px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 提示 + 付款資訊 + 表單區塊 --- */
+.form-hint-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* --- 提示訊息 --- */
+.form-hint {
+  background-color: var(--color-hint-bg);
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hint-title {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  margin: 0;
+}
+
+/* --- 付款資訊卡片 --- */
+.payment-info {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.payment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+.payment-label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+}
+
+.payment-amount {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--color-gold);
+  text-align: right;
+}
+
+.payment-account {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: right;
+}
+
+.payment-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e5e5;
+}
+
+.payment-deadline {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  padding: 0 16px;
+  margin: 0;
+  line-height: normal;
+}
+
+.deadline-date {
+  font-weight: 500;
+  color: var(--color-gold);
+}
+
+/* --- 表單欄位 --- */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.form-label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  margin: 0;
+}
+
+.form-label .required {
+  color: var(--color-required);
+}
+
+/* --- 下拉選單 --- */
+.form-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-select {
+  width: 100%;
+  height: 47px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  padding-right: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.form-select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 9px;
+  background: url('../assets/select-arrow.svg') no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+}
+
+/* --- 日期輸入框 --- */
+.form-date-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-date {
+  width: 100%;
+  height: 47px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  padding-right: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+}
+
+.form-date:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.form-date-wrapper .calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.form-date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* --- 多行文字輸入 --- */
+.form-textarea {
+  width: 100%;
+  height: 96px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.form-textarea::placeholder {
+  color: var(--color-text-dark);
+  opacity: 0.7;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* --- 填寫對保問卷按鈕 --- */
+.questionnaire-btn-wrapper {
+  width: 100%;
+  padding-top: 8px;
+}
+
+.btn-questionnaire {
+  width: 100%;
+  background-color: var(--color-gold);
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-questionnaire:hover {
+  opacity: 0.9;
+}
+
+.btn-questionnaire:active {
+  opacity: 0.8;
+}
+
+.btn-questionnaire .star-icon {
+  width: 16px;
+  height: 15px;
+  display: block;
+}
+
+/* 問卷已填寫狀態：實心星星 */
+.btn-questionnaire.filled .star-icon {
+  filter: drop-shadow(0 0 0 #fff);
+}
+
+/* --- 底部按鈕區 --- */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 0 20px;
+}
+
+.form-actions .btn {
+  flex: 1;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.form-actions .btn:hover {
+  opacity: 0.9;
+}
+
+.form-actions .btn:active {
+  opacity: 0.8;
+}
+
+.btn-leave {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input) !important;
+  color: var(--color-text-dark);
+}
+
+.btn-confirm {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+/* --- 驗證錯誤 --- */
+.form-group.has-error .form-select,
+.form-group.has-error .form-date,
+.form-group.has-error .form-textarea {
+  border-color: var(--color-required);
+}
+
+.form-error-msg {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--color-required);
+  margin: 4px 0 0;
+  line-height: normal;
+}
+
+/* --- 響應式設計 --- */
+@media (min-width: 768px) {
+  .crm-guarantee-reserve {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .crm-guarantee-reserve {
+    max-width: 420px;
+  }
+  .top-bar {
+    max-width: 420px;
+  }
+}

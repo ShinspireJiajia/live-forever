@@ -1,0 +1,492 @@
+/* ============================================
+   預約客變服務表單樣式
+   根據 Figma 設計稿 (node-id: 1:6213)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  /* 主要色彩 */
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-border-input: #b3b09e;
+  --color-required: #e06060;
+
+  /* 字型 */
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 頁面整體 --- */
+.crm-reserve-form {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列 --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(58, 66, 70, 0.8);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 主要內容區域 --- */
+.form-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 80px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 提示訊息 --- */
+.form-hint {
+  background-color: rgba(179, 176, 158, 0.16);
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-hint p {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  margin: 0;
+}
+
+/* --- 表單欄位區域 --- */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* --- 表單群組 --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+/* 欄位標籤 */
+.form-label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  margin: 0;
+}
+
+.form-label .required {
+  color: var(--color-required);
+}
+
+/* --- 下拉選單 --- */
+.form-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-select {
+  width: 100%;
+  height: 47px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  padding-right: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* 下拉箭頭圖示 */
+.form-select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 9px;
+  background: url('../assets/select-arrow.svg') no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+}
+
+/* --- 日期輸入框 --- */
+.form-date-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-date {
+  width: 100%;
+  height: 47px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  padding-right: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+}
+
+.form-date:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* 日曆圖示 */
+.form-date-wrapper .calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* 隱藏原生日期選擇器圖示 */
+.form-date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* --- 一般輸入框 --- */
+.form-input {
+  width: 100%;
+  height: 47px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* --- 文字區域 --- */
+.form-textarea {
+  width: 100%;
+  height: 96px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.form-textarea::placeholder {
+  color: var(--color-text-dark);
+  opacity: 0.7;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* --- Radio 按鈕群組 --- */
+.radio-group {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.radio-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* 隱藏原生 radio */
+.radio-item input[type="radio"] {
+  display: none;
+}
+
+/* 自訂 radio 外觀 */
+.radio-custom {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border-input);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+/* 選中狀態 */
+.radio-item input[type="radio"]:checked + .radio-custom {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+/* 選中時的圓點 */
+.radio-custom .radio-dot {
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+
+.radio-item input[type="radio"]:checked + .radio-custom .radio-dot {
+  display: block;
+}
+
+/* Radio 標籤文字 */
+.radio-label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 底部按鈕區 --- */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 0 20px;
+}
+
+/* --- 欄位驗證錯誤提示 --- */
+.form-group.has-error .form-select,
+.form-group.has-error .form-input,
+.form-group.has-error .form-date,
+.form-group.has-error .form-textarea {
+  border-color: var(--color-required);
+}
+
+.form-group.has-error .radio-custom {
+  border-color: var(--color-required);
+}
+
+.form-error-msg {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--color-required);
+  margin: 4px 0 0;
+  line-height: normal;
+}
+
+.form-actions .btn {
+  flex: 1;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.form-actions .btn:hover {
+  opacity: 0.9;
+}
+
+.form-actions .btn:active {
+  opacity: 0.8;
+}
+
+/* 離開按鈕（外框樣式） */
+.btn-leave {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input) !important;
+  color: var(--color-text-dark);
+}
+
+/* 確認建立按鈕（金色填滿） */
+.btn-confirm {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+/* --- 響應式設計 --- */
+@media (min-width: 768px) {
+  .crm-reserve-form {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .crm-reserve-form {
+    max-width: 420px;
+  }
+  .top-bar {
+    max-width: 420px;
+  }
+}

@@ -1,0 +1,628 @@
+/* ============================================
+   CRM 首頁樣式
+   根據 Figma 設計稿 (node-id: 1:2610)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-white: #ffffff;
+  --color-badge-red: #e06060;
+  --color-muted-bg: rgba(179, 176, 158, 0.12);
+  --color-light-bg: #f6f6f3;
+  --color-shortcut-bg: rgba(179, 176, 158, 0.16);
+  --color-status-done-bg: #dcf1eb;
+  --color-status-processing-bg: #dce6f1;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+  --font-family-roboto: "Roboto", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-index {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部標題列 --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 8px;
+  background-color: var(--color-page-bg);
+}
+
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.title-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  padding: 73px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ======================================
+   快捷功能區
+   ====================================== */
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 我要報修卡片 --- */
+.repair-card {
+  background-color: var(--color-text-dark);
+  border-radius: 12px;
+  padding: 20px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.repair-icon-wrap {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.repair-gear-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.repair-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 三個快捷入口 --- */
+.shortcut-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.shortcut-card {
+  flex: 1;
+  background-color: var(--color-shortcut-bg);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.shortcut-icon-wrap {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcut-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* 會員中心圖示為 24x24，需居中於 40x40 容器內 */
+.shortcut-icon.icon-sm {
+  width: 24px;
+  height: 24px;
+}
+
+.shortcut-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 森林聚落卡片 --- */
+.forest-card {
+  background-color: var(--color-shortcut-bg);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.forest-icon-wrap {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forest-icon {
+  width: 40px;
+  height: 28px;
+  object-fit: cover;
+}
+
+.forest-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* ======================================
+   服務九宮格卡片
+   ====================================== */
+.service-grid-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-grid-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* 收合狀態下只顯示兩列高度（～142px） */
+.service-grid-inner.collapsed {
+  max-height: 142px;
+}
+
+/* 展開狀態 */
+.service-grid-inner.expanded {
+  max-height: 500px;
+}
+
+.service-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.service-row.row-hidden {
+  /* 由 JS 控制 display */
+}
+
+.service-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.service-item.placeholder {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.service-icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+}
+
+.service-icon-circle.bg-muted {
+  background-color: var(--color-muted-bg);
+}
+
+.service-icon-circle.bg-light {
+  background-color: var(--color-light-bg);
+}
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* 通知徽章 */
+.badge {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: var(--color-badge-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge span {
+  font-family: var(--font-family-roboto);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.service-label {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  width: 72px;
+  line-height: normal;
+}
+
+/* 可預約標籤 */
+.tag-reservable {
+  position: absolute;
+  top: -12px;
+  right: -4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 12px;
+  background-color: var(--color-status-done-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-reservable span {
+  font-family: var(--font-family-roboto), var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text-dark);
+  text-align: center;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+/* --- 查看更多 / 收合 按鈕 --- */
+.btn-expand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* 漸層遮罩效果（收合時） */
+.btn-expand.has-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    var(--color-white) 80%
+  );
+  padding-top: 24px;
+  margin-top: -24px;
+  position: relative;
+  z-index: 2;
+}
+
+.expand-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-gold);
+  text-align: center;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+.expand-arrow {
+  width: 16px;
+  height: 9px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.expand-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* ======================================
+   報修表單進度區
+   ====================================== */
+.repair-progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 區段標題 --- */
+.section-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.section-icon-group {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-icon-main {
+  width: 15.6px;
+  height: 18px;
+  position: absolute;
+  left: 4px;
+  top: 2.5px;
+}
+
+.section-icon-gears {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.gear-small,
+.gear-large {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.section-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 報修卡片 --- */
+.repair-order-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.order-number {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.order-status {
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-status span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.status-done {
+  background-color: var(--color-status-done-bg);
+}
+
+.status-processing {
+  background-color: var(--color-status-processing-bg);
+}
+
+/* 訂單資訊 */
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.order-info p {
+  margin: 0;
+}
+
+.info-label {
+  font-weight: 500;
+}
+
+.info-value {
+  font-weight: 400;
+}
+
+/* 內容查看按鈕 */
+.btn-view-order {
+  width: 100%;
+  background-color: var(--color-gold);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-view-order span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  text-align: center;
+  line-height: normal;
+}
+
+.btn-view-order:hover {
+  opacity: 0.9;
+}
+
+.btn-view-order:active {
+  opacity: 0.8;
+}
+
+/* ======================================
+   響應式設計
+   ====================================== */
+@media (min-width: 768px) {
+  .crm-index {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .crm-index {
+    max-width: 420px;
+  }
+  .top-bar {
+    max-width: 420px;
+  }
+}

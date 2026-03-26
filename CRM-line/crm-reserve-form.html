@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>預約客變服務</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-reserve-form.css">
+</head>
+<body>
+
+  <!-- 預約客變服務頁面容器 -->
+  <div class="crm-reserve-form" data-node-id="1:6213">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:6214">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列 -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" data-node-id="1:824" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="1:6266">預約客變服務</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="#" data-node-id="193:1313" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="form-content" data-node-id="1:6215">
+
+      <!-- 提示訊息 -->
+      <div class="form-hint" data-node-id="1:6216">
+        <p data-node-id="1:6217">您可建立一筆客變服務</p>
+      </div>
+
+      <!-- 表單欄位 -->
+      <form class="form-fields" id="reserveForm" data-node-id="1:6218">
+
+        <!-- 建案 -->
+        <div class="form-group" data-node-id="1:6219">
+          <p class="form-label" data-node-id="1:6220">
+            建案<span class="required">＊</span>
+          </p>
+          <div class="form-select-wrapper">
+            <select class="form-select" id="project" name="project" required data-node-id="1:6221">
+              <option value="">請選擇建案</option>
+              <option value="greenocean" selected>綠海建案</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 戶別 -->
+        <div class="form-group" data-node-id="1:6222">
+          <p class="form-label" data-node-id="1:6223">
+            戶別<span class="required">＊</span>
+          </p>
+          <div class="form-select-wrapper">
+            <select class="form-select" id="unit" name="unit" required data-node-id="1:6224">
+              <option value="">請選擇戶別</option>
+              <option value="B1" selected>B1</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 日期 -->
+        <div class="form-group" data-node-id="1:6228">
+          <p class="form-label" data-node-id="1:6229">
+            日期<span class="required">＊</span>
+          </p>
+          <div class="form-date-wrapper">
+            <input class="form-date" type="date" id="date" name="date" value="2025-08-23" required data-node-id="1:6230">
+            <img class="calendar-icon" src="assets/calendar-icon.svg" alt="">
+          </div>
+        </div>
+
+        <!-- 時段 -->
+        <div class="form-group" data-node-id="1:6239">
+          <p class="form-label" data-node-id="1:6240">
+            時段<span class="required">＊</span>
+          </p>
+          <div class="form-select-wrapper">
+            <select class="form-select" id="timeSlot" name="timeSlot" required data-node-id="1:6241">
+              <option value="">請選擇時段</option>
+              <option value="10:00" selected>10:00</option>
+              <option value="14:00">14:00</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 出席人數 -->
+        <div class="form-group" data-node-id="1:6242">
+          <p class="form-label" data-node-id="1:6243">
+            出席人數<span class="required">＊</span>
+          </p>
+          <input class="form-input" type="number" id="attendees" name="attendees" value="3" min="1" required data-node-id="1:6244">
+        </div>
+
+        <!-- 設計師出席 -->
+        <div class="form-group" data-node-id="1:6245">
+          <p class="form-label" data-node-id="1:6246">
+            設計師出席<span class="required">＊</span>
+          </p>
+          <div class="radio-group" data-node-id="1:6247">
+            <label class="radio-item" data-node-id="1:6248">
+              <input type="radio" name="designerAttend" value="yes">
+              <span class="radio-custom">
+                <img class="radio-dot" src="assets/radio-dot.svg" alt="">
+              </span>
+              <span class="radio-label" data-node-id="1:6250">是</span>
+            </label>
+            <label class="radio-item" data-node-id="1:6251">
+              <input type="radio" name="designerAttend" value="no" checked>
+              <span class="radio-custom">
+                <img class="radio-dot" src="assets/radio-dot.svg" alt="">
+              </span>
+              <span class="radio-label" data-node-id="1:6253">否</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 備註事項 -->
+        <div class="form-group" data-node-id="1:6254">
+          <p class="form-label" data-node-id="1:6255">備註事項</p>
+          <textarea class="form-textarea" id="notes" name="notes" placeholder="請輸入備註事項" data-node-id="1:6256"></textarea>
+        </div>
+
+        <!-- 變更需求 -->
+        <div class="form-group" data-node-id="1:6257">
+          <p class="form-label" data-node-id="1:6258">變更需求</p>
+          <textarea class="form-textarea" id="changeRequest" name="changeRequest" placeholder="請輸入變更需求" data-node-id="1:6259"></textarea>
+        </div>
+
+      </form>
+
+      <!-- 底部按鈕 -->
+      <div class="form-actions" data-node-id="1:6260">
+        <button class="btn btn-leave" id="btnLeave" data-node-id="1:6261">
+          離開
+        </button>
+        <button class="btn btn-confirm" id="btnConfirm" data-node-id="1:6263">
+          確認建立
+        </button>
+      </div>
+
+    </div>
+    <!-- /form-content -->
+
+  </div>
+  <!-- /crm-reserve-form -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-reserve-form.js"></script>
+
+</body>
+</html>

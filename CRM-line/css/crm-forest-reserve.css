@@ -1,0 +1,506 @@
+/* ============================================
+   森林聚落報名預約頁面樣式
+   根據 Figma 設計稿
+   付費版 node-id: 1:4606
+   免費版 node-id: 197:1813
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-text-dimmed: rgba(58, 66, 70, 0.8);
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-border-input: #b3b09e;
+  --color-notice-bg: rgba(179, 176, 158, 0.16);
+  --color-required: #e06060;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+  --font-family-roboto: "Roboto", sans-serif;
+}
+
+/* --- 全域重置 --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 頁面整體容器 --- */
+.crm-forest-reserve {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列 --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dimmed);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 主要內容區域 --- */
+.reserve-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  overflow-y: auto;
+  padding: 81px 20px 100px;
+}
+
+/* --- 活動資訊卡片 --- */
+.reserve-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* 活動圖片 */
+.reserve-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 1080;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+.reserve-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- 卡片內容區 --- */
+.reserve-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px 20px;
+}
+
+/* 狀態標籤與活動名稱 */
+.reserve-event-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 24px;
+  border-radius: 2px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: normal;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.status-available {
+  background-color: var(--color-gold);
+}
+
+.reserve-event-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+  line-height: normal;
+  margin: 0;
+}
+
+/* --- 活動詳細資訊 --- */
+.reserve-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: normal;
+}
+
+.meta-icon {
+  width: 14px;
+  height: 15.556px;
+  flex-shrink: 0;
+}
+
+.meta-icon-location {
+  height: 18px;
+}
+
+.meta-row span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.meta-price-symbol {
+  font-family: var(--font-family-roboto);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  text-align: center;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+/* --- 限制提示 --- */
+.reserve-notice {
+  background-color: var(--color-notice-bg);
+  border-radius: 8px;
+  padding: 12px 8px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+}
+
+/* --- 表單區域 --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.required {
+  color: var(--color-required);
+}
+
+/* 下拉選單 */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-select {
+  width: 100%;
+  height: 47px;
+  background: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  padding: 12px;
+  padding-right: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 9px;
+  pointer-events: none;
+}
+
+/* --- Radio 按鈕組 --- */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* 隱藏原生 radio */
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 自訂 radio 圓圈 */
+.radio-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border-input);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.radio-dot {
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+
+/* 選中狀態 */
+.radio-input:checked + .radio-circle {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+.radio-input:checked + .radio-circle .radio-dot {
+  display: block;
+}
+
+.radio-text {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 分隔線 --- */
+.reserve-divider {
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* --- 費用摘要 --- */
+.reserve-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px 16px;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 底部操作按鈕 --- */
+.reserve-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 20px 24px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+  pointer-events: none;
+}
+
+.btn-submit {
+  pointer-events: auto;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-gold);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.btn-submit:active {
+  opacity: 0.85;
+}
+
+/* --- 響應式設計 --- */
+
+/* 平板裝置 */
+@media (min-width: 768px) {
+  .crm-forest-reserve {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .reserve-footer {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* 桌面裝置 */
+@media (min-width: 1024px) {
+  .crm-forest-reserve {
+    max-width: 420px;
+  }
+
+  .top-bar {
+    max-width: 420px;
+  }
+
+  .reserve-footer {
+    max-width: 420px;
+  }
+}

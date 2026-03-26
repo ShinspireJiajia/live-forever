@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 款項明細</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-forest-payment-result.css">
+</head>
+<body>
+
+  <!-- 款項明細結果頁面容器 -->
+  <div class="crm-forest-payment-result">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列 -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title">款項明細</h1>
+    </div>
+
+    <!-- 結果內容區域 -->
+    <div class="result-content">
+
+      <!-- 結果提示卡片 -->
+      <div class="result-card">
+        <!-- 狀態圖示 -->
+        <img class="result-icon" id="resultIcon" src="assets/icon-payment-success.svg" alt="">
+        <!-- 狀態標題 -->
+        <p class="result-title" id="resultTitle">付款完成</p>
+        <!-- 錯誤訊息（僅失敗時顯示） -->
+        <p class="result-message" id="resultMessage" style="display: none;"></p>
+      </div>
+
+      <!-- 確認按鈕 -->
+      <button class="btn-confirm" id="btnConfirm">確認</button>
+
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/crm-forest-payment-result.js"></script>
+</body>
+</html>

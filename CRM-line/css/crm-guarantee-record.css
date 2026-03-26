@@ -1,0 +1,809 @@
+/* ============================================
+   對保服務 - 檢視紀錄頁面樣式
+   根據 Figma 設計稿 (node-id: 29:1665)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-border-input: #b3b09e;
+  --color-hint-bg: rgba(179, 176, 158, 0.16);
+  --color-time-text: #989792;
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- 頁面整體 --- */
+.crm-guarantee-record {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列（凍結固定） --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(58, 66, 70, 0.8);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 主要內容區域 --- */
+.record-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 80px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 預約詳情卡片 --- */
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-card .card-number {
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* 詳情列表 */
+.detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-row {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  margin: 0;
+}
+
+.detail-row .detail-label {
+  font-weight: 500;
+}
+
+/* 備註事項 */
+.detail-note {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--color-text-dark);
+  font-size: 16px;
+  line-height: normal;
+}
+
+.note-title {
+  font-weight: 500;
+  margin: 0;
+}
+
+.note-text {
+  font-weight: 400;
+  margin: 0;
+}
+
+/* 查看已填寫的問卷連結 */
+.survey-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.survey-link span {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-gold);
+  line-height: normal;
+}
+
+.survey-link .link-arrow {
+  width: 6px;
+  height: 12px;
+  display: block;
+}
+
+/* 卡片分隔線 */
+.card-divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  margin: 0;
+}
+
+.card-divider img {
+  display: block;
+  width: 100%;
+  height: 1px;
+}
+
+/* --- 簽名區域 --- */
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signature-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  margin: 0;
+}
+
+.signature-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+
+.signature-pad {
+  background-color: var(--color-hint-bg);
+  border: 1px dashed var(--color-border-input);
+  border-radius: 8px;
+  padding: 40px 8px;
+  cursor: pointer;
+  position: relative;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-pad.has-signature {
+  padding: 8px;
+  border-style: solid;
+}
+
+.signature-placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  opacity: 0.8;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+.signature-result {
+  display: block;
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* 簽名操作按鈕（卡片內） */
+.signature-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.signature-actions .btn {
+  flex: 1;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.signature-actions .btn:hover {
+  opacity: 0.9;
+}
+
+.btn-clear-inline {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input) !important;
+  color: var(--color-text-dark);
+}
+
+.btn-confirm-inline {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+/* --- 全螢幕橫向簽名遮罩 --- */
+.signature-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-overlay.active {
+  display: flex;
+}
+
+/* 在直向手機上旋轉 90° 呈現橫向簽名 */
+@media (orientation: portrait) {
+  .signature-overlay-inner {
+    transform: rotate(90deg);
+    width: 90vh;
+    height: 80vw;
+    max-height: 400px;
+  }
+}
+
+@media (orientation: landscape) {
+  .signature-overlay-inner {
+    width: 90vw;
+    height: 70vh;
+    max-width: 800px;
+    max-height: 400px;
+  }
+}
+
+.signature-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.signature-overlay-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+}
+
+.signature-canvas-wrap {
+  flex: 1;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.signature-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.signature-overlay-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.signature-overlay-actions .btn {
+  flex: 1;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  padding: 14px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.signature-overlay-actions .btn:hover {
+  opacity: 0.9;
+}
+
+.btn-clear {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input) !important;
+  color: var(--color-text-dark);
+}
+
+.btn-sign-confirm {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+/* --- 下載附件區 --- */
+.section-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.section-header .section-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.section-header .section-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.download-section,
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 附件項目 */
+.attachment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(179,176,158,0.04) 0%, rgba(179,176,158,0.04) 100%),
+              linear-gradient(90deg, #fff 0%, #fff 100%);
+}
+
+.attachment-item .file-name {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  margin: 0;
+}
+
+.attachment-item .download-btn {
+  width: 44px;
+  height: 42px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.attachment-item .download-btn img {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- 聯絡專員（聊天）區 --- */
+.chat-area {
+  background-color: var(--color-hint-bg);
+  border-radius: 12px;
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+/* 使用者訊息（靠右） */
+.chat-msg-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.chat-msg-user .msg-bubble {
+  background-color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  word-break: break-word;
+}
+
+.chat-msg-user .msg-time {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-time-text);
+  text-align: right;
+  padding: 0 12px;
+  margin: 0;
+}
+
+/* 專員訊息（靠左） */
+.chat-msg-agent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.chat-msg-agent .msg-bubble {
+  background-color: rgba(179, 176, 158, 0.32);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  word-break: break-word;
+}
+
+.chat-msg-agent .msg-sender {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-time-text);
+  padding: 0 12px;
+  margin: 0;
+}
+
+/* 聊天區內附件卡片需撐滿寬度 */
+.chat-msg-agent .attachment-item {
+  align-self: stretch;
+}
+
+/* --- 我要留言按鈕 --- */
+.btn-leave-message {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  background-color: var(--color-gold);
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.btn-leave-message:hover {
+  opacity: 0.9;
+}
+
+/* --- 我要留言彈窗 --- */
+.message-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.message-modal-overlay.active {
+  display: flex;
+}
+
+.message-modal {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 訊息輸入區 */
+.message-input-area {
+  background-color: var(--color-hint-bg);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.message-textarea {
+  width: 100%;
+  min-height: 48px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.message-textarea::placeholder {
+  color: rgba(58, 66, 70, 0.6);
+}
+
+/* 附件上傳區 */
+.message-upload-area {
+  background-color: var(--color-hint-bg);
+  border-radius: 8px;
+  padding: 8px 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-select-file {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background-color: #ffffff;
+  border: 1px solid var(--color-gold);
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  box-sizing: border-box;
+}
+
+.btn-select-file:hover {
+  opacity: 0.9;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(179,176,158,0.04) 0%, rgba(179,176,158,0.04) 100%),
+              linear-gradient(90deg, #fff 0%, #fff 100%);
+}
+
+.selected-file .file-name {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  margin: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-remove-file {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(224, 96, 96, 0.12);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px;
+}
+
+.btn-remove-file img {
+  width: 18px;
+  height: 20px;
+}
+
+.upload-hint {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+  margin: 0;
+}
+
+/* 彈窗操作按鈕 */
+.message-modal-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 8px;
+}
+
+.message-modal-actions .btn {
+  flex: 1;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.btn-modal-cancel {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-input) !important;
+  color: var(--color-text-dark);
+}
+
+.btn-modal-send {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+.message-modal-actions .btn:hover {
+  opacity: 0.9;
+}
+
+/* --- 響應式設計 --- */
+@media (min-width: 768px) {
+  .crm-guarantee-record {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .crm-guarantee-record {
+    max-width: 420px;
+  }
+  .top-bar {
+    max-width: 420px;
+  }
+}

@@ -1,0 +1,333 @@
+/* ============================================
+   客變服務頁面樣式
+   根據 Figma 設計稿 (node-id: 1:6175)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  /* 主要色彩 */
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-text-dark: #3a4246;
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-decoration: #b3b09e;
+
+  /* 按鈕 */
+  --color-btn-disabled-bg: rgba(217, 217, 217, 0.3);
+  --color-btn-disabled-border: rgba(217, 217, 217, 0.8);
+  --color-btn-outline-border: #b3b09e;
+
+  /* 狀態標籤 */
+  --color-status-bg: rgba(232, 177, 95, 0.12);
+  --color-status-text: #c58b36;
+
+  /* 字型 */
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 頁面整體 --- */
+.crm-custom-service {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列 --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(58, 66, 70, 0.8);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 主要內容區域 --- */
+.main-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  padding: 80px 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 預約按鈕 --- */
+.btn-reserve {
+  width: 100%;
+  background-color: var(--color-gold);
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.btn-reserve:hover {
+  opacity: 0.9;
+}
+
+.btn-reserve:active {
+  opacity: 0.8;
+}
+
+/* --- 服務卡片列表 --- */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 服務卡片 --- */
+.service-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 卡片標題列（狀態 + 編號） */
+.card-header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+}
+
+/* 狀態標籤 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background-color: var(--color-status-bg);
+  color: var(--color-status-text);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: normal;
+  justify-self: start;
+}
+
+/* 卡片編號 */
+.card-number {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-gold);
+  line-height: normal;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* 卡片資訊區 */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+}
+
+.card-info p {
+  margin: 0;
+}
+
+.card-info .label {
+  font-weight: 500;
+}
+
+/* 卡片操作按鈕區 */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.card-actions .btn {
+  flex: 1;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.card-actions .btn:hover {
+  opacity: 0.9;
+}
+
+.card-actions .btn:active {
+  opacity: 0.8;
+}
+
+/* 按鈕樣式：金色填滿 */
+.btn-gold {
+  background-color: var(--color-gold);
+  color: #ffffff;
+}
+
+/* 按鈕樣式：外框 */
+.btn-outline {
+  background-color: #ffffff;
+  border: 1px solid var(--color-btn-outline-border) !important;
+  color: var(--color-text-dark);
+}
+
+/* 按鈕樣式：禁用 (半透明) */
+.btn-disabled {
+  background-color: var(--color-btn-disabled-bg);
+  border: 1px solid var(--color-btn-disabled-border) !important;
+  color: var(--color-text-dark);
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* --- 響應式設計 --- */
+
+/* 手機裝置 (預設) */
+@media (min-width: 768px) {
+  .crm-custom-service {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* 平板以上置中顯示 */
+@media (min-width: 1024px) {
+  .crm-custom-service {
+    max-width: 420px;
+  }
+  .top-bar {
+    max-width: 420px;
+  }
+}

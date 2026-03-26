@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>對保服務</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-guarantee-service.css">
+</head>
+<body>
+
+  <!-- 對保服務頁面容器 -->
+  <div class="crm-guarantee-service" data-node-id="246:954">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="246:955">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（凍結區塊） -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" data-node-id="1:824" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="246:987">對保服務</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="#" data-node-id="246:988" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="246:956">
+
+      <!-- ====== 狀態一：服務尚未開放（無紀錄且未開放） ====== -->
+      <div class="state-locked" id="stateLocked" style="display: none;">
+        <div class="timeline-item">
+          <div class="item-title" style="color: #AEAEB2;">線上預約對保</div>
+          <div class="lock-box">
+            🔒 功能尚未開放，待通知後啟用
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== 狀態二：服務已開放但無紀錄 ====== -->
+      <div class="state-empty" id="stateEmpty" style="display: none;">
+        <!-- 預約對保服務按鈕 -->
+        <div style="width: 100%;" data-node-id="246:957">
+          <button class="btn-reserve" id="btnReserveEmpty" data-node-id="246:958">
+            預約對保服務
+          </button>
+        </div>
+        <!-- 空狀態插圖 -->
+        <div class="empty-state" data-node-id="246:1309">
+          <div class="empty-icon" data-node-id="246:1310">
+            <img src="assets/empty-record-icon.svg" alt="" data-node-id="246:1311">
+          </div>
+          <p class="empty-text" data-node-id="246:1316">無相關紀錄</p>
+        </div>
+      </div>
+
+      <!-- ====== 狀態三：有預約紀錄 ====== -->
+      <div class="state-has-records" id="stateHasRecords" style="display: none;">
+        <!-- 預約對保服務按鈕 -->
+        <div style="width: 100%;" data-node-id="246:957">
+          <button class="btn-reserve" id="btnReserve" data-node-id="246:958">
+            預約對保服務
+          </button>
+        </div>
+
+        <!-- 服務卡片列表 -->
+        <div class="card-list" data-node-id="246:960">
+
+          <!-- 卡片 1：預約中 -->
+          <div class="service-card" data-sort-date="2025-07-30 10:00" data-status="預約中" data-node-id="246:961">
+            <!-- 狀態標籤與案件編號 -->
+            <div class="card-header" data-node-id="246:962">
+              <span class="status-badge status-pending" data-node-id="246:963">預約中</span>
+              <span class="card-number" data-node-id="246:965">20250901-002</span>
+            </div>
+            <!-- 案件資訊 -->
+            <div class="card-info" data-node-id="246:966">
+              <p data-node-id="246:967">
+                <span class="label">建　　案</span>｜綠海建案 (A3-3)
+              </p>
+              <p data-node-id="246:968">
+                <span class="label">預約日期</span>｜2025/07/30 10:00
+              </p>
+            </div>
+            <!-- 操作按鈕 -->
+            <div class="card-actions" data-node-id="246:969">
+              <button class="btn btn-outline" data-action="view-record" data-node-id="246:970">
+                檢視紀錄
+              </button>
+            </div>
+          </div>
+
+          <!-- 卡片 2：已完成 -->
+          <div class="service-card" data-sort-date="2025-06-15 14:00" data-status="已完成" data-node-id="246:972">
+            <!-- 狀態標籤與案件編號 -->
+            <div class="card-header" data-node-id="246:974">
+              <span class="status-badge status-completed" data-node-id="246:976">已完成</span>
+              <span class="card-number" data-node-id="246:975">20250901-003</span>
+            </div>
+            <!-- 案件資訊 -->
+            <div class="card-info" data-node-id="246:973">
+              <p data-node-id="246:978">
+                <span class="label">建　　案</span>｜綠海建案 (A3-3)
+              </p>
+              <p data-node-id="246:979">
+                <span class="label">預約日期</span>｜2025/06/15 14:00
+              </p>
+            </div>
+            <!-- 操作按鈕 -->
+            <div class="card-actions" data-node-id="246:980">
+              <button class="btn btn-outline" data-action="view-record" data-node-id="246:982">
+                檢視紀錄
+              </button>
+              <button class="btn btn-gold" data-action="survey" data-node-id="246:984">
+                滿意度問卷
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /card-list -->
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-guarantee-service -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-guarantee-service.js"></script>
+
+</body>
+</html>

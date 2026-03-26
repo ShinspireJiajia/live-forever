@@ -1,0 +1,591 @@
+/* ============================================
+   森林聚落列表頁面樣式
+   根據 Figma 設計稿 (node-id: 1:4391)
+   ============================================ */
+
+/* --- CSS 變數定義 --- */
+:root {
+  /* 主要色彩 */
+  --color-page-bg: #f8f7f5;
+  --color-gold: #b8a676;
+  --color-gold-light: rgba(184, 166, 118, 0.2);
+  --color-text-dark: #3a4246;
+  --color-text-dimmed: rgba(58, 66, 70, 0.8);
+  --color-border-light: rgba(179, 176, 158, 0.2);
+  --color-border-input: #b3b09e;
+  --color-overlay: rgba(58, 66, 70, 0.4);
+  --color-status-full-bg: rgba(58, 66, 70, 0.8);
+
+  /* 字型 */
+  --font-family: "Noto Sans TC", "Microsoft JhengHei", "微軟正黑體", "PingFang TC", sans-serif;
+}
+
+/* --- 全域重置 --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 頁面整體容器 --- */
+.crm-forest-list {
+  background-color: var(--color-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  max-width: 100%;
+}
+
+/* --- 裝飾性橢圓 --- */
+.decoration-ellipse {
+  position: absolute;
+  top: -72px;
+  left: 264px;
+  width: 192px;
+  height: 192px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoration-ellipse img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+/* --- 頂部導覽列 --- */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 18px;
+  background-color: var(--color-page-bg);
+}
+
+/* 返回按鈕 */
+.btn-back {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-light);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.btn-back img {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-back .arrow-icon {
+  width: 16px;
+  height: 15.7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 頁面標題 */
+.page-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-dark);
+  text-align: center;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  margin: 0;
+  line-height: normal;
+}
+
+/* 首頁按鈕 */
+.btn-home {
+  position: absolute;
+  right: 20px;
+  top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-home .home-icon {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
+
+.btn-home span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dimmed);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* --- 搜尋列 --- */
+.search-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 81px 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input-wrapper {
+  flex: 1 0 0;
+  min-width: 0;
+  height: 47px;
+  background: #ffffff;
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  letter-spacing: 0.32px;
+  line-height: normal;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-dark);
+  opacity: 0.7;
+}
+
+/* 查詢按鈕 */
+.btn-search {
+  flex-shrink: 0;
+  background-color: var(--color-gold);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-search:active {
+  opacity: 0.85;
+}
+
+/* --- 篩選標籤列 --- */
+.filter-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: clip;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 隱藏捲軸 */
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  flex-shrink: 0;
+  background: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dimmed);
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* 選中的篩選標籤 */
+.filter-tab.active {
+  background-color: var(--color-gold-light);
+  border: 1px solid var(--color-gold);
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+/* --- 活動卡片列表 --- */
+.event-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- 活動卡片 --- */
+.event-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+
+/* 活動圖片容器 */
+.event-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 1080;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.event-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 已額滿卡片圖片遮罩 */
+.event-image-dimmed img {
+  opacity: 0.8;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay);
+}
+
+/* --- 活動資訊區 --- */
+.event-info {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* 狀態標籤 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 24px;
+  border-radius: 2px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  line-height: normal;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* 可預約狀態 */
+.status-available {
+  background-color: var(--color-gold);
+}
+
+/* 已額滿狀態 */
+.status-full {
+  background-color: var(--color-status-full-bg);
+}
+
+/* 活動標題 */
+.event-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* 已額滿的資訊半透明 */
+.event-info-dimmed {
+  opacity: 0.8;
+}
+
+/* --- 活動日期與地點 --- */
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-icon {
+  width: 14px;
+  height: 15.556px;
+  flex-shrink: 0;
+}
+
+.detail-icon-location {
+  height: 18px;
+}
+
+.detail-row span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* 已額滿的詳細資訊半透明 */
+.event-details-dimmed {
+  opacity: 0.8;
+}
+
+/* ============================================
+   我已報名卡片樣式
+   根據 Figma 設計稿 (node-id: 1:4450)
+   ============================================ */
+
+/* --- 已報名卡片 --- */
+.reg-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 16px;
+}
+
+/* 已報名卡片圖片 */
+.reg-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 1080;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.reg-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 已報名卡片標題 */
+.reg-card-title-row {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.reg-card-title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  margin: 0;
+}
+
+/* 已報名卡片日期地點 */
+.reg-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+/* 分隔線 */
+.reg-card-divider {
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* 已報名卡片資訊列表 */
+.reg-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  padding: 0 16px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.info-label {
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-weight: 400;
+  text-align: right;
+}
+
+/* 報名費用粗體大字 */
+.info-value-price {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* 轉帳帳號粗體 */
+.info-value-bold {
+  font-weight: 600;
+}
+
+/* --- 付款狀態標籤 --- */
+.info-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: normal;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* 待付款 */
+.badge-pending {
+  background-color: rgba(232, 177, 95, 0.12);
+  color: #c58b36;
+}
+
+/* 付款完成 */
+.badge-paid {
+  background-color: #dcf1eb;
+  color: #325148;
+}
+
+/* 已取消 */
+.badge-cancelled {
+  background-color: rgba(179, 176, 158, 0.2);
+  color: #325148;
+}
+
+/* 已報名列表底部提示 */
+.registered-list-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 8px;
+}
+
+.registered-list-footer span {
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: #b3b09e;
+  letter-spacing: 1px;
+}
+
+/* --- 響應式設計 --- */
+
+/* 平板裝置 */
+@media (min-width: 768px) {
+  .crm-forest-list {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .top-bar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* 桌面裝置 */
+@media (min-width: 1024px) {
+  .crm-forest-list {
+    max-width: 420px;
+  }
+
+  .top-bar {
+    max-width: 420px;
+  }
+}

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>檢視紀錄</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/crm-view-record.css">
+</head>
+<body>
+
+  <!-- 檢視紀錄頁面容器 -->
+  <div class="crm-view-record" data-node-id="1:6289">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:6290">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列 -->
+    <div class="top-bar">
+      <button class="btn-back" id="btnBack" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <h1 class="page-title" data-node-id="1:6375">檢視紀錄</h1>
+      <a class="btn-home" id="btnHome" href="#" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="record-content" data-node-id="1:6291">
+
+      <!-- 費用通知區（僅已完成狀態顯示） -->
+      <div class="fee-notice" id="feeNotice" data-node-id="1:6293">
+        <!-- 打勾圖示 -->
+        <img class="checkmark" src="assets/checkmark.svg" alt="完成" data-node-id="1:6294">
+        <!-- 說明文字 -->
+        <p class="notice-text" data-node-id="1:6298">
+          您的客變方案已規劃完成，為保障您的權益，請您撥冗確認本次服務的相關費用。
+        </p>
+        <!-- 費用卡片 -->
+        <div class="fee-card" data-node-id="1:6299">
+          <div class="fee-row" data-node-id="1:6300">
+            <p class="fee-label" data-node-id="1:6301">總金額</p>
+            <p class="fee-amount" data-node-id="1:6302">＄80,000</p>
+          </div>
+          <div class="fee-row" style="padding-bottom: 4px;" data-node-id="1:6303">
+            <p class="fee-label" data-node-id="1:6304">付款方式</p>
+            <p class="fee-value" data-node-id="1:6305">7109-4521-3258</p>
+          </div>
+          <div class="fee-divider" data-node-id="1:6306">
+            <img src="assets/divider-line.svg" alt="">
+          </div>
+          <p class="fee-deadline" data-node-id="1:6308">
+            請於 <span class="highlight">2025/09/05</span> 前完成付款
+          </p>
+        </div>
+        <!-- 補充說明 -->
+        <p class="notice-text" data-node-id="1:6309">
+          如果您對這次的客變費用有任何問題，或需要我們提供協助，請直接與我聯繫，我很樂意為您說明。
+        </p>
+      </div>
+
+      <!-- 預約詳情卡片 -->
+      <div class="detail-card" data-node-id="1:6310">
+        <p class="card-number" data-node-id="1:6311">20250901-002</p>
+        <div class="detail-list" data-node-id="1:6312">
+          <p class="detail-row" data-node-id="1:6313">
+            <span class="detail-label">建　案</span>｜綠海建案
+          </p>
+          <p class="detail-row" data-node-id="1:6314">
+            <span class="detail-label">戶　別</span>｜B1
+          </p>
+          <p class="detail-row" data-node-id="1:6315">
+            <span class="detail-label">樓　層</span>｜3
+          </p>
+          <p class="detail-row" data-node-id="1:6316">
+            <span class="detail-label">日　期</span>｜2025/08/21
+          </p>
+          <p class="detail-row" data-node-id="1:6317">
+            <span class="detail-label">時　段</span>｜10:00
+          </p>
+          <p class="detail-row" data-node-id="1:6318">
+            <span class="detail-label-normal">出席人數</span>｜3
+          </p>
+          <!-- 設計師出席 -->
+          <div class="detail-block" data-node-id="1:6319">
+            <p class="block-label" data-node-id="1:6321">設計師出席</p>
+            <p class="block-value" data-node-id="1:6322">否</p>
+          </div>
+          <!-- 備註事項 -->
+          <div class="detail-block" data-node-id="1:6323">
+            <p class="block-label" data-node-id="1:6325">備註事項</p>
+            <p class="block-value" data-node-id="1:6326">希望在隔間牆拆除後，增加一處電源插座。</p>
+          </div>
+        </div>
+
+        <!-- 簽名區塊（僅在狀態為已完成時顯示） -->
+        <div class="signature-section" id="signatureSection">
+          <!-- 分隔線 -->
+          <div class="card-divider" data-node-id="1:6327">
+            <img src="assets/divider-line2.svg" alt="">
+          </div>
+
+          <!-- 住戶簽名確認 -->
+          <p class="signature-title" data-node-id="1:6329">住戶簽名確認</p>
+          <div class="signature-area" data-node-id="1:6330">
+            <div class="signature-pad" id="signaturePad" data-node-id="1:6331">
+              <p class="signature-placeholder" id="signaturePlaceholder" data-node-id="1:6332">點擊此處進行簽名</p>
+              <!-- 已確認的簽名圖片 -->
+              <img class="signature-result" id="signatureResult" src="" alt="簽名" style="display:none;">
+            </div>
+          </div>
+        </div>
+
+    <!-- 全螢幕橫向簽名遮罩 -->
+    <div class="signature-overlay" id="signatureOverlay">
+      <div class="signature-overlay-inner">
+        <p class="signature-overlay-title">請在下方區域簽名</p>
+        <div class="signature-canvas-wrap">
+          <canvas id="signatureCanvas"></canvas>
+        </div>
+        <div class="signature-overlay-actions">
+          <button class="btn btn-clear" id="btnClearSign">清除簽名</button>
+          <button class="btn btn-sign-confirm" id="btnConfirmSign">確認簽名</button>
+        </div>
+      </div>
+    </div>
+      </div>
+
+      <!-- 下載附件區 -->
+      <div class="download-section" data-node-id="1:6338">
+        <div class="section-header" data-node-id="1:6339">
+          <img class="section-icon" src="assets/download-icon.svg" alt="" data-node-id="1:6342">
+          <p class="section-title" data-node-id="1:6345">下載附件</p>
+        </div>
+        <div class="attachment-item" data-node-id="1:6346">
+          <p class="file-name" data-node-id="1:6347">客變變更報告.pdf</p>
+          <button class="download-btn" data-action="download" data-file="report.pdf" data-node-id="1:6348">
+            <img src="assets/download-btn.svg" alt="下載">
+          </button>
+        </div>
+      </div>
+
+      <!-- 聯絡專員區 -->
+      <div class="chat-section" data-node-id="1:6350">
+        <div class="section-header" data-node-id="1:6351">
+          <img class="section-icon" src="assets/chat-icon.svg" alt="" data-node-id="1:6352">
+          <p class="section-title" data-node-id="1:6357">聯絡專員</p>
+        </div>
+        <div class="chat-area" data-node-id="1:6358">
+          <div class="chat-messages" data-node-id="1:6359">
+            <!-- 第1則：使用者訊息 -->
+            <div class="chat-msg-user">
+              <div class="msg-bubble">你好，我想了解客變施工的時程安排。</div>
+              <p class="msg-time">2025/08/01 09:15 AM</p>
+            </div>
+            <!-- 第2則：專員回覆 -->
+            <div class="chat-msg-agent">
+              <div class="msg-bubble">您好，目前預計八月中開始施工，預計工期約兩週。</div>
+              <p class="msg-sender">王曉明 2025/08/01 09:20AM</p>
+            </div>
+            <!-- 第3則：使用者訊息 -->
+            <div class="chat-msg-user">
+              <div class="msg-bubble">施工期間住戶需要配合什麼嗎？</div>
+              <p class="msg-time">2025/08/02 02:10 PM</p>
+            </div>
+            <!-- 第4則：專員回覆 -->
+            <div class="chat-msg-agent">
+              <div class="msg-bubble">施工期間該樓層會有噪音，建議您提前安排。如有特殊需求可以隨時告知我們。</div>
+              <p class="msg-sender">王曉明 2025/08/02 02:25PM</p>
+            </div>
+            <!-- 第5則：使用者訊息 -->
+            <div class="chat-msg-user">
+              <div class="msg-bubble">我想修改一下廚房隔間的位置，還來得及嗎？</div>
+              <p class="msg-time">2025/08/03 10:00 AM</p>
+            </div>
+            <!-- 第6則：專員回覆 -->
+            <div class="chat-msg-agent">
+              <div class="msg-bubble">目前還在變更確認階段，可以調整。我會請設計師重新出圖給您確認。</div>
+              <p class="msg-sender">王曉明 2025/08/03 10:15AM</p>
+            </div>
+            <!-- 第7則：使用者訊息 -->
+            <div class="chat-msg-user">
+              <div class="msg-bubble">好的，謝謝！另外想問費用會增加多少？</div>
+              <p class="msg-time">2025/08/04 11:30 AM</p>
+            </div>
+            <!-- 第8則：專員回覆 -->
+            <div class="chat-msg-agent">
+              <div class="msg-bubble">初步估算會增加約$15,000，確認修改後我會提供正式報價單。</div>
+              <div class="attachment-item">
+                <p class="file-name">初步報價單.pdf</p>
+                <button class="download-btn" data-action="download" data-file="quote.pdf">
+                  <img src="assets/download-btn2.svg" alt="下載">
+                </button>
+              </div>
+              <p class="msg-sender">王曉明 2025/08/04 11:45AM</p>
+            </div>
+            <!-- 第9則：使用者訊息 -->
+            <div class="chat-msg-user">
+              <div class="msg-bubble">請問大約什麼時候可以維修？</div>
+              <p class="msg-time">2025/08/05 10:30 AM</p>
+            </div>
+            <!-- 第10則：專員回覆 -->
+            <div class="chat-msg-agent">
+              <div class="msg-bubble">您好，約下午會派維修人員過去</div>
+              <div class="attachment-item">
+                <p class="file-name">聯絡資訊.jpg</p>
+                <button class="download-btn" data-action="download" data-file="contact.jpg">
+                  <img src="assets/download-btn2.svg" alt="下載">
+                </button>
+              </div>
+              <p class="msg-sender">王曉明 2025/08/05 10:30AM</p>
+            </div>
+          </div>
+        </div>
+        <!-- 我要留言按鈕 -->
+        <button class="btn-leave-message" id="btnLeaveMessage">我要留言</button>
+      </div>
+
+    </div>
+    <!-- /record-content -->
+
+    <!-- 我要留言彈窗 -->
+    <div class="message-modal-overlay" id="messageModalOverlay">
+      <div class="message-modal" data-node-id="195:1613">
+        <!-- 訊息輸入區 -->
+        <div class="message-input-area">
+          <textarea class="message-textarea" id="messageTextarea" placeholder="請輸入訊息...."></textarea>
+        </div>
+        <!-- 附件上傳區 -->
+        <div class="message-upload-area">
+          <label class="btn-select-file" for="messageFileInput">
+            選擇檔案
+          </label>
+          <input type="file" id="messageFileInput" accept=".jpg,.jpeg,.png,.mp4" style="display:none;">
+          <!-- 已選檔案預覽 -->
+          <div class="selected-file" id="selectedFile" style="display:none;">
+            <p class="file-name" id="selectedFileName"></p>
+            <button class="btn-remove-file" id="btnRemoveFile" aria-label="移除檔案">
+              <img src="assets/delete-icon.svg" alt="刪除">
+            </button>
+          </div>
+          <p class="upload-hint">＊支援圖片.jpg、影片.mp4，最大 5MB</p>
+        </div>
+        <!-- 操作按鈕 -->
+        <div class="message-modal-actions">
+          <button class="btn btn-modal-cancel" id="btnMsgCancel">離開</button>
+          <button class="btn btn-modal-send" id="btnMsgSend">發送訊息</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /crm-view-record -->
+
+  <script src="js/crm-view-record.js"></script>
+
+</body>
+</html>

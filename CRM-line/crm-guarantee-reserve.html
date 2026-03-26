@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>預約對保服務</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-guarantee-reserve.css">
+</head>
+<body>
+
+  <!-- 預約對保服務頁面容器 -->
+  <div class="crm-guarantee-reserve" data-node-id="29:1464">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="29:1465">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（凍結區塊） -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="29:1516">預約對保服務</h1>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="form-content" data-node-id="29:1466">
+
+      <!-- 提示訊息 + 付款資訊 -->
+      <div class="form-hint-block" data-node-id="29:1467">
+        <div class="form-hint" data-node-id="29:1468">
+          <p class="hint-title" data-node-id="29:1469">您可建立一筆對保預約</p>
+          <!-- 付款資訊卡片 -->
+          <div class="payment-info" data-node-id="29:1470">
+            <div class="payment-row" data-node-id="29:1471">
+              <span class="payment-label" data-node-id="29:1472">代辦費金額</span>
+              <span class="payment-amount" data-node-id="29:1473">＄500,000</span>
+            </div>
+            <div class="payment-row" data-node-id="29:1474">
+              <span class="payment-label" data-node-id="29:1475">繳款帳號</span>
+              <span class="payment-account" data-node-id="29:1476">7109-4521-3258</span>
+            </div>
+            <div class="payment-divider" data-node-id="29:1477"></div>
+            <p class="payment-deadline" data-node-id="29:1478">
+              請於 <span class="deadline-date">2025/09/05</span> 前完成付款
+            </p>
+          </div>
+        </div>
+
+        <!-- 表單欄位 -->
+        <form class="form-fields" id="guaranteeForm">
+
+          <!-- 建案 -->
+          <div class="form-group" data-node-id="29:1480">
+            <p class="form-label" data-node-id="29:1481">
+              建案<span class="required">＊</span>
+            </p>
+            <div class="form-select-wrapper">
+              <select class="form-select" id="project" name="project" required data-node-id="29:1482">
+                <option value="">請選擇建案</option>
+                <option value="greenocean" selected>綠海建案</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 戶別 -->
+          <div class="form-group" data-node-id="29:1483">
+            <p class="form-label" data-node-id="29:1484">
+              戶別 <span class="required">＊</span>
+            </p>
+            <div class="form-select-wrapper">
+              <select class="form-select" id="unit" name="unit" required data-node-id="29:1485">
+                <option value="">請選擇戶別</option>
+                <option value="B1" selected>B1</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 日期 -->
+          <div class="form-group" data-node-id="29:1489">
+            <p class="form-label" data-node-id="29:1490">
+              日期 <span class="required">＊</span>
+            </p>
+            <div class="form-date-wrapper">
+              <input class="form-date" type="date" id="date" name="date" value="2025-08-23" required data-node-id="29:1491">
+              <img class="calendar-icon" src="assets/calendar-icon.svg" alt="">
+            </div>
+          </div>
+
+          <!-- 時段 -->
+          <div class="form-group" data-node-id="29:1500">
+            <p class="form-label" data-node-id="29:1501">
+              時段 <span class="required">＊</span>
+            </p>
+            <div class="form-select-wrapper">
+              <select class="form-select" id="timeSlot" name="timeSlot" required data-node-id="29:1502">
+                <option value="">請選擇時段</option>
+                <option value="10:00" selected>10:00</option>
+                <option value="14:00">14:00</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 備註事項 -->
+          <div class="form-group" data-node-id="29:1503">
+            <p class="form-label" data-node-id="29:1504">備註事項</p>
+            <textarea class="form-textarea" id="notes" name="notes" placeholder="請輸入其他備註事項" data-node-id="29:1505"></textarea>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- 填寫對保問卷按鈕 -->
+      <div class="questionnaire-btn-wrapper" data-node-id="29:1506">
+        <button class="btn-questionnaire" id="btnQuestionnaire" data-node-id="29:1507">
+          <img class="star-icon" id="starIcon" src="assets/star-outline-icon.svg" alt="" data-node-id="29:1508">
+          <span data-node-id="29:1509">填寫對保問卷</span>
+        </button>
+      </div>
+
+      <!-- 底部按鈕 -->
+      <div class="form-actions" data-node-id="29:1510">
+        <button class="btn btn-leave" id="btnLeave" data-node-id="29:1511">
+          離開
+        </button>
+        <button class="btn btn-confirm" id="btnConfirm" data-node-id="29:1513">
+          確認建立
+        </button>
+      </div>
+
+    </div>
+    <!-- /form-content -->
+
+  </div>
+  <!-- /crm-guarantee-reserve -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-guarantee-reserve.js"></script>
+
+</body>
+</html>
