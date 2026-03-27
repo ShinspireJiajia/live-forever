@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM</title>
+  <!-- Google Fonts: Noto Sans TC + Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-index.css">
+</head>
+<body>
+
+  <!-- CRM 首頁容器 -->
+  <div class="crm-index" data-node-id="1:2610">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:2611">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部標題列 -->
+    <div class="top-bar">
+      <h1 class="page-title">
+        <span class="title-dot"></span>CRM
+      </h1>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="1:2612">
+
+      <!-- 快捷功能區 -->
+      <div class="quick-actions" data-node-id="1:2613">
+
+        <!-- 我要報修 -->
+        <div class="repair-card" data-node-id="1:2614" id="btnRepair">
+          <div class="repair-icon-wrap" data-node-id="1:2615">
+            <img class="repair-gear-icon" src="assets/icon-gear-repair.svg" alt="" data-node-id="1:2617">
+          </div>
+          <p class="repair-text" data-node-id="1:2628">我要報修</p>
+        </div>
+
+        <!-- 三個快捷入口 -->
+        <div class="shortcut-row" data-node-id="1:2629">
+          <!-- 會員中心 -->
+          <div class="shortcut-card" data-node-id="1:2630" id="btnMember">
+            <div class="shortcut-icon-wrap" data-node-id="1:2631">
+              <img class="shortcut-icon icon-sm" src="assets/icon-member-center.svg" alt="" data-node-id="1:2633">
+            </div>
+            <p class="shortcut-text" data-node-id="1:2640">會員中心</p>
+          </div>
+          <!-- 綠海養護 -->
+          <div class="shortcut-card" data-node-id="1:2641" id="btnGreenCare">
+            <div class="shortcut-icon-wrap" data-node-id="1:2642">
+              <img class="shortcut-icon" src="assets/icon-green-care.svg" alt="">
+            </div>
+            <p class="shortcut-text" data-node-id="1:2647">綠海養護</p>
+          </div>
+          <!-- 綁定新身分 -->
+          <div class="shortcut-card" data-node-id="1:2648" id="btnBind">
+            <div class="shortcut-icon-wrap" data-node-id="1:2649">
+              <img class="shortcut-icon" src="assets/icon-bind-identity.svg" alt="">
+            </div>
+            <p class="shortcut-text" data-node-id="1:2655">綁定新身分</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- /quick-actions -->
+
+      <!-- 服務功能區（僅戶別資訊） -->
+      <div class="service-grid-card" data-node-id="1:238">
+        <div class="service-grid-inner" id="serviceGridInner" data-node-id="1:239">
+
+          <!-- 僅保留戶別資訊 -->
+          <div class="service-row" data-node-id="1:240">
+            <div class="service-item" data-node-id="1:251" id="btnUnit">
+              <div class="service-icon-circle bg-light" data-node-id="1:252">
+                <img class="service-icon" src="assets/icon-unit-info.svg" alt="" data-node-id="1:253">
+              </div>
+              <p class="service-label" data-node-id="1:258">戶別資訊</p>
+            </div>
+            <!-- 佔位 -->
+            <div class="service-item placeholder"></div>
+            <div class="service-item placeholder"></div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /service-grid-card -->
+
+      <!-- 報修表單進度區 -->
+      <div class="repair-progress-section" data-node-id="1:2663">
+
+        <!-- 區段標題 -->
+        <div class="section-header" data-node-id="1:2664">
+          <div class="section-icon-group" data-node-id="1:2665">
+            <img class="section-icon-main" src="assets/icon-repair-progress.svg" alt="" data-node-id="1:2667">
+            <div class="section-icon-gears" data-node-id="1:2668">
+              <img class="gear-small" src="assets/icon-repair-gear1.svg" alt="" data-node-id="1:2669">
+              <img class="gear-large" src="assets/icon-repair-gear2.svg" alt="" data-node-id="1:2680">
+            </div>
+          </div>
+          <p class="section-title" data-node-id="1:2691">報修表單進度</p>
+        </div>
+
+        <!-- 報修卡片 1 -->
+        <div class="repair-order-card" data-node-id="1:2692">
+          <div class="order-header" data-node-id="1:2693">
+            <p class="order-number" data-node-id="1:2694">20250808-001</p>
+            <div class="order-status status-done" data-node-id="1:2695">
+              <span data-node-id="1:2696">已完成</span>
+            </div>
+          </div>
+          <div class="order-info" data-node-id="1:2697">
+            <p data-node-id="1:2698"><span class="info-label">建　　案</span><span class="info-value">｜綠海建案 (A3-3) </span></p>
+            <p data-node-id="1:2699"><span class="info-label">類&emsp;&emsp;型</span><span class="info-value">｜綠海維修</span></p>
+            <p data-node-id="1:2700"><span class="info-label">問題描述</span><span class="info-value">｜客廳浴室的洗手台水龍頭，在...</span></p>
+          </div>
+          <button class="btn-view-order" data-node-id="1:2701">
+            <span data-node-id="1:2702">內容查看</span>
+          </button>
+        </div>
+
+        <!-- 報修卡片 2 -->
+        <div class="repair-order-card" data-node-id="1:2703">
+          <div class="order-header" data-node-id="1:2704">
+            <p class="order-number" data-node-id="1:2705">20250808-002</p>
+            <div class="order-status status-processing" data-node-id="1:2706">
+              <span data-node-id="1:2707">處理中</span>
+            </div>
+          </div>
+          <div class="order-info" data-node-id="1:2708">
+            <p data-node-id="1:2709"><span class="info-label">建　　案</span><span class="info-value">｜綠海建案 (A3-3) </span></p>
+            <p data-node-id="1:2710"><span class="info-label">類&emsp;&emsp;型</span><span class="info-value">｜個案單報修</span></p>
+            <p data-node-id="1:2711"><span class="info-label">問題描述</span><span class="info-value">｜廚房水槽下方的水管有輕微滲...</span></p>
+          </div>
+          <button class="btn-view-order" data-node-id="1:2712">
+            <span data-node-id="1:2713">內容查看</span>
+          </button>
+        </div>
+
+      </div>
+      <!-- /repair-progress-section -->
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-index -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>交屋服務</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-handover-service.css">
+</head>
+<body>
+
+  <!-- 交屋服務頁面容器 -->
+  <div class="crm-handover-service" data-node-id="244:559">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="244:560">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（凍結區塊） -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" data-node-id="244:594" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="244:595">交屋服務</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="#" data-node-id="244:596" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="244:561">
+
+      <!-- 預約交屋服務按鈕 -->
+      <div style="width: 100%;" data-node-id="244:562">
+        <button class="btn-reserve" id="btnReserve" data-node-id="244:563">
+          預約交屋服務
+        </button>
+      </div>
+
+      <!-- 服務卡片列表 -->
+      <div class="card-list" data-node-id="244:565">
+
+        <!-- 卡片 1：預約中 -->
+        <div class="service-card" data-sort-date="2025-07-30 10:00" data-status="預約中" data-node-id="244:566">
+          <!-- 狀態標籤與案件編號 -->
+          <div class="card-header" data-node-id="244:567">
+            <span class="status-badge status-pending" data-node-id="244:568">預約中</span>
+            <span class="card-number" data-node-id="244:570">20250901-002</span>
+          </div>
+          <!-- 案件資訊 -->
+          <div class="card-info" data-node-id="244:571">
+            <p data-node-id="244:572">
+              <span class="label">建　　案</span>｜綠海建案 (A3-3)
+            </p>
+            <p data-node-id="244:573">
+              <span class="label">預約日期</span>｜2025/07/30 10:00
+            </p>
+          </div>
+          <!-- 操作按鈕 -->
+          <div class="card-actions" data-node-id="244:574">
+            <button class="btn btn-outline" data-action="view-record" data-node-id="244:620">
+              檢視紀錄
+            </button>
+          </div>
+        </div>
+
+        <!-- 卡片 2：已完成 -->
+        <div class="service-card" data-sort-date="2025-06-15 14:00" data-status="已完成" data-node-id="244:580">
+          <!-- 狀態標籤與案件編號 -->
+          <div class="card-header" data-node-id="244:582">
+            <span class="status-badge status-completed" data-node-id="244:584">已完成</span>
+            <span class="card-number" data-node-id="244:583">20250901-003</span>
+          </div>
+          <!-- 案件資訊 -->
+          <div class="card-info" data-node-id="244:581">
+            <p data-node-id="244:586">
+              <span class="label">建　　案</span>｜綠海建案 (A3-3)
+            </p>
+            <p data-node-id="244:587">
+              <span class="label">預約日期</span>｜2025/06/15 14:00
+            </p>
+          </div>
+          <!-- 操作按鈕 -->
+          <div class="card-actions" data-node-id="244:588">
+            <button class="btn btn-outline" data-action="view-record" data-node-id="244:590">
+              檢視紀錄
+            </button>
+            <button class="btn btn-gold" data-action="survey" data-node-id="244:592">
+              滿意度問卷
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /card-list -->
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-handover-service -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-handover-service.js"></script>
+
+</body>
+</html>

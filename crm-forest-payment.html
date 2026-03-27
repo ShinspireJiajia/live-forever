@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 線上支付</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-forest-payment.css">
+</head>
+<body>
+
+  <!-- 線上支付頁面容器 -->
+  <div class="crm-forest-payment" data-node-id="1:4668">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頁面標題 -->
+    <h1 class="page-title" data-node-id="1:4692">線上支付</h1>
+
+    <!-- 支付方式選擇區域 -->
+    <div class="payment-section" data-node-id="1:4670">
+
+      <!-- 區塊標題 -->
+      <div class="section-header" data-node-id="1:4671">
+        <img class="section-icon" src="assets/payment-icon.svg" alt="" data-node-id="1:4672">
+        <span data-node-id="1:4676">請選擇支付方式</span>
+      </div>
+
+      <!-- 信用卡選項（預設選取） -->
+      <label class="payment-option" data-node-id="1:4677">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="credit-card" checked>
+          <span class="radio-custom"></span>
+          <span class="option-label" data-node-id="1:4680">信用卡</span>
+        </div>
+        <div class="option-right" data-node-id="1:4681">
+          <img class="brand-logo brand-visa" src="assets/visa-logo.png" alt="VISA">
+          <img class="brand-logo brand-mastercard" src="assets/mastercard-logo.png" alt="Mastercard">
+        </div>
+      </label>
+
+      <!-- LINE PAY 選項 -->
+      <label class="payment-option" data-node-id="196:1746">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="line-pay">
+          <span class="radio-custom"></span>
+          <span class="option-label" data-node-id="196:1763">LINE PAY</span>
+        </div>
+        <div class="option-right" data-node-id="196:1750">
+          <img class="brand-logo brand-linepay" src="assets/linepay-logo.png" alt="LINE Pay" data-node-id="196:1759">
+        </div>
+      </label>
+
+      <!-- ATM 虛擬帳號轉帳選項 -->
+      <label class="payment-option" data-node-id="196:1739">
+        <div class="option-left">
+          <input type="radio" name="paymentMethod" value="atm">
+          <span class="radio-custom"></span>
+          <span class="option-label" data-node-id="196:1742">ATM 虛擬帳號轉帳</span>
+        </div>
+      </label>
+
+    </div>
+
+    <!-- 底部按鈕區域 -->
+    <div class="payment-footer" data-node-id="1:4693">
+      <button class="btn-confirm" id="btnConfirm" data-node-id="1:4694">確認</button>
+      <button class="btn-cancel" id="btnCancel" data-node-id="1:4696">取消</button>
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/crm-forest-payment.js"></script>
+</body>
+</html>

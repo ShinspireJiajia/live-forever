@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>戶別資訊</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-unit-info.css">
+</head>
+<body>
+
+  <!-- 戶別資訊頁面容器 -->
+  <div class="crm-unit-info" data-node-id="1:5046">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:5047">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（凍結區塊） -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" data-node-id="1:824" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="1:5088">戶別資訊</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="crm-index.html" data-node-id="128:1387" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="1:5048">
+
+      <!-- 戶別卡片列表（由 JS 動態產生） -->
+      <div class="unit-card-list" id="unitCardList"></div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-unit-info -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-unit-info.js"></script>
+
+</body>
+</html>

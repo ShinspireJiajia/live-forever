@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>對保問卷</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-guarantee-survey.css">
+</head>
+<body>
+
+  <!-- 對保問卷頁面容器 -->
+  <div class="crm-guarantee-survey" data-node-id="29:1534">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="29:1535">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（凍結區塊） -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="29:1602">對保問卷</h1>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="survey-content" data-node-id="29:1536">
+
+      <!-- 對保的銀行 -->
+      <div class="survey-section" data-node-id="29:1537">
+        <div class="section-block" data-node-id="29:1538">
+          <div class="section-title-row" data-node-id="29:1539">
+            <p class="section-title" data-node-id="29:1540">對保的銀行<span class="required">＊</span></p>
+          </div>
+
+          <!-- 銀行選項列表 -->
+          <div class="bank-options" id="bankOptions">
+
+            <!-- 國泰世華 -->
+            <label class="bank-card selected" data-value="cathay" data-node-id="29:1541">
+              <div class="bank-card-content" data-node-id="29:1542">
+                <div class="bank-card-header" data-node-id="29:1543">
+                  <span class="bank-name" data-node-id="29:1544">國泰世華</span>
+                  <span class="radio-btn checked"></span>
+                </div>
+                <p class="bank-desc" data-node-id="29:1546">國泰世華銀行提供優惠存款方案，數位帳戶可享1.1%利率存款優惠。</p>
+              </div>
+              <a class="bank-link" href="#" data-node-id="29:1547">
+                <span data-node-id="29:1548">前往官網了解更多</span>
+                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow">
+              </a>
+            </label>
+
+            <!-- 台灣銀行 -->
+            <label class="bank-card" data-value="bot" data-node-id="29:1550">
+              <div class="bank-card-content" data-node-id="29:1551">
+                <div class="bank-card-header" data-node-id="29:1552">
+                  <span class="bank-name" data-node-id="29:1553">台灣銀行</span>
+                  <span class="radio-btn"></span>
+                </div>
+                <p class="bank-desc" data-node-id="29:1555">台灣銀行提供安全可靠的服務方案，首次開戶可享最高1.5%優惠利率。</p>
+              </div>
+              <a class="bank-link" href="#" data-node-id="29:1556">
+                <span data-node-id="29:1557">前往官網了解更多</span>
+                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow">
+              </a>
+            </label>
+
+            <!-- 華南銀行 -->
+            <label class="bank-card" data-value="hua-nan" data-node-id="29:1559">
+              <div class="bank-card-content" data-node-id="29:1560">
+                <div class="bank-card-header" data-node-id="29:1561">
+                  <span class="bank-name" data-node-id="29:1562">華南銀行</span>
+                  <span class="radio-btn"></span>
+                </div>
+                <p class="bank-desc" data-node-id="29:1564">華南銀行提供優惠存款方案，數位帳戶可享1.1%利率存款優惠。</p>
+              </div>
+              <a class="bank-link" href="#" data-node-id="29:1565">
+                <span data-node-id="29:1566">前往官網了解更多</span>
+                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow">
+              </a>
+            </label>
+
+            <!-- 其他 -->
+            <label class="bank-card" data-value="other" data-node-id="29:1568">
+              <div class="bank-card-content" data-node-id="29:1569">
+                <div class="bank-card-header" data-node-id="29:1570">
+                  <span class="bank-name" data-node-id="29:1571">其他</span>
+                  <span class="radio-btn"></span>
+                </div>
+                <p class="bank-desc" data-node-id="29:1573">如果您使用的是其他銀行，請在下方填入銀行名稱。</p>
+              </div>
+              <!-- 其他銀行輸入框（預設顯示） -->
+              <div class="other-bank-input" id="otherBankInput">
+                <input class="form-input" type="text" id="otherBankName" placeholder="請輸入銀行名稱">
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- 預計貸款金額 -->
+        <div class="form-group" data-node-id="29:1577">
+          <p class="form-label" data-node-id="29:1578">預計貸款金額<span class="required">＊</span></p>
+          <input class="form-input" type="text" id="loanAmount" name="loanAmount" placeholder="請輸入預計貸款金額" inputmode="numeric" data-node-id="29:1579">
+        </div>
+
+        <!-- 問卷體驗（星星評分） -->
+        <div class="rating-section" data-node-id="29:1580">
+          <div class="rating-content" data-node-id="29:1581">
+            <p class="section-title" data-node-id="29:1582">問卷體驗</p>
+            <div class="star-rating" id="starRating" data-node-id="29:1583">
+              <svg class="star filled" data-value="1" width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.3985 1.37604C12.6448 0.874654 13.3563 0.874654 13.6026 1.37604L16.7907 7.8665C16.8885 8.0656 17.0775 8.2036 17.2962 8.23553L24.425 9.27632C24.9757 9.35672 25.1956 10.0367 24.7971 10.427L19.6386 15.4791C19.4804 15.6341 19.4082 15.8573 19.4456 16.0762L20.6633 23.2099C20.7574 23.761 20.1817 24.1812 19.6891 23.921L13.313 20.5529C13.1174 20.4496 12.8837 20.4496 12.6881 20.5529L6.31197 23.921C5.81942 24.1812 5.24374 23.761 5.33781 23.2099L6.55555 16.0762C6.5929 15.8573 6.5207 15.6341 6.36246 15.4791L1.20404 10.427C0.805556 10.0367 1.02544 9.35672 1.57614 9.27632L8.70489 8.23553C8.92357 8.2036 9.11262 8.0656 9.21041 7.8665L12.3985 1.37604Z" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="star filled" data-value="2" width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.3985 1.37604C12.6448 0.874654 13.3563 0.874654 13.6026 1.37604L16.7907 7.8665C16.8885 8.0656 17.0775 8.2036 17.2962 8.23553L24.425 9.27632C24.9757 9.35672 25.1956 10.0367 24.7971 10.427L19.6386 15.4791C19.4804 15.6341 19.4082 15.8573 19.4456 16.0762L20.6633 23.2099C20.7574 23.761 20.1817 24.1812 19.6891 23.921L13.313 20.5529C13.1174 20.4496 12.8837 20.4496 12.6881 20.5529L6.31197 23.921C5.81942 24.1812 5.24374 23.761 5.33781 23.2099L6.55555 16.0762C6.5929 15.8573 6.5207 15.6341 6.36246 15.4791L1.20404 10.427C0.805556 10.0367 1.02544 9.35672 1.57614 9.27632L8.70489 8.23553C8.92357 8.2036 9.11262 8.0656 9.21041 7.8665L12.3985 1.37604Z" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="star filled" data-value="3" width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.3985 1.37604C12.6448 0.874654 13.3563 0.874654 13.6026 1.37604L16.7907 7.8665C16.8885 8.0656 17.0775 8.2036 17.2962 8.23553L24.425 9.27632C24.9757 9.35672 25.1956 10.0367 24.7971 10.427L19.6386 15.4791C19.4804 15.6341 19.4082 15.8573 19.4456 16.0762L20.6633 23.2099C20.7574 23.761 20.1817 24.1812 19.6891 23.921L13.313 20.5529C13.1174 20.4496 12.8837 20.4496 12.6881 20.5529L6.31197 23.921C5.81942 24.1812 5.24374 23.761 5.33781 23.2099L6.55555 16.0762C6.5929 15.8573 6.5207 15.6341 6.36246 15.4791L1.20404 10.427C0.805556 10.0367 1.02544 9.35672 1.57614 9.27632L8.70489 8.23553C8.92357 8.2036 9.11262 8.0656 9.21041 7.8665L12.3985 1.37604Z" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="star filled" data-value="4" width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.3985 1.37604C12.6448 0.874654 13.3563 0.874654 13.6026 1.37604L16.7907 7.8665C16.8885 8.0656 17.0775 8.2036 17.2962 8.23553L24.425 9.27632C24.9757 9.35672 25.1956 10.0367 24.7971 10.427L19.6386 15.4791C19.4804 15.6341 19.4082 15.8573 19.4456 16.0762L20.6633 23.2099C20.7574 23.761 20.1817 24.1812 19.6891 23.921L13.313 20.5529C13.1174 20.4496 12.8837 20.4496 12.6881 20.5529L6.31197 23.921C5.81942 24.1812 5.24374 23.761 5.33781 23.2099L6.55555 16.0762C6.5929 15.8573 6.5207 15.6341 6.36246 15.4791L1.20404 10.427C0.805556 10.0367 1.02544 9.35672 1.57614 9.27632L8.70489 8.23553C8.92357 8.2036 9.11262 8.0656 9.21041 7.8665L12.3985 1.37604Z" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              <svg class="star" data-value="5" width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.3985 1.37604C12.6448 0.874654 13.3563 0.874654 13.6026 1.37604L16.7907 7.8665C16.8885 8.0656 17.0775 8.2036 17.2962 8.23553L24.425 9.27632C24.9757 9.35672 25.1956 10.0367 24.7971 10.427L19.6386 15.4791C19.4804 15.6341 19.4082 15.8573 19.4456 16.0762L20.6633 23.2099C20.7574 23.761 20.1817 24.1812 19.6891 23.921L13.313 20.5529C13.1174 20.4496 12.8837 20.4496 12.6881 20.5529L6.31197 23.921C5.81942 24.1812 5.24374 23.761 5.33781 23.2099L6.55555 16.0762C6.5929 15.8573 6.5207 15.6341 6.36246 15.4791L1.20404 10.427C0.805556 10.0367 1.02544 9.35672 1.57614 9.27632L8.70489 8.23553C8.92357 8.2036 9.11262 8.0656 9.21041 7.8665L12.3985 1.37604Z" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- 其他補充 -->
+        <div class="form-group" data-node-id="29:1589">
+          <p class="form-label" data-node-id="29:1590">其他補充</p>
+          <textarea class="form-textarea" id="additionalNote" name="additionalNote" placeholder="請輸入其他補充說明" data-node-id="29:1591"></textarea>
+        </div>
+
+        <!-- 圖片上傳 -->
+        <div class="form-group" data-node-id="29:1592">
+          <p class="form-label" data-node-id="29:1593">圖片上傳</p>
+          <div class="upload-area" data-node-id="29:1594">
+            <button class="btn-upload" id="btnUpload" type="button" data-node-id="29:1595">
+              <span data-node-id="29:1596">選擇檔案</span>
+            </button>
+            <input type="file" id="fileInput" accept=".jpg,.jpeg,.mp4" style="display: none;">
+            <p class="upload-hint" data-node-id="29:1597">＊支援圖片.jpg、影片.mp4，最大 5MB</p>
+            <!-- 已上傳檔案列表 -->
+            <div class="uploaded-files" id="uploadedFiles"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 確認送出按鈕 -->
+      <div class="submit-wrapper" data-node-id="29:1598">
+        <button class="btn-submit" id="btnSubmit" data-node-id="29:1599">
+          <span data-node-id="29:1600">確認送出</span>
+        </button>
+      </div>
+
+    </div>
+    <!-- /survey-content -->
+
+  </div>
+  <!-- /crm-guarantee-survey -->
+
+  <!-- JavaScript -->
+  <script src="js/crm-guarantee-survey.js"></script>
+
+</body>
+</html>

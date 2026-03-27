@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 報名預約</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-forest-reserve.css">
+</head>
+<body>
+
+  <!-- 森林聚落報名預約頁面容器 -->
+  <div class="crm-forest-reserve" data-node-id="1:4606">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列 -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title">森林聚落</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="#" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域（可捲動） -->
+    <div class="reserve-content">
+
+      <!-- 活動資訊卡片 -->
+      <div class="reserve-card">
+
+        <!-- 活動圖片 -->
+        <div class="reserve-image">
+          <img id="reserveImage" src="assets/event-image-forest.png" alt="活動圖片">
+        </div>
+
+        <!-- 卡片內容區 -->
+        <div class="reserve-card-body">
+
+          <!-- 狀態標籤與活動名稱 -->
+          <div class="reserve-event-header">
+            <span class="status-badge status-available">可預約</span>
+            <h2 class="reserve-event-title" id="reserveTitle">打開植深館｜Into the Forest Living</h2>
+          </div>
+
+          <!-- 活動詳細資訊（日期、地點、費用） -->
+          <div class="reserve-meta">
+            <div class="meta-row">
+              <img class="meta-icon" src="assets/calendar-icon.svg" alt="">
+              <span id="reserveDate">2025/12/05 - 2026/03/31</span>
+            </div>
+            <div class="meta-row">
+              <img class="meta-icon meta-icon-location" src="assets/location-icon.svg" alt="">
+              <span id="reserveLocation">陸府植深館1</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-price-symbol">$</span>
+              <span id="reservePrice">＄600元 / 人</span>
+            </div>
+          </div>
+
+          <!-- 限制提示 -->
+          <div class="reserve-notice" id="reserveNotice">
+            一戶僅可報名 2 位
+          </div>
+
+          <!-- 報名人數 -->
+          <div class="form-group">
+            <label class="form-label">
+              報名人數<span class="required">＊</span>
+            </label>
+            <div class="select-wrapper">
+              <select class="form-select" id="reserveCount">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+              </select>
+              <img class="select-arrow" src="assets/select-arrow.svg" alt="">
+            </div>
+          </div>
+
+          <!-- 是否索取收據（僅付費活動顯示） -->
+          <div class="form-group" id="receiptGroup">
+            <label class="form-label">是否索取收據</label>
+            <div class="radio-group">
+              <label class="radio-item">
+                <input type="radio" name="receipt" value="yes" class="radio-input">
+                <span class="radio-circle"></span>
+                <span class="radio-text">是</span>
+              </label>
+              <label class="radio-item">
+                <input type="radio" name="receipt" value="no" class="radio-input" checked>
+                <span class="radio-circle">
+                  <img class="radio-dot" src="assets/radio-dot.svg" alt="">
+                </span>
+                <span class="radio-text">否</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 分隔線 -->
+        <div class="reserve-divider"></div>
+
+        <!-- 費用摘要 -->
+        <div class="reserve-summary">
+          <div class="summary-row">
+            <span>報名費用</span>
+            <span id="summaryUnitPrice">＄600元 / 人</span>
+          </div>
+          <!-- 共計（僅付費活動顯示） -->
+          <div class="summary-row" id="summaryTotalRow">
+            <span>共計</span>
+            <span id="summaryTotal">＄1200 元</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 底部操作按鈕（固定在底部） -->
+    <div class="reserve-footer">
+      <button class="btn-submit" id="btnSubmit">
+        確認提交預約
+      </button>
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/crm-forest-reserve.js"></script>
+</body>
+</html>

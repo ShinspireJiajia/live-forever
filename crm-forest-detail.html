@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落 - 活動內頁</title>
+  <!-- Google Fonts: Noto Sans TC & Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-forest-detail.css">
+</head>
+<body>
+
+  <!-- 森林聚落活動內頁容器 -->
+  <div class="crm-forest-detail" data-node-id="1:4541">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列 -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title">森林聚落</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="#" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 主要內容區域（可捲動） -->
+    <div class="detail-content" id="detailContent">
+
+      <!-- 活動橫幅圖片 -->
+      <div class="detail-banner">
+        <div class="detail-banner-img" id="detailBannerImg">
+          <img src="assets/event-image-forest.png" alt="活動圖片">
+        </div>
+      </div>
+
+      <!-- 活動資訊區 -->
+      <div class="detail-info">
+        <!-- 活動名稱 -->
+        <h2 class="detail-title" id="detailTitle">打開植深館｜Into the Forest Living</h2>
+
+        <!-- 活動詳細資訊 -->
+        <div class="detail-meta">
+          <!-- 日期 -->
+          <div class="meta-row">
+            <img class="meta-icon" src="assets/calendar-icon.svg" alt="">
+            <span id="detailDate">2025/12/05 - 2026/03/31</span>
+          </div>
+          <!-- 地點 -->
+          <div class="meta-row">
+            <img class="meta-icon meta-icon-location" src="assets/location-icon.svg" alt="">
+            <span id="detailLocation">陸府植深館1</span>
+          </div>
+          <!-- 費用 -->
+          <div class="meta-row">
+            <span class="meta-price-symbol">$</span>
+            <span id="detailPrice">＄600元 / 人</span>
+          </div>
+        </div>
+
+        <!-- 活動描述 -->
+        <div class="detail-description" id="detailDescription">
+          <p>沿著深邃的入口廊道前行，在步移景異間經歷中國林園式設計的「一阻、二引、三通」空間遞進。流動的風輕拂肌膚，光線穿透樹梢在地面交織成毯，長廊盡頭迎來的是由玻璃帷幕包圍的開闊視野。</p>
+          <p>&nbsp;</p>
+          <p>整座建築宛如一座日晷，紀錄著日光的東升西落，捕捉時間的維度。望向窗外，那面銹蝕金屬牆上斑駁翹曲的鐵繡，如同東方繪畫的肌理，靜靜展現歲月積累的詩意。</p>
+          <p>&nbsp;</p>
+          <p>空間，是生活流動之地。在這裡，物件不僅承載了功能與美學，更包容了多重想像。我們邀請您走進植深館，在四季更迭中找一個角落落座，打開對生命的感知，讓藝術與自然流動成你我的日常生活。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部操作按鈕（固定在底部） -->
+    <div class="detail-footer">
+      <button class="btn-action btn-action-available" id="btnAction">
+        我要預約
+      </button>
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/crm-forest-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森林聚落</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <link rel="stylesheet" href="css/crm-forest-list.css">
+</head>
+<body>
+
+  <!-- 森林聚落列表頁面容器 -->
+  <div class="crm-forest-list" data-node-id="1:4391">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="1:4392">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列 -->
+    <div class="top-bar">
+      <!-- 返回按鈕 -->
+      <button class="btn-back" id="btnBack" data-node-id="1:824" aria-label="返回">
+        <img src="assets/arrow.svg" alt="">
+        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
+      </button>
+      <!-- 頁面標題 -->
+      <h1 class="page-title" data-node-id="1:4431">森林聚落</h1>
+      <!-- 首頁按鈕 -->
+      <a class="btn-home" id="btnHome" href="#" data-node-id="196:1631" aria-label="首頁">
+        <img class="home-icon" src="assets/home-icon.svg" alt="">
+        <span>首頁</span>
+      </a>
+    </div>
+
+    <!-- 搜尋列 -->
+    <div class="search-bar" data-node-id="1:4432">
+      <div class="search-input-wrapper" data-node-id="1:4433">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="搜尋建案名稱或關鍵字"
+          data-node-id="I1:4433;81:615"
+        >
+      </div>
+      <button class="btn-search" id="btnSearch" data-node-id="1:4434">
+        查詢
+      </button>
+    </div>
+
+    <!-- 篩選標籤列 -->
+    <div class="filter-tabs" data-node-id="1:4436">
+      <button class="filter-tab active" data-filter="all" data-node-id="1:4437">
+        所有活動
+      </button>
+      <button class="filter-tab" data-filter="registered" data-node-id="1:4439">
+        我已報名
+      </button>
+    </div>
+
+    <!-- 活動卡片列表 -->
+    <div class="event-list" data-node-id="1:4393">
+
+      <!-- 活動卡片 1：可預約 -->
+      <div class="event-card" data-status="available" data-event-id="event-forest" data-node-id="1:4394">
+        <!-- 活動圖片 -->
+        <div class="event-image" data-node-id="1:4395">
+          <img src="assets/event-image-forest.png" alt="打開植深館｜Into the Forest Living">
+        </div>
+        <!-- 活動資訊 -->
+        <div class="event-info" data-node-id="1:4396">
+          <div class="event-meta" data-node-id="1:4397">
+            <!-- 狀態標籤 -->
+            <span class="status-badge status-available" data-node-id="1:4398">
+              可預約
+            </span>
+            <!-- 活動名稱 -->
+            <h2 class="event-title" data-node-id="1:4400">
+              打開植深館｜Into the Forest Living
+            </h2>
+          </div>
+        </div>
+        <!-- 活動日期與地點 -->
+        <div class="event-details" data-node-id="1:4401">
+          <div class="detail-row" data-node-id="1:4402">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="" data-node-id="1:4403">
+            <span data-node-id="1:4408">2025/12/05 - 2026/03/31</span>
+          </div>
+          <div class="detail-row" data-node-id="1:4409">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="" data-node-id="1:4410">
+            <span data-node-id="1:4411">陸府植深館1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 活動卡片 2：可預約（免費） -->
+      <div class="event-card" data-status="available" data-event-id="event-nature-free">
+        <!-- 活動圖片 -->
+        <div class="event-image">
+          <img src="assets/event-image-nature.png" alt="人．造自然">
+        </div>
+        <!-- 活動資訊 -->
+        <div class="event-info">
+          <div class="event-meta">
+            <!-- 狀態標籤 -->
+            <span class="status-badge status-available">
+              可預約
+            </span>
+            <!-- 活動名稱 -->
+            <h2 class="event-title">
+              人．造自然
+            </h2>
+          </div>
+        </div>
+        <!-- 活動日期與地點 -->
+        <div class="event-details">
+          <div class="detail-row">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="">
+            <span>2025/12/05 - 2026/03/31</span>
+          </div>
+          <div class="detail-row">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="">
+            <span>陸府植深館1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 活動卡片 3：已額滿 -->
+      <div class="event-card event-card-full" data-status="full" data-event-id="event-nature" data-node-id="1:4412">
+        <!-- 活動圖片（帶遮罩） -->
+        <div class="event-image event-image-dimmed" data-node-id="1:4413">
+          <img src="assets/event-image-nature.png" alt="人．造自然">
+          <div class="image-overlay"></div>
+        </div>
+        <!-- 活動資訊 -->
+        <div class="event-info event-info-dimmed" data-node-id="1:4414">
+          <div class="event-meta" data-node-id="1:4415">
+            <!-- 狀態標籤 -->
+            <span class="status-badge status-full" data-node-id="1:4416">
+              已額滿
+            </span>
+            <!-- 活動名稱 -->
+            <h2 class="event-title" data-node-id="1:4418">
+              人．造自然
+            </h2>
+          </div>
+        </div>
+        <!-- 活動日期與地點 -->
+        <div class="event-details event-details-dimmed" data-node-id="1:4419">
+          <div class="detail-row" data-node-id="1:4420">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="" data-node-id="1:4421">
+            <span data-node-id="1:4426">2025/04/19 - 2025/08/31</span>
+          </div>
+          <div class="detail-row" data-node-id="1:4427">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="" data-node-id="1:4428">
+            <span data-node-id="1:4429">陸府植深館1</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 我已報名卡片列表（預設隱藏） -->
+    <div class="event-list registered-list" id="registeredList" style="display: none;">
+
+      <!-- 已報名卡片 1：ATM 待付款 -->
+      <div class="reg-card">
+        <div class="reg-card-image">
+          <img src="assets/event-image-forest.png" alt="打開植深館｜Into the Forest Living">
+        </div>
+        <div class="reg-card-title-row">
+          <h2 class="reg-card-title">打開植深館｜Into the Forest Living</h2>
+        </div>
+        <div class="reg-card-details">
+          <div class="detail-row">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="">
+            <span>2025/12/05 - 2026/03/31</span>
+          </div>
+          <div class="detail-row">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="">
+            <span>陸府植深館1</span>
+          </div>
+        </div>
+        <div class="reg-card-divider"></div>
+        <div class="reg-card-info">
+          <div class="info-row">
+            <span class="info-label">報名費用</span>
+            <span class="info-value info-value-price">＄600元</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">付款方式</span>
+            <span class="info-value">ATM 虛擬帳號轉帳</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">付款狀態</span>
+            <span class="info-badge badge-pending">待付款</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">轉帳帳號</span>
+            <span class="info-value info-value-bold">822 - 123456789012</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">繳費期限</span>
+            <span class="info-value">2026/02/12 23:59 止</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">收據需求</span>
+            <span class="info-value">個人收據</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已報名卡片 2：信用卡 付款完成 -->
+      <div class="reg-card">
+        <div class="reg-card-image">
+          <img src="assets/event-image-jazz.png" alt="魯千千 & Richie Goods 爵士二重奏">
+        </div>
+        <div class="reg-card-title-row">
+          <h2 class="reg-card-title">魯千千 &amp; Richie Goods 爵士二重奏</h2>
+        </div>
+        <div class="reg-card-details">
+          <div class="detail-row">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="">
+            <span>2025.09.26(五) 18:30-20:00</span>
+          </div>
+          <div class="detail-row">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="">
+            <span>陸府植深館1</span>
+          </div>
+        </div>
+        <div class="reg-card-divider"></div>
+        <div class="reg-card-info">
+          <div class="info-row">
+            <span class="info-label">報名費用</span>
+            <span class="info-value info-value-price">＄600元</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">付款方式</span>
+            <span class="info-value">信用卡</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">付款狀態</span>
+            <span class="info-badge badge-paid">付款完成</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">收據需求</span>
+            <span class="info-value">不索取</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已報名卡片 3：LINE PAY 已取消 -->
+      <div class="reg-card">
+        <div class="reg-card-image">
+          <img src="assets/event-image-jazz.png" alt="魯千千 & Richie Goods 爵士二重奏">
+        </div>
+        <div class="reg-card-title-row">
+          <h2 class="reg-card-title">魯千千 &amp; Richie Goods 爵士二重奏</h2>
+        </div>
+        <div class="reg-card-details">
+          <div class="detail-row">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="">
+            <span>2025.09.26(五) 18:30-20:00</span>
+          </div>
+          <div class="detail-row">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="">
+            <span>陸府植深館1</span>
+          </div>
+        </div>
+        <div class="reg-card-divider"></div>
+        <div class="reg-card-info">
+          <div class="info-row">
+            <span class="info-label">報名費用</span>
+            <span class="info-value info-value-price">＄600元</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">付款方式</span>
+            <span class="info-value">LINE PAY</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">付款狀態</span>
+            <span class="info-badge badge-cancelled">已取消</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">收據需求</span>
+            <span class="info-value">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已報名卡片 4：免費活動 -->
+      <div class="reg-card">
+        <div class="reg-card-image">
+          <img src="assets/event-image-jazz.png" alt="魯千千 & Richie Goods 爵士二重奏">
+        </div>
+        <div class="reg-card-title-row">
+          <h2 class="reg-card-title">魯千千 &amp; Richie Goods 爵士二重奏</h2>
+        </div>
+        <div class="reg-card-details">
+          <div class="detail-row">
+            <img class="detail-icon" src="assets/calendar-icon.svg" alt="">
+            <span>2025.09.26(五) 18:30-20:00</span>
+          </div>
+          <div class="detail-row">
+            <img class="detail-icon detail-icon-location" src="assets/location-icon.svg" alt="">
+            <span>陸府植深館1</span>
+          </div>
+        </div>
+        <div class="reg-card-divider"></div>
+        <div class="reg-card-info">
+          <div class="info-row">
+            <span class="info-label">報名費用</span>
+            <span class="info-value">免費</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部提示文字 -->
+      <div class="registered-list-footer">
+        <span>—— 已載入近三個月全部紀錄 ——</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 頁面互動邏輯 -->
+  <script src="js/crm-forest-list.js"></script>
+</body>
+</html>
