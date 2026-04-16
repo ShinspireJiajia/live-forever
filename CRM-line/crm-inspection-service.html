@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>驗屋服務</title>
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
+  <link rel="stylesheet" href="css/crm-inspection-service.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
+
+  <!-- 驗屋服務頁面容器 -->
+  <div class="crm-inspection-service" data-node-id="301:548">
+
+    <!-- 裝飾性橢圓背景 -->
+    <div class="decoration-ellipse" data-node-id="301:549">
+      <img src="assets/ellipse-decoration.svg" alt="">
+    </div>
+
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="驗屋服務"></div>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content" data-node-id="301:550">
+
+      <!-- ====== 狀態一：服務尚未開放 ====== -->
+      <div class="state-locked" id="stateLocked" style="display: none;">
+        <div class="timeline-item">
+          <div class="item-title" style="color: #AEAEB2;">線上預約驗屋</div>
+          <div class="lock-box">
+            🔒 功能尚未開放，待通知後啟用
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== 狀態二：服務已開放但無紀錄 ====== -->
+      <div class="state-empty" id="stateEmpty" style="display: none;">
+        <!-- 預約驗屋服務按鈕 -->
+        <div style="width: 100%;" data-node-id="301:551">
+          <button class="btn-reserve" id="btnReserveEmpty" data-node-id="301:552">
+            預約驗屋服務
+          </button>
+        </div>
+        <!-- 空狀態插圖 -->
+        <div class="empty-state">
+          <div class="empty-icon">
+            <img src="assets/empty-record-icon.svg" alt="" loading="lazy">
+          </div>
+          <p class="empty-text">無相關紀錄</p>
+        </div>
+      </div>
+
+      <!-- ====== 狀態三：有預約紀錄 ====== -->
+      <div class="state-has-records" id="stateHasRecords" style="display: none;">
+        <!-- 預約驗屋服務按鈕 -->
+        <div style="width: 100%;" data-node-id="301:551">
+          <button class="btn-reserve" id="btnReserve" data-node-id="301:552">
+            預約驗屋服務
+          </button>
+        </div>
+
+        <!-- 服務卡片列表 -->
+        <div class="card-list" data-node-id="301:554">
+
+          <!-- 卡片 1：預約中 -->
+          <div class="service-card" data-sort-date="2025-07-30 10:00" data-status="預約中" data-node-id="301:555">
+            <!-- 狀態標籤與案件編號 -->
+            <div class="card-header" data-node-id="301:556">
+              <span class="status-badge status-pending" data-node-id="301:557">預約中</span>
+              <span class="card-number" data-node-id="301:559">20250901-002</span>
+            </div>
+            <!-- 案件資訊 -->
+            <div class="card-info" data-node-id="301:560">
+              <p data-node-id="301:561">
+                <span class="label">建　　案</span>｜綠海建案 (A3-3)
+              </p>
+              <p data-node-id="301:562">
+                <span class="label">預約日期</span>｜2025/07/30 10:00
+              </p>
+            </div>
+            <!-- 操作按鈕 -->
+            <div class="card-actions" data-node-id="301:563">
+              <button class="btn btn-outline" data-action="view-record" data-node-id="301:564">
+                檢視紀錄
+              </button>
+            </div>
+          </div>
+
+          <!-- 卡片 2：已完成 -->
+          <div class="service-card" data-sort-date="2025-06-15 14:00" data-status="已完成" data-node-id="301:566">
+            <!-- 狀態標籤與案件編號 -->
+            <div class="card-header" data-node-id="301:568">
+              <span class="status-badge status-completed" data-node-id="301:570">已完成</span>
+              <span class="card-number" data-node-id="301:569">20250901-003</span>
+            </div>
+            <!-- 案件資訊 -->
+            <div class="card-info" data-node-id="301:567">
+              <p data-node-id="301:572">
+                <span class="label">建　　案</span>｜綠海建案 (A3-3)
+              </p>
+              <p data-node-id="301:573">
+                <span class="label">預約日期</span>｜2025/06/15 14:00
+              </p>
+            </div>
+            <!-- 操作按鈕 -->
+            <div class="card-actions" data-node-id="301:574">
+              <button class="btn btn-outline" data-action="view-record" data-node-id="301:576">
+                檢視紀錄
+              </button>
+              <button class="btn btn-gold" data-action="survey" data-node-id="301:578">
+                滿意度問卷
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /card-list -->
+      </div>
+
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /crm-inspection-service -->
+
+  <!-- 共用頂部導覽列元件 -->
+
+
+  <script src="js/crm-header.js" defer></script>
+
+
+  <!-- JavaScript -->
+  <script src="js/crm-inspection-service.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
+</body>
+</html>

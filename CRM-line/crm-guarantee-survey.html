@@ -9,9 +9,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- 頁面樣式 -->
+  <!-- 共用頂部導覽列樣式 -->
+  <link rel="stylesheet" href="css/crm-global.css">
+  <link rel="stylesheet" href="css/crm-header.css">
   <link rel="stylesheet" href="css/crm-guarantee-survey.css">
+
+  <!-- Loading 遮罩 inline 樣式（確保最快渲染） -->
+  <style>
+    .crm-page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#e8e4df;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .35s ease,visibility .35s ease}
+    .crm-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .crm-loader-spinner{width:40px;height:40px;border:3px solid rgba(169,158,145,.25);border-top-color:#a99e91;border-radius:50%;animation:crm-spin .7s linear infinite}
+    .crm-loader-text{margin-top:16px;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:14px;font-weight:500;color:#6b6560;letter-spacing:1px}
+    @keyframes crm-spin{to{transform:rotate(360deg)}}
+  </style>
 </head>
 <body>
+  <!-- 全頁 Loading 遮罩 -->
+  <div class="crm-page-loader" id="crmPageLoader">
+    <div class="crm-loader-spinner"></div>
+    <p class="crm-loader-text">載入中</p>
+  </div>
+
 
   <!-- 對保問卷頁面容器 -->
   <div class="crm-guarantee-survey" data-node-id="29:1534">
@@ -21,24 +39,44 @@
       <img src="assets/ellipse-decoration.svg" alt="">
     </div>
 
-    <!-- 頂部導覽列（凍結區塊） -->
-    <div class="top-bar">
-      <!-- 返回按鈕 -->
-      <button class="btn-back" id="btnBack" aria-label="返回">
-        <img src="assets/arrow.svg" alt="">
-        <img class="arrow-icon" src="assets/arrow-icon.svg" alt="">
-      </button>
-      <!-- 頁面標題 -->
-      <h1 class="page-title" data-node-id="29:1602">對保問卷</h1>
-    </div>
+    <!-- 頂部導覽列（共用元件） -->
+
+
+    <div id="crmHeader" data-title="對保問卷" data-back="crm-guarantee-reserve.html"></div>
 
     <!-- 主要內容區域 -->
     <div class="survey-content" data-node-id="29:1536">
 
-      <!-- 對保的銀行 -->
-      <div class="survey-section" data-node-id="29:1537">
+      <!-- ① 基本貸款意願（項次1，始終顯示） -->
+      <div class="survey-section" id="sectionLoanIntent">
+        <div class="section-block">
+          <div class="section-title-row">
+            <span class="section-number">1</span>
+            <p class="section-title">基本貸款意願</p>
+          </div>
+          <p class="section-hint">[單選題] 您的購屋資金規劃：</p>
+          <div class="loan-intent-options" id="loanIntentOptions">
+            <!-- 需辦理房屋貸款 -->
+            <label class="intent-option" data-value="loan">
+              <span class="radio-btn"></span>
+              <span class="intent-label">需辦理房屋貸款</span>
+              <span class="intent-hint">→ 進入區塊 2 (對保的銀行)</span>
+            </label>
+            <!-- 全額自備 -->
+            <label class="intent-option" data-value="self-fund">
+              <span class="radio-btn"></span>
+              <span class="intent-label">全額自備，無需貸款</span>
+              <span class="intent-hint">→ 跳至區塊 4 (產權登記資訊)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ② 對保的銀行（條件顯示：選擇「需辦理房屋貸款」時顯示） -->
+      <div class="survey-section loan-conditional" id="sectionBank" style="display:none;">
         <div class="section-block" data-node-id="29:1538">
           <div class="section-title-row" data-node-id="29:1539">
+            <span class="section-number">2</span>
             <p class="section-title" data-node-id="29:1540">對保的銀行<span class="required">＊</span></p>
           </div>
 
@@ -56,7 +94,7 @@
               </div>
               <a class="bank-link" href="#" data-node-id="29:1547">
                 <span data-node-id="29:1548">前往官網了解更多</span>
-                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow">
+                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow" loading="lazy">
               </a>
             </label>
 
@@ -71,7 +109,7 @@
               </div>
               <a class="bank-link" href="#" data-node-id="29:1556">
                 <span data-node-id="29:1557">前往官網了解更多</span>
-                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow">
+                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow" loading="lazy">
               </a>
             </label>
 
@@ -86,7 +124,7 @@
               </div>
               <a class="bank-link" href="#" data-node-id="29:1565">
                 <span data-node-id="29:1566">前往官網了解更多</span>
-                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow">
+                <img src="assets/chevron-right-gold.svg" alt="" class="link-arrow" loading="lazy">
               </a>
             </label>
 
@@ -107,12 +145,141 @@
 
           </div>
         </div>
+      </div>
 
-        <!-- 預計貸款金額 -->
-        <div class="form-group" data-node-id="29:1577">
-          <p class="form-label" data-node-id="29:1578">預計貸款金額<span class="required">＊</span></p>
-          <input class="form-input" type="text" id="loanAmount" name="loanAmount" placeholder="請輸入預計貸款金額" inputmode="numeric" data-node-id="29:1579">
+      <!-- ③ 對保地址（條件顯示：選擇「需辦理房屋貸款」時顯示） -->
+      <div class="survey-section loan-conditional" id="sectionAddress" style="display:none;">
+        <div class="section-block">
+          <div class="section-title-row">
+            <span class="section-number">3</span>
+            <p class="section-title">對保地址</p>
+          </div>
+          <p class="section-hint">[單選題] 請選擇您方便的對保地點：</p>
+          <div class="address-options" id="addressOptions">
+            <!-- 陸府建設總公司 -->
+            <label class="address-card" data-value="headquarters">
+              <span class="radio-btn"></span>
+              <div class="address-info">
+                <span class="address-name">陸府建設總公司</span>
+                <span class="address-detail"><img src="assets/icon-location.svg" alt="" class="address-icon" onerror="this.style.display='none'"> 台中市西屯區市政北二路282號</span>
+              </div>
+            </label>
+            <!-- 陸府植森接待中心 -->
+            <label class="address-card" data-value="zhisen">
+              <span class="radio-btn"></span>
+              <div class="address-info">
+                <span class="address-name">陸府植森接待中心</span>
+                <span class="address-detail"><img src="assets/icon-location.svg" alt="" class="address-icon" onerror="this.style.display='none'"> 台中市南屯區大墩十一街168號</span>
+              </div>
+            </label>
+            <!-- 其他 -->
+            <label class="address-card" data-value="other-address">
+              <span class="radio-btn"></span>
+              <div class="address-info">
+                <span class="address-name">其他</span>
+                <span class="address-detail address-detail-hint">選擇此選項，用戶需自行填寫對保地址</span>
+              </div>
+              <!-- 自行輸入對保地址 -->
+              <div class="other-address-input" id="otherAddressInput" style="display:none;">
+                <input class="form-input" type="text" id="otherAddressName" placeholder="請輸入對保地址">
+              </div>
+            </label>
+          </div>
         </div>
+      </div>
+
+      <!-- ④ 貸款需求細節（條件顯示：選擇「需辦理房屋貸款」時顯示） -->
+      <div class="survey-section loan-conditional" id="sectionLoanDetail" style="display:none;">
+        <div class="section-block">
+          <div class="section-title-row">
+            <span class="section-number">4</span>
+            <p class="section-title">貸款需求細節</p>
+          </div>
+
+          <!-- 預計貸款成數 -->
+          <div class="form-group">
+            <p class="form-label">預計貸款成數</p>
+            <div class="input-with-suffix">
+              <input class="form-input" type="text" id="loanRatio" name="loanRatio" placeholder="例如：80" inputmode="numeric">
+              <span class="input-suffix">%</span>
+            </div>
+          </div>
+
+          <!-- 預計貸款金額 -->
+          <div class="form-group">
+            <p class="form-label">預計貸款金額</p>
+            <div class="input-with-suffix">
+              <input class="form-input" type="text" id="loanAmount" name="loanAmount" placeholder="請輸入預計貸款金額" inputmode="numeric">
+              <span class="input-suffix">萬元</span>
+            </div>
+          </div>
+
+          <!-- 貸款人職業屬性 -->
+          <div class="form-group">
+            <p class="form-label">貸款人職業屬性</p>
+            <select class="form-select" id="occupationType" name="occupationType">
+              <option value="" disabled selected>請選擇職業屬性</option>
+              <option value="salaried">一般受僱人員</option>
+              <option value="civil-servant">軍公教人員</option>
+              <option value="professional">專業人士（醫師、律師等）</option>
+              <option value="business-owner">企業主／自營商</option>
+              <option value="freelance">自由業／接案人員</option>
+              <option value="retired">退休人員</option>
+              <option value="other-occupation">其他</option>
+            </select>
+          </div>
+
+          <!-- 名下是否有其他房貸 -->
+          <div class="form-group">
+            <p class="form-label">名下是否有其他房貸？</p>
+            <div class="inline-radio-group" id="otherMortgageOptions">
+              <label class="inline-radio-option" data-value="no">
+                <span class="radio-btn"></span>
+                <span>否（首購）</span>
+              </label>
+              <label class="inline-radio-option" data-value="yes">
+                <span class="radio-btn"></span>
+                <span>是（受限貸令規範）</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⑤ 產權登記資訊（始終顯示） -->
+      <div class="survey-section" id="sectionPropertyReg">
+        <div class="section-block">
+          <div class="section-title-row">
+            <span class="section-number">5</span>
+            <p class="section-title">產權登記資訊</p>
+          </div>
+
+          <!-- 產權登記人是否與合約買方一致 -->
+          <div class="form-group">
+            <p class="form-label">[產權登記人] 是否與合約買方一致？</p>
+            <div class="inline-radio-group" id="propertyOwnerOptions">
+              <label class="inline-radio-option" data-value="yes">
+                <span class="radio-btn"></span>
+                <span>是</span>
+              </label>
+              <label class="inline-radio-option" data-value="no">
+                <span class="radio-btn"></span>
+                <span>否（需填寫指定登記人）</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 指定登記人姓名（條件顯示：選「否」時顯示） -->
+          <div class="form-group designated-owner-group" id="designatedOwnerGroup" style="display:none;">
+            <p class="form-label">指定登記人姓名<span class="required">＊</span></p>
+            <input class="form-input" type="text" id="designatedOwnerName" name="designatedOwnerName" placeholder="請輸入指定登記人姓名">
+            <p class="form-info-hint"><span class="info-icon">ℹ</span> 當選擇「否」時，此欄位將顯示供住戶填寫</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 問卷體驗、其他補充、上傳等（始終顯示） -->
+      <div class="survey-section" data-node-id="29:1537">
 
         <!-- 問卷體驗（星星評分） -->
         <div class="rating-section" data-node-id="29:1580">
@@ -173,8 +340,15 @@
   </div>
   <!-- /crm-guarantee-survey -->
 
-  <!-- JavaScript -->
-  <script src="js/crm-guarantee-survey.js"></script>
+  <!-- 共用頂部導覽列元件 -->
 
+
+  <script src="js/crm-header.js" defer></script>
+
+
+  <!-- JavaScript -->
+  <script src="js/crm-guarantee-survey.js" defer></script>
+
+  <script src="js/crm-loading.js"></script>
 </body>
 </html>
