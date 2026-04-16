@@ -71,34 +71,35 @@ class FoundationRegistrationManager {
         if (!infoEl) return;
 
         if (!event) {
-            infoEl.style.display = 'none'; // 無活動資訊時隱藏
+            infoEl.style.display = 'none';
             return;
         }
 
-        infoEl.style.display = 'block'; // 有活動資訊時顯示
-        const status = this.getEventStatus(event);
-        const statusClass = this.getStatusClass(status);
+        infoEl.style.display = 'block';
+        const totalCapacity = FoundationMockData.getEventTotalCapacity(event.event_id);
+        const totalRegistered = FoundationMockData.getEventRegisteredCount(event.event_id);
+        const sessions = FoundationMockData.getSessionsByEventId(event.event_id);
+        const isFree = event.resident_adult_price === 0 && event.non_resident_adult_price === 0;
 
         infoEl.innerHTML = `
             <div class="event-info-header">
                 <div>
                     <h2 class="event-info-title">${event.title}</h2>
-                    <span class="category-tag">${event.category}</span>
                     ${event.is_resident_only ? '<span class="identity-badge resident" style="margin-left:8px;">住戶限定</span>' : ''}
                 </div>
             </div>
             <div class="event-info-grid">
                 <div class="event-info-item">
-                    <span class="event-info-label">活動時間</span>
-                    <span class="event-info-value">${this.formatDateTime(event.start_dt)} ~ ${this.formatDateTime(event.end_dt)}</span>
+                    <span class="event-info-label">場次數</span>
+                    <span class="event-info-value">${sessions.length} 場</span>
                 </div>
                 <div class="event-info-item">
                     <span class="event-info-label">報名費用</span>
-                    <span class="event-info-value">${event.price > 0 ? '$' + event.price.toLocaleString() : '免費'}</span>
+                    <span class="event-info-value">${isFree ? '免費' : '住戶 $' + event.resident_adult_price + ' / 非住戶 $' + event.non_resident_adult_price}</span>
                 </div>
                 <div class="event-info-item">
-                    <span class="event-info-label">報名上限</span>
-                    <span class="event-info-value">${event.max_slots} 人</span>
+                    <span class="event-info-label">總名額 / 已報名</span>
+                    <span class="event-info-value">${totalCapacity} 人 / ${totalRegistered} 人</span>
                 </div>
                 <div class="event-info-item">
                     <span class="event-info-label">攜伴上限</span>
@@ -292,7 +293,7 @@ class FoundationRegistrationManager {
         const pageData = filtered.slice(start, end);
         
         if (pageData.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="13" class="text-center">無符合條件的報名資料</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="14" class="text-center">無符合條件的報名資料</td></tr>';
             return;
         }
         
@@ -313,6 +314,10 @@ class FoundationRegistrationManager {
                 projectInfo = projects[idSum % projects.length];
             }
             
+            // 取得場次資訊
+            const session = reg.session_id ? FoundationMockData.getSessionById(reg.session_id) : null;
+            const sessionText = session ? session.activity_time : '-';
+
             return `
                 <tr>
                     <td>${start + index + 1}</td>
@@ -325,6 +330,7 @@ class FoundationRegistrationManager {
                         ${reg.applicant_name}
                     </td>
                     <td>${reg.phone}</td>
+                    <td style="font-size:12px;">${sessionText}</td>
                     <td>${(reg.companion_count || 0) + 1} 人</td>
                     <td>
                         $${reg.final_amount.toLocaleString()}
@@ -529,7 +535,7 @@ class FoundationRegistrationManager {
     }
 
     /**
-     * 標記退費
+     * 標記退費 - 開啟退款彈窗
      */
     markRefund(regId) {
         const reg = this.registrations.find(r => r.reg_id === regId);
@@ -540,11 +546,87 @@ class FoundationRegistrationManager {
             return;
         }
         
-        if (confirm('確定要將此報名標記為「退費中」嗎？\n\n注意：實際退款需線下人工執行，系統僅作狀態標記。')) {
-            this.showToast('success', '退費標記', '已將報名狀態更新為退費中，請進行線下退款處理');
-            this.renderTable();
-            this.updateStats();
+        // 儲存當前退款的報名 ID
+        this.currentRefundRegId = regId;
+        
+        // 設定退款金額顯示
+        const refundAmountEl = document.getElementById('refundAmount');
+        if (refundAmountEl) {
+            refundAmountEl.textContent = '$' + reg.final_amount.toLocaleString();
         }
+        
+        // 清空備註欄位
+        const refundNoteEl = document.getElementById('refundNote');
+        if (refundNoteEl) {
+            refundNoteEl.value = '';
+        }
+        
+        // 開啟退款彈窗
+        this.openRefundModal();
+    }
+
+    /**
+     * 開啟退款彈窗
+     */
+    openRefundModal() {
+        const modal = document.getElementById('refundModal');
+        if (modal) {
+            modal.classList.add('active');
+        }
+        
+        // 綁定確認按鈕事件 (只綁定一次)
+        if (!this.refundModalEventsBound) {
+            this.bindRefundModalEvents();
+            this.refundModalEventsBound = true;
+        }
+    }
+
+    /**
+     * 關閉退款彈窗
+     */
+    closeRefundModal() {
+        const modal = document.getElementById('refundModal');
+        if (modal) {
+            modal.classList.remove('active');
+        }
+        this.currentRefundRegId = null;
+    }
+
+    /**
+     * 綁定退款彈窗事件
+     */
+    bindRefundModalEvents() {
+        const btnConfirm = document.getElementById('btnConfirmRefund');
+        if (btnConfirm) {
+            btnConfirm.addEventListener('click', () => this.confirmRefund());
+        }
+    }
+
+    /**
+     * 確認退款
+     */
+    confirmRefund() {
+        const note = document.getElementById('refundNote')?.value;
+        if (!note) {
+            this.showToast('error', '錯誤', '請輸入退款備註說明');
+            return;
+        }
+        
+        const reg = this.registrations.find(r => r.reg_id === this.currentRefundRegId);
+        if (reg) {
+            // 更新報名狀態為已退費
+            reg.payment_status = '已退費';
+        }
+        
+        // 關閉彈窗
+        this.closeRefundModal();
+        
+        // 更新表格與統計
+        this.renderTable();
+        this.updateStats();
+        
+        // 顯示成功訊息
+        this.showToast('success', '退款申請已執行', '已更新狀態為已退費');
     }
 
     /**
@@ -651,6 +733,60 @@ class FoundationRegistrationManager {
         document.getElementById('addPaymentMethod')?.addEventListener('change', () => {
              this.handlePaymentMethodChange();
         });
+
+        // 案場與戶別變更時更新驗證提示
+        document.getElementById('addProject')?.addEventListener('change', () => {
+            this.updateResidentValidationHint();
+        });
+        document.getElementById('addUnit')?.addEventListener('change', () => {
+            this.updateResidentValidationHint();
+        });
+    }
+
+    /**
+     * 更新住戶驗證提示
+     * 選擇案場與戶別後，顯示需輸入的驗證資訊提示
+     */
+    updateResidentValidationHint() {
+        const hintContainer = document.getElementById('residentValidationHint');
+        const hintText = document.getElementById('residentHintText');
+        
+        if (!hintContainer || !hintText) return;
+
+        const projectSelect = document.getElementById('addProject');
+        const unitSelect = document.getElementById('addUnit');
+        const project = projectSelect ? projectSelect.value : '';
+        const unit = unitSelect ? unitSelect.value : '';
+
+        // 如果沒有選擇案場或戶別，隱藏提示
+        if (!project || !unit) {
+            hintContainer.style.display = 'none';
+            return;
+        }
+
+        // 取得該戶別的住戶資料
+        const resident = FoundationMockData.getResidentInfo(project, unit);
+        
+        if (!resident) {
+            // 找不到住戶資料
+            hintContainer.style.display = 'block';
+            hintContainer.querySelector('.validation-hint').className = 'validation-hint warning';
+            hintText.innerHTML = `<strong>注意：</strong>找不到「${project} ${unit}」的住戶登記資料，請確認案場與戶別是否正確。`;
+            return;
+        }
+
+        // 顯示驗證提示
+        hintContainer.style.display = 'block';
+        hintContainer.querySelector('.validation-hint').className = 'validation-hint';
+        
+        // 部分遮蔽住戶資訊作為提示（保護隱私）
+        const maskedName = resident.name.charAt(0) + '○' + resident.name.slice(-1);
+        const maskedPhone = resident.phone.substring(0, 4) + '***' + resident.phone.slice(-3);
+        
+        hintText.innerHTML = `
+            <strong>住戶驗證：</strong>請輸入「${project} ${unit}」登記住戶的<strong>姓名</strong>或<strong>聯絡電話</strong>進行驗證。
+            <br><small style="color: #666;">提示：登記住戶 ${maskedName}，電話 ${maskedPhone}</small>
+        `;
     }
 
     /**
@@ -694,16 +830,21 @@ class FoundationRegistrationManager {
         const residentFields = document.getElementById('residentFields');
         const projectSelect = document.getElementById('addProject');
         const unitSelect = document.getElementById('addUnit');
+        const hintContainer = document.getElementById('residentValidationHint');
 
         if (residentFields) {
             if (identity === 'resident') {
                 residentFields.style.display = 'block';
                 if (projectSelect) projectSelect.required = true;
                 if (unitSelect) unitSelect.required = true;
+                // 更新驗證提示
+                this.updateResidentValidationHint();
             } else {
                 residentFields.style.display = 'none';
                 if (projectSelect) projectSelect.required = false;
                 if (unitSelect) unitSelect.required = false;
+                // 隱藏驗證提示
+                if (hintContainer) hintContainer.style.display = 'none';
             }
         }
     }
@@ -739,6 +880,41 @@ class FoundationRegistrationManager {
         const name = nameDetails ? nameDetails.value : '';
         const phoneDetails = document.getElementById('addPhone');
         const phone = phoneDetails ? phoneDetails.value : '';
+
+        // ============================================
+        // 住戶身分驗證 - 檢核姓名或電話是否符合所選戶別
+        // ============================================
+        if (identity === 'resident') {
+            const projectSelect = document.getElementById('addProject');
+            const unitSelect = document.getElementById('addUnit');
+            const project = projectSelect ? projectSelect.value : '';
+            const unit = unitSelect ? unitSelect.value : '';
+
+            if (!project || !unit) {
+                alert('請選擇案場與戶別');
+                return;
+            }
+
+            // 呼叫驗證方法
+            const validation = FoundationMockData.validateResident(project, unit, name, phone);
+            
+            if (!validation.valid) {
+                // 組合錯誤訊息
+                let errorMsg = '住戶驗證失敗！\n\n';
+                errorMsg += validation.message + '\n\n';
+                errorMsg += '請確認：\n';
+                errorMsg += '1. 報名者姓名需與該戶別登記之住戶姓名相符\n';
+                errorMsg += '2. 或聯絡電話需與該戶別登記之電話相符\n\n';
+                errorMsg += '如需修正住戶資料，請洽系統管理員。';
+                
+                alert(errorMsg);
+                this.showToast('error', '驗證失敗', '報名者資料與該戶別登記資料不符');
+                return;
+            }
+
+            // 驗證成功，顯示提示
+            this.showToast('success', '住戶驗證通過', `已確認 ${validation.matchType} 符合「${project} ${unit}」住戶資料`);
+        }
         const receiptInput = document.querySelector('input[name="needReceipt"]:checked');
         const needReceipt = receiptInput ? receiptInput.value : 'no';
         

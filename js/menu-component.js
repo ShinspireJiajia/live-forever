@@ -102,6 +102,7 @@ const CRM_SIDEBAR_HTML = `
                             <ul class="menu-items">
                                 <li class="menu-item"><a href="member-list.html" title="會員管理"><span class="menu-title">會員管理</span></a></li>
                                 <li class="menu-item"><a href="member-bindline.html" title="Line 綁定"><span class="menu-title">Line 綁定</span></a></li>
+                                <li class="menu-item"><a href="member-life-service.html" title="鄰里生活服務管理"><span class="menu-title">鄰里生活服務管理</span></a></li>
                                 <li class="menu-item"><a href="#" title="活動歷程 (未完成)"><span class="menu-title">活動歷程 (未完成)</span></a></li>
                             </ul>
                         </li>

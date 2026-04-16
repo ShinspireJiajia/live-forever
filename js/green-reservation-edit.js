@@ -12,6 +12,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const sidebarManager = new SidebarManager();
 
+    // ============================================
+    // 頁籤切換功能
+    // ============================================
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetTab = this.dataset.tab;
+
+            // 移除所有 active
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // 添加目前頁籤的 active
+            this.classList.add('active');
+            document.getElementById(`tab-${targetTab}`).classList.add('active');
+        });
+    });
+
     // 取得今天日期
     const today = new Date();
     const todayFormatted = today.toISOString().split('T')[0];
@@ -141,15 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 取消按鈕功能
-    const cancelBtn = document.getElementById('cancelBtn');
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', function() {
-            // 返回列表，不需確認
-            window.location.href = 'green-reservation.html';
-        });
-    }
-    
     // 取消預約相關功能
     const cancelReservationBtn = document.getElementById('cancelReservationBtn');
     const cancelReservationModal = document.getElementById('cancel-reservation-modal');
@@ -159,7 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelReasonInput = document.getElementById('cancelReason');
     const cancelReasonError = document.getElementById('cancelReasonError');
     const reservationStatus = document.getElementById('reservationStatus');
-    const saveBtn = document.getElementById('saveBtn');
+    const saveBtn = document.getElementById('btnSaveTop');
+    const saveBtnBottom = document.getElementById('btnSaveBottom');
 
     if (cancelReservationBtn) {
         cancelReservationBtn.addEventListener('click', function() {
@@ -233,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 禁用表單按鈕
             if (saveBtn) saveBtn.disabled = true;
+            if (saveBtnBottom) saveBtnBottom.disabled = true;
             if (cancelReservationBtn) cancelReservationBtn.disabled = true;
             
             // 顯示提示

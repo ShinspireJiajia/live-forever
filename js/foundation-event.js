@@ -3,7 +3,7 @@
  * 基金會活動模組 - JavaScript
  * ============================================
  * 檔案：foundation-event.js
- * 說明：基金會活動管理相關功能
+ * 說明：基金會活動管理（CMS 同步列表）
  * ============================================
  */
 
@@ -25,7 +25,7 @@ class FoundationEventManager {
         this.loadMockData();
         this.bindEvents();
         this.renderTable();
-        this.updateStats();
+        this.updatePageInfo();
     }
 
     /**
@@ -39,18 +39,28 @@ class FoundationEventManager {
      * 綁定事件
      */
     bindEvents() {
-        // 查詢表單
-        const searchForm = document.getElementById('searchForm');
-        if (searchForm) {
-            searchForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleSearch();
+        // 關鍵字搜尋
+        const btnSearch = document.getElementById('btnKeywordSearch');
+        if (btnSearch) {
+            btnSearch.addEventListener('click', () => this.handleSearch());
+        }
+        const searchKeyword = document.getElementById('searchKeyword');
+        if (searchKeyword) {
+            searchKeyword.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.handleSearch();
+                }
             });
-            searchForm.addEventListener('reset', () => {
-                setTimeout(() => {
-                    this.currentPage = 1;
-                    this.renderTable();
-                }, 0);
+        }
+
+        // 篩選下拉
+        const filterAll = document.getElementById('filterAllData');
+        if (filterAll) {
+            filterAll.addEventListener('change', () => {
+                this.currentPage = 1;
+                this.renderTable();
+                this.updatePageInfo();
             });
         }
 
@@ -60,45 +70,28 @@ class FoundationEventManager {
             btnSync.addEventListener('click', () => this.handleSync());
         }
 
-        // 新增活動
-        const btnAdd = document.getElementById('btnAdd');
-        if (btnAdd) {
-            btnAdd.addEventListener('click', () => this.openEventModal());
-        }
-    }
-
-    /**
-     * 處理同步
-     */
-    async handleSync() {
+        // 同步按鈕
         const btnSync = document.getElementById('btnSync');
-        const icon = btnSync.querySelector('i');
+        const btnSync = document.getElementById('btnSync');
+        const originalHtml = btnSync.innerHTML;
         
         // 顯示同步中狀態
-        icon.classList.add('spinning');
         btnSync.disabled = true;
         btnSync.innerHTML = '<i class="fa-solid fa-sync spinning"></i> 同步中...';
         
         // 模擬 API 同步
         await new Promise(resolve => setTimeout(resolve, 2000));
         
-        // 更新最後同步時間
-        const syncTime = new Date().toLocaleString('zh-TW');
-        const lastSyncEl = document.getElementById('lastSyncTime');
-        if (lastSyncEl) {
-            lastSyncEl.textContent = syncTime;
-        }
-        
         // 恢復按鈕狀態
         btnSync.disabled = false;
-        btnSync.innerHTML = '<i class="fa-solid fa-sync"></i> 手動同步';
+        btnSync.innerHTML = originalHtml;
         
         // 顯示成功訊息
-        this.showToast('success', '同步成功', '已從外部 API 同步最新活動資料');
+        this.showToast('success', '同步成功', '已從 CMS 同步最新活動資料');
         
         // 重新載入資料
         this.renderTable();
-        this.updateStats();
+        this.updatePageInfo();
     }
 
     /**
@@ -107,70 +100,32 @@ class FoundationEventManager {
     handleSearch() {
         this.currentPage = 1;
         this.renderTable();
-    }
-
-    /**
-     * 取得篩選條件
-     */
-    getFilters() {
-        const filters = {};
-        
-        const searchTitle = document.getElementById('searchTitle');
-        const searchCategory = document.getElementById('searchCategory');
-        const searchDateFrom = document.getElementById('searchDateFrom');
-        const searchDateTo = document.getElementById('searchDateTo');
-        
-        if (searchTitle?.value) filters.title = searchTitle.value;
-        if (searchCategory?.value) filters.category = searchCategory.value;
-        if (searchDateFrom?.value) filters.dateFrom = searchDateFrom.value;
-        if (searchDateTo?.value) filters.dateTo = searchDateTo.value;
-        
-        return filters;
+        this.updatePageInfo();
     }
 
     /**
      * 篩選活動
      */
     filterEvents() {
-        const filters = this.getFilters();
         let filtered = [...this.events];
         
-        if (filters.title) {
+        // 關鍵字篩選
+        const keyword = document.getElementById('searchKeyword')?.value?.trim();
+        if (keyword) {
             filtered = filtered.filter(e => 
-                e.title.toLowerCase().includes(filters.title.toLowerCase())
+                e.title.toLowerCase().includes(keyword.toLowerCase())
             );
         }
-        
-        if (filters.category) {
-            filtered = filtered.filter(e => e.category === filters.category);
+
+        // 顯示狀態篩選
+        const filterVisible = document.getElementById('filterAllData')?.value;
+        if (filterVisible === 'visible') {
+            filtered = filtered.filter(e => e.is_frontend_visible);
+        } else if (filterVisible === 'hidden') {
+            filtered = filtered.filter(e => !e.is_frontend_visible);
         }
         
         return filtered;
-    }
-
-    /**
-     * 取得活動狀態
-     */
-    getEventStatus(event) {
-        const now = new Date();
-        const startDate = new Date(event.start_dt);
-        const endDate = new Date(event.end_dt);
-        
-        if (now < startDate) return '即將開始';
-        if (now >= startDate && now <= endDate) return '進行中';
-        return '已結束';
-    }
-
-    /**
-     * 取得狀態樣式類別
-     */
-    getStatusClass(status) {
-        switch (status) {
-            case '即將開始': return 'upcoming';
-            case '進行中': return 'active';
-            case '已結束': return 'ended';
-            default: return '';
-        }
     }
 
     /**
@@ -186,49 +141,37 @@ class FoundationEventManager {
         const pageData = filtered.slice(start, end);
         
         if (pageData.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="8" class="text-center">無符合條件的活動資料</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#999;padding:20px;">無符合條件的活動資料</td></tr>';
             return;
         }
         
-        tbody.innerHTML = pageData.map((event, index) => {
-            const status = this.getEventStatus(event);
-
-            // 計算已報名人數 (排除已取消)
-            const registeredCount = FoundationMockData.registrations
-                .filter(r => r.event_id === event.event_id && r.payment_status !== '已取消')
-                .reduce((sum, r) => sum + 1 + r.companion_count, 0);
-            
-            // 產生序號: EV + YYMMDD + 流水號(2碼)
-            const startDate = new Date(event.start_dt);
-            const yymmdd = startDate.getFullYear().toString().substr(2) + 
-                           (startDate.getMonth() + 1).toString().padStart(2, '0') + 
-                           startDate.getDate().toString().padStart(2, '0');
-            
-            let sequence = '01';
-            // 嘗試從 event_id 取得最後兩碼
-            const idMatch = event.event_id.match(/\d{2}$/);
-            if (idMatch) {
-                sequence = idMatch[0];
-            }
-
-            const serialNo = `EV${yymmdd}${sequence}`;
+        tbody.innerHTML = pageData.map((event) => {
+            // 格式化建立日期
+            const created = event.created_at ? new Date(event.created_at) : null;
+            const createdStr = created 
+                ? created.toLocaleString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })
+                : '-';
             
             return `
                 <tr>
-                    <td>${serialNo}</td>
-                    <td>
-                        ${event.title}
-                        ${event.is_resident_only ? '(住戶限定)' : ''}
-                    </td>
-                    <td>${event.category}</td>
-                    <td>${this.formatDateTime(event.start_dt)}</td>
-                    <td>${this.formatDateTime(event.end_dt)}</td>
-                    <td>${event.max_slots} 人</td>
-                    <td>${registeredCount} 人</td>
+                    <td>${event.title}</td>
+                    <td>${event.publish_date || '-'}</td>
+                    <td class="cell-bool"><input type="checkbox" ${event.is_frontend_visible ? 'checked' : ''} disabled></td>
+                    <td class="cell-bool"><input type="checkbox" ${event.is_pinned ? 'checked' : ''} disabled></td>
+                    <td class="cell-bool"><input type="checkbox" ${event.is_resident_only ? 'checked' : ''} disabled></td>
+                    <td class="cell-bool"><input type="checkbox" ${event.is_form_visible ? 'checked' : ''} disabled></td>
+                    <td>${createdStr}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn btn-sm btn-outline-success" onclick="eventManager.editEvent('${event.event_id}')">編輯規則</button>
-                            <button class="btn btn-sm btn-outline-success" onclick="eventManager.viewRegistrations('${event.event_id}')">報名管理</button>
+                            <button class="btn btn-sm btn-primary" onclick="eventManager.viewCmsPage('${event.event_id}')" title="開啟 CMS 活動頁面">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="eventManager.editEvent('${event.event_id}')" title="報名規則設定">
+                                <i class="fa-solid fa-gear"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="eventManager.viewRegistrations('${event.event_id}')" title="報名管理">
+                                <i class="fa-solid fa-users"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -240,18 +183,15 @@ class FoundationEventManager {
     }
 
     /**
-     * 格式化日期時間
+     * 更新頁面資訊
      */
-    formatDateTime(dateStr) {
-        const date = new Date(dateStr);
-        return date.toLocaleString('zh-TW', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-        });
+    updatePageInfo() {
+        const filtered = this.filterEvents();
+        const totalPages = Math.ceil(filtered.length / this.pageSize) || 1;
+        const infoEl = document.getElementById('pageDataInfo');
+        if (infoEl) {
+            infoEl.textContent = `頁次 ${this.currentPage} / ${totalPages} 共有 ${filtered.length} 筆資料`;
+        }
     }
 
     /**
@@ -272,21 +212,15 @@ class FoundationEventManager {
         
         // 上一頁
         const prevDisabled = this.currentPage === 1 ? 'disabled' : '';
-        html += `
-            <li class="page-item ${prevDisabled}">
-                <a class="page-link" href="javascript:void(0)" onclick="eventManager.goToPage(${this.currentPage - 1})">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </a>
-            </li>`;
+        html += `<li class="page-item ${prevDisabled}">
+                    <a class="page-link" href="javascript:void(0)" onclick="eventManager.goToPage(${this.currentPage - 1})">
+                        <i class="fa-solid fa-chevron-left"></i></a></li>`;
         
-        // 頁碼
         for (let i = 1; i <= totalPages; i++) {
             if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
                 const active = i === this.currentPage ? 'active' : '';
-                html += `
-                    <li class="page-item ${active}">
-                        <a class="page-link" href="javascript:void(0)" onclick="eventManager.goToPage(${i})">${i}</a>
-                    </li>`;
+                html += `<li class="page-item ${active}">
+                            <a class="page-link" href="javascript:void(0)" onclick="eventManager.goToPage(${i})">${i}</a></li>`;
             } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
                 html += '<li class="page-item disabled"><span class="page-link">...</span></li>';
             }
@@ -294,12 +228,9 @@ class FoundationEventManager {
         
         // 下一頁
         const nextDisabled = this.currentPage === totalPages ? 'disabled' : '';
-        html += `
-            <li class="page-item ${nextDisabled}">
-                <a class="page-link" href="javascript:void(0)" onclick="eventManager.goToPage(${this.currentPage + 1})">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </a>
-            </li>`;
+        html += `<li class="page-item ${nextDisabled}">
+                    <a class="page-link" href="javascript:void(0)" onclick="eventManager.goToPage(${this.currentPage + 1})">
+                        <i class="fa-solid fa-chevron-right"></i></a></li>`;
         
         html += '</ul>';
         wrapper.innerHTML = html;
@@ -309,25 +240,24 @@ class FoundationEventManager {
      * 跳轉頁面
      */
     goToPage(page) {
+        const filtered = this.filterEvents();
+        const totalPages = Math.ceil(filtered.length / this.pageSize);
+        if (page < 1 || page > totalPages) return;
         this.currentPage = page;
         this.renderTable();
+        this.updatePageInfo();
     }
 
     /**
-     * 更新統計
+     * 查看 CMS 活動頁面（導向外部 URL）
      */
-    updateStats() {
-        const events = this.events;
-        
-        const totalEl = document.getElementById('statTotal');
-        const activeEl = document.getElementById('statActive');
-        const upcomingEl = document.getElementById('statUpcoming');
-        const endedEl = document.getElementById('statEnded');
-        
-        if (totalEl) totalEl.textContent = events.length;
-        if (activeEl) activeEl.textContent = events.filter(e => this.getEventStatus(e) === '進行中').length;
-        if (upcomingEl) upcomingEl.textContent = events.filter(e => this.getEventStatus(e) === '即將開始').length;
-        if (endedEl) endedEl.textContent = events.filter(e => this.getEventStatus(e) === '已結束').length;
+    viewCmsPage(eventId) {
+        const event = FoundationMockData.getEventById(eventId);
+        if (event && event.cms_url) {
+            window.location.href = event.cms_url;
+        } else {
+            this.showToast('error', '錯誤', '找不到活動的 CMS 連結');
+        }
     }
 
     /**
@@ -345,18 +275,9 @@ class FoundationEventManager {
     }
 
     /**
-     * 開啟活動設定彈窗
-     */
-    openEventModal(event = null) {
-        // 這裡可以實作彈窗邏輯
-        console.log('Open event modal', event);
-    }
-
-    /**
      * 顯示提示訊息
      */
     showToast(type, title, message) {
-        // 建立 toast 元素
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
         toast.innerHTML = `
@@ -372,7 +293,6 @@ class FoundationEventManager {
             </button>
         `;
         
-        // 加入頁面
         let container = document.querySelector('.toast-container');
         if (!container) {
             container = document.createElement('div');
@@ -380,8 +300,6 @@ class FoundationEventManager {
             document.body.appendChild(container);
         }
         container.appendChild(toast);
-        
-        // 自動移除
         setTimeout(() => toast.remove(), 5000);
     }
 }

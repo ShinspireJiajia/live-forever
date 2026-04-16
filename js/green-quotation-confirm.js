@@ -174,62 +174,41 @@ function renderRemarks(remarks) {
 
 // ==================== 簽名畫布功能 ====================
 
+var signatureInstance = null;
+
 /**
  * 初始化簽名畫布
  */
 function initSignatureCanvas() {
-    canvas = document.getElementById('signatureCanvas');
-    ctx = canvas.getContext('2d');
-
-    // 設定畫布實際尺寸（處理高解析度螢幕）
-    resizeCanvas();
-
-    // 設定畫筆樣式
-    ctx.strokeStyle = '#333333';
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-
-    // 監聽視窗大小變化
-    window.addEventListener('resize', resizeCanvas);
+    signatureInstance = DesktopSignatureCanvas.init({
+        canvasId: 'signatureCanvas',
+        clearBtnId: 'clearSignature',
+        confirmBtnId: null,
+        onClear: function() {
+            hasSignature = false;
+            updateSubmitButton();
+        },
+        onDraw: function() {
+            if (!hasSignature) {
+                hasSignature = true;
+                updateSubmitButton();
+            }
+        }
+    });
 }
 
 /**
- * 調整畫布尺寸
+ * 取得簽名圖片（Base64 格式）
+ * @returns {string} Base64 編碼的圖片資料
  */
-function resizeCanvas() {
-    const wrapper = canvas.parentElement;
-    const rect = wrapper.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-
-    // 設定畫布實際尺寸
-    canvas.width = rect.width * dpr;
-    canvas.height = 200 * dpr;
-
-    // 設定 CSS 尺寸
-    canvas.style.width = rect.width + 'px';
-    canvas.style.height = '200px';
-
-    // 縮放畫布以匹配解析度
-    ctx.scale(dpr, dpr);
-
-    // 重新設定畫筆樣式
-    ctx.strokeStyle = '#333333';
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
+function getSignatureImage() {
+    return signatureInstance ? signatureInstance.getDataUrl() : '';
 }
 
 /**
  * 綁定事件
  */
 function bindEvents() {
-    // 簽名畫布事件
-    bindCanvasEvents();
-
-    // 清除簽名按鈕
-    document.getElementById('clearSignature').addEventListener('click', clearSignature);
-
     // 同意條款核取方塊
     document.getElementById('agreeCheckbox').addEventListener('change', updateSubmitButton);
 
@@ -238,130 +217,6 @@ function bindEvents() {
 
     // 前往付款按鈕
     document.getElementById('goPaymentBtn').addEventListener('click', goToPayment);
-}
-
-/**
- * 綁定畫布繪圖事件
- */
-function bindCanvasEvents() {
-    // 滑鼠事件
-    canvas.addEventListener('mousedown', startDrawing);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDrawing);
-    canvas.addEventListener('mouseout', stopDrawing);
-
-    // 觸控事件
-    canvas.addEventListener('touchstart', handleTouchStart);
-    canvas.addEventListener('touchmove', handleTouchMove);
-    canvas.addEventListener('touchend', stopDrawing);
-}
-
-/**
- * 開始繪圖
- * @param {MouseEvent} e - 滑鼠事件
- */
-function startDrawing(e) {
-    isDrawing = true;
-    const pos = getMousePos(e);
-    lastX = pos.x;
-    lastY = pos.y;
-
-    // 標記畫布為啟用狀態
-    canvas.parentElement.classList.add('active');
-}
-
-/**
- * 繪製線條
- * @param {MouseEvent} e - 滑鼠事件
- */
-function draw(e) {
-    if (!isDrawing) return;
-
-    e.preventDefault();
-    const pos = getMousePos(e);
-
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-
-    lastX = pos.x;
-    lastY = pos.y;
-
-    // 標記有簽名
-    if (!hasSignature) {
-        hasSignature = true;
-        canvas.parentElement.classList.add('has-signature');
-        updateSubmitButton();
-    }
-}
-
-/**
- * 停止繪圖
- */
-function stopDrawing() {
-    isDrawing = false;
-    canvas.parentElement.classList.remove('active');
-}
-
-/**
- * 處理觸控開始事件
- * @param {TouchEvent} e - 觸控事件
- */
-function handleTouchStart(e) {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const mouseEvent = new MouseEvent('mousedown', {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    startDrawing(mouseEvent);
-}
-
-/**
- * 處理觸控移動事件
- * @param {TouchEvent} e - 觸控事件
- */
-function handleTouchMove(e) {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const mouseEvent = new MouseEvent('mousemove', {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    draw(mouseEvent);
-}
-
-/**
- * 取得滑鼠在畫布中的位置
- * @param {MouseEvent} e - 滑鼠事件
- * @returns {Object} 座標物件 { x, y }
- */
-function getMousePos(e) {
-    const rect = canvas.getBoundingClientRect();
-    return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-    };
-}
-
-/**
- * 清除簽名
- */
-function clearSignature() {
-    const dpr = window.devicePixelRatio || 1;
-    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-    hasSignature = false;
-    canvas.parentElement.classList.remove('has-signature');
-    updateSubmitButton();
-}
-
-/**
- * 取得簽名圖片（Base64 格式）
- * @returns {string} Base64 編碼的圖片資料
- */
-function getSignatureImage() {
-    return canvas.toDataURL('image/png');
 }
 
 // ==================== 表單提交 ====================

@@ -169,170 +169,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ========================================
-    // 簽名功能
+    // 簽名功能（使用共用元件）
     // ========================================
-    const signatureCanvas = document.getElementById('signatureCanvas');
-    const signaturePlaceholder = document.getElementById('signaturePlaceholder');
-    const btnClearSign = document.getElementById('btnClearSign');
-    const btnConfirmSign = document.getElementById('btnConfirmSign');
-    const signatureArea = document.getElementById('signatureArea');
-    const skipSignatureCheckbox = document.getElementById('skipSignature');
-    const signatureDisabledOverlay = document.getElementById('signatureDisabledOverlay');
     
-    let isDrawing = false;
-    let signatureCtx = null;
-    let hasSignature = false;
-
-    // 「此次無需簽名」核取方塊功能
-    if (skipSignatureCheckbox) {
-        skipSignatureCheckbox.addEventListener('change', function() {
-            const isSkipped = this.checked;
-            
-            if (isSkipped) {
-                // 停用簽名區域
-                if (signatureArea) signatureArea.classList.add('disabled');
-                // 顯示遮罩層
-                if (signatureDisabledOverlay) signatureDisabledOverlay.style.display = 'flex';
-                // 停用按鈕
-                if (btnClearSign) btnClearSign.disabled = true;
-                if (btnConfirmSign) btnConfirmSign.disabled = true;
-                // 清除已有簽名
-                if (signatureCtx && signatureCanvas) {
-                    const dpr = window.devicePixelRatio || 1;
-                    signatureCtx.clearRect(0, 0, signatureCanvas.width / dpr, signatureCanvas.height / dpr);
-                    hasSignature = false;
-                }
-                // 隱藏提示文字
-                if (signaturePlaceholder) signaturePlaceholder.classList.add('hidden');
-            } else {
-                // 啟用簽名區域
-                if (signatureArea) signatureArea.classList.remove('disabled');
-                // 隱藏遮罩層
-                if (signatureDisabledOverlay) signatureDisabledOverlay.style.display = 'none';
-                // 啟用按鈕
-                if (btnClearSign) btnClearSign.disabled = false;
-                if (btnConfirmSign) btnConfirmSign.disabled = false;
-                // 顯示提示文字
-                if (signaturePlaceholder) signaturePlaceholder.classList.remove('hidden');
-            }
-        });
-        
-        // 初始化時觸發一次，以處理預設勾選狀態
-        skipSignatureCheckbox.dispatchEvent(new Event('change'));
+    // 根據狀態控制簽名區塊顯示：處理中時隱藏
+    var cStatusSelect = document.getElementById('cStatus');
+    var signatureSection = document.getElementById('signatureSection');
+    var signatureDivider = document.getElementById('signatureDivider');
+    
+    function toggleSignatureByStatus() {
+        var status = cStatusSelect ? cStatusSelect.value : '';
+        var isProcessing = (status === '處理中');
+        if (signatureSection) signatureSection.style.display = isProcessing ? 'none' : '';
+        if (signatureDivider) signatureDivider.style.display = isProcessing ? 'none' : '';
     }
     
-    if (signatureCanvas) {
-        signatureCtx = signatureCanvas.getContext('2d');
-        
-        // 調整 canvas 尺寸以符合容器
-        function resizeCanvas() {
-            const container = signatureCanvas.parentElement;
-            const rect = container.getBoundingClientRect();
-            const dpr = window.devicePixelRatio || 1;
-            
-            // 設定實際畫布大小
-            signatureCanvas.width = rect.width * dpr;
-            signatureCanvas.height = 200 * dpr;
-            
-            // 設定 CSS 顯示大小
-            signatureCanvas.style.width = rect.width + 'px';
-            signatureCanvas.style.height = '200px';
-            
-            // 縮放繪圖上下文
-            signatureCtx.scale(dpr, dpr);
-            
-            // 設定繪圖樣式
-            signatureCtx.strokeStyle = '#000';
-            signatureCtx.lineWidth = 2;
-            signatureCtx.lineCap = 'round';
-            signatureCtx.lineJoin = 'round';
-        }
-        
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        // 取得滑鼠/觸控位置
-        function getPosition(e) {
-            const rect = signatureCanvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
-            return { x, y };
-        }
-        
-        // 開始繪製
-        function startDrawing(e) {
-            // 檢查是否已標記為無需簽名
-            if (skipSignatureCheckbox && skipSignatureCheckbox.checked) return;
-            
-            e.preventDefault();
-            isDrawing = true;
-            hasSignature = true;
-            
-            if (signaturePlaceholder) {
-                signaturePlaceholder.classList.add('hidden');
-            }
-            
-            const pos = getPosition(e);
-            signatureCtx.beginPath();
-            signatureCtx.moveTo(pos.x, pos.y);
-        }
-        
-        // 繪製中
-        function draw(e) {
-            if (!isDrawing) return;
-            e.preventDefault();
-            
-            const pos = getPosition(e);
-            signatureCtx.lineTo(pos.x, pos.y);
-            signatureCtx.stroke();
-        }
-        
-        // 結束繪製
-        function stopDrawing() {
-            isDrawing = false;
-        }
-        
-        // 滑鼠事件
-        signatureCanvas.addEventListener('mousedown', startDrawing);
-        signatureCanvas.addEventListener('mousemove', draw);
-        signatureCanvas.addEventListener('mouseup', stopDrawing);
-        signatureCanvas.addEventListener('mouseleave', stopDrawing);
-        
-        // 觸控事件
-        signatureCanvas.addEventListener('touchstart', startDrawing);
-        signatureCanvas.addEventListener('touchmove', draw);
-        signatureCanvas.addEventListener('touchend', stopDrawing);
+    // 頁面載入時依狀態判斷
+    toggleSignatureByStatus();
+    
+    // 狀態變更時重新判斷
+    if (cStatusSelect) {
+        cStatusSelect.addEventListener('change', toggleSignatureByStatus);
     }
     
-    // 清除簽名
-    if (btnClearSign) {
-        btnClearSign.addEventListener('click', function() {
-            if (signatureCtx && signatureCanvas) {
-                const dpr = window.devicePixelRatio || 1;
-                signatureCtx.clearRect(0, 0, signatureCanvas.width / dpr, signatureCanvas.height / dpr);
-                hasSignature = false;
-                
-                if (signaturePlaceholder) {
-                    signaturePlaceholder.classList.remove('hidden');
-                }
-            }
-        });
-    }
-    
-    // 確認簽名
-    if (btnConfirmSign) {
-        btnConfirmSign.addEventListener('click', function() {
-            if (!hasSignature) {
-                alert('請先進行簽名');
-                return;
-            }
-            
-            // 取得簽名圖片 (Base64)
-            const signatureData = signatureCanvas.toDataURL('image/png');
-            console.log('簽名資料:', signatureData);
+    DesktopSignatureCanvas.init({
+        onConfirm: function(dataUrl) {
+            console.log('簽名資料:', dataUrl);
             alert('簽名已確認');
-        });
-    }
+        }
+    });
     
     // ========================================
     // 進度更新彈窗
