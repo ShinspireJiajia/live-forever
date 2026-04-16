@@ -1,0 +1,646 @@
+/**
+ * ============================================
+ * 前台報名表單樣式
+ * ============================================
+ * 檔案：foundation-registration-form.css
+ * 說明：步驟式報名表單（前台會員使用）
+ * ============================================
+ */
+
+/* === 報名表單主容器 === */
+.reg-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/* === 步驟進度條 === */
+.step-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-2xl);
+    padding: 0;
+    list-style: none;
+    gap: 0;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    flex: 1;
+    text-align: center;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    background: var(--color-gray-300);
+    color: var(--color-gray-500);
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-normal);
+}
+
+.step-label {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-gray-500);
+    white-space: nowrap;
+    transition: var(--transition-normal);
+}
+
+/* 步驟之間的連接線 */
+.step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: calc(50% + 24px);
+    width: calc(100% - 48px);
+    height: 2px;
+    background: var(--color-gray-300);
+    z-index: 0;
+    transition: var(--transition-normal);
+}
+
+/* 目前步驟 */
+.step-item.active .step-circle {
+    background: var(--color-btn-primary);
+    color: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(169, 158, 145, 0.2);
+}
+.step-item.active .step-label {
+    color: var(--color-btn-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 已完成步驟 */
+.step-item.completed .step-circle {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+.step-item.completed .step-label {
+    color: var(--color-success);
+}
+.step-item.completed::after {
+    background: var(--color-success);
+}
+
+/* === 步驟內容區 === */
+.step-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.step-content.active {
+    display: block;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === 步驟面板卡片 === */
+.step-panel {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+}
+
+.step-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin: 0 0 var(--spacing-md) 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-btn-primary);
+}
+
+/* === Step 1：活動資訊 === */
+.event-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.event-summary-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin: 0;
+}
+
+.event-summary-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta-label {
+    font-size: 13px;
+    color: var(--color-gray-500);
+    font-weight: var(--font-weight-medium);
+}
+
+.meta-value {
+    font-size: 15px;
+    color: var(--color-gray-900);
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-sm);
+}
+.pricing-table th,
+.pricing-table td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-gray-300);
+    font-size: 14px;
+}
+.pricing-table th {
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+    font-weight: var(--font-weight-medium);
+}
+.pricing-table .price {
+    color: var(--color-danger);
+    font-weight: var(--font-weight-bold);
+    font-size: 16px;
+}
+.pricing-table .price-free {
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+}
+
+/* === Step 2：場次選擇 === */
+.session-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.session-card {
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+.session-card:hover {
+    border-color: var(--color-btn-primary);
+    background: rgba(169, 158, 145, 0.04);
+}
+.session-card.selected {
+    border-color: var(--color-btn-primary);
+    background: rgba(169, 158, 145, 0.08);
+}
+.session-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.session-radio {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-gray-300);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+}
+.session-card.selected .session-radio {
+    border-color: var(--color-btn-primary);
+}
+.session-card.selected .session-radio::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-btn-primary);
+}
+
+.session-info {
+    flex: 1;
+}
+.session-time {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: 4px;
+}
+.session-deadline {
+    font-size: 13px;
+    color: var(--color-gray-500);
+}
+
+.session-slots {
+    text-align: right;
+    flex-shrink: 0;
+}
+.slots-count {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+}
+.slots-count.ok { color: var(--color-success); }
+.slots-count.low { color: var(--color-warning); }
+.slots-count.full { color: var(--color-danger); }
+.slots-label {
+    font-size: 12px;
+    color: var(--color-gray-500);
+}
+
+/* === Step 3：報名資料 === */
+.identity-selector {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.identity-option {
+    flex: 1;
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+.identity-option:hover {
+    border-color: var(--color-btn-primary);
+}
+.identity-option.selected {
+    border-color: var(--color-btn-primary);
+    background: rgba(169, 158, 145, 0.08);
+}
+.identity-option i {
+    font-size: 28px;
+    color: var(--color-gray-500);
+    margin-bottom: 8px;
+    display: block;
+}
+.identity-option.selected i {
+    color: var(--color-btn-primary);
+}
+.identity-option-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-700);
+}
+.identity-option.selected .identity-option-label {
+    color: var(--color-btn-primary);
+}
+
+.reg-form-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+.reg-form-fields .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* 通行碼區塊 */
+.access-code-section {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: #fff8e1;
+    border: 1px solid #ffcc80;
+    border-radius: var(--border-radius-md);
+}
+.access-code-section .form-label {
+    color: #e65100;
+}
+
+/* 攜伴設定 */
+.companion-section {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-gray-100);
+    border-radius: var(--border-radius-md);
+}
+.companion-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+.companion-row label {
+    font-size: 14px;
+    color: var(--color-gray-700);
+}
+.companion-counter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+.companion-counter button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--color-gray-300);
+    background: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--color-gray-700);
+    transition: var(--transition-fast);
+}
+.companion-counter button:hover {
+    background: var(--color-gray-100);
+}
+.companion-counter button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+.companion-count-display {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    min-width: 32px;
+    text-align: center;
+}
+
+/* === Step 4：確認付款 === */
+.order-summary {
+    margin-bottom: var(--spacing-lg);
+}
+.order-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.order-summary-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-gray-300);
+    font-size: 15px;
+}
+.order-summary-table td:first-child {
+    color: var(--color-gray-500);
+    width: 140px;
+}
+.order-summary-table td:last-child {
+    color: var(--color-gray-900);
+    font-weight: var(--font-weight-medium);
+}
+.order-total-row td {
+    border-bottom: 2px solid var(--color-gray-900);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+}
+.order-total-row td:last-child {
+    color: var(--color-danger);
+    font-size: var(--font-size-xl);
+}
+
+/* 模擬付款區 */
+.payment-mock-section {
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius-md);
+    background: var(--color-gray-100);
+}
+.payment-mock-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 var(--spacing-md) 0;
+    color: var(--color-gray-700);
+}
+
+.payment-method-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+.payment-method-tab {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--border-radius-sm);
+    background: var(--color-white);
+    cursor: pointer;
+    text-align: center;
+    transition: var(--transition-fast);
+    font-size: 14px;
+}
+.payment-method-tab:hover {
+    border-color: var(--color-btn-primary);
+}
+.payment-method-tab.active {
+    border-color: var(--color-btn-primary);
+    background: rgba(169, 158, 145, 0.08);
+    font-weight: var(--font-weight-medium);
+}
+.payment-method-tab i {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.mock-card-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+}
+.mock-card-form .full-width {
+    grid-column: 1 / -1;
+}
+.mock-card-form .form-input {
+    background: var(--color-white);
+}
+
+.mock-transfer-info {
+    background: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 免費活動提示 */
+.free-event-note {
+    padding: var(--spacing-lg);
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    color: #2e7d32;
+    font-size: var(--font-size-lg);
+}
+.free-event-note i {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* 收據勾選 */
+.receipt-option {
+    margin-top: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 14px;
+    color: var(--color-gray-700);
+}
+
+/* === Step 5：完成頁 === */
+.completion-page {
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+}
+.completion-icon {
+    font-size: 72px;
+    color: var(--color-success);
+    margin-bottom: var(--spacing-md);
+}
+.completion-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+.completion-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-500);
+    margin: 0 0 var(--spacing-lg) 0;
+}
+.completion-details {
+    background: var(--color-gray-100);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    text-align: left;
+    margin: 0 auto;
+    max-width: 500px;
+}
+.completion-details .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-gray-300);
+    font-size: 14px;
+}
+.completion-details .detail-row:last-child {
+    border-bottom: none;
+}
+.completion-details .detail-label {
+    color: var(--color-gray-500);
+}
+.completion-details .detail-value {
+    color: var(--color-gray-900);
+    font-weight: var(--font-weight-medium);
+}
+
+/* === 步驟按鈕列 === */
+.step-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-lg);
+    gap: var(--spacing-sm);
+}
+.step-actions .btn {
+    min-width: 140px;
+}
+
+/* === 提示與錯誤 === */
+.form-error {
+    color: var(--color-danger);
+    font-size: 12px;
+    margin-top: 4px;
+}
+.alert-box {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+.alert-box.alert-warning {
+    background: #fff3e0;
+    border: 1px solid #ffcc80;
+    color: #e65100;
+}
+.alert-box.alert-info {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    color: #1565c0;
+}
+
+/* === 響應式 === */
+@media (max-width: 767px) {
+    .reg-form-container {
+        padding: var(--spacing-md);
+    }
+    .step-label {
+        font-size: 10px;
+    }
+    .step-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+    .step-item:not(:last-child)::after {
+        top: 16px;
+        left: calc(50% + 20px);
+        width: calc(100% - 40px);
+    }
+    .event-summary-meta {
+        grid-template-columns: 1fr;
+    }
+    .reg-form-fields {
+        grid-template-columns: 1fr;
+    }
+    .identity-selector {
+        flex-direction: column;
+    }
+    .mock-card-form {
+        grid-template-columns: 1fr;
+    }
+    .mock-card-form .full-width {
+        grid-column: auto;
+    }
+    .payment-method-tabs {
+        flex-direction: column;
+    }
+    .session-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .session-slots {
+        text-align: left;
+    }
+    .step-actions {
+        flex-direction: column;
+    }
+    .step-actions .btn {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .reg-form-container {
+        max-width: 680px;
+    }
+}

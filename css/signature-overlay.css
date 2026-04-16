@@ -1,0 +1,142 @@
+/* ============================================
+ * 全螢幕橫向簽名遮罩樣式
+ * 適用於桌面版後台管理頁面
+ * ============================================ */
+
+/* --- 全螢幕遮罩背景 --- */
+.signature-fullscreen-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.92);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.signature-fullscreen-overlay.active {
+    display: flex;
+}
+
+/* --- 遮罩內容區（佔滿全螢幕，含安全內邊距） --- */
+.signature-fullscreen-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: calc(100vw - 48px);
+    height: calc(100vh - 48px);
+    box-sizing: border-box;
+}
+
+/* 直向螢幕時旋轉 90° 以橫向佔滿全螢幕 */
+@media (orientation: portrait) {
+    .signature-fullscreen-inner {
+        transform: rotate(90deg);
+        /* rotate(90deg) 會將 CSS width → 視覺高度、CSS height → 視覺寬度
+           因此 width 使用較小的 vw、height 使用較大的 vh */
+        width: calc(100vw - 48px);
+        height: calc(100vh - 48px);
+    }
+}
+
+/* --- 標題 --- */
+.signature-fullscreen-title {
+    font-family: var(--font-family-base, "Microsoft JhengHei", sans-serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* --- 畫布容器 --- */
+.signature-fullscreen-canvas-wrap {
+    flex: 1;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    min-height: 0;
+}
+
+.signature-fullscreen-canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* --- 操作按鈕列 --- */
+.signature-fullscreen-actions {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    flex-shrink: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.signature-fullscreen-actions button {
+    flex: 1;
+    font-family: var(--font-family-base, "Microsoft JhengHei", sans-serif);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s ease;
+}
+
+.signature-fullscreen-actions button:hover {
+    opacity: 0.88;
+}
+
+/* 取消按鈕 */
+.btn-sig-cancel {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0 !important;
+    color: #616161;
+}
+
+/* 清除按鈕 */
+.btn-sig-clear {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0 !important;
+    color: #616161;
+}
+
+/* 確認簽名按鈕 */
+.btn-sig-confirm {
+    background-color: var(--color-btn-primary, #a99e91);
+    color: #ffffff;
+}
+
+/* --- 行內簽名預覽圖片 --- */
+.signature-preview-img {
+    display: none;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    border-radius: var(--border-radius-md, 8px);
+    background-color: transparent;
+}
+
+/* 簽名區域已簽名狀態 */
+.signature-area.has-signed {
+    border-style: solid;
+    border-color: var(--color-success, #27AE60);
+}
+
+.signature-area.has-signed .signature-placeholder {
+    display: none;
+}
