@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動報名 - 陸府生活美學教育基金會</title>
+
+    <!-- Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS 樣式 -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/breadcrumb.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/foundation-registration-form.css">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- 主容器 -->
+    <!-- ============================================ -->
+    <div class="app-container">
+
+        <!-- 頂部導覽列 (動態渲染) -->
+        <div id="header-container"></div>
+
+        <!-- 側邊欄選單 (動態渲染) -->
+        <div id="sidebar-container"></div>
+
+        <!-- ============================================ -->
+        <!-- 主內容區域 -->
+        <!-- ============================================ -->
+        <main class="main-content">
+            <!-- 麵包屑導覽 -->
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                    <i class="fa-solid fa-house"></i> 首頁
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="foundation-event-list.html" class="breadcrumb-item">官網活動(基金會)</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item active">活動報名</span>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 報名表單主容器 -->
+            <!-- ============================================ -->
+            <div class="reg-form-container" id="regFormContent">
+
+                <!-- 步驟進度條 -->
+                <ul class="step-progress">
+                    <li class="step-item active">
+                        <span class="step-circle">1</span>
+                        <span class="step-label">活動資訊</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-circle">2</span>
+                        <span class="step-label">選擇場次</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-circle">3</span>
+                        <span class="step-label">填寫資料</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-circle">4</span>
+                        <span class="step-label">確認付款</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-circle">5</span>
+                        <span class="step-label">完成</span>
+                    </li>
+                </ul>
+
+                <!-- Step 1：活動資訊 -->
+                <div class="step-content active" id="step1">
+                    <div class="step-panel">
+                        <h3 class="step-title">
+                            <i class="fa-solid fa-info-circle"></i> 活動資訊
+                        </h3>
+                        <div id="step1Content">
+                            <!-- JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2：選擇場次 -->
+                <div class="step-content" id="step2">
+                    <div class="step-panel">
+                        <h3 class="step-title">
+                            <i class="fa-solid fa-calendar-check"></i> 選擇場次
+                        </h3>
+                        <div id="step2Content">
+                            <!-- JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3：填寫報名資料 -->
+                <div class="step-content" id="step3">
+                    <div class="step-panel">
+                        <h3 class="step-title">
+                            <i class="fa-solid fa-pen-to-square"></i> 填寫報名資料
+                        </h3>
+                        <div id="step3Content">
+                            <!-- JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4：確認付款 -->
+                <div class="step-content" id="step4">
+                    <div class="step-panel">
+                        <h3 class="step-title">
+                            <i class="fa-solid fa-credit-card"></i> 確認付款
+                        </h3>
+                        <div id="step4Content">
+                            <!-- JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5：完成 -->
+                <div class="step-content" id="step5">
+                    <div class="step-panel">
+                        <div id="step5Content">
+                            <!-- JavaScript 動態產生 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 步驟操作按鈕 -->
+                <div class="step-actions" id="stepActions">
+                    <button type="button" class="btn btn-secondary" id="btnStepPrev" style="display:none;">
+                        <i class="fa-solid fa-arrow-left"></i> 上一步
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnStepNext">
+                        下一步 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast 提示容器 -->
+    <div class="toast-container"></div>
+
+    <!-- ============================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================ -->
+    <script src="js/menu-component.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/foundation-mock-data.js"></script>
+    <script src="js/foundation-registration-form.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initCRMLayout === 'function') {
+                initCRMLayout();
+            }
+            const sidebarManager = new SidebarManager();
+        });
+    </script>
+
+    <!-- Toast 樣式（與其他頁面一致） -->
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .toast {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+            max-width: 450px;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast-icon { font-size: 20px; }
+        .toast-success .toast-icon { color: #27AE60; }
+        .toast-error .toast-icon { color: #E74C3C; }
+        .toast-content { flex: 1; }
+        .toast-title { font-weight: 600; margin-bottom: 4px; }
+        .toast-message { font-size: 14px; color: #666; }
+        .toast-close { background: none; border: none; cursor: pointer; color: #999; padding: 0; }
+    </style>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Dashboard Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #F8F7F5; font-family: "Microsoft JhengHei", sans-serif; }
+        .bg-custom-dark { background-color: #3D4449; }
+        .bg-custom-tan { background-color: #B7A67D; }
+        .text-custom-gold { color: #B7A67D; }
+        /* 隱藏分類標籤的橫向捲軸 */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* 預約彈窗底部安全距離 */
+        #service-modal .modal-inner { padding-bottom: env(safe-area-inset-bottom, 24px); }
+    </style>
+</head>
+<body class="p-4 max-w-md mx-auto">
+
+    <div class="flex items-center justify-center mb-6">
+        <div class="w-3 h-3 bg-stone-400 rounded-full mr-2"></div>
+        <h1 class="text-2xl font-bold text-gray-700 tracking-wider">CRM</h1>
+    </div>
+
+    <button class="w-full bg-custom-dark text-white rounded-xl py-5 px-6 flex items-center mb-4 shadow-sm">
+        <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        <span class="text-xl font-medium">我要報修</span>
+    </button>
+
+    <div class="grid grid-cols-3 gap-3 mb-4">
+        <div class="bg-white/60 p-4 rounded-xl flex flex-col items-center">
+            <div class="w-10 h-10 border-2 border-gray-400 rounded-full flex items-center justify-center mb-2">☺</div>
+            <span class="text-sm text-gray-600">會員中心</span>
+        </div>
+        <div class="bg-white/60 p-4 rounded-xl flex flex-col items-center">
+            <div class="text-2xl mb-2">🌱</div>
+            <span class="text-sm text-gray-600">綠海養護</span>
+        </div>
+        <div class="bg-white/60 p-4 rounded-xl flex flex-col items-center">
+            <div class="text-2xl mb-2">🏠+</div>
+            <span class="text-sm text-gray-600">綁定新身分</span>
+        </div>
+    </div>
+
+    <div class="bg-stone-200/50 p-4 rounded-xl flex items-center mb-6">
+        <div class="flex text-stone-600 mr-4">🌲🌲🌲</div>
+        <span class="text-gray-700 font-medium">森林聚落</span>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm mb-8">
+        <div class="grid grid-cols-3 gap-6 text-center">
+            <div class="relative">
+                <div class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">21</div>
+                <div class="bg-gray-100 w-16 h-16 rounded-full mx-auto flex items-center justify-center text-2xl mb-2">📜</div>
+                <span class="text-sm text-gray-600">款項資訊</span>
+            </div>
+            <div>
+                <div class="bg-gray-100 w-16 h-16 rounded-full mx-auto flex items-center justify-center text-2xl mb-2">🏢</div>
+                <span class="text-sm text-gray-600">戶別資訊</span>
+            </div>
+            <div>
+                <div class="bg-gray-100 w-16 h-16 rounded-full mx-auto flex items-center justify-center text-2xl mb-2">🏠</div>
+                <span class="text-sm text-gray-600">房屋健檢</span>
+            </div>
+        </div>
+        <div class="mt-4 flex justify-center text-custom-gold items-center text-sm">
+            查看更多 <span class="ml-1">∨</span>
+        </div>
+    </div>
+
+    <!-- ===== 鄰里生活服務專區 ===== -->
+    <div class="mb-8">
+        <!-- 標題列 -->
+        <div class="flex items-center justify-between mb-4 text-gray-700">
+            <div class="flex items-center">
+                <span class="mr-2 text-xl">🌟</span>
+                <h2 class="font-bold">鄰里生活服務專區</h2>
+            </div>
+            <span class="text-xs text-custom-gold font-medium">社區專屬優惠</span>
+        </div>
+
+        <!-- 分類標籤（橫向捲動） -->
+        <div class="flex gap-2 mb-4 overflow-x-auto hide-scrollbar pb-1">
+            <button class="service-tab flex-shrink-0 text-xs px-4 py-2 rounded-full bg-stone-700 text-white transition" data-category="家政服務">🧹 家政服務</button>
+            <button class="service-tab flex-shrink-0 text-xs px-4 py-2 rounded-full bg-stone-100 text-stone-600 transition" data-category="汽車美容">🚗 汽車美容</button>
+            <button class="service-tab flex-shrink-0 text-xs px-4 py-2 rounded-full bg-stone-100 text-stone-600 transition" data-category="餐飲優惠">🍽️ 餐飲優惠</button>
+        </div>
+
+        <!-- 服務卡片網格（2 欄） -->
+        <div id="service-grid" class="grid grid-cols-2 gap-3"></div>
+
+        <!-- 查看更多 / 收合按鈕 -->
+        <div class="mt-3 text-center hidden" id="service-more-btn">
+            <button id="toggle-services" class="text-xs text-custom-gold font-medium flex items-center mx-auto gap-1">
+                <span id="toggle-label">查看更多</span>
+                <span id="toggle-icon">∨</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== 服務詳情與預約彈窗 ===== -->
+    <div id="service-modal" class="fixed inset-0 z-50 flex items-end justify-center hidden" style="background:rgba(0,0,0,0.45)">
+        <div class="bg-white rounded-t-3xl w-full max-w-md overflow-y-auto p-6 pb-8" style="max-height:90vh">
+            <!-- 關閉列 -->
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-lg font-bold text-gray-700"></h3>
+                <button id="close-modal" class="text-gray-400 text-2xl leading-none">✕</button>
+            </div>
+
+            <!-- 廠商資訊 -->
+            <div class="flex items-center gap-4 bg-stone-50 rounded-2xl p-4 mb-4">
+                <span id="modal-icon" class="text-5xl"></span>
+                <div>
+                    <p id="modal-vendor" class="font-medium text-gray-700 text-sm"></p>
+                    <p id="modal-discount" class="text-sm text-red-500 font-bold mt-1"></p>
+                </div>
+            </div>
+
+            <!-- 優惠說明 -->
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4">
+                <p class="text-xs text-amber-700 font-medium mb-1">🎁 社區住戶專屬優惠</p>
+                <p id="modal-offer" class="text-xs text-gray-600 leading-relaxed"></p>
+            </div>
+
+            <!-- 服務說明 -->
+            <div class="mb-5">
+                <h4 class="font-bold text-gray-700 mb-2 text-sm">服務說明</h4>
+                <p id="modal-desc" class="text-sm text-gray-500 leading-relaxed"></p>
+            </div>
+
+            <!-- 預約表單 -->
+            <div class="border-t border-gray-100 pt-5">
+                <h4 class="font-bold text-gray-700 mb-4 text-sm">預約申請</h4>
+                <div class="space-y-3">
+                    <!-- 戶別 / 姓名 -->
+                    <div class="flex gap-3">
+                        <div class="flex-1">
+                            <label class="text-xs text-gray-500 mb-1 block">戶&nbsp;&nbsp;&nbsp;別 *</label>
+                            <input type="text" id="form-unit" value="A3-3"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-stone-400"
+                                placeholder="戶別">
+                        </div>
+                        <div class="flex-1">
+                            <label class="text-xs text-gray-500 mb-1 block">姓&nbsp;&nbsp;&nbsp;名 *</label>
+                            <input type="text" id="form-name" value="王小明"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-stone-400"
+                                placeholder="姓名">
+                        </div>
+                    </div>
+                    <!-- 聯絡電話 -->
+                    <div>
+                        <label class="text-xs text-gray-500 mb-1 block">聯絡電話 *</label>
+                        <input type="tel" id="form-phone" value="0912-345-678"
+                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-stone-400"
+                            placeholder="聯絡電話">
+                    </div>
+                    <!-- 預約日期 / 時段 -->
+                    <div class="flex gap-3">
+                        <div class="flex-1">
+                            <label class="text-xs text-gray-500 mb-1 block">預約日期 *</label>
+                            <input type="date" id="form-date"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-stone-400">
+                        </div>
+                        <div class="flex-1">
+                            <label class="text-xs text-gray-500 mb-1 block">時&nbsp;&nbsp;&nbsp;段 *</label>
+                            <select id="form-slot"
+                                class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-stone-400">
+                                <option value="">請選擇</option>
+                                <option>上午 09:00–12:00</option>
+                                <option>下午 13:00–17:00</option>
+                                <option>傍晚 17:00–20:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- 備註 -->
+                    <div>
+                        <label class="text-xs text-gray-500 mb-1 block">服務項目備註</label>
+                        <textarea id="form-note" rows="2"
+                            class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-stone-400"
+                            placeholder="請說明特殊需求或備注事項…"></textarea>
+                    </div>
+                    <!-- 免責條款 -->
+                    <label class="flex items-start gap-2 text-xs text-gray-500 cursor-pointer">
+                        <input type="checkbox" id="form-agree" class="mt-0.5 accent-stone-600">
+                        <span>我已了解此為預約申請，後續將由管理人員與我聯繫確認，實際服務時間及細節以確認通知為準。</span>
+                    </label>
+                </div>
+                <button onclick="submitReservation()"
+                    class="mt-5 w-full bg-stone-700 text-white py-3 rounded-2xl font-medium text-sm">
+                    送出預約申請
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 預約成功 Toast -->
+    <div id="toast-success"
+        class="fixed top-6 left-1/2 -translate-x-1/2 z-[60] bg-green-600 text-white text-sm px-5 py-3 rounded-full shadow-lg hidden"
+        style="white-space:nowrap">
+        ✅ 預約申請已送出，我們將盡快與您聯繫！
+    </div>
+
+    <!-- ===== 報修表單進度 ===== -->
+    <div class="flex items-center mb-4 text-gray-700">
+        <span class="mr-2 text-xl">📋</span>
+        <h2 class="font-bold">報修表單進度</h2>
+    </div>
+
+    <div class="space-y-4">
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-custom-gold font-bold text-lg">20250808-001</span>
+                <span class="bg-teal-50 text-teal-600 px-3 py-1 rounded text-sm">已完成</span>
+            </div>
+            <div class="space-y-2 text-gray-600 text-sm mb-5">
+                <p>建　　案｜建案名稱 (A3-3)</p>
+                <p>類　　型｜綠海維修</p>
+                <p class="truncate">問題描述｜客廳浴室的洗手台水龍頭，在...</p>
+            </div>
+            <button class="w-full bg-custom-tan text-white py-3 rounded-xl font-medium">內容查看</button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-custom-gold font-bold text-lg">20250808-002</span>
+                <span class="bg-blue-50 text-blue-500 px-3 py-1 rounded text-sm">處理中</span>
+            </div>
+            <div class="space-y-2 text-gray-600 text-sm mb-5">
+                <p>綠海建案｜戶別 A3-3</p>
+                <p>類　　型｜個案單報修</p>
+                <p class="truncate">問題描述｜廚房水槽下方的水管有輕微滲...</p>
+            </div>
+            <button class="w-full bg-custom-tan text-white py-3 rounded-xl font-medium">內容查看</button>
+        </div>
+    </div>
+
+<script>
+    /* ===================================================
+     * 鄰里生活服務專區 — 資料與互動邏輯
+     * =================================================== */
+
+    /* 服務資料庫 */
+    const services = {
+        '家政服務': [
+            {
+                icon: '🧺', name: '專業乾洗', discount: '滿 500 打 9 折',
+                vendor: '潔淨乾洗坊',
+                offer: '社區住戶免費上門取件，消費滿 500 元享 9 折，送洗完成後 2 工作天送件到府。',
+                desc: '提供衣物、床組、羽絨被等精密乾洗服務，採用環保無毒溶劑維護衣物品質。服務流程：預約 → 上門取件 → 送洗 → 送件到府。'
+            },
+            {
+                icon: '🧹', name: '居家清潔', discount: '首次享 85 折',
+                vendor: '亮潔居家',
+                offer: '首次預約享 85 折，3 小時深度清潔，含廚房、衛浴重點清潔項目。',
+                desc: '專業清潔人員提供全室深度清潔，包含廚房除油、衛浴去垢、地板拋光，自備清潔用品，無需擔心化學殘留。'
+            },
+            {
+                icon: '🔧', name: '家電維修', discount: '到府免檢查費',
+                vendor: '萬修便利站',
+                offer: '社區住戶到府診斷免收檢查費，維修費用依廠商報價另計。',
+                desc: '提供冷氣、洗衣機、冰箱、熱水器等家電維修，師傅均具本科認證，維修後提供 30 天免費保固。'
+            },
+            {
+                icon: '🐾', name: '寵物美容', discount: '首購折 $100',
+                vendor: '毛孩美容院',
+                offer: '社區住戶首次消費立折 100 元，可在社區中庭服務車預約，免出社區。',
+                desc: '提供小型犬貓洗澡、剪毛、修指甲、耳道清潔等全套美容服務，使用寵物專用低敏洗劑，溫和呵護您的毛孩。'
+            }
+        ],
+        '汽車美容': [
+            {
+                icon: '🚗', name: '到府洗車', discount: '住戶現折 $200',
+                vendor: '閃亮汽車美容',
+                offer: '社區住戶每次基礎洗車現折 200 元，預約制於停車場完成，不影響出行。',
+                desc: '提供車身清洗、輪胎清潔、車窗亮光等基礎洗車服務，採無刷水洗方式，有效降低車漆刮傷風險。'
+            },
+            {
+                icon: '✨', name: '打蠟拋光', discount: '社區專屬 85 折',
+                vendor: '閃亮汽車美容',
+                offer: '全車系打蠟拋光享 85 折優惠，施工於社區停車場，安全便利。',
+                desc: '人工研磨拋光去除細微刮痕，施以進口棕梠蠟保護漆面，增加光澤並延長車漆壽命，完整施工約 2–3 小時。'
+            },
+            {
+                icon: '🔩', name: '輪胎保養', discount: '換胎免工本費',
+                vendor: '穩行輪胎行',
+                offer: '社區住戶更換輪胎免收工本費，僅需支付輪胎本身費用。',
+                desc: '提供四輪定位、輪胎更換、輪圈清潔、氣嘴更換等服務，師傅至停車場現場作業，全程約 30–60 分鐘。'
+            }
+        ],
+        '餐飲優惠': [
+            {
+                icon: '🍽️', name: '主廚私房菜', discount: '外帶享 9 折',
+                vendor: '灶藝台式料理',
+                offer: '社區住戶來電或 APP 預訂外帶享 9 折，不限菜色，節假日亦適用。',
+                desc: '精選台灣在地食材，提供傳統台式合菜料理。推薦菜色：三杯雞、客家小炒、滷肉飯，預訂前一日確保食材新鮮。'
+            },
+            {
+                icon: '🛵', name: '早午餐外送', discount: '首購折 $50',
+                vendor: '晨光輕食',
+                offer: '首次透過社區管道下單折抵 50 元，且免收外送費（限社區內配送）。',
+                desc: '提供健康輕食早午餐，含三明治、沙拉、優格穀麥碗等選項，平日 07:30–14:00 接受預訂，送達時間約 30 分鐘。'
+            },
+            {
+                icon: '☕', name: '精品咖啡', discount: '第二杯半價',
+                vendor: '繁星咖啡',
+                offer: '憑社區住戶身份，點第二杯享半價，適用單品咖啡及所有義式飲品，每日限量供應。',
+                desc: '精選衣索比亞、哥倫比亞等產區單品咖啡豆，現點現磨，提供美式、拿鐵、卡布奇諾等多種選擇，可指定烘焙深度。'
+            }
+        ]
+    };
+
+    /* 目前展開狀態 */
+    var serviceExpanded = false;
+    var currentCategory = '家政服務';
+
+    /* 渲染服務卡片 */
+    function renderServices(category, expanded) {
+        currentCategory = category;
+        serviceExpanded = !!expanded;
+        const grid = document.getElementById('service-grid');
+        const moreBtn = document.getElementById('service-more-btn');
+        const list = services[category] || [];
+        const displayList = serviceExpanded ? list : list.slice(0, 2);
+
+        grid.innerHTML = '';
+        displayList.forEach(function(s) {
+            const card = document.createElement('div');
+            card.className = 'bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center cursor-pointer active:scale-95 transition';
+            card.innerHTML =
+                '<div class="text-3xl mb-2">' + s.icon + '</div>' +
+                '<span class="font-bold text-gray-700 text-sm text-center">' + s.name + '</span>' +
+                '<span class="text-xs text-red-500 mt-1 text-center">' + s.discount + '</span>' +
+                '<button class="mt-3 text-xs bg-stone-100 px-3 py-1 rounded-full text-stone-600">了解詳情</button>';
+            card.addEventListener('click', function() { openServiceModal(s); });
+            grid.appendChild(card);
+        });
+
+        /* 顯示 / 隱藏查看更多按鈕 */
+        if (list.length > 2) {
+            moreBtn.classList.remove('hidden');
+            document.getElementById('toggle-label').textContent = serviceExpanded ? '收合' : '查看更多';
+            document.getElementById('toggle-icon').textContent  = serviceExpanded ? '∧' : '∨';
+        } else {
+            moreBtn.classList.add('hidden');
+        }
+    }
+
+    /* 開啟服務詳情彈窗 */
+    function openServiceModal(s) {
+        document.getElementById('modal-title').textContent = s.name;
+        document.getElementById('modal-icon').textContent = s.icon;
+        document.getElementById('modal-vendor').textContent = s.vendor;
+        document.getElementById('modal-discount').textContent = s.discount;
+        document.getElementById('modal-offer').textContent = s.offer;
+        document.getElementById('modal-desc').textContent = s.desc;
+        /* 重置表單欄位（保留自動帶入資訊） */
+        document.getElementById('form-date').value = '';
+        document.getElementById('form-slot').value = '';
+        document.getElementById('form-note').value = '';
+        document.getElementById('form-agree').checked = false;
+        const modal = document.getElementById('service-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    /* 關閉彈窗 */
+    function closeModal() {
+        document.getElementById('service-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('close-modal').addEventListener('click', closeModal);
+    document.getElementById('service-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    /* 送出預約 */
+    function submitReservation() {
+        var agree = document.getElementById('form-agree').checked;
+        var date  = document.getElementById('form-date').value;
+        var slot  = document.getElementById('form-slot').value;
+        if (!agree) { alert('請先勾選免責條款'); return; }
+        if (!date || !slot) { alert('請填寫預約日期與時段'); return; }
+        closeModal();
+        var toast = document.getElementById('toast-success');
+        toast.classList.remove('hidden');
+        setTimeout(function() { toast.classList.add('hidden'); }, 3500);
+    }
+
+    /* 查看更多 / 收合切換 */
+    document.getElementById('toggle-services').addEventListener('click', function() {
+        renderServices(currentCategory, !serviceExpanded);
+    });
+
+    /* 分類標籤切換 */
+    document.querySelectorAll('.service-tab').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.service-tab').forEach(function(b) {
+                b.classList.remove('bg-stone-700', 'text-white');
+                b.classList.add('bg-stone-100', 'text-stone-600');
+            });
+            this.classList.add('bg-stone-700', 'text-white');
+            this.classList.remove('bg-stone-100', 'text-stone-600');
+            /* 切換分類時回到收合狀態 */
+            renderServices(this.dataset.category, false);
+        });
+    });
+
+    /* 頁面初始載入：預設顯示「家政服務」，收合狀態 */
+    renderServices('家政服務', false);
+</script>
+</body>
+</html>

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/signature-overlay.css">
     <link rel="stylesheet" href="css/case-edit.css">
     <link rel="stylesheet" href="css/chat.css">
 </head>
@@ -412,10 +413,10 @@
                             </div>
 
                             <!-- 分隔線 -->
-                            <hr class="section-divider">
+                            <hr class="section-divider" id="signatureDivider">
 
                             <!-- 住戶簽名確認區塊 -->
-                            <div class="section-block">
+                            <div class="section-block" id="signatureSection">
                                 <div class="signature-header">
                                     <h3 class="section-title">住戶簽名確認</h3>
                                     <!-- 此次不用簽名核取方塊 -->
@@ -623,6 +624,7 @@
     <script src="js/menu-component.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/signature-canvas.js"></script>
     <script src="js/case-edit.js"></script>
 </body>
 </html>

@@ -28,14 +28,10 @@
     <!-- ============================================ -->
     <div class="app-container">
         
-        <!-- ============================================ -->
         <!-- 頂部導覽列 (動態渲染) -->
-        <!-- ============================================ -->
         <div id="header-container"></div>
 
-        <!-- ============================================ -->
         <!-- 側邊欄選單 (動態渲染) -->
-        <!-- ============================================ -->
         <div id="sidebar-container"></div>
 
         <!-- ============================================ -->
@@ -45,8 +41,7 @@
             <!-- 麵包屑導覽 -->
             <div class="breadcrumb">
                 <a href="index.html" class="breadcrumb-item">
-                    <i class="fa-solid fa-house"></i>
-                    首頁
+                    <i class="fa-solid fa-house"></i> 首頁
                 </a>
                 <span class="breadcrumb-separator">/</span>
                 <a href="foundation-event-list.html" class="breadcrumb-item">官網活動(基金會)</a>
@@ -56,140 +51,230 @@
 
             <!-- 頁面內容 -->
             <div class="content-wrapper">
-                <div class="page-header">
-                    <h1 class="page-title">活動規則設定</h1>
+
+                <!-- ===== 頁面標題列 ===== -->
+                <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                    <h1 class="page-title" style="margin:0;">活動規則設定</h1>
+                    <div style="display:flex;gap:8px;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="history.back()">
+                            <i class="fa-solid fa-arrow-left"></i> 返回列表
+                        </button>
+                    </div>
                 </div>
 
-                <!-- 活動基本資訊  -->
-                <div class="event-info-card">
-                    <div class="event-info-header">
-                        <div>
-                            <h3 style="margin: 0 0 8px 0;">
-                                <i class="fa-solid fa-info-circle" style="color: var(--color-info);"></i>
-                                活動基本資訊 
-                            </h3>
-                        </div>
-
+                <!-- ===== 區塊一：CMS 同步資訊（唯讀）===== -->
+                <div class="edit-section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-solid fa-cloud-arrow-down" style="color:var(--color-info);"></i>
+                            CMS 同步資訊
+                        </h3>
+                        <span class="section-badge badge-readonly">唯讀</span>
                     </div>
-                    <div class="event-info-grid" id="eventBasicInfo">
+                    <div class="info-grid" id="cmsInfoGrid">
                         <!-- JavaScript 動態產生 -->
                     </div>
                 </div>
 
-                <!-- 參與規則設定表單 -->
+                <!-- ===== 區塊二：場次一覽（CMS 同步，唯讀）===== -->
+                <div class="edit-section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-solid fa-calendar-days" style="color:var(--color-info);"></i>
+                            場次一覽
+                        </h3>
+                        <span class="section-badge badge-readonly">唯讀（CMS 同步）</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>場次</th>
+                                    <th>活動時間</th>
+                                    <th>報名截止日</th>
+                                    <th>人數限制</th>
+                                    <th>已報名</th>
+                                    <th>剩餘名額</th>
+                                    <th>顯示</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sessionsTableBody">
+                                <!-- JavaScript 動態產生 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ===== 區塊三：報名連結管理 ===== -->
+                <div class="edit-section">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fa-solid fa-link" style="color:var(--color-btn-primary);"></i>
+                            報名連結管理
+                        </h3>
+                    </div>
+                    <div class="link-management">
+                        <p class="link-hint">將以下連結提供給 CMS 廠商，嵌入官網活動頁的「立即報名」按鈕：</p>
+                        <div class="link-copy-row">
+                            <input type="text" class="form-input" id="registrationUrl" readonly>
+                            <button type="button" class="btn btn-primary btn-sm" id="btnCopyUrl">
+                                <i class="fa-solid fa-copy"></i> 複製連結
+                            </button>
+                        </div>
+                        <span class="form-hint">此連結為前台會員報名入口，包含活動 ID 參數</span>
+                    </div>
+                </div>
+
+                <!-- ===== 區塊四：CRM 報名規則設定（可編輯）===== -->
                 <form id="rulesForm">
-                    <!-- 報名資格設定 -->
-                    <div class="rules-section">
-                        <h3 class="rules-section-title">
-                            <i class="fa-solid fa-user-check"></i>
-                            報名資格設定
-                        </h3>
-                        <div class="rules-grid">
-                            <div class="form-group">
-                                <label class="form-label">是否住戶限定</label>
-                                <div class="form-switch-group">
-                                    <label class="form-switch">
-                                        <input type="checkbox" id="isResidentOnly">
-                                        <span class="switch-slider"></span>
-                                    </label>
-                                    <span class="switch-label">僅限住戶報名</span>
-                                </div>
-                                <span class="form-hint">開啟後，僅驗證通過的住戶可報名此活動</span>
-                            </div>
+                    <div class="edit-section">
+                        <div class="section-header">
+                            <h3 class="section-title">
+                                <i class="fa-solid fa-gear" style="color:var(--color-btn-primary);"></i>
+                                CRM 報名規則設定
+                            </h3>
+                            <span class="section-badge badge-editable">可編輯</span>
                         </div>
-                    </div>
 
-                    <!-- 人數限制設定 -->
-                    <div class="rules-section">
-                        <h3 class="rules-section-title">
-                            <i class="fa-solid fa-users"></i>
-                            人數限制設定
-                        </h3>
-                        <div class="rules-grid">
-                            <div class="form-group">
-                                <label class="form-label" id="limitLabel">單次報名人數上限</label>
-                                <input type="number" class="form-input" id="registrationLimit" min="1" max="100" value="1">
-                                <span class="form-hint" id="limitHint">限制每次報名可填寫的總人數（含主要報名者）</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 費用設定 -->
-                    <div class="rules-section">
-                        <h3 class="rules-section-title">
-                            <i class="fa-solid fa-dollar-sign"></i>
-                            費用設定
-                        </h3>
-                        <div class="rules-grid">
-                            <div class="form-group">
-                                <label class="form-label">每人報名費用</label>
-                                <div class="input-group">
-                                    <span class="input-prefix">$</span>
-                                    <input type="number" class="form-input" id="registrationFee" min="0" value="0">
+                        <!-- 報名資格 -->
+                        <div class="rules-block">
+                            <h4 class="rules-block-title"><i class="fa-solid fa-user-check"></i> 報名資格</h4>
+                            <div class="rules-grid">
+                                <div class="form-group">
+                                    <label class="form-label">住戶限定</label>
+                                    <div class="form-switch-group">
+                                        <label class="form-switch">
+                                            <input type="checkbox" id="isResidentOnly">
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                        <span class="switch-label">僅限住戶報名</span>
+                                    </div>
+                                    <span class="form-hint">開啟後，僅驗證通過的住戶可報名此活動</span>
                                 </div>
-                                <span class="form-hint">設為 0 表示免費，不分身分單一票價</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">提供收據選項</label>
-                                <div class="form-switch-group">
-                                    <label class="form-switch">
-                                        <input type="checkbox" id="needReceipt" checked>
-                                        <span class="switch-slider"></span>
-                                    </label>
-                                    <span class="switch-label">報名者可選擇是否需要收據</span>
+                                <div class="form-group">
+                                    <label class="form-label">通行碼（選填）</label>
+                                    <input type="text" class="form-input" id="accessCode" placeholder="留空表示不需通行碼">
+                                    <span class="form-hint">設定後，報名者須輸入通行碼才能進入報名流程</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 取消與退費設定 -->
-                    <div class="rules-section">
-                        <h3 class="rules-section-title">
-                            <i class="fa-solid fa-ban"></i>
-                            取消與退費設定
-                        </h3>
-                        <div class="rules-grid">
-                            <div class="form-group">
-                                <label class="form-label">取消期限 (活動前)</label>
-                                <div class="input-group">
-                                    <span class="input-prefix">前</span>
-                                    <input type="number" class="form-input" id="cancellationDays" min="0" value="7">
-                                    <span class="input-suffix">天</span>
+                        <!-- 攜伴設定 -->
+                        <div class="rules-block">
+                            <h4 class="rules-block-title"><i class="fa-solid fa-users"></i> 攜伴設定</h4>
+                            <div class="rules-grid">
+                                <div class="form-group">
+                                    <label class="form-label">允許攜伴</label>
+                                    <div class="form-switch-group">
+                                        <label class="form-switch">
+                                            <input type="checkbox" id="allowCompanion">
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                        <span class="switch-label">報名者可攜帶同行人員</span>
+                                    </div>
                                 </div>
-                                <span class="form-hint">在此期限前可免費取消或申請退費</span>
+                                <div class="form-group" id="maxCompanionGroup">
+                                    <label class="form-label">攜伴人數上限</label>
+                                    <input type="number" class="form-input" id="maxCompanion" min="0" max="10" value="0">
+                                    <span class="form-hint">每位報名者可攜帶的最多同行人數</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">退費手續費</label>
-                                <div class="input-group">
-                                    <span class="input-prefix">$</span>
-                                    <input type="number" class="form-input" id="refundFee" min="0" value="0">
+                        </div>
+
+                        <!-- 費用設定 -->
+                        <div class="rules-block">
+                            <h4 class="rules-block-title"><i class="fa-solid fa-dollar-sign"></i> 費用設定</h4>
+                            <div class="rules-grid rules-grid-4">
+                                <div class="form-group">
+                                    <label class="form-label">住戶成人價</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="residentAdultPrice" min="0" value="0">
+                                    </div>
                                 </div>
-                                <span class="form-hint">申請退費時將扣除此金額</span>
+                                <div class="form-group">
+                                    <label class="form-label">住戶孩童價</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="residentChildPrice" min="0" value="0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">非住戶成人價</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="nonResidentAdultPrice" min="0" value="0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">非住戶孩童價</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="nonResidentChildPrice" min="0" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="form-hint" style="margin-top:4px;">全部設為 0 表示免費活動</span>
+                        </div>
+
+                        <!-- 取消與退費 -->
+                        <div class="rules-block">
+                            <h4 class="rules-block-title"><i class="fa-solid fa-ban"></i> 取消與退費</h4>
+                            <div class="rules-grid">
+                                <div class="form-group">
+                                    <label class="form-label">取消期限（活動前）</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">前</span>
+                                        <input type="number" class="form-input" id="cancellationDays" min="0" value="7">
+                                        <span class="input-suffix">天</span>
+                                    </div>
+                                    <span class="form-hint">在此期限前可免費取消或申請退費</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">退費手續費</label>
+                                    <div class="input-group">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" class="form-input" id="refundFee" min="0" value="0">
+                                    </div>
+                                    <span class="form-hint">申請退費時將扣除此金額</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 收據設定 -->
+                        <div class="rules-block">
+                            <h4 class="rules-block-title"><i class="fa-solid fa-receipt"></i> 收據設定</h4>
+                            <div class="rules-grid">
+                                <div class="form-group">
+                                    <label class="form-label">提供收據選項</label>
+                                    <div class="form-switch-group">
+                                        <label class="form-switch">
+                                            <input type="checkbox" id="needReceipt" checked>
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                        <span class="switch-label">報名者可選擇是否需要收據</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
 
                     <!-- 操作按鈕 -->
                     <div class="form-actions" style="margin-top: 24px;">
                         <button type="button" class="btn btn-secondary" onclick="history.back()">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            返回
+                            <i class="fa-solid fa-arrow-left"></i> 返回
                         </button>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa-solid fa-save"></i>
-                            儲存設定
+                            <i class="fa-solid fa-save"></i> 儲存設定
                         </button>
                     </div>
                 </form>
+
             </div>
         </main>
     </div>
 
-    <!-- ============================================ -->
     <!-- Toast 提示容器 -->
-    <!-- ============================================ -->
     <div class="toast-container"></div>
 
     <!-- ============================================ -->
@@ -204,37 +289,37 @@
             if (typeof initCRMLayout === 'function') {
                 initCRMLayout();
             }
-            
-            // 初始化側邊欄
             const sidebarManager = new SidebarManager();
-            
-            // 從 URL 取得活動 ID
+
+            // === 從 URL 取得活動 ID ===
             const urlParams = new URLSearchParams(window.location.search);
             const eventId = urlParams.get('id');
-            
-            // 載入活動資料
-            const event = eventId ? FoundationMockData.getEventById(eventId) : FoundationMockData.events[0];
-            
-            // 監聽住戶限定開關
-            const isResidentOnly = document.getElementById('isResidentOnly');
-            isResidentOnly.addEventListener('change', function() {
-                const label = document.getElementById('limitLabel');
-                const hint = document.getElementById('limitHint');
-                if (this.checked) {
-                    label.textContent = '每戶人數上限';
-                    hint.textContent = '限制該戶別總共可報名的人數（例如：設為 3，若同戶已報名 3 人，該戶其他成員不可再報名）';
-                } else {
-                    label.textContent = '單次報名人數上限';
-                    hint.textContent = '限制每次報名可填寫的總人數（含主要報名者）';
-                }
-            });
+            const event = eventId 
+                ? FoundationMockData.getEventById(eventId) 
+                : FoundationMockData.events[0];
 
-            if (event) {
-                renderEventInfo(event);
-                populateForm(event);
+            if (!event) {
+                document.querySelector('.content-wrapper').innerHTML = 
+                    '<p style="text-align:center;padding:40px;color:#999;">找不到活動資料</p>';
+                return;
             }
 
-            // 表單提交
+            // === 渲染 CMS 同步資訊 ===
+            renderCmsInfo(event);
+
+            // === 渲染場次一覽 ===
+            renderSessions(event);
+
+            // === 產生報名連結 ===
+            renderRegistrationUrl(event);
+
+            // === 填入 CRM 規則表單 ===
+            populateForm(event);
+
+            // === 綁定事件 ===
+            bindFormEvents();
+
+            // === 表單提交 ===
             document.getElementById('rulesForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 showToast('success', '儲存成功', '活動規則設定已更新');
@@ -244,73 +329,144 @@
             });
 
             /**
-             * 渲染活動基本資訊
+             * 渲染 CMS 同步資訊（唯讀區）
              */
-            function renderEventInfo(event) {
-                const container = document.getElementById('eventBasicInfo');
-                container.innerHTML = `
-                    <div class="event-info-item">
-                        <span class="event-info-label">活動 ID</span>
-                        <span class="event-info-value">${event.event_id}</span>
+            function renderCmsInfo(ev) {
+                const grid = document.getElementById('cmsInfoGrid');
+                const syncTime = ev.last_sync_at 
+                    ? new Date(ev.last_sync_at).toLocaleString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false })
+                    : '-';
+                const createdTime = ev.created_at
+                    ? new Date(ev.created_at).toLocaleString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false })
+                    : '-';
+
+                grid.innerHTML = `
+                    <div class="info-item">
+                        <span class="info-label">活動 ID</span>
+                        <span class="info-value">${ev.event_id}</span>
                     </div>
-                    <div class="event-info-item">
-                        <span class="event-info-label">活動名稱</span>
-                        <span class="event-info-value">${event.title}</span>
+                    <div class="info-item">
+                        <span class="info-label">CMS 活動 ID</span>
+                        <span class="info-value">${ev.cms_event_id}</span>
                     </div>
-                    <div class="event-info-item">
-                        <span class="event-info-label">活動類別</span>
-                        <span class="event-info-value"><span class="category-tag">${event.category}</span></span>
+                    <div class="info-item">
+                        <span class="info-label">活動名稱</span>
+                        <span class="info-value">${ev.title}</span>
                     </div>
-                    <div class="event-info-item">
-                        <span class="event-info-label">活動時間</span>
-                        <span class="event-info-value">${formatDateTime(event.start_dt)} ~ ${formatDateTime(event.end_dt)}</span>
+                    <div class="info-item">
+                        <span class="info-label">上架日期</span>
+                        <span class="info-value">${ev.publish_date || '-'}</span>
                     </div>
-                    <div class="event-info-item">
-                        <span class="event-info-label">報名上限</span>
-                        <span class="event-info-value">${event.max_slots} 人</span>
+                    <div class="info-item">
+                        <span class="info-label">CMS 活動頁面</span>
+                        <span class="info-value">
+                            <a href="${ev.cms_url}" target="_blank" class="cms-link">
+                                <i class="fa-solid fa-up-right-from-square"></i> 開啟 CMS 頁面
+                            </a>
+                        </span>
                     </div>
-                    <div class="event-info-item">
-                        <span class="event-info-label">最後同步</span>
-                        <span class="event-info-value">${formatDateTime(event.last_sync_at)}</span>
+                    <div class="info-item">
+                        <span class="info-label">建立時間</span>
+                        <span class="info-value">${createdTime}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">最後同步</span>
+                        <span class="info-value">${syncTime}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">前台顯示</span>
+                        <span class="info-value">${ev.is_frontend_visible ? '<span class="status-on">顯示中</span>' : '<span class="status-off">已隱藏</span>'}</span>
                     </div>
                 `;
             }
 
             /**
-             * 填入表單資料
+             * 渲染場次一覽表格
              */
-            function populateForm(event) {
-                document.getElementById('isResidentOnly').checked = event.is_resident_only;
-                
-                // 人數限制
-                const defaultLimit = event.max_companion !== undefined ? (event.max_companion + 1) : 2;
-                document.getElementById('registrationLimit').value = event.registration_limit || defaultLimit;
-                
-                // 費用設定
-                document.getElementById('registrationFee').value = event.resident_adult_price || event.price || 0;
+            function renderSessions(ev) {
+                const tbody = document.getElementById('sessionsTableBody');
+                const sessions = FoundationMockData.getSessionsByEventId(ev.event_id);
 
-                document.getElementById('needReceipt').checked = event.need_receipt;
-                
-                // 取消與退費設定
-                document.getElementById('cancellationDays').value = event.cancellation_days || 7;
-                document.getElementById('refundFee').value = event.cancellation_fee || 0;
+                if (sessions.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#999;padding:16px;">尚無場次資料</td></tr>';
+                    return;
+                }
 
-                // 更新文字狀態
-                isResidentOnly.dispatchEvent(new Event('change'));
+                tbody.innerHTML = sessions.map((s, idx) => {
+                    const registered = FoundationMockData.getSessionRegisteredCount(s.session_id);
+                    const remaining = FoundationMockData.getSessionRemainingSlots(s.session_id);
+                    const remainClass = remaining <= 0 ? 'slots-full' : remaining <= 5 ? 'slots-low' : 'slots-ok';
+
+                    return `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td>${s.activity_time}</td>
+                            <td>${s.registration_deadline}</td>
+                            <td>${s.capacity_limit} 人</td>
+                            <td>${registered} 人</td>
+                            <td><span class="${remainClass}">${remaining <= 0 ? '已額滿' : remaining + ' 人'}</span></td>
+                            <td>${s.is_visible ? '<i class="fa-solid fa-check" style="color:var(--color-success);"></i>' : '<i class="fa-solid fa-minus" style="color:#ccc;"></i>'}</td>
+                        </tr>
+                    `;
+                }).join('');
             }
 
             /**
-             * 格式化日期時間
+             * 產生報名連結
              */
-            function formatDateTime(dateStr) {
-                const date = new Date(dateStr);
-                return date.toLocaleString('zh-TW', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit'
+            function renderRegistrationUrl(ev) {
+                const urlInput = document.getElementById('registrationUrl');
+                const baseUrl = window.location.origin + window.location.pathname.replace('foundation-event-edit.html', '');
+                const regUrl = `${baseUrl}foundation-registration-form.html?event_id=${ev.event_id}`;
+                urlInput.value = regUrl;
+
+                document.getElementById('btnCopyUrl').addEventListener('click', function() {
+                    navigator.clipboard.writeText(regUrl).then(() => {
+                        showToast('success', '已複製', '報名連結已複製到剪貼簿');
+                    }).catch(() => {
+                        urlInput.select();
+                        document.execCommand('copy');
+                        showToast('success', '已複製', '報名連結已複製到剪貼簿');
+                    });
                 });
+            }
+
+            /**
+             * 填入 CRM 規則表單
+             */
+            function populateForm(ev) {
+                document.getElementById('isResidentOnly').checked = ev.is_resident_only;
+                document.getElementById('accessCode').value = ev.access_code || '';
+                document.getElementById('allowCompanion').checked = ev.allow_companion;
+                document.getElementById('maxCompanion').value = ev.max_companion || 0;
+                document.getElementById('residentAdultPrice').value = ev.resident_adult_price || 0;
+                document.getElementById('residentChildPrice').value = ev.resident_child_price || 0;
+                document.getElementById('nonResidentAdultPrice').value = ev.non_resident_adult_price || 0;
+                document.getElementById('nonResidentChildPrice').value = ev.non_resident_child_price || 0;
+                document.getElementById('cancellationDays').value = ev.cancellation_days || 7;
+                document.getElementById('refundFee').value = ev.refund_fee || 0;
+                document.getElementById('needReceipt').checked = ev.need_receipt;
+
+                // 初始化攜伴群組顯示
+                toggleCompanionGroup();
+            }
+
+            /**
+             * 綁定表單互動事件
+             */
+            function bindFormEvents() {
+                // 攜伴開關控制
+                document.getElementById('allowCompanion').addEventListener('change', toggleCompanionGroup);
+            }
+
+            /**
+             * 切換攜伴人數欄位顯示
+             */
+            function toggleCompanionGroup() {
+                const allowed = document.getElementById('allowCompanion').checked;
+                const group = document.getElementById('maxCompanionGroup');
+                group.style.opacity = allowed ? '1' : '0.4';
+                document.getElementById('maxCompanion').disabled = !allowed;
             }
 
             /**
@@ -331,21 +487,245 @@
                         <i class="fa-solid fa-times"></i>
                     </button>
                 `;
-                
                 let container = document.querySelector('.toast-container');
                 container.appendChild(toast);
-                
                 setTimeout(() => toast.remove(), 5000);
             }
         });
     </script>
 
+    <!-- ============================================ -->
     <!-- 頁面專用樣式 -->
+    <!-- ============================================ -->
     <style>
-        .page-subtitle { color: var(--color-text-muted); margin-top: 8px; }
-        .text-muted { color: var(--color-text-muted); font-weight: normal; }
+        /* === 區塊容器 === */
+        .edit-section {
+            background: #fff;
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--border-radius-md);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--color-gray-300);
+        }
+        .section-title {
+            margin: 0;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+        }
+        .section-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 12px;
+        }
+        .badge-readonly {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .badge-editable {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
 
-        /* Toast 樣式 */
+        /* === CMS 同步資訊格線 === */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .info-label {
+            font-size: 13px;
+            color: var(--color-gray-500);
+            font-weight: 500;
+        }
+        .info-value {
+            font-size: 15px;
+            color: var(--color-gray-900);
+        }
+        .cms-link {
+            color: var(--color-info);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .cms-link:hover {
+            text-decoration: underline;
+        }
+        .status-on {
+            color: var(--color-success);
+            font-weight: 500;
+        }
+        .status-off {
+            color: var(--color-gray-500);
+        }
+
+        /* === 場次表格 === */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .slots-ok { color: var(--color-success); font-weight: 500; }
+        .slots-low { color: var(--color-warning); font-weight: 600; }
+        .slots-full { color: var(--color-danger); font-weight: 600; }
+
+        /* === 報名連結管理 === */
+        .link-management {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .link-hint {
+            margin: 0;
+            font-size: 14px;
+            color: var(--color-gray-700);
+        }
+        .link-copy-row {
+            display: flex;
+            gap: 8px;
+            align-items: stretch;
+        }
+        .link-copy-row .form-input {
+            flex: 1;
+            background: var(--color-gray-100);
+            color: var(--color-gray-700);
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        /* === 規則區塊 === */
+        .rules-block {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--color-gray-300);
+        }
+        .rules-block:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .rules-block-title {
+            margin: 0 0 16px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-gray-700);
+        }
+        .rules-block-title i {
+            margin-right: 6px;
+            color: var(--color-btn-primary);
+        }
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .rules-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* === 開關樣式 === */
+        .form-switch-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .form-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+        .form-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+        .switch-slider::before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        .form-switch input:checked + .switch-slider {
+            background-color: var(--color-success);
+        }
+        .form-switch input:checked + .switch-slider::before {
+            transform: translateX(22px);
+        }
+        .switch-label {
+            font-size: 14px;
+            color: var(--color-gray-500);
+        }
+
+        /* === 輸入群組 === */
+        .input-group {
+            display: flex;
+            align-items: stretch;
+        }
+        .input-prefix,
+        .input-suffix {
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            background: var(--color-gray-100);
+            border: 1px solid var(--color-gray-300);
+            color: var(--color-gray-500);
+            font-size: 14px;
+        }
+        .input-prefix {
+            border-right: none;
+            border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+        }
+        .input-suffix {
+            border-left: none;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+        }
+        .input-group .form-input {
+            border-radius: 0;
+            flex: 1;
+        }
+        .input-prefix + .form-input {
+            border-radius: 0;
+        }
+
+        /* === 提示 / 表單操作 === */
+        .form-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--color-gray-500);
+        }
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* === Toast 樣式 === */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -355,7 +735,6 @@
             flex-direction: column;
             gap: 10px;
         }
-        
         .toast {
             display: flex;
             align-items: flex-start;
@@ -368,12 +747,10 @@
             max-width: 450px;
             animation: slideIn 0.3s ease;
         }
-        
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
-        
         .toast-icon { font-size: 20px; }
         .toast-success .toast-icon { color: #27AE60; }
         .toast-content { flex: 1; }
@@ -381,134 +758,23 @@
         .toast-message { font-size: 14px; color: #666; }
         .toast-close { background: none; border: none; cursor: pointer; color: #999; padding: 0; }
 
-        /* 開關樣式 */
-        .form-switch-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* === 響應式 === */
+        @media (max-width: 1023px) {
+            .rules-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-
-        .form-switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 26px;
-        }
-
-        .form-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .switch-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: 0.3s;
-            border-radius: 26px;
-        }
-
-        .switch-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-        }
-
-        .form-switch input:checked + .switch-slider {
-            background-color: var(--color-success);
-        }
-
-        .form-switch input:checked + .switch-slider:before {
-            transform: translateX(22px);
-        }
-
-        .switch-label {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-        }
-
-        /* 輸入群組 */
-        .input-group {
-            display: flex;
-            align-items: stretch;
-        }
-
-        .input-prefix,
-        .input-suffix {
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            background: var(--color-gray-100);
-            border: 1px solid var(--color-border);
-            color: var(--color-text-secondary);
-            font-size: 14px;
-        }
-
-        .input-prefix {
-            border-right: none;
-            border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
-        }
-
-        .input-suffix {
-            border-left: none;
-            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-        }
-
-        .input-group .form-input {
-            border-radius: 0;
-            flex: 1;
-        }
-
-        .input-group .form-input:only-child {
-            border-radius: var(--border-radius-sm);
-        }
-
-        .input-prefix + .form-input {
-            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-        }
-
-        .form-input + .input-suffix {
-            border-left: none;
-        }
-
-        /* 提示文字 */
-        .form-hint {
-            display: block;
-            margin-top: 6px;
-            font-size: 13px;
-            color: var(--color-text-muted);
-        }
-
-        /* 徽章 */
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 12px;
-        }
-
-        .badge-success {
-            background-color: var(--color-success-light);
-            color: var(--color-success-dark);
-        }
-
-        /* 表單操作區 */
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
+        @media (max-width: 767px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .rules-grid,
+            .rules-grid-4 {
+                grid-template-columns: 1fr;
+            }
+            .link-copy-row {
+                flex-direction: column;
+            }
         }
     </style>
 </body>
